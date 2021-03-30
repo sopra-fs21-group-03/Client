@@ -4,7 +4,7 @@ import { BaseContainer } from '../../helpers/layout';
 import { api, handleError } from '../../helpers/api';
 import Player from '../../views/Player';
 import { Spinner } from '../../views/design/Spinner';
-import { Button } from '../../views/design/Button';
+import { RedButton } from '../../views/design/RedButton';
 import { withRouter } from 'react-router-dom';
 
 const Container = styled(BaseContainer)`
@@ -80,14 +80,14 @@ class Game extends React.Component {
                 );
               })}
             </Users>
-            <Button
+            <RedButton
               width="100%"
               onClick={() => {
                 this.logout();
               }}
             >
               Logout
-            </Button>
+            </RedButton>
           </div>
         )}
       </Container>

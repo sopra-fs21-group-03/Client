@@ -119,7 +119,7 @@ const ButtonContainer = styled.div`
  * https://reactjs.org/docs/react-component.html
  * @Class
  */
-class Login extends React.Component {
+class Register extends React.Component {
   /**
    * If you don’t initialize the state and you don’t bind methods, you don’t need to implement a constructor for your React component.
    * The constructor for a React component is called before it is mounted (rendered).
@@ -211,7 +211,7 @@ class Login extends React.Component {
                   this.login();
                 }}
               >
-                Login
+                Register
               </RedButton>
               <BlackButton
                 disabled={!this.state.username || !this.state.name}
@@ -220,7 +220,7 @@ class Login extends React.Component {
                   this.login();
                 }}
             >
-              Create new Account
+              Get back to Login
             </BlackButton>
             </ButtonContainer>
           </Form>
@@ -234,4 +234,4 @@ class Login extends React.Component {
  * You can get access to the history object's properties via the withRouter.
  * withRouter will pass updated match, location, and history props to the wrapped component whenever it renders.
  */
-export default withRouter(Login);
+export default withRouter(Register);
