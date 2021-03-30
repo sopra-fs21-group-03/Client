@@ -26,14 +26,13 @@ const Container2 = styled.div`
 
 const Title = styled.h1`
   font-weight: bold;
-  font-size: 32pt;
+  font-size: 36pt;
   color: red;
   width: 100%;
   text-align: left;
   white-space: nowrap;
   overflow: hidden;
   max-width: 50em;
-  border: 1px dotted black;
 `;
 /**
  * This is an example of a Functional and stateless component (View) in React. Functional components are not classes and thus don't handle internal state changes.

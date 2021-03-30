@@ -6,6 +6,43 @@ import User from '../shared/models/User';
 import { withRouter } from 'react-router-dom';
 import { Button } from '../../views/design/Button';
 
+
+const WelcomeTitleBig = styled.h1`
+  font: club;
+  float: left;
+  font-weight: bold;
+  font-size: 48pt;
+  color: red;
+  width: 100%;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 50em;
+  margin: 0;
+  position: absolute;
+`;
+
+const WelcomeTitleSmall = styled.h1`
+  font-weight: bold;
+  font-size: 24pt;
+  color: black;
+  width: 100%;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 50em;
+  margin: 0;
+  position: absolute;
+  margin-top: 90px;
+  text-shadow: 2px 1px 2px black;
+`;
+
+const WelcomeTitlesContainer = styled.div`
+  height: 30%;
+  width: 100%;
+  position: absolute;
+`;
+
 const FormContainer = styled.div`
   margin-top: 2em;
   display: flex;
@@ -13,14 +50,32 @@ const FormContainer = styled.div`
   align-items: center;
   min-height: 300px;
   justify-content: center;
+  width: 45%;
+  height: 90%;
+  float: right;
+  margin-left: 50%;
+  position: absolute;
+`;
+
+const WelcomeLogoContainer = styled.div`
+  margin-top: 4em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 300px;
+  justify-content: center;
+  width: 45%;
+  height: 80%;
+  float: left;
+  position: absolute;
 `;
 
 const Form = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 60%;
-  height: 375px;
+  width: 100%;
+  height: 100%;
   font-size: 16px;
   font-weight: 300;
   padding-left: 37px;
@@ -128,6 +183,12 @@ class Login extends React.Component {
   render() {
     return (
       <BaseContainer>
+        <WelcomeLogoContainer>
+          <WelcomeTitlesContainer>
+            <WelcomeTitleBig>Sopra Poker</WelcomeTitleBig>
+            <WelcomeTitleSmall>Join,Play and WIN!</WelcomeTitleSmall>
+          </WelcomeTitlesContainer>
+        </WelcomeLogoContainer>
         <FormContainer>
           <Form>
             <Label>Username</Label>
