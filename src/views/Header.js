@@ -8,18 +8,32 @@ import { ReactLogo } from "./ReactLogo";
  * Using styled-components, you can have styling conditions using the following syntax: ${props => ...}
  * https://www.styled-components.com/
  */
+
 const Container = styled.div`
-  height: ${props => props.height}px;
-  background: ${props => props.background};
+  height: 100px;
+  background: black;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
+//${props => props.height}px
+//default height
+
+const Container2 = styled.div`
+    height: 100%;
+    width: 40%;
+`;
 
 const Title = styled.h1`
   font-weight: bold;
-  color: white;
-  text-align: center;
+  font-size: 32pt;
+  color: red;
+  width: 100%;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 50em;
+  border: 1px dotted black;
 `;
 /**
  * This is an example of a Functional and stateless component (View) in React. Functional components are not classes and thus don't handle internal state changes.
@@ -31,9 +45,10 @@ const Title = styled.h1`
  */
 const Header = props => {
   return (
-    <Container height={props.height}>
-      <Title>The Sopra FS21 Group 03 knows how to handle Git Problems! yes</Title>
-      <ReactLogo width={60} height={60} />
+    <Container /**height={props.height}**/>
+        <Container2>
+            <Title>Sopra Poker</Title>
+        </Container2>
     </Container>
   );
 };
