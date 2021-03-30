@@ -34,16 +34,39 @@ const TableCircleLeft = styled.span`
 background-color: green;
   margin: 0;
   position: absolute;
-  left: 50%;
+  left: 20%;
   top: 40%;
   margin-right: 0%;
   transform: translate(-50%, -50%);
   height: 55%;
-  width: .height();
+  width: 20%;
   margin-left: auto;
   padding-left: 15px;
   margin-right: auto;
   padding-right: 15px;
+  border-top: solid;
+  border-bottom: solid;
+  border-left: solid;
+  border-color: brown;
+  border-width: 15px;
+  border-radius: 50%;
+`;
+
+const TableCircleRight = styled.span`
+background-color: green;
+  margin: 0;
+  position: absolute;
+  left: 80%;
+  top: 40%;
+  margin-right: 0%;
+  transform: translate(-50%, -50%);
+  height: 55%;
+  width: 20%;
+  margin-left: auto;
+  padding-left: 15px;
+  margin-right: auto;
+  padding-right: 15px;
+  border-right: solid;
   border-top: solid;
   border-bottom: solid;
   border-color: brown;
@@ -404,8 +427,9 @@ class GameScreen extends React.Component {
         else{
             return (
                 <GameContainer>
-                    <Tablesquare></Tablesquare>
                     <TableCircleLeft></TableCircleLeft>
+                    <TableCircleRight></TableCircleRight>
+                    <Tablesquare></Tablesquare>
                     <UpperContainer>
                         <TopLeftPlayerContainer>Top Left Player</TopLeftPlayerContainer>
                         <TopRightPlayerContainer>Top Right Player</TopRightPlayerContainer>
