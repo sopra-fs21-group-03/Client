@@ -6,9 +6,10 @@ import Player from '../../views/Player';
 import { Spinner } from '../../views/design/Spinner';
 import { RedButton } from '../../views/design/RedButton';
 import { withRouter } from 'react-router-dom';
+import User from '../shared/models/User';
+import Card from "../shared/models/Card";
 
 document.body.style.backgroundColor = "green";
-
 
 const Tablesquare = styled.div`
 background-color: green;
@@ -19,7 +20,7 @@ background-color: green;
   margin-right: 0%;
   transform: translate(-50%, -50%);
   width: 60%;
-  height: 55%;
+  height: 65%;
   margin-left: auto;
   padding-left: 15px;
   margin-right: auto;
@@ -38,7 +39,7 @@ background-color: green;
   top: 40%;
   margin-right: 0%;
   transform: translate(-50%, -50%);
-  height: 55%;
+  height: 65%;
   width: 20%;
   margin-left: auto;
   padding-left: 15px;
@@ -60,7 +61,7 @@ background-color: green;
   top: 40%;
   margin-right: 0%;
   transform: translate(-50%, -50%);
-  height: 55%;
+  height: 65%;
   width: 20%;
   margin-left: auto;
   padding-left: 15px;
@@ -108,8 +109,6 @@ const IfTrueContainer = styled.div`
   padding-right: 15px;
 `;
  **/
-
-
 
 const UpperContainer = styled.div`
 border: dotted;
@@ -399,6 +398,21 @@ border: dotted;
   padding-right: 15px;
 `;
 
+const tenHeartsCard = styled.div`
+  background-color: white;
+  margin: 0;
+  position: absolute;
+  left: 75%;
+  top: 50%;
+  margin-right: 0%;
+  transform: translate(-50%, -50%);
+  width: 2%;
+  height: 3%;
+  margin-left: auto;
+  padding-left: 15px;
+  margin-right: auto;
+  padding-right: 15px;
+`;
 
 class GameScreen extends React.Component {
     constructor() {
@@ -408,9 +422,11 @@ class GameScreen extends React.Component {
         };
     }
 
+    ten = new Card({cardNumber: 10, suit: "heart"});
+    card = <p>{this.ten.suit}</p>;
 
     componentDidMount() {
-        this.interval = setInterval(() => this.setState({ time: Date.now() }), 1000);
+        this.interval = setInterval(() => this.setState({ time: Date.now() }), 200);
     }
     componentWillUnmount() {
         clearInterval(this.interval);
@@ -418,12 +434,49 @@ class GameScreen extends React.Component {
 
 
     render() {
-        if(2==3){
+        //not turn
+        if(2==6){
             return (
                 <GameContainer>
                     <p>{Date.now()}</p>
+                    {this.card}
                 </GameContainer>);
         }
+        //turn
+        if(2==3) {
+            return (
+                <GameContainer>
+                    <TableCircleLeft></TableCircleLeft>
+                    <TableCircleRight></TableCircleRight>
+                    <Tablesquare></Tablesquare>
+                    <UpperContainer>
+                        <TopLeftPlayerContainer>Top Left Player
+
+                        </TopLeftPlayerContainer>
+                        <TopRightPlayerContainer>Top Right Player</TopRightPlayerContainer>
+                    </UpperContainer>
+                    <MiddleContainer>
+                        <PlayerLeftContainer>Left Player</PlayerLeftContainer>
+                        <TableComponentsContainer>
+                            <TotalPotContainer>Total Pot</TotalPotContainer>
+                            <MiddleCardsContainer>Middle Cards</MiddleCardsContainer>
+                            <CallContainer>Call Button</CallContainer>
+                            <RaiseContainer>Raise Button</RaiseContainer>
+                        </TableComponentsContainer>
+                        <PlayerRightContainer>Right Player</PlayerRightContainer>
+                    </MiddleContainer>
+                    <LowerContainer>
+                        <ChatContainer>Chat</ChatContainer>
+                        <CheckContainer>CheckButton</CheckContainer>
+                        <OwnCardsContainer>Own Cards</OwnCardsContainer>
+                        <FoldContainer>FoldButton</FoldContainer>
+                        <LeaveTableContainer>Leave Tabel Button</LeaveTableContainer>
+                    </LowerContainer>
+                    <BottomContainer>
+                    </BottomContainer>
+                </GameContainer>);
+        }
+        //showdown
         else{
             return (
                 <GameContainer>

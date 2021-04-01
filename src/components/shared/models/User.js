@@ -3,6 +3,7 @@
  */
 class User {
   constructor(data = {}) {
+    this.cards = null;
     this.id = null;
     this.name = null;
     this.username = null;
@@ -12,3 +13,4 @@ class User {
   }
 }
 export default User;
+
