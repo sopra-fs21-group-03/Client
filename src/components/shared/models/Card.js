@@ -6,6 +6,7 @@ class Card {
         Object.assign(this, data)
         if(this.suit=="heart"){
             this.symbol=<p>"heartt"</p>}
+        this.searchName = suit + cardNumber;
     };
 }
 export default Card;

@@ -8,6 +8,7 @@ import { RedButton } from '../../views/design/RedButton';
 import { withRouter } from 'react-router-dom';
 import User from '../shared/models/User';
 import Card from "../shared/models/Card";
+import Deck from "../shared/models/Deck";
 
 document.body.style.backgroundColor = "green";
 
@@ -422,8 +423,12 @@ class GameScreen extends React.Component {
         };
     }
 
+    deck = new Deck();
+
+
+
     ten = new Card({cardNumber: 10, suit: "heart"});
-    card = <CardBox></CardBox>
+    card = <CardBox>{this.deck.hearts10}</CardBox>
 
     componentDidMount() {
         this.interval = setInterval(() => this.setState({ time: Date.now() }), 200);
