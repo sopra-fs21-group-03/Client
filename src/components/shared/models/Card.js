@@ -7,7 +7,7 @@ class Card {
         this.symbol= null;
         Object.assign(this, data)
         if(this.suit=="heart"){
-            this.symbol=<Diamond>"heart"</Diamond>}
+            this.symbol=<card><Diamond></Diamond></card>}
     };
 }
 export default Card;
