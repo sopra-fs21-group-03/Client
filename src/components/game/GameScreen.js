@@ -398,7 +398,7 @@ border: dotted;
   padding-right: 15px;
 `;
 
-const tenHeartsCard = styled.div`
+const CardBox = styled.div`
   background-color: white;
   margin: 0;
   position: absolute;
@@ -406,8 +406,8 @@ const tenHeartsCard = styled.div`
   top: 50%;
   margin-right: 0%;
   transform: translate(-50%, -50%);
-  width: 2%;
-  height: 3%;
+  width: 35px;
+  height: 50px;
   margin-left: auto;
   padding-left: 15px;
   margin-right: auto;
@@ -423,7 +423,7 @@ class GameScreen extends React.Component {
     }
 
     ten = new Card({cardNumber: 10, suit: "heart"});
-    card = <p>{this.ten.suit}</p>;
+    card = <CardBox></CardBox>
 
     componentDidMount() {
         this.interval = setInterval(() => this.setState({ time: Date.now() }), 200);
@@ -435,7 +435,7 @@ class GameScreen extends React.Component {
 
     render() {
         //not turn
-        if(2==6){
+        if(2==3){
             return (
                 <GameContainer>
                     <p>{Date.now()}</p>
@@ -443,7 +443,7 @@ class GameScreen extends React.Component {
                 </GameContainer>);
         }
         //turn
-        if(2==3) {
+        if(2==2) {
             return (
                 <GameContainer>
                     <TableCircleLeft></TableCircleLeft>
@@ -456,19 +456,19 @@ class GameScreen extends React.Component {
                         <TopRightPlayerContainer>Top Right Player</TopRightPlayerContainer>
                     </UpperContainer>
                     <MiddleContainer>
-                        <PlayerLeftContainer>Left Player</PlayerLeftContainer>
+                        <PlayerLeftContainer> {this.card}</PlayerLeftContainer>
                         <TableComponentsContainer>
                             <TotalPotContainer>Total Pot</TotalPotContainer>
                             <MiddleCardsContainer>Middle Cards</MiddleCardsContainer>
                             <CallContainer>Call Button</CallContainer>
                             <RaiseContainer>Raise Button</RaiseContainer>
                         </TableComponentsContainer>
-                        <PlayerRightContainer>Right Player</PlayerRightContainer>
+                        <PlayerRightContainer>{this.card}</PlayerRightContainer>
                     </MiddleContainer>
                     <LowerContainer>
                         <ChatContainer>Chat</ChatContainer>
                         <CheckContainer>CheckButton</CheckContainer>
-                        <OwnCardsContainer>Own Cards</OwnCardsContainer>
+                        <OwnCardsContainer>{this.card}</OwnCardsContainer>
                         <FoldContainer>FoldButton</FoldContainer>
                         <LeaveTableContainer>Leave Tabel Button</LeaveTableContainer>
                     </LowerContainer>
