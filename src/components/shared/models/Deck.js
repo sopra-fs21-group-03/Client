@@ -20,9 +20,14 @@ background-color: green;
   border-width: 15px;
 `;
 
-class Deck {
-        hearts10 = <hearts10></hearts10>;
-    ;
+class Deck implements Element {
+        hearts = <hearts10>hello</hearts10>;
+
+    findCard(suit, rank){
+        if (suit=="heart"){
+
+        }
+    }
 }
     //hearts10 = <hearts10></hearts10>;
 

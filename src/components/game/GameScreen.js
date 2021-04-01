@@ -428,7 +428,7 @@ class GameScreen extends React.Component {
 
 
     ten = new Card({cardNumber: 10, suit: "heart"});
-    card = <CardBox>{this.deck.hearts10}</CardBox>
+    card =this.ten.symbol
 
     componentDidMount() {
         this.interval = setInterval(() => this.setState({ time: Date.now() }), 200);
@@ -440,13 +440,12 @@ class GameScreen extends React.Component {
 
     render() {
         //not turn
-        if(2==3){
+        if(2==2){
             return (
-                <GameContainer>
-                    <p>{Date.now()}</p>
-                    {this.card}
-                </GameContainer>);
-        }
+                this.card
+            )}
+
+
         //turn
         if(2==2) {
             return (

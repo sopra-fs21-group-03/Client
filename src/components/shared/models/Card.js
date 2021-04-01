@@ -1,3 +1,5 @@
+import {Diamond} from "../../../views/design/Suits";
+
 class Card {
     constructor(data = {}) {
         this.suit = null;
@@ -5,8 +7,7 @@ class Card {
         this.symbol= null;
         Object.assign(this, data)
         if(this.suit=="heart"){
-            this.symbol=<p>"heartt"</p>}
-        this.searchName = suit + cardNumber;
+            this.symbol=<Diamond>"heart"</Diamond>}
     };
 }
 export default Card;
