@@ -427,8 +427,8 @@ class GameScreen extends React.Component {
 
 
 
-    ten = new Card({cardNumber: 10, suit: "heart"});
-    card =this.ten.symbol
+    ten = new Card({cardNumber: "TEN", suit: "SPADES"});
+    card =this.ten.card
 
     componentDidMount() {
         this.interval = setInterval(() => this.setState({ time: Date.now() }), 200);
