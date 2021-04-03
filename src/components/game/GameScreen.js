@@ -426,9 +426,9 @@ class GameScreen extends React.Component {
     deck = new Deck();
 
 
-
-    ten = new Card({cardNumber: "TEN", suit: "SPADES"});
-    card =this.ten.card
+    returnCard(cardNumber, Suit){
+    const card = new Card({cardNumber: cardNumber, suit: Suit});
+    return card.card}
 
     componentDidMount() {
         this.interval = setInterval(() => this.setState({ time: Date.now() }), 200);
@@ -440,7 +440,7 @@ class GameScreen extends React.Component {
 
     render() {
         //not turn
-        if(2==2){
+        if(2==3){
             return (
                 this.card
             )}
@@ -460,19 +460,19 @@ class GameScreen extends React.Component {
                         <TopRightPlayerContainer>Top Right Player</TopRightPlayerContainer>
                     </UpperContainer>
                     <MiddleContainer>
-                        <PlayerLeftContainer> {this.card}</PlayerLeftContainer>
+                        <PlayerLeftContainer>{this.returnCard("TEN","CLUBS")}</PlayerLeftContainer>
                         <TableComponentsContainer>
                             <TotalPotContainer>Total Pot</TotalPotContainer>
                             <MiddleCardsContainer>Middle Cards</MiddleCardsContainer>
                             <CallContainer>Call Button</CallContainer>
                             <RaiseContainer>Raise Button</RaiseContainer>
                         </TableComponentsContainer>
-                        <PlayerRightContainer>{this.card}</PlayerRightContainer>
+                        <PlayerRightContainer>{this.returnCard("TWO","HEART")}</PlayerRightContainer>
                     </MiddleContainer>
                     <LowerContainer>
                         <ChatContainer>Chat</ChatContainer>
                         <CheckContainer>CheckButton</CheckContainer>
-                        <OwnCardsContainer>{this.card}</OwnCardsContainer>
+                        <OwnCardsContainer>{this.returnCard("ACE","DIAMOND")}</OwnCardsContainer>
                         <FoldContainer>FoldButton</FoldContainer>
                         <LeaveTableContainer>Leave Tabel Button</LeaveTableContainer>
                     </LowerContainer>
