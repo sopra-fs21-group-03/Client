@@ -13,6 +13,12 @@ import {BlackButton} from "../../views/design/BlackButton";
 
 document.body.style.backgroundColor = "green";
 
+const LeaveTableButton = styled(BlackButton)`
+  position: absolute;
+  top: 70%;
+  left: 20%;
+`;
+
 const Tablesquare = styled.div`
 background-color: green;
   margin: 0;
@@ -481,14 +487,14 @@ class GameScreen extends React.Component {
                         <OwnCardsContainer>{this.returnCard("ACE","DIAMOND")}</OwnCardsContainer>
                         <FoldContainer>FoldButton</FoldContainer>
                         <LeaveTableContainer>Leave Tabel Button
-                            <BlackButton
-                            width="100%"
+                            <LeaveTableButton
+                            width="60%"
                             onClick={() => {
                                 this.logout();
                             }}
                             >
-                            Logout
-                            </BlackButton>
+                            Leave Table
+                            </LeaveTableButton>
                         </LeaveTableContainer>
                     </LowerContainer>
                     <BottomContainer>
