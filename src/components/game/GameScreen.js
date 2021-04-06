@@ -13,6 +13,13 @@ import {BlackButton} from "../../views/design/BlackButton";
 
 document.body.style.backgroundColor = "green";
 
+const Writen =styled.p`
+    margin-top: 0;
+    margin-bottom: 2px;
+    padding-top: 0;
+    padding-bottom: 0;
+`;
+
 const LeaveTableButton = styled(BlackButton)`
   position: absolute;
   top: 60%;
@@ -311,7 +318,6 @@ const LeaveTableContainer = styled.div`
 `;
 
 const CheckContainer = styled.div`
-border: dotted;
   margin: 0;
   position: absolute;
   left: 31.25%;
@@ -327,7 +333,6 @@ border: dotted;
 `;
 
 const FoldContainer = styled.div`
-border: dotted;
   margin: 0;
   position: absolute;
   left: 68.75%;
@@ -343,7 +348,6 @@ border: dotted;
 `;
 
 const OwnCardsContainer = styled.div`
-border: dotted;
   margin: 0;
   position: absolute;
   left: 50%;
@@ -359,7 +363,6 @@ border: dotted;
 `;
 
 const PlayerLeftContainer = styled.div`
-border: dotted;
   margin: 0;
   position: absolute;
   left: 10%;
@@ -375,7 +378,6 @@ border: dotted;
 `;
 
 const PlayerRightContainer = styled.div`
-border: dotted;
   margin: 0;
   position: absolute;
   left: 90%;
@@ -391,7 +393,6 @@ border: dotted;
 `;
 
 const PlayerCardsContainer = styled.div`
-border: dotted;
   margin: 0;
   position: absolute;
   top: ${props => props.top || null};
@@ -407,7 +408,6 @@ border: dotted;
 `;
 
 const TableComponentsContainer = styled.div`
-border: dotted;
   margin: 0;
   position: absolute;
   left: 50%;
@@ -441,7 +441,6 @@ const TotalPotContainer = styled.div`
 `;
 
 const MiddleCardsContainer = styled.div`
-border: dotted;
   margin: 0;
   position: absolute;
   left: 50%;
@@ -457,7 +456,6 @@ border: dotted;
 `;
 
 const CallContainer = styled.div`
-border: dotted;
   margin: 0;
   position: absolute;
   left: 25%;
@@ -473,7 +471,6 @@ border: dotted;
 `;
 
 const RaiseContainer = styled.div`
-border: dotted;
   margin: 0;
   position: absolute;
   left: 75%;
@@ -489,7 +486,6 @@ border: dotted;
 `;
 
 const TopLeftPlayerContainer = styled.div`
-border: dotted;
   margin: 0;
   position: absolute;
   left: 25%;
@@ -505,7 +501,6 @@ border: dotted;
 `;
 
 const TopRightPlayerContainer = styled.div`
-border: dotted;
   margin: 0;
   position: absolute;
   left: 75%;
@@ -521,7 +516,9 @@ border: dotted;
 `;
 
 const CardBox = styled.div`
-  background-color: white;
+  border: solid;
+  border-color: white;
+  background-color: red;
   margin: 0;
   position: absolute;
   margin-right: 0%;
@@ -644,7 +641,7 @@ class GameScreen extends React.Component {
                                 left="70%"
                                 width="60%"
                                 height="30%">
-                                    BestPokerPlayerEUWest Money: 20.000
+                                Hacker Money: 20.000
                             </PlayerInfoContainer>
                             <PlayerCardsContainer
                                 top="72.5%"
@@ -675,7 +672,7 @@ class GameScreen extends React.Component {
                                 left="40%"
                                 width="60%"
                                 height="30%">
-                                BestPokerPlayerEUWest Money: 20.000
+                                Stanley Money: 20.000
                             </PlayerInfoContainer>
                             <PlayerCardsContainer
                                 top="72.5%"
@@ -708,7 +705,7 @@ class GameScreen extends React.Component {
                                 left="25%"
                                 width="50%"
                                 height="60%">
-                                BestPokerPlayerEUWest Money: 20.000
+                                PokerNoob Money: 20.000
                             </PlayerInfoContainer>
                             <PlayerCardsContainer
                                 top="50%"
@@ -735,7 +732,49 @@ class GameScreen extends React.Component {
                         </PlayerLeftContainer>
                         <TableComponentsContainer>
                             <TotalPotContainer>Total Pot: 20.000</TotalPotContainer>
-                            <MiddleCardsContainer>Middle Cards</MiddleCardsContainer>
+                            <MiddleCardsContainer>
+                                <CardBox
+                                    width="9%"
+                                    height="80%"
+                                    top="50%"
+                                    left="70%">
+                                    {this.returnCard("TEN","CLUBS")}
+                                </CardBox>
+                                <CardBox
+                                    width="9%"
+                                    height="80%"
+                                    top="50%"
+                                    left="60%">
+                                    {this.returnCard("TEN","CLUBS")}
+                                </CardBox>
+                                <CardBox
+                                    width="9%"
+                                    height="80%"
+                                    top="50%"
+                                    left="50%">
+                                    {this.returnCard("TEN","CLUBS")}
+                                </CardBox>
+                                <CardBox
+                                    width="9%"
+                                    height="80%"
+                                    top="50%"
+                                    left="40%">
+                                    {this.returnCard("TEN","CLUBS")}
+                                </CardBox>
+                                <CardBox
+                                    width="9%"
+                                    height="80%"
+                                    top="50%"
+                                    left="30%">
+                                    {this.returnCard("TEN","CLUBS")}
+                                </CardBox>
+                                <CardBox
+                                    width="9%"
+                                    height="80%"
+                                    top="50%"
+                                    left="80%">
+                                </CardBox>
+                            </MiddleCardsContainer>
                             <CallContainer>
                                 <CallButton>Call</CallButton>
                             </CallContainer>
@@ -779,24 +818,23 @@ class GameScreen extends React.Component {
                         <ChatContainer>
                             <InnerTextChatContainer>
                                 <TextBacklogChatContainer>
-                                    <p>hissssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                                    <p>hi</p>
-                                    <p>hi</p>
-                                    <p>hi</p>
-                                    <p>hi</p>
-                                    <p>hi</p>
-                                    <p>hi</p>
-                                    <p>hi</p>
-                                    <p>hi</p>
-                                    <p>hi</p>
-                                    <p>hi</p>
-                                    <p>hi</p>
-                                    <p>hi</p>
-                                    <p>hi</p>
-                                    <p>hi</p>
-                                    <p>hi</p>
-                                    <p>hi</p>
-                                    <p>hi</p>
+                                    <Writen>BestPokerPlayerEUWest: Hello Guys</Writen>
+                                    <Writen>Hacker: hi</Writen>
+                                    <Writen>Stanley: EZ</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
                                 </TextBacklogChatContainer>
                                 <ChatInputField placeholder = "Type in your message"></ChatInputField>
                             </InnerTextChatContainer>
@@ -806,13 +844,14 @@ class GameScreen extends React.Component {
                         </CheckContainer>
                         <OwnCardsContainer>
                             <CardBox
-                                width="40%"
+                                width="35%"
                                 height="80%"
                                 top="50%"
                                 left="28%">
+                                {this.returnCard("KING","HEART")}
                             </CardBox>
                             <CardBox
-                                width="40%"
+                                width="35%"
                                 height="80%"
                                 top="50%"
                                 left="72%">
@@ -822,7 +861,7 @@ class GameScreen extends React.Component {
                         <FoldContainer>
                             <FoldButton>Fold</FoldButton>
                         </FoldContainer>
-                        <LeaveTableContainer>Leave Tabel Button
+                        <LeaveTableContainer>
                             <LeaveTableButton
                             onClick={() => {
                                 this.logout();
