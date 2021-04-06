@@ -32,3 +32,18 @@ button {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
 }
+
+::-webkit-scrollbar{
+  width:15px;
+}
+
+::-webkit-scrollbar-track{
+  border: 1px solid white;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb{
+  background: linear-gradient(red, red);
+  border: solid white 1px;
+  border-radius: 10px;
+}

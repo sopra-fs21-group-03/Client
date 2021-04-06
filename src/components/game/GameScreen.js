@@ -26,9 +26,13 @@ const LeaveTableButton = styled(BlackButton)`
 
 const CheckButton = styled(RedButton)`
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 10px 5px 5px black;
+    transform: translateY(0px);
+    background: white;
+    border: solid 3px;
+    border-color: red;
+    color: red;
   }
+  transition: all 2s ease;
   position: absolute;
   width: 80%;
   left: 10%;
@@ -37,6 +41,14 @@ const CheckButton = styled(RedButton)`
 `;
 
 const CallButton = styled(RedButton)`
+  &:hover {
+    transform: translateY(0px);
+    background: white;
+    border: solid 3px;
+    border-color: red;
+    color: red;
+  }
+  transition: all 2s ease;
   position: absolute;
   width: 80%;
   left: 10%;
@@ -45,6 +57,14 @@ const CallButton = styled(RedButton)`
 `;
 
 const RaiseButton = styled(RedButton)`
+  &:hover {
+    transform: translateY(0px);
+    background: white;
+    border: solid 3px;
+    border-color: red;
+    color: red;
+  }
+  transition: all 2s ease;
   position: absolute;
   width: 80%;
   left: 10%;
@@ -53,11 +73,69 @@ const RaiseButton = styled(RedButton)`
 `;
 
 const FoldButton = styled(RedButton)`
+  &:hover {
+    transform: translateY(0px);
+    background: white;
+    border: solid 3px;
+    border-color: red;
+    color: red;
+  }
+  transition: all 2s ease;
   position: absolute;
   width: 80%;
   left: 10%;
   top: 8%;
   color: white;
+`;
+
+const InnerTextChatContainer = styled.div`
+  background: rgb(0,0,0,0.7);
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-right: 0%;
+  transform: translate(-50%, -50%);
+  width: 95%;
+  height: 100%;
+  margin-left: auto;
+  padding: 15px;
+  margin-right: auto;
+  border-radius: 10px;
+`;
+
+const TextBacklogChatContainer = styled.div`
+  margin: 0;
+  margin-top:5px;
+  position: absolute;
+  left: 50%;
+  top: 42.5%;
+  transform: translate(-50%, -50%);
+  width: 98%;
+  height: 85%;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-right: auto;
+  overflow: auto;
+  color: white;
+  word-wrap:break-word;
+`;
+
+const ChatInputField = styled.input`
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.8);
+  }
+  width: 90%;
+  height: 10%;
+  padding-left: 15px;
+  margin-left: -4px;
+  border: none;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255);
+  position: absolute;
+  top: 87.5%;
 `;
 
 const Tablesquare = styled.div`
@@ -206,7 +284,6 @@ background-color: black;
 `;
 
 const ChatContainer = styled.div`
-border: dotted;
   margin: 0;
   position: absolute;
   left: 12.5%;
@@ -222,7 +299,6 @@ border: dotted;
 `;
 
 const LeaveTableContainer = styled.div`
-border: dotted;
   margin: 0;
   position: absolute;
   left: 87.5%;
@@ -546,7 +622,31 @@ class GameScreen extends React.Component {
                         <PlayerRightContainer>{this.returnCard("TWO","HEART")}</PlayerRightContainer>
                     </MiddleContainer>
                     <LowerContainer>
-                        <ChatContainer>Chat</ChatContainer>
+                        <ChatContainer>
+                            <InnerTextChatContainer>
+                                <TextBacklogChatContainer>
+                                    <p>hissssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
+                                    <p>hi</p>
+                                    <p>hi</p>
+                                    <p>hi</p>
+                                    <p>hi</p>
+                                    <p>hi</p>
+                                    <p>hi</p>
+                                    <p>hi</p>
+                                    <p>hi</p>
+                                    <p>hi</p>
+                                    <p>hi</p>
+                                    <p>hi</p>
+                                    <p>hi</p>
+                                    <p>hi</p>
+                                    <p>hi</p>
+                                    <p>hi</p>
+                                    <p>hi</p>
+                                    <p>hi</p>
+                                </TextBacklogChatContainer>
+                                <ChatInputField placeholder = "Type in your message"></ChatInputField>
+                            </InnerTextChatContainer>
+                        </ChatContainer>
                         <CheckContainer>
                             <CheckButton>Check</CheckButton>
                         </CheckContainer>
