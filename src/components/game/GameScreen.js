@@ -564,7 +564,7 @@ const PlayerInfoContainer = styled.div`
   margin-right: auto;
   padding-left: 5px;
   font-size: 18pt;
-  color: black;
+  color: ${props => props.color || null};
   padding-top: 10px;
   overflow: auto;
   word-wrap:break-word;
@@ -657,7 +657,8 @@ class GameScreen extends React.Component {
                                 top="25%"
                                 left="70%"
                                 width="60%"
-                                height="30%">
+                                height="30%"
+                                color="black">
                                 Hacker Money: 20.000
                             </PlayerInfoContainer>
                             <PlayerCardsContainer
@@ -688,7 +689,8 @@ class GameScreen extends React.Component {
                                 top="25%"
                                 left="40%"
                                 width="60%"
-                                height="30%">
+                                height="30%"
+                                color="black">
                                 Stanley Money: 20.000
                             </PlayerInfoContainer>
                             <PlayerCardsContainer
@@ -721,7 +723,8 @@ class GameScreen extends React.Component {
                                 top="45%"
                                 left="25%"
                                 width="50%"
-                                height="60%">
+                                height="60%"
+                                color="black">
                                 PokerNoob Money: 20.000
                             </PlayerInfoContainer>
                             <PlayerCardsContainer
@@ -805,7 +808,8 @@ class GameScreen extends React.Component {
                                 top="45%"
                                 left="75%"
                                 width="50%"
-                                height="60%">
+                                height="60%"
+                                color="black">
                                 BestPokerPlayerEUWest Money: 20.000
                             </PlayerInfoContainer>
                             <PlayerCardsContainer
@@ -890,6 +894,14 @@ class GameScreen extends React.Component {
                         </LeaveTableContainer>
                     </LowerContainer>
                     <BottomContainer>
+                        <PlayerInfoContainer
+                            top="50%"
+                            left="50%"
+                            width="30%"
+                            height="60%"
+                            color="white">
+                            MySelf Money: 20.000
+                        </PlayerInfoContainer>
                     </BottomContainer>
                 </GameContainer>);
         }
