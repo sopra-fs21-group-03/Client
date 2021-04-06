@@ -129,8 +129,8 @@ class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      name: null,
-      username: null
+      username: null,
+      password: null
     };
   }
   /**
@@ -142,15 +142,12 @@ class Login extends React.Component {
     try {
       const requestBody = JSON.stringify({
         username: this.state.username,
-        name: this.state.name
+        password: this.state.password
       });
-      const response = await api.post('/users', requestBody);
-
-      // Get the returned user and update a new object.
-      const user = new User(response.data);
+      const responseToken = await api.put('/users', requestBody);
 
       // Store the token into the local storage.
-      localStorage.setItem('token', user.token);
+      localStorage.setItem('token', responseToken);
 
       // Login successfully worked --> navigate to the route /game in the GameRouter
       this.props.history.push(`/gamescreen`);
@@ -199,12 +196,12 @@ class Login extends React.Component {
             <InputField
               placeholder="Password"
               onChange={e => {
-                this.handleInputChange('name', e.target.value);
+                this.handleInputChange('password', e.target.value);
               }}
             />
             <ButtonContainer>
               <RedButton
-                disabled={!this.state.username || !this.state.name}
+                disabled={!this.state.username || !this.state.password}
                 width="100%"
                 style={{color: "black"}}
                 onClick={() => {

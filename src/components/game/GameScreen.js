@@ -9,6 +9,7 @@ import { withRouter } from 'react-router-dom';
 import User from '../shared/models/User';
 import Card from "../shared/models/Card";
 import Deck from "../shared/models/Deck";
+import {BlackButton} from "../../views/design/BlackButton";
 
 document.body.style.backgroundColor = "green";
 
@@ -423,6 +424,11 @@ class GameScreen extends React.Component {
         };
     }
 
+    logout() {
+        localStorage.removeItem('token');
+        this.props.history.push('/login');
+    }
+
     deck = new Deck();
 
 
@@ -474,7 +480,16 @@ class GameScreen extends React.Component {
                         <CheckContainer>CheckButton</CheckContainer>
                         <OwnCardsContainer>{this.returnCard("ACE","DIAMOND")}</OwnCardsContainer>
                         <FoldContainer>FoldButton</FoldContainer>
-                        <LeaveTableContainer>Leave Tabel Button</LeaveTableContainer>
+                        <LeaveTableContainer>Leave Tabel Button
+                            <BlackButton
+                            width="100%"
+                            onClick={() => {
+                                this.logout();
+                            }}
+                            >
+                            Logout
+                            </BlackButton>
+                        </LeaveTableContainer>
                     </LowerContainer>
                     <BottomContainer>
                     </BottomContainer>
