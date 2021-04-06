@@ -20,27 +20,23 @@ const SymbolBox2 = styled.div`
       margin-bottom: auto;
       margin-top: -58px;
      
-      
-    
-  `;
+`;
 
 const CardBox = styled.li`
   background-color: white;  
-  height: 60px;
-  width: 45px;
-  margin-left: 10px;
-  margin-top: 10px
+  height: 100%;
+  width: 100%;
   overflow: hidden;
   border: 2px solid black;
- 
 `;
+
 const CardNumberOnCard= styled.div`
     height: 20px;
     width: 30px;
     margin-left: 8px;
     margin-top: 16px;
     flex-grow: 10;
-    `;
+`;
 
 
 

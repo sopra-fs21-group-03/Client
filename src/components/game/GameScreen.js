@@ -220,7 +220,6 @@ const GameContainer = styled.div`
 `;
 
 const UpperContainer = styled.div`
-border: dotted;
   margin: 0;
   position: absolute;
   left: 50%;
@@ -228,7 +227,7 @@ border: dotted;
   margin-right: 0%;
   transform: translate(-50%, -50%);
   width: 100%;
-  height: 20%;
+  height: 25%;
   margin-left: auto;
   padding-left: 15px;
   margin-right: auto;
@@ -236,7 +235,6 @@ border: dotted;
 `;
 
 const MiddleContainer = styled.div`
-border: dotted;
   margin: 0;
   position: absolute;
   left: 50%;
@@ -252,7 +250,6 @@ border: dotted;
 `;
 
 const LowerContainer = styled.div`
-border: dotted;
   margin: 0;
   position: absolute;
   top: 75%;
@@ -393,6 +390,22 @@ border: dotted;
   padding-right: 15px;
 `;
 
+const PlayerCardsContainer = styled.div`
+border: dotted;
+  margin: 0;
+  position: absolute;
+  top: ${props => props.top || null};
+  left: ${props => props.left || null};
+  margin-right: 0%;
+  transform: translate(-50%, -50%);
+  width: ${props => props.width || null};
+  height: ${props => props.height || null};
+  margin-left: auto;
+  padding-left: 15px;
+  margin-right: auto;
+  padding-right: 15px;
+`;
+
 const TableComponentsContainer = styled.div`
 border: dotted;
   margin: 0;
@@ -410,19 +423,21 @@ border: dotted;
 `;
 
 const TotalPotContainer = styled.div`
-border: dotted;
   margin: 0;
   position: absolute;
   left: 50%;
-  top: 10%;
+  top: 12.5%;
   margin-right: 0%;
   transform: translate(-50%, -50%);
   width: 100%;
-  height: 20%;
+  height: 12%;
   margin-left: auto;
   padding-left: 15px;
   margin-right: auto;
   padding-right: 15px;
+  text-align: center;
+  font-size: 24pt;
+  color: red;
 `;
 
 const MiddleCardsContainer = styled.div`
@@ -509,17 +524,38 @@ const CardBox = styled.div`
   background-color: white;
   margin: 0;
   position: absolute;
-  left: 75%;
-  top: 50%;
   margin-right: 0%;
   transform: translate(-50%, -50%);
-  width: 35px;
-  height: 50px;
+  width: ${props => props.width || null};
+  height: ${props => props.height || null};
+  top: ${props => props.top || null};
+  left: ${props => props.left || null};
   margin-left: auto;
-  padding-left: 15px;
+  padding-left: auto;
   margin-right: auto;
-  padding-right: 15px;
+  padding-right: auto;
+  transform: ${props => props.transform || null};
 `;
+
+const PlayerInfoContainer = styled.div`
+  width: ${props => props.width || null};
+  height: ${props => props.height || null};
+  top: ${props => props.top || null};
+  left: ${props => props.left || null};
+  margin: 0;
+  position: absolute;
+  margin-right: 0%;
+  transform: translate(-50%, -50%);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 5px;
+  font-size: 18pt;
+  color: black;
+  padding-top: 10px;
+  overflow: auto;
+  word-wrap:break-word;
+`;
+
 
 class GameScreen extends React.Component {
     constructor() {
@@ -602,15 +638,103 @@ class GameScreen extends React.Component {
                     <TableCircleRight></TableCircleRight>
                     <Tablesquare></Tablesquare>
                     <UpperContainer>
-                        <TopLeftPlayerContainer>Top Left Player
-
+                        <TopLeftPlayerContainer>
+                            <PlayerInfoContainer
+                                top="25%"
+                                left="70%"
+                                width="60%"
+                                height="30%">
+                                    BestPokerPlayerEUWest Money: 20.000
+                            </PlayerInfoContainer>
+                            <PlayerCardsContainer
+                                top="72.5%"
+                                left="60%"
+                                width="30%"
+                                height="55%">
+                                <CardBox
+                                    width="30%"
+                                    top="0"
+                                    left="29%"
+                                    height="100%"
+                                    transform="rotate(180deg)">
+                                    {this.returnCard("TWO","HEART")}
+                                </CardBox>
+                                <CardBox
+                                    width="30%"
+                                    top="0"
+                                    left="61%"
+                                    height="100%"
+                                    transform="rotate(180deg)">
+                                    {this.returnCard("NINE","SPADES")}
+                                </CardBox>
+                            </PlayerCardsContainer>
                         </TopLeftPlayerContainer>
-                        <TopRightPlayerContainer>Top Right Player</TopRightPlayerContainer>
+                        <TopRightPlayerContainer>
+                            <PlayerInfoContainer
+                                top="25%"
+                                left="40%"
+                                width="60%"
+                                height="30%">
+                                BestPokerPlayerEUWest Money: 20.000
+                            </PlayerInfoContainer>
+                            <PlayerCardsContainer
+                                top="72.5%"
+                                left="20%"
+                                width="30%"
+                                height="55%">
+                                <CardBox
+                                    width="30%"
+                                    top="0"
+                                    left="29%"
+                                    height="100%"
+                                    transform="rotate(180deg)">
+                                    {this.returnCard("JACK","HEART")}
+                                </CardBox>
+                                <CardBox
+                                    width="30%"
+                                    top="0"
+                                    left="61%"
+                                    height="100%"
+                                    transform="rotate(180deg)">
+                                    {this.returnCard("TWO","SPADES")}
+                                </CardBox>
+                            </PlayerCardsContainer>
+                        </TopRightPlayerContainer>
                     </UpperContainer>
                     <MiddleContainer>
-                        <PlayerLeftContainer>{this.returnCard("TEN","CLUBS")}</PlayerLeftContainer>
+                        <PlayerLeftContainer>
+                            <PlayerInfoContainer
+                                top="45%"
+                                left="25%"
+                                width="50%"
+                                height="60%">
+                                BestPokerPlayerEUWest Money: 20.000
+                            </PlayerInfoContainer>
+                            <PlayerCardsContainer
+                                top="50%"
+                                left="78%"
+                                width="40%"
+                                height="50%">
+                                <CardBox
+                                width="60%"
+                                height="80%"
+                                top="-15%"
+                                left="20%"
+                                transform="rotate(90deg)">
+                                {this.returnCard("TEN","CLUBS")}
+                            </CardBox>
+                                <CardBox
+                                    width="60%"
+                                    height="80%"
+                                    top="35%"
+                                    left="20%"
+                                    transform="rotate(90deg)">
+                                    {this.returnCard("TWO","HEART")}
+                                </CardBox>
+                            </PlayerCardsContainer>
+                        </PlayerLeftContainer>
                         <TableComponentsContainer>
-                            <TotalPotContainer>Total Pot</TotalPotContainer>
+                            <TotalPotContainer>Total Pot: 20.000</TotalPotContainer>
                             <MiddleCardsContainer>Middle Cards</MiddleCardsContainer>
                             <CallContainer>
                                 <CallButton>Call</CallButton>
@@ -619,7 +743,37 @@ class GameScreen extends React.Component {
                                 <RaiseButton>Raise</RaiseButton>
                             </RaiseContainer>
                         </TableComponentsContainer>
-                        <PlayerRightContainer>{this.returnCard("TWO","HEART")}</PlayerRightContainer>
+                        <PlayerRightContainer>
+                            <PlayerInfoContainer
+                                top="45%"
+                                left="75%"
+                                width="50%"
+                                height="60%">
+                                BestPokerPlayerEUWest Money: 20.000
+                            </PlayerInfoContainer>
+                            <PlayerCardsContainer
+                                top="50%"
+                                left="22%"
+                                width="40%"
+                                height="50%">
+                                <CardBox
+                                    width="60%"
+                                    height="80%"
+                                    top="-15%"
+                                    left="20%"
+                                    transform="rotate(270deg)">
+                                    {this.returnCard("TEN","CLUBS")}
+                                </CardBox>
+                                <CardBox
+                                    width="60%"
+                                    height="80%"
+                                    top="35%"
+                                    left="20%"
+                                    transform="rotate(270deg)">
+                                    {this.returnCard("TWO","HEART")}
+                                </CardBox>
+                            </PlayerCardsContainer>
+                        </PlayerRightContainer>
                     </MiddleContainer>
                     <LowerContainer>
                         <ChatContainer>
@@ -650,7 +804,21 @@ class GameScreen extends React.Component {
                         <CheckContainer>
                             <CheckButton>Check</CheckButton>
                         </CheckContainer>
-                        <OwnCardsContainer>{this.returnCard("ACE","DIAMOND")}</OwnCardsContainer>
+                        <OwnCardsContainer>
+                            <CardBox
+                                width="40%"
+                                height="80%"
+                                top="50%"
+                                left="28%">
+                            </CardBox>
+                            <CardBox
+                                width="40%"
+                                height="80%"
+                                top="50%"
+                                left="72%">
+                                {this.returnCard("ACE","DIAMOND")}
+                            </CardBox>
+                        </OwnCardsContainer>
                         <FoldContainer>
                             <FoldButton>Fold</FoldButton>
                         </FoldContainer>
