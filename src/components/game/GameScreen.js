@@ -73,10 +73,25 @@ const RaiseButton = styled(RedButton)`
   }
   transition: all 2s ease;
   position: absolute;
-  width: 80%;
+  width: 50%;
   left: 10%;
   top: 25%;
   color: white;
+  border-radius: 10px 0 0 10px;
+`;
+
+const RaiseInput = styled.input`
+  transition: all 2s ease;
+  position: absolute;
+  width: 30%;
+  left: 60%;
+  top: 25%;
+  color: red;
+  height: 50px;
+  border-radius: 0 10px 10px 0;
+  border: solid red;
+  type: number;
+  padding-left: 15px;
 `;
 
 const FoldButton = styled(RedButton)`
@@ -423,13 +438,15 @@ const TableComponentsContainer = styled.div`
 `;
 
 const TotalPotContainer = styled.div`
+  background: rgb(0,0,0,0.7);
+  border-radius: 15px;
   margin: 0;
   position: absolute;
-  left: 50%;
-  top: 12.5%;
+  left: 45%;
+  top: 15%;
   margin-right: 0%;
   transform: translate(-50%, -50%);
-  width: 100%;
+  width: 30%;
   height: 12%;
   margin-left: auto;
   padding-left: 15px;
@@ -737,35 +754,35 @@ class GameScreen extends React.Component {
                                     width="9%"
                                     height="80%"
                                     top="50%"
-                                    left="70%">
+                                    left="68%">
                                     {this.returnCard("TEN","CLUBS")}
                                 </CardBox>
                                 <CardBox
                                     width="9%"
                                     height="80%"
                                     top="50%"
-                                    left="60%">
+                                    left="58%">
                                     {this.returnCard("TEN","CLUBS")}
                                 </CardBox>
                                 <CardBox
                                     width="9%"
                                     height="80%"
                                     top="50%"
-                                    left="50%">
+                                    left="48%">
                                     {this.returnCard("TEN","CLUBS")}
                                 </CardBox>
                                 <CardBox
                                     width="9%"
                                     height="80%"
                                     top="50%"
-                                    left="40%">
+                                    left="38%">
                                     {this.returnCard("TEN","CLUBS")}
                                 </CardBox>
                                 <CardBox
                                     width="9%"
                                     height="80%"
                                     top="50%"
-                                    left="30%">
+                                    left="28%">
                                     {this.returnCard("TEN","CLUBS")}
                                 </CardBox>
                                 <CardBox
@@ -780,6 +797,7 @@ class GameScreen extends React.Component {
                             </CallContainer>
                             <RaiseContainer>
                                 <RaiseButton>Raise</RaiseButton>
+                                <RaiseInput type="number"></RaiseInput>
                             </RaiseContainer>
                         </TableComponentsContainer>
                         <PlayerRightContainer>
