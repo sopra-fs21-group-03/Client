@@ -54,9 +54,9 @@ class AppRouter extends React.Component {
                   path="/gamescreen"
                   exact
                   render={() => (
-                      <GameGuard>
+                      //<GameGuard>
                         <GameScreen />
-                      </GameGuard>
+                      //</GameGuard>
                   )}
               />
               <Route path="/" exact render={() => <Redirect to={"/game"} />} />

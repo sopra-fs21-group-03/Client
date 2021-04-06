@@ -17,25 +17,25 @@ const SymbolBox2 = styled.div`
       overflow: hidden;
       text-align: center;
       margin: auto;
-      margin-bottom: auto;
-      margin-top: -58px;
+      margin-top: 15px;
      
 `;
 
-const CardBox = styled.li`
+const CardBox = styled.div`
   background-color: white;  
   height: 100%;
   width: 100%;
-  overflow: hidden;
   border: 2px solid black;
 `;
 
 const CardNumberOnCard= styled.div`
     height: 20px;
-    width: 30px;
-    margin-left: 8px;
+    width: 100%;
     margin-top: 16px;
     flex-grow: 10;
+    position: absolute;
+    top: 50%;
+    text-align: center;
 `;
 
 
