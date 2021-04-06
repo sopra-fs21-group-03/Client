@@ -15,8 +15,49 @@ document.body.style.backgroundColor = "green";
 
 const LeaveTableButton = styled(BlackButton)`
   position: absolute;
-  top: 70%;
-  left: 20%;
+  top: 60%;
+  left: 25%;
+  background: rgb(0,0,0,0.8);
+  height: 25%;
+  width: 60%;
+  font-size: 24pt;
+  font-weight: 200;
+`;
+
+const CheckButton = styled(RedButton)`
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 10px 5px 5px black;
+  }
+  position: absolute;
+  width: 80%;
+  left: 10%;
+  top: 8%;
+  color: white;
+`;
+
+const CallButton = styled(RedButton)`
+  position: absolute;
+  width: 80%;
+  left: 10%;
+  top: 25%;
+  color: white;
+`;
+
+const RaiseButton = styled(RedButton)`
+  position: absolute;
+  width: 80%;
+  left: 10%;
+  top: 25%;
+  color: white;
+`;
+
+const FoldButton = styled(RedButton)`
+  position: absolute;
+  width: 80%;
+  left: 10%;
+  top: 8%;
+  color: white;
 `;
 
 const Tablesquare = styled.div`
@@ -99,24 +140,6 @@ const GameContainer = styled.div`
   padding-right: 15px;
   max-width: 100%;
 `;
-
-/**
-const IfTrueContainer = styled.div`
-  background-color: green;
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: 0%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  margin-left: auto;
-  padding-left: 15px;
-  margin-right: auto;
-  padding-right: 15px;
-`;
- **/
 
 const UpperContainer = styled.div`
 border: dotted;
@@ -454,13 +477,6 @@ class GameScreen extends React.Component {
         //not turn
         if(2==3){
             return (
-                this.card
-            )}
-
-
-        //turn
-        if(2==2) {
-            return (
                 <GameContainer>
                     <TableCircleLeft></TableCircleLeft>
                     <TableCircleRight></TableCircleRight>
@@ -488,7 +504,58 @@ class GameScreen extends React.Component {
                         <FoldContainer>FoldButton</FoldContainer>
                         <LeaveTableContainer>Leave Tabel Button
                             <LeaveTableButton
-                            width="60%"
+                                width="60%"
+                                onClick={() => {
+                                    this.logout();
+                                }}
+                            >
+                                Leave Table
+                            </LeaveTableButton>
+                        </LeaveTableContainer>
+                    </LowerContainer>
+                    <BottomContainer>
+                    </BottomContainer>
+                </GameContainer>);
+        }
+
+        //turn
+        if(2==2) {
+            return (
+                <GameContainer>
+                    <TableCircleLeft></TableCircleLeft>
+                    <TableCircleRight></TableCircleRight>
+                    <Tablesquare></Tablesquare>
+                    <UpperContainer>
+                        <TopLeftPlayerContainer>Top Left Player
+
+                        </TopLeftPlayerContainer>
+                        <TopRightPlayerContainer>Top Right Player</TopRightPlayerContainer>
+                    </UpperContainer>
+                    <MiddleContainer>
+                        <PlayerLeftContainer>{this.returnCard("TEN","CLUBS")}</PlayerLeftContainer>
+                        <TableComponentsContainer>
+                            <TotalPotContainer>Total Pot</TotalPotContainer>
+                            <MiddleCardsContainer>Middle Cards</MiddleCardsContainer>
+                            <CallContainer>
+                                <CallButton>Call</CallButton>
+                            </CallContainer>
+                            <RaiseContainer>
+                                <RaiseButton>Raise</RaiseButton>
+                            </RaiseContainer>
+                        </TableComponentsContainer>
+                        <PlayerRightContainer>{this.returnCard("TWO","HEART")}</PlayerRightContainer>
+                    </MiddleContainer>
+                    <LowerContainer>
+                        <ChatContainer>Chat</ChatContainer>
+                        <CheckContainer>
+                            <CheckButton>Check</CheckButton>
+                        </CheckContainer>
+                        <OwnCardsContainer>{this.returnCard("ACE","DIAMOND")}</OwnCardsContainer>
+                        <FoldContainer>
+                            <FoldButton>Fold</FoldButton>
+                        </FoldContainer>
+                        <LeaveTableContainer>Leave Tabel Button
+                            <LeaveTableButton
                             onClick={() => {
                                 this.logout();
                             }}
