@@ -153,7 +153,7 @@ class Login extends React.Component {
       localStorage.setItem('token', user.token);
 
       // Login successfully worked --> navigate to the route /game in the GameRouter
-      this.props.history.push(`/game`);
+      this.props.history.push(`/gamescreen`);
     } catch (error) {
       alert(`Something went wrong during the login: \n${handleError(error)}`);
     }
@@ -214,10 +214,9 @@ class Login extends React.Component {
                 Login
               </RedButton>
               <BlackButton
-                disabled={!this.state.username || !this.state.name}
                 width="80%"
                 onClick={() => {
-                  this.login();
+                  this.props.history.push(`/register`);
                 }}
             >
               Create new Account

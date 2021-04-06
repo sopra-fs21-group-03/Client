@@ -129,8 +129,8 @@ class Register extends React.Component {
   constructor() {
     super();
     this.state = {
-      name: null,
-      username: null
+      username: null,
+      password: null
     };
   }
   /**
@@ -138,22 +138,19 @@ class Register extends React.Component {
    * If the request is successful, a new user is returned to the front-end
    * and its token is stored in the localStorage.
    */
-  async login() {
+  async register() {
     try {
       const requestBody = JSON.stringify({
         username: this.state.username,
-        name: this.state.name
+        password: this.state.password
       });
-      const response = await api.post('/users', requestBody);
-
-      // Get the returned user and update a new object.
-      const user = new User(response.data);
+      const responseToken = await api.post('/users', requestBody);
 
       // Store the token into the local storage.
-      localStorage.setItem('token', user.token);
+      localStorage.setItem('token', responseToken);
 
       // Login successfully worked --> navigate to the route /game in the GameRouter
-      this.props.history.push(`/game`);
+      this.props.history.push(`/gamescreen`);
     } catch (error) {
       alert(`Something went wrong during the login: \n${handleError(error)}`);
     }
@@ -199,25 +196,24 @@ class Register extends React.Component {
             <InputField
               placeholder="Password"
               onChange={e => {
-                this.handleInputChange('name', e.target.value);
+                this.handleInputChange('password', e.target.value);
               }}
             />
             <ButtonContainer>
               <RedButton
-                disabled={!this.state.username || !this.state.name}
+                disabled={!this.state.username || !this.state.password}
                 width="100%"
                 style={{color: "black"}}
                 onClick={() => {
-                  this.login();
+                  this.register();
                 }}
               >
                 Register
               </RedButton>
               <BlackButton
-                disabled={!this.state.username || !this.state.name}
                 width="80%"
                 onClick={() => {
-                  this.login();
+                  this.props.history.push(`/login`);
                 }}
             >
               Get back to Login
