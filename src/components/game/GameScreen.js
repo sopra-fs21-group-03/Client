@@ -549,6 +549,7 @@ const CardBox = styled.div`
   margin-right: auto;
   padding-right: auto;
   transform: ${props => props.transform || null};
+  display: ${props => props.display || null}; 
 `;
 
 const PlayerInfoContainer = styled.div`
@@ -568,6 +569,12 @@ const PlayerInfoContainer = styled.div`
   padding-top: 10px;
   overflow: auto;
   word-wrap:break-word;
+`;
+
+const FrontCardBox = styled.div`
+  width: 100%;
+  height: 100%;
+  display: ${props => props.display || null};  
 `;
 
 
@@ -601,51 +608,7 @@ class GameScreen extends React.Component {
 
     render() {
         //not turn
-        if(2==3){
-            return (
-                <GameContainer>
-                    <TableCircleLeft></TableCircleLeft>
-                    <TableCircleRight></TableCircleRight>
-                    <Tablesquare></Tablesquare>
-                    <UpperContainer>
-                        <TopLeftPlayerContainer>Top Left Player
-
-                        </TopLeftPlayerContainer>
-                        <TopRightPlayerContainer>Top Right Player</TopRightPlayerContainer>
-                    </UpperContainer>
-                    <MiddleContainer>
-                        <PlayerLeftContainer>{this.returnCard("TEN","CLUBS")}</PlayerLeftContainer>
-                        <TableComponentsContainer>
-                            <TotalPotContainer>Total Pot</TotalPotContainer>
-                            <MiddleCardsContainer>Middle Cards</MiddleCardsContainer>
-                            <CallContainer>Call Button</CallContainer>
-                            <RaiseContainer>Raise Button</RaiseContainer>
-                        </TableComponentsContainer>
-                        <PlayerRightContainer>{this.returnCard("TWO","HEART")}</PlayerRightContainer>
-                    </MiddleContainer>
-                    <LowerContainer>
-                        <ChatContainer>Chat</ChatContainer>
-                        <CheckContainer>CheckButton</CheckContainer>
-                        <OwnCardsContainer>{this.returnCard("ACE","DIAMOND")}</OwnCardsContainer>
-                        <FoldContainer>FoldButton</FoldContainer>
-                        <LeaveTableContainer>Leave Tabel Button
-                            <LeaveTableButton
-                                width="60%"
-                                onClick={() => {
-                                    this.logout();
-                                }}
-                            >
-                                Leave Table
-                            </LeaveTableButton>
-                        </LeaveTableContainer>
-                    </LowerContainer>
-                    <BottomContainer>
-                    </BottomContainer>
-                </GameContainer>);
-        }
-
-        //turn
-        if(2==2) {
+        if(2==2){
             return (
                 <GameContainer>
                     <TableCircleLeft></TableCircleLeft>
@@ -672,7 +635,7 @@ class GameScreen extends React.Component {
                                     left="29%"
                                     height="100%"
                                     transform="rotate(180deg)">
-                                    {this.returnCard("TWO","HEART")}
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
                                     width="30%"
@@ -680,7 +643,7 @@ class GameScreen extends React.Component {
                                     left="61%"
                                     height="100%"
                                     transform="rotate(180deg)">
-                                    {this.returnCard("NINE","SPADES")}
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
                                 </CardBox>
                             </PlayerCardsContainer>
                         </TopLeftPlayerContainer>
@@ -704,7 +667,7 @@ class GameScreen extends React.Component {
                                     left="29%"
                                     height="100%"
                                     transform="rotate(180deg)">
-                                    {this.returnCard("JACK","HEART")}
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
                                     width="30%"
@@ -712,7 +675,264 @@ class GameScreen extends React.Component {
                                     left="61%"
                                     height="100%"
                                     transform="rotate(180deg)">
-                                    {this.returnCard("TWO","SPADES")}
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
+                                </CardBox>
+                            </PlayerCardsContainer>
+                        </TopRightPlayerContainer>
+                    </UpperContainer>
+                    <MiddleContainer>
+                        <PlayerLeftContainer>
+                            <PlayerInfoContainer
+                                top="45%"
+                                left="25%"
+                                width="50%"
+                                height="60%"
+                                color="black">
+                                PokerNoob Money: 20.000
+                            </PlayerInfoContainer>
+                            <PlayerCardsContainer
+                                top="50%"
+                                left="78%"
+                                width="40%"
+                                height="50%">
+                                <CardBox
+                                    width="60%"
+                                    height="80%"
+                                    top="-15%"
+                                    left="20%"
+                                    transform="rotate(90deg)">
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
+                                </CardBox>
+                                <CardBox
+                                    width="60%"
+                                    height="80%"
+                                    top="35%"
+                                    left="20%"
+                                    transform="rotate(90deg)">
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
+                                </CardBox>
+                            </PlayerCardsContainer>
+                        </PlayerLeftContainer>
+                        <TableComponentsContainer>
+                            <TotalPotContainer>Total Pot: 20.000</TotalPotContainer>
+                            <MiddleCardsContainer>
+                                <CardBox
+                                    width="9%"
+                                    height="80%"
+                                    top="50%"
+                                    left="68%">
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
+                                </CardBox>
+                                <CardBox
+                                    width="9%"
+                                    height="80%"
+                                    top="50%"
+                                    left="58%">
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
+                                </CardBox>
+                                <CardBox
+                                    width="9%"
+                                    height="80%"
+                                    top="50%"
+                                    left="48%">
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
+                                </CardBox>
+                                <CardBox
+                                    width="9%"
+                                    height="80%"
+                                    top="50%"
+                                    left="38%">
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
+                                </CardBox>
+                                <CardBox
+                                    width="9%"
+                                    height="80%"
+                                    top="50%"
+                                    left="28%">
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
+                                </CardBox>
+                                <CardBox
+                                    width="9%"
+                                    height="80%"
+                                    top="50%"
+                                    left="80%">
+                                </CardBox>
+                            </MiddleCardsContainer>
+                            <CallContainer>
+                            </CallContainer>
+                            <RaiseContainer>
+                            </RaiseContainer>
+                        </TableComponentsContainer>
+                        <PlayerRightContainer>
+                            <PlayerInfoContainer
+                                top="45%"
+                                left="75%"
+                                width="50%"
+                                height="60%"
+                                color="black">
+                                BestPokerPlayerEUWest Money: 20.000
+                            </PlayerInfoContainer>
+                            <PlayerCardsContainer
+                                top="50%"
+                                left="22%"
+                                width="40%"
+                                height="50%">
+                                <CardBox
+                                    width="60%"
+                                    height="80%"
+                                    top="-15%"
+                                    left="20%"
+                                    transform="rotate(270deg)">
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
+                                </CardBox>
+                                <CardBox
+                                    width="60%"
+                                    height="80%"
+                                    top="35%"
+                                    left="20%"
+                                    transform="rotate(270deg)">
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
+                                </CardBox>
+                            </PlayerCardsContainer>
+                        </PlayerRightContainer>
+                    </MiddleContainer>
+                    <LowerContainer>
+                        <ChatContainer>
+                            <InnerTextChatContainer>
+                                <TextBacklogChatContainer>
+                                    <Writen>BestPokerPlayerEUWest: Hello Guys</Writen>
+                                    <Writen>Hacker: hi</Writen>
+                                    <Writen>Stanley: EZ</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                    <Writen>hi</Writen>
+                                </TextBacklogChatContainer>
+                                <ChatInputField placeholder = "Type in your message"></ChatInputField>
+                            </InnerTextChatContainer>
+                        </ChatContainer>
+                        <CheckContainer>
+                        </CheckContainer>
+                        <OwnCardsContainer>
+                            <CardBox
+                                width="35%"
+                                height="80%"
+                                top="50%"
+                                left="28%">
+                                <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
+                            </CardBox>
+                            <CardBox
+                                width="35%"
+                                height="80%"
+                                top="50%"
+                                left="72%">
+                                <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
+                            </CardBox>
+                        </OwnCardsContainer>
+                        <FoldContainer>
+                        </FoldContainer>
+                        <LeaveTableContainer>
+                            <LeaveTableButton
+                                onClick={() => {
+                                    this.logout();
+                                }}
+                            >
+                                Leave Table
+                            </LeaveTableButton>
+                        </LeaveTableContainer>
+                    </LowerContainer>
+                    <BottomContainer>
+                        <PlayerInfoContainer
+                            top="50%"
+                            left="50%"
+                            width="30%"
+                            height="60%"
+                            color="white">
+                            MySelf Money: 20.000
+                        </PlayerInfoContainer>
+                    </BottomContainer>
+                </GameContainer>);
+        }
+
+        //turn
+        if(2==3) {
+            return (
+                <GameContainer>
+                    <TableCircleLeft></TableCircleLeft>
+                    <TableCircleRight></TableCircleRight>
+                    <Tablesquare></Tablesquare>
+                    <UpperContainer>
+                        <TopLeftPlayerContainer>
+                            <PlayerInfoContainer
+                                top="25%"
+                                left="70%"
+                                width="60%"
+                                height="30%"
+                                color="black">
+                                Hacker Money: 20.000
+                            </PlayerInfoContainer>
+                            <PlayerCardsContainer
+                                top="72.5%"
+                                left="60%"
+                                width="30%"
+                                height="55%">
+                                <CardBox
+                                    width="30%"
+                                    top="0"
+                                    left="29%"
+                                    height="100%"
+                                    transform="rotate(180deg)">
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
+                                </CardBox>
+                                <CardBox
+                                    width="30%"
+                                    top="0"
+                                    left="61%"
+                                    height="100%"
+                                    transform="rotate(180deg)">
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
+                                </CardBox>
+                            </PlayerCardsContainer>
+                        </TopLeftPlayerContainer>
+                        <TopRightPlayerContainer>
+                            <PlayerInfoContainer
+                                top="25%"
+                                left="40%"
+                                width="60%"
+                                height="30%"
+                                color="black">
+                                Stanley Money: 20.000
+                            </PlayerInfoContainer>
+                            <PlayerCardsContainer
+                                top="72.5%"
+                                left="20%"
+                                width="30%"
+                                height="55%">
+                                <CardBox
+                                    width="30%"
+                                    top="0"
+                                    left="29%"
+                                    height="100%"
+                                    transform="rotate(180deg)">
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
+                                </CardBox>
+                                <CardBox
+                                    width="30%"
+                                    top="0"
+                                    left="61%"
+                                    height="100%"
+                                    transform="rotate(180deg)">
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
                                 </CardBox>
                             </PlayerCardsContainer>
                         </TopRightPlayerContainer>
@@ -738,7 +958,7 @@ class GameScreen extends React.Component {
                                 top="-15%"
                                 left="20%"
                                 transform="rotate(90deg)">
-                                {this.returnCard("TEN","CLUBS")}
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
                             </CardBox>
                                 <CardBox
                                     width="60%"
@@ -746,7 +966,7 @@ class GameScreen extends React.Component {
                                     top="35%"
                                     left="20%"
                                     transform="rotate(90deg)">
-                                    {this.returnCard("TWO","HEART")}
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
                                 </CardBox>
                             </PlayerCardsContainer>
                         </PlayerLeftContainer>
@@ -758,35 +978,35 @@ class GameScreen extends React.Component {
                                     height="80%"
                                     top="50%"
                                     left="68%">
-                                    {this.returnCard("TEN","CLUBS")}
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
                                     width="9%"
                                     height="80%"
                                     top="50%"
                                     left="58%">
-                                    {this.returnCard("TEN","CLUBS")}
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
                                     width="9%"
                                     height="80%"
                                     top="50%"
                                     left="48%">
-                                    {this.returnCard("TEN","CLUBS")}
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
                                     width="9%"
                                     height="80%"
                                     top="50%"
                                     left="38%">
-                                    {this.returnCard("TEN","CLUBS")}
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
                                     width="9%"
                                     height="80%"
                                     top="50%"
                                     left="28%">
-                                    {this.returnCard("TEN","CLUBS")}
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
                                     width="9%"
@@ -823,7 +1043,7 @@ class GameScreen extends React.Component {
                                     top="-15%"
                                     left="20%"
                                     transform="rotate(270deg)">
-                                    {this.returnCard("TEN","CLUBS")}
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
                                     width="60%"
@@ -831,7 +1051,7 @@ class GameScreen extends React.Component {
                                     top="35%"
                                     left="20%"
                                     transform="rotate(270deg)">
-                                    {this.returnCard("TWO","HEART")}
+                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
                                 </CardBox>
                             </PlayerCardsContainer>
                         </PlayerRightContainer>
@@ -870,14 +1090,14 @@ class GameScreen extends React.Component {
                                 height="80%"
                                 top="50%"
                                 left="28%">
-                                {this.returnCard("KING","HEART")}
+                                <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
                             </CardBox>
                             <CardBox
                                 width="35%"
                                 height="80%"
                                 top="50%"
                                 left="72%">
-                                {this.returnCard("ACE","DIAMOND")}
+                                <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
                             </CardBox>
                         </OwnCardsContainer>
                         <FoldContainer>
