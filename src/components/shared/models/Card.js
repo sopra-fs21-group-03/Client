@@ -48,7 +48,7 @@ class Card {
         this.cardNumber = null;
         this.symbol= null;
         Object.assign(this, data)
-        if(this.suit=="SPADES"){
+        if(this.suit.toString()=="SPADES"){
             this.symbol=<SymbolBox2><Spades></Spades></SymbolBox2>}
         if(this.suit=="DIAMOND"){
             this.symbol=<SymbolBox2><Diamond></Diamond></SymbolBox2>}

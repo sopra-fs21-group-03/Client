@@ -589,7 +589,7 @@ class GameScreen extends React.Component {
 
 
 
-    game=new Game({name:"GameName",opponents:[new User({cards:[new Card({cardNumber:"ACE", suit:"DIAMOND"}),new Card({cardNumber:"TWO", suit:"DIAMOND"})]}),new User({cards:[new Card({cardNumber:"ACE", suit:"SPADES"}),new Card({cardNumber:"TWO", suit:"SPADES"})]})]});
+    game=new Game({name:"GameName",opponents:[new User({cards:[new Card({cardNumber:"ACE", suit:"DIAMOND"}),new Card({cardNumber:"TWO", suit:"DIAMOND"})]}),new User({cards:[new Card({cardNumber:"ACE", suit:"HEART"}),new Card({cardNumber:"TWO", suit:"SPADES"})]})]});
     user1=new User(this.game.opponents[0])
     user2=new User(this.game.opponents[1])
 
