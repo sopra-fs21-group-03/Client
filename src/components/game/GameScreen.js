@@ -10,6 +10,7 @@ import User from '../shared/models/User';
 import Card from "../shared/models/Card";
 import Deck from "../shared/models/Deck";
 import {BlackButton} from "../../views/design/BlackButton";
+import Game from "../shared/models/Game";
 
 document.body.style.backgroundColor = "green";
 
@@ -586,12 +587,20 @@ class GameScreen extends React.Component {
         };
     }
 
+
+
+    game=new Game({name:"GameName",opponents:[new User({cards:[new Card({cardNumber:"ACE", suit:"DIAMOND"}),new Card({cardNumber:"TWO", suit:"DIAMOND"})]}),new User({cards:[new Card({cardNumber:"ACE", suit:"SPADES"}),new Card({cardNumber:"TWO", suit:"SPADES"})]})]});
+    user1=new User(this.game.opponents[0])
+    user2=new User(this.game.opponents[1])
+
+
+
+
     logout() {
         localStorage.removeItem('token');
         this.props.history.push('/login');
     }
 
-    deck = new Deck();
 
 
     returnCard(cardNumber, Suit){
@@ -635,7 +644,7 @@ class GameScreen extends React.Component {
                                     left="29%"
                                     height="100%"
                                     transform="rotate(180deg)">
-                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
+                                    <FrontCardBox>{this.user1.cards[0].card}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
                                     width="30%"
@@ -643,7 +652,7 @@ class GameScreen extends React.Component {
                                     left="61%"
                                     height="100%"
                                     transform="rotate(180deg)">
-                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
+                                    <FrontCardBox>{this.user1.cards[1].card}</FrontCardBox>
                                 </CardBox>
                             </PlayerCardsContainer>
                         </TopLeftPlayerContainer>
@@ -667,7 +676,7 @@ class GameScreen extends React.Component {
                                     left="29%"
                                     height="100%"
                                     transform="rotate(180deg)">
-                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
+                                    <FrontCardBox>{this.user2.cards[0].card}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
                                     width="30%"
@@ -675,7 +684,7 @@ class GameScreen extends React.Component {
                                     left="61%"
                                     height="100%"
                                     transform="rotate(180deg)">
-                                    <FrontCardBox>{this.returnCard("TWO","HEART")}</FrontCardBox>
+                                    <FrontCardBox>{this.user2.cards[1].card}</FrontCardBox>
                                 </CardBox>
                             </PlayerCardsContainer>
                         </TopRightPlayerContainer>
@@ -803,20 +812,6 @@ class GameScreen extends React.Component {
                                     <Writen>BestPokerPlayerEUWest: Hello Guys</Writen>
                                     <Writen>Hacker: hi</Writen>
                                     <Writen>Stanley: EZ</Writen>
-                                    <Writen>hi</Writen>
-                                    <Writen>hi</Writen>
-                                    <Writen>hi</Writen>
-                                    <Writen>hi</Writen>
-                                    <Writen>hi</Writen>
-                                    <Writen>hi</Writen>
-                                    <Writen>hi</Writen>
-                                    <Writen>hi</Writen>
-                                    <Writen>hi</Writen>
-                                    <Writen>hi</Writen>
-                                    <Writen>hi</Writen>
-                                    <Writen>hi</Writen>
-                                    <Writen>hi</Writen>
-                                    <Writen>hi</Writen>
                                 </TextBacklogChatContainer>
                                 <ChatInputField placeholder = "Type in your message"></ChatInputField>
                             </InnerTextChatContainer>
