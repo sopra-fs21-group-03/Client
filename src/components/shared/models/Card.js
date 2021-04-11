@@ -1,15 +1,12 @@
 import {Clubs, Diamond, Heart, Spades} from "../../../views/design/Suits";
 import styled from "styled-components";
 
-const SymbolBox = styled.div`
-      height: 42px;
-      width: 28px;
-      overflow: hidden;
-      margin: auto;
-      margin-bottom: auto;
-      margin-top: -62px;
-      text-align: center;
-  `;
+const NULLBox = styled.div`
+      background-color: red;  
+      height: 100%;
+      width: 100%;
+      border: 2px solid black;
+`;
 
 const SymbolBox2 = styled.div`
       height: 39px;
@@ -59,6 +56,9 @@ class Card {
 
         this.cardNumberOnCard=<CardNumberOnCard>{this.cardNumber}</CardNumberOnCard>;
         this.card=<CardBox>{this.cardNumberOnCard}{this.symbol}</CardBox>
+        if(this.suit=="NULL"){
+            this.card=<NULLBox></NULLBox>
+        }
     };
 }
 export default Card;

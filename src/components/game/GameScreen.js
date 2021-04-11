@@ -589,7 +589,49 @@ class GameScreen extends React.Component {
 
 
 
-    game=new Game({name:"GameName",opponents:[new User({cards:[new Card({cardNumber:"ACE", suit:"DIAMOND"}),new Card({cardNumber:"TWO", suit:"DIAMOND"})]}),new User({cards:[new Card({cardNumber:"ACE", suit:"HEART"}),new Card({cardNumber:"TWO", suit:"SPADES"})]})]});
+    game=new Game({
+        "gameName": "default",
+        "river": [new Card({"suit":"DIAMOND","cardNumber":"ACE" }),new Card({"suit":"DIAMOND","cardNumber":"ACE" }),new Card({"suit":"DIAMOND","cardNumber":"ACE" })],
+        "pot": {},
+        "showdown": false,
+        "onTurn": null,
+        "opponents": [
+            {
+                "username": "1",
+                "money": 0,
+                "blind": null
+            },
+            {
+                "username": "2",
+                "money": 0,
+                "blind": null
+            },
+            {
+                "username": "3",
+                "money": 0,
+                "blind": null
+            },
+            {
+                "username": "4",
+                "money": 0,
+                "blind": null
+            }
+        ]
+    });
+    river=this.game.river;
+    getRiverCard(index){
+        if (this.river[index]!=null){
+            return this.river[index].card;}
+        else{return null;}
+        }
+
+    Myself=new User({
+        "username": "3",
+        "money": 0,
+        "blind": null,
+        "cards": [new Card({"suit":"DIAMOND","cardNumber":"ACE" }),new Card({"suit":"SPADES","cardNumber":"ACE" })]
+    })
+
     user1=new User(this.game.opponents[0])
     user2=new User(this.game.opponents[1])
 
@@ -617,7 +659,257 @@ class GameScreen extends React.Component {
 
     render() {
         //not turn
+
         if(2==2){
+            return (
+                <GameContainer>
+                    <TableCircleLeft></TableCircleLeft>
+                    <TableCircleRight></TableCircleRight>
+                    <Tablesquare></Tablesquare>
+                    <UpperContainer>
+                        <TopLeftPlayerContainer>
+                            <PlayerInfoContainer
+                                top="25%"
+                                left="70%"
+                                width="60%"
+                                height="30%"
+                                color="black">
+                                Hacker Money: 20.000
+                            </PlayerInfoContainer>
+                            <PlayerCardsContainer
+                                top="72.5%"
+                                left="60%"
+                                width="30%"
+                                height="55%">
+                                <CardBox
+                                    width="30%"
+                                    top="0"
+                                    left="29%"
+                                    height="100%"
+                                    transform="rotate(180deg)">
+
+                                </CardBox>
+                                <CardBox
+                                    width="30%"
+                                    top="0"
+                                    left="61%"
+                                    height="100%"
+                                    transform="rotate(180deg)">
+
+                                </CardBox>
+                            </PlayerCardsContainer>
+                        </TopLeftPlayerContainer>
+                        <TopRightPlayerContainer>
+                            <PlayerInfoContainer
+                                top="25%"
+                                left="40%"
+                                width="60%"
+                                height="30%"
+                                color="black">
+                                Stanley Money: 20.000
+                            </PlayerInfoContainer>
+                            <PlayerCardsContainer
+                                top="72.5%"
+                                left="20%"
+                                width="30%"
+                                height="55%">
+                                <CardBox
+                                    width="30%"
+                                    top="0"
+                                    left="29%"
+                                    height="100%"
+                                    transform="rotate(180deg)">
+
+                                </CardBox>
+                                <CardBox
+                                    width="30%"
+                                    top="0"
+                                    left="61%"
+                                    height="100%"
+                                    transform="rotate(180deg)">
+
+                                </CardBox>
+                            </PlayerCardsContainer>
+                        </TopRightPlayerContainer>
+                    </UpperContainer>
+                    <MiddleContainer>
+                        <PlayerLeftContainer>
+                            <PlayerInfoContainer
+                                top="45%"
+                                left="25%"
+                                width="50%"
+                                height="60%"
+                                color="black">
+                                PokerNoob Money: 20.000
+                            </PlayerInfoContainer>
+                            <PlayerCardsContainer
+                                top="50%"
+                                left="78%"
+                                width="40%"
+                                height="50%">
+                                <CardBox
+                                    width="60%"
+                                    height="80%"
+                                    top="-15%"
+                                    left="20%"
+                                    transform="rotate(90deg)">
+
+                                </CardBox>
+                                <CardBox
+                                    width="60%"
+                                    height="80%"
+                                    top="35%"
+                                    left="20%"
+                                    transform="rotate(90deg)">
+
+                                </CardBox>
+                            </PlayerCardsContainer>
+                        </PlayerLeftContainer>
+                        <TableComponentsContainer>
+                            <TotalPotContainer>Total Pot: 20.000</TotalPotContainer>
+                            <MiddleCardsContainer>
+                                <CardBox
+                                    width="9%"
+                                    height="80%"
+                                    top="50%"
+                                    left="68%">
+                                <FrontCardBox>{this.getRiverCard(0  )}</FrontCardBox>
+
+                                </CardBox>
+                                <CardBox
+                                    width="9%"
+                                    height="80%"
+                                    top="50%"
+                                    left="58%">
+
+                                <FrontCardBox>{this.getRiverCard(1)}</FrontCardBox>
+
+                                </CardBox>
+                                <CardBox
+                                    width="9%"
+                                    height="80%"
+                                    top="50%"
+                                    left="48%">
+                                <FrontCardBox>{this.getRiverCard(2)}</FrontCardBox>
+
+                                </CardBox>
+                                <CardBox
+                                    width="9%"
+                                    height="80%"
+                                    top="50%"
+                                    left="38%">
+                                <FrontCardBox>{this.getRiverCard(3)}</FrontCardBox>
+
+                                </CardBox>
+                                <CardBox
+                                    width="9%"
+                                    height="80%"
+                                    top="50%"
+                                    left="28%">
+                                <FrontCardBox>{this.getRiverCard(4)}</FrontCardBox>
+
+                                </CardBox>
+                                <CardBox
+                                    width="9%"
+                                    height="80%"
+                                    top="50%"
+                                    left="80%">
+
+                                </CardBox>
+                            </MiddleCardsContainer>
+                            <CallContainer>
+                            </CallContainer>
+                            <RaiseContainer>
+                            </RaiseContainer>
+                        </TableComponentsContainer>
+                        <PlayerRightContainer>
+                            <PlayerInfoContainer
+                                top="45%"
+                                left="75%"
+                                width="50%"
+                                height="60%"
+                                color="black">
+                                BestPokerPlayerEUWest Money: 20.000
+                            </PlayerInfoContainer>
+                            <PlayerCardsContainer
+                                top="50%"
+                                left="22%"
+                                width="40%"
+                                height="50%">
+                                <CardBox
+                                    width="60%"
+                                    height="80%"
+                                    top="-15%"
+                                    left="20%"
+                                    transform="rotate(270deg)">
+
+                                </CardBox>
+                                <CardBox
+                                    width="60%"
+                                    height="80%"
+                                    top="35%"
+                                    left="20%"
+                                    transform="rotate(270deg)">
+
+                                </CardBox>
+                            </PlayerCardsContainer>
+                        </PlayerRightContainer>
+                    </MiddleContainer>
+                    <LowerContainer>
+                        <ChatContainer>
+                            <InnerTextChatContainer>
+                                <TextBacklogChatContainer>
+                                    <Writen>BestPokerPlayerEUWest: Hello Guys</Writen>
+                                    <Writen>Hacker: hi</Writen>
+                                    <Writen>Stanley: EZ</Writen>
+                                </TextBacklogChatContainer>
+                                <ChatInputField placeholder = "Type in your message"></ChatInputField>
+                            </InnerTextChatContainer>
+                        </ChatContainer>
+                        <CheckContainer>
+                        </CheckContainer>
+                        <OwnCardsContainer>
+                            <CardBox
+                                width="35%"
+                                height="80%"
+                                top="50%"
+                                left="28%">
+                            <FrontCardBox>{this.Myself.cards[0].card}</FrontCardBox>
+                            </CardBox>
+                            <CardBox
+                                width="35%"
+                                height="80%"
+                                top="50%"
+                                left="72%">
+                                <FrontCardBox>{this.Myself.cards[1].card}</FrontCardBox>
+                            </CardBox>
+                        </OwnCardsContainer>
+                        <FoldContainer>
+                        </FoldContainer>
+                        <LeaveTableContainer>
+                            <LeaveTableButton
+                                onClick={() => {
+                                    this.logout();
+                                }}
+                            >
+                                Leave Table
+                            </LeaveTableButton>
+                        </LeaveTableContainer>
+                    </LowerContainer>
+                    <BottomContainer>
+                        <PlayerInfoContainer
+                            top="50%"
+                            left="50%"
+                            width="30%"
+                            height="60%"
+                            color="white">
+                            MySelf Money: 20.000
+                        </PlayerInfoContainer>
+                    </BottomContainer>
+                </GameContainer>);
+        }
+
+        /* if(2==3){
             return (
                 <GameContainer>
                     <TableCircleLeft></TableCircleLeft>
@@ -857,7 +1149,7 @@ class GameScreen extends React.Component {
                         </PlayerInfoContainer>
                     </BottomContainer>
                 </GameContainer>);
-        }
+        } */
 
         //turn
         if(2==3) {
