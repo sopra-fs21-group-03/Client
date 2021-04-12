@@ -29,21 +29,19 @@ class GameScreen extends React.Component {
         this.props.history.push('/login');
     }
 
+    game = new Game();
 
+    async updateGame(){
+        const gameResponse = await api.get('/games/1',{headers:{ Authorization: localStorage.getItem('token')}});
+        this.game = gameResponse.data;
+    }
 
     returnCard(cardNumber, Suit){
     const card = new Card({cardNumber: cardNumber, suit: Suit});
     return card.card}
 
-    //game_jonas = new Game;
-
-    async componentDidMount() {
-        this.interval = setInterval(() => this.setState({ time: Date.now() }), 200);
-
-        //this.game_jonas = await api.get('/games/1',{headers:{ Authorization: localStorage.getItem('token')}});
-
-        //console.log(localStorage.getItem('token'));
-        //console.log(this.game_jonas);
+    componentDidMount() {
+        this.interval = setInterval(() => this.setState({ time: Date.now() }), 5000);
     }
     componentWillUnmount() {
         clearInterval(this.interval);
@@ -51,7 +49,9 @@ class GameScreen extends React.Component {
 
 
     render() {
-        //not turn
+
+        this.updateGame();
+        console.log(this.game);
 
         if(2==2){
             return (

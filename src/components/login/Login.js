@@ -144,10 +144,12 @@ class Login extends React.Component {
         username: this.state.username,
         password: this.state.password
       });
-      const responseToken = await api.put('/users', requestBody);
+      const response = await api.put('/users', requestBody);
+
+      const user = new User(response.data);
 
       // Store the token into the local storage.
-      localStorage.setItem('token', responseToken);
+      localStorage.setItem('token', user.token);
 
       // Login successfully worked --> navigate to the route /game in the GameRouter
       this.props.history.push(`/gamescreen`);
