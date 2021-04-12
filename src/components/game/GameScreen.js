@@ -15,7 +15,6 @@ import { Writen, LeaveTableButton, CheckButton, CallButton, RaiseButton, RaiseIn
 
 document.body.style.backgroundColor = "green";
 
-
 class GameScreen extends React.Component {
     constructor() {
         super();
@@ -24,78 +23,49 @@ class GameScreen extends React.Component {
         };
     }
 
-
-
-    game=new Game({
-        "gameName": "default",
-        "river": [new Card({"suit":"DIAMOND","cardNumber":"ACE" }),new Card({"suit":"DIAMOND","cardNumber":"ACE" }),new Card({"suit":"DIAMOND","cardNumber":"ACE" })],
-        "pot": {},
-        "showdown": false,
-        "onTurn": null,
-        "opponents": [
-            {
-                "username": "1",
-                "money": 0,
-                "blind": null
-            },
-            {
-                "username": "2",
-                "money": 0,
-                "blind": null
-            },
-            {
-                "username": "3",
-                "money": 0,
-                "blind": null
-            },
-            {
-                "username": "4",
-                "money": 0,
-                "blind": null
-            }
-        ]
-    });
-    river=this.game.river;
-    getRiverCard(index){
-        if (this.river[index]!=null){
-            return this.river[index].card;}
-        else{return null;}
-        }
-
-    Myself=new User({
-        "username": "3",
-        "money": 0,
-        "blind": null,
-        "cards": [new Card({"suit":"DIAMOND","cardNumber":"ACE" }),new Card({"suit":"SPADES","cardNumber":"ACE" })]
-    })
-
-    user1=new User(this.game.opponents[0])
-    user2=new User(this.game.opponents[1])
-
-
-
-
     logout() {
         localStorage.removeItem('token');
+        localStorage.removeItem('userID');
         this.props.history.push('/login');
     }
 
+    game = new Game();
+    myselfUser = new User();
 
+    async updateGameScreen(){
+        const gameResponse = await api.get('/games/1',{headers:{ Authorization: localStorage.getItem('token')}});
+        this.game = gameResponse.data;
+
+        const myselfUserResponse = await api.get('/games/1/' + localStorage.getItem('userID'),{headers:{ Authorization: localStorage.getItem('token')}});
+        this.myselfUser = myselfUserResponse.data;
+    }
 
     returnCard(cardNumber, Suit){
     const card = new Card({cardNumber: cardNumber, suit: Suit});
     return card.card}
 
     componentDidMount() {
-        this.interval = setInterval(() => this.setState({ time: Date.now() }), 200);
+        this.interval = setInterval(() => this.setState({ time: Date.now() }), 5000);
     }
     componentWillUnmount() {
         clearInterval(this.interval);
     }
 
+    river=this.game.river;
+
+    getRiverCard(index){
+        if (this.river[index]!=null){
+            return this.river[index].card;}
+        else{return null;}
+    }
+
+    returnCard(cardNumber, Suit){
+        const card = new Card({cardNumber: cardNumber, suit: Suit});
+        return card.card}
 
     render() {
-        //not turn
+
+        this.updateGameScreen();
 
         if(2==2){
             return (
@@ -210,7 +180,7 @@ class GameScreen extends React.Component {
                                     height="80%"
                                     top="50%"
                                     left="68%">
-                                <FrontCardBox>{this.getRiverCard(0  )}</FrontCardBox>
+                                <FrontCardBox></FrontCardBox>
 
                                 </CardBox>
                                 <CardBox
@@ -219,7 +189,7 @@ class GameScreen extends React.Component {
                                     top="50%"
                                     left="58%">
 
-                                <FrontCardBox>{this.getRiverCard(1)}</FrontCardBox>
+                                <FrontCardBox></FrontCardBox>
 
                                 </CardBox>
                                 <CardBox
@@ -227,7 +197,7 @@ class GameScreen extends React.Component {
                                     height="80%"
                                     top="50%"
                                     left="48%">
-                                <FrontCardBox>{this.getRiverCard(2)}</FrontCardBox>
+                                <FrontCardBox></FrontCardBox>
 
                                 </CardBox>
                                 <CardBox
@@ -235,7 +205,7 @@ class GameScreen extends React.Component {
                                     height="80%"
                                     top="50%"
                                     left="38%">
-                                <FrontCardBox>{this.getRiverCard(3)}</FrontCardBox>
+                                <FrontCardBox></FrontCardBox>
 
                                 </CardBox>
                                 <CardBox
@@ -243,7 +213,7 @@ class GameScreen extends React.Component {
                                     height="80%"
                                     top="50%"
                                     left="28%">
-                                <FrontCardBox>{this.getRiverCard(4)}</FrontCardBox>
+                                <FrontCardBox></FrontCardBox>
 
                                 </CardBox>
                                 <CardBox
@@ -311,14 +281,14 @@ class GameScreen extends React.Component {
                                 height="80%"
                                 top="50%"
                                 left="28%">
-                            <FrontCardBox>{this.Myself.cards[0].card}</FrontCardBox>
+                            <FrontCardBox></FrontCardBox>
                             </CardBox>
                             <CardBox
                                 width="35%"
                                 height="80%"
                                 top="50%"
                                 left="72%">
-                                <FrontCardBox>{this.Myself.cards[1].card}</FrontCardBox>
+                                <FrontCardBox></FrontCardBox>
                             </CardBox>
                         </OwnCardsContainer>
                         <FoldContainer>

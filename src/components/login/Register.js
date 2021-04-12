@@ -144,10 +144,18 @@ class Register extends React.Component {
         username: this.state.username,
         password: this.state.password
       });
-      const responseToken = await api.post('/users', requestBody);
+      const response = await api.post('/users', requestBody);
+
+      const user = new User(response.data);
 
       // Store the token into the local storage.
-      localStorage.setItem('token', responseToken);
+      localStorage.setItem('token', user.token);
+
+      const secondResponse = await api.get('/users/ids',{headers:{ Authorization: localStorage.getItem('token')}});
+
+      const userForUserID = new User(secondResponse.data);
+
+      localStorage.setItem('userID', userForUserID.id);
 
       // Login successfully worked --> navigate to the route /game in the GameRouter
       this.props.history.push(`/gamescreen`);
