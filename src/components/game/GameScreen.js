@@ -31,10 +31,16 @@ class GameScreen extends React.Component {
 
     game = new Game();
     myselfUser = new User();
+    user1=new User();
+    user2=new User();
+    user3=new User();
+    user4=new User();
+
 
     async updateGameScreen(){
         const gameResponse = await api.get('/games/1',{headers:{ Authorization: localStorage.getItem('token')}});
         this.game = gameResponse.data;
+        this.user1=new User(this.game.opponents[0])
 
         const myselfUserResponse = await api.get('/games/1/' + localStorage.getItem('userID'),{headers:{ Authorization: localStorage.getItem('token')}});
         this.myselfUser = myselfUserResponse.data;
@@ -67,6 +73,7 @@ class GameScreen extends React.Component {
 
         this.updateGameScreen();
         console.log(this.myselfUser);
+        console.log(this.game);
 
         if(2==2){
             return (
@@ -82,7 +89,7 @@ class GameScreen extends React.Component {
                                 width="60%"
                                 height="30%"
                                 color="black">
-                                Hacker Money: 20.000
+                                {this.user1.username}Money : {this.user1.money} Blind:{this.user1.blind}
                             </PlayerInfoContainer>
                             <PlayerCardsContainer
                                 top="72.5%"

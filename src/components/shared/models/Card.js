@@ -51,7 +51,7 @@ class Card {
             this.symbol=<SymbolBox2><Diamond></Diamond></SymbolBox2>}
         if(this.suit=="HEART"){
             this.symbol=<SymbolBox2><Heart></Heart></SymbolBox2>}
-        if(this.suit=="CLUBS"){
+        if(this.suit=="CLUB"){
             this.symbol=<SymbolBox2><Clubs></Clubs></SymbolBox2>}
 
         this.cardNumberOnCard=<CardNumberOnCard>{this.rank}</CardNumberOnCard>;

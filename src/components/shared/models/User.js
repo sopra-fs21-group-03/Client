@@ -10,7 +10,7 @@ class User {
     this.name = null;
     this.username = null;
     this.token = null;
-    this.role=null;
+    this.blind=null;
     this.money=null;
     if(this.cards==null){
       this.cards=[new Card({"suit":"NULL"}),new Card({"suit":"NULL"})]
