@@ -292,6 +292,7 @@ class GameScreen extends React.Component {
                                 top="50%"
                                 left="72%">
                                 <FrontCardBox>
+                                    {new Card(this.myselfUser.cards[1]).card}
                                 </FrontCardBox>
                             </CardBox>
                         </OwnCardsContainer>

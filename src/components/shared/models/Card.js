@@ -45,13 +45,13 @@ class Card {
         this.rank = null;
         this.symbol= null;
         Object.assign(this, data)
-        if(this.suit.toString()=="SPADES"){
+        if(this.suit=="SPADE"){
             this.symbol=<SymbolBox2><Spades></Spades></SymbolBox2>}
-        if(this.suit.toString()=="DIAMOND"){
+        if(this.suit=="DIAMOND"){
             this.symbol=<SymbolBox2><Diamond></Diamond></SymbolBox2>}
-        if(this.suit.toString()=="HEART"){
+        if(this.suit=="HEART"){
             this.symbol=<SymbolBox2><Heart></Heart></SymbolBox2>}
-        if(this.suit.toString()=="CLUBS"){
+        if(this.suit=="CLUBS"){
             this.symbol=<SymbolBox2><Clubs></Clubs></SymbolBox2>}
 
         this.cardNumberOnCard=<CardNumberOnCard>{this.rank}</CardNumberOnCard>;
