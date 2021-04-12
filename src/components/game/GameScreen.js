@@ -45,7 +45,7 @@ class GameScreen extends React.Component {
     return card.card}
 
     componentDidMount() {
-        this.interval = setInterval(() => this.setState({ time: Date.now() }), 5000);
+        this.interval = setInterval(() => this.setState({ time: Date.now() }), 500);
     }
     componentWillUnmount() {
         clearInterval(this.interval);
@@ -66,6 +66,7 @@ class GameScreen extends React.Component {
     render() {
 
         this.updateGameScreen();
+        console.log(this.myselfUser);
 
         if(2==2){
             return (
@@ -281,14 +282,17 @@ class GameScreen extends React.Component {
                                 height="80%"
                                 top="50%"
                                 left="28%">
-                            <FrontCardBox></FrontCardBox>
+                            <FrontCardBox>
+                                {new Card(this.myselfUser.cards[0]).card}
+                            </FrontCardBox>
                             </CardBox>
                             <CardBox
                                 width="35%"
                                 height="80%"
                                 top="50%"
                                 left="72%">
-                                <FrontCardBox></FrontCardBox>
+                                <FrontCardBox>
+                                </FrontCardBox>
                             </CardBox>
                         </OwnCardsContainer>
                         <FoldContainer>
@@ -310,7 +314,7 @@ class GameScreen extends React.Component {
                             width="30%"
                             height="60%"
                             color="white">
-                            MySelf Money: 20.000
+                            {this.myselfUser.username}
                         </PlayerInfoContainer>
                     </BottomContainer>
                 </GameContainer>);

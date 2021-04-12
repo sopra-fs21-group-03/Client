@@ -42,19 +42,19 @@ const CardNumberOnCard= styled.div`
 class Card {
     constructor(data = {}) {
         this.suit = null;
-        this.cardNumber = null;
+        this.rank = null;
         this.symbol= null;
         Object.assign(this, data)
         if(this.suit.toString()=="SPADES"){
             this.symbol=<SymbolBox2><Spades></Spades></SymbolBox2>}
-        if(this.suit=="DIAMOND"){
+        if(this.suit.toString()=="DIAMOND"){
             this.symbol=<SymbolBox2><Diamond></Diamond></SymbolBox2>}
-        if(this.suit=="HEART"){
+        if(this.suit.toString()=="HEART"){
             this.symbol=<SymbolBox2><Heart></Heart></SymbolBox2>}
-        if(this.suit=="CLUBS"){
+        if(this.suit.toString()=="CLUBS"){
             this.symbol=<SymbolBox2><Clubs></Clubs></SymbolBox2>}
 
-        this.cardNumberOnCard=<CardNumberOnCard>{this.cardNumber}</CardNumberOnCard>;
+        this.cardNumberOnCard=<CardNumberOnCard>{this.rank}</CardNumberOnCard>;
         this.card=<CardBox>{this.cardNumberOnCard}{this.symbol}</CardBox>
         if(this.suit=="NULL"){
             this.card=<NULLBox></NULLBox>
