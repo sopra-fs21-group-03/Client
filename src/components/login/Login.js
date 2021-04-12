@@ -151,6 +151,12 @@ class Login extends React.Component {
       // Store the token into the local storage.
       localStorage.setItem('token', user.token);
 
+      const secondResponse = await api.get('/users/ids',{headers:{ Authorization: localStorage.getItem('token')}});
+
+      const userForUserID = new User(secondResponse.data);
+
+      localStorage.setItem('userID', userForUserID.id);
+
       // Login successfully worked --> navigate to the route /game in the GameRouter
       this.props.history.push(`/gamescreen`);
     } catch (error) {

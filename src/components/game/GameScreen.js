@@ -15,7 +15,6 @@ import { Writen, LeaveTableButton, CheckButton, CallButton, RaiseButton, RaiseIn
 
 document.body.style.backgroundColor = "green";
 
-
 class GameScreen extends React.Component {
     constructor() {
         super();
@@ -26,14 +25,19 @@ class GameScreen extends React.Component {
 
     logout() {
         localStorage.removeItem('token');
+        localStorage.removeItem('userID');
         this.props.history.push('/login');
     }
 
     game = new Game();
+    myselfUser = new User();
 
-    async updateGame(){
+    async updateGameScreen(){
         const gameResponse = await api.get('/games/1',{headers:{ Authorization: localStorage.getItem('token')}});
         this.game = gameResponse.data;
+
+        const myselfUserResponse = await api.get('/games/1/' + localStorage.getItem('userID'),{headers:{ Authorization: localStorage.getItem('token')}});
+        this.myselfUser = myselfUserResponse.data;
     }
 
     returnCard(cardNumber, Suit){
@@ -47,11 +51,21 @@ class GameScreen extends React.Component {
         clearInterval(this.interval);
     }
 
+    river=this.game.river;
+
+    getRiverCard(index){
+        if (this.river[index]!=null){
+            return this.river[index].card;}
+        else{return null;}
+    }
+
+    returnCard(cardNumber, Suit){
+        const card = new Card({cardNumber: cardNumber, suit: Suit});
+        return card.card}
 
     render() {
 
-        this.updateGame();
-        console.log(this.game);
+        this.updateGameScreen();
 
         if(2==2){
             return (
