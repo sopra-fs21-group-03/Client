@@ -19,8 +19,25 @@ class GameScreen extends React.Component {
     constructor() {
         super();
         this.state = {
-            users: null
+            token: null
         };
+    }
+
+    async call(){
+        this.returnToken()
+        await api.put("/games/1/"+localStorage.getItem('userID')+"/call", this.returnToken()  )
+    }
+    async check(){
+        this.returnToken()
+        await api.put("/games/1/"+localStorage.getItem('userID')+"/check", this.returnToken()  )
+    }
+
+    returnToken(){
+        const requestBody = JSON.stringify({
+            token: localStorage.getItem('token')
+        });
+        console.log(requestBody)
+        return requestBody
     }
 
     logout() {
@@ -42,6 +59,7 @@ class GameScreen extends React.Component {
     async updateGameScreen(){
         const gameResponse = await api.get('/games/1',{headers:{ Authorization: localStorage.getItem('token')}});
         this.game = gameResponse.data;
+
 
 
         const myselfUserResponse = await api.get('/games/1/' + localStorage.getItem('userID'),{headers:{ Authorization: localStorage.getItem('token')}});
@@ -68,11 +86,16 @@ class GameScreen extends React.Component {
         clearInterval(this.interval);
     }
 
-    river=this.game.river;
+
 
     getRiverCard(index){
-        if (this.river[index]!=null){
-            return this.river[index].card;}
+
+        if (this.game.river.cards!=null){
+            if(this.game.river.cards[index]!=null){
+
+            const card=new Card(this.game.river.cards[index])
+
+            return card.card;}}
         else{return null;}
     }
 
@@ -82,9 +105,10 @@ class GameScreen extends React.Component {
 
     render() {
 
+
         this.updateGameScreen();
-        console.log(this.myselfUser);
-        console.log(this.game);
+        console.log(this.game)
+
 
         if(this.game.onTurn.username!=this.myselfUser.username){
             return (
@@ -179,7 +203,6 @@ class GameScreen extends React.Component {
                                     top="-15%"
                                     left="20%"
                                     transform="rotate(90deg)">
-
                                 </CardBox>
                                 <CardBox
                                     width="60%"
@@ -199,7 +222,7 @@ class GameScreen extends React.Component {
                                     height="80%"
                                     top="50%"
                                     left="68%">
-                                <FrontCardBox></FrontCardBox>
+                                <FrontCardBox>{this.getRiverCard(0)}</FrontCardBox>
 
                                 </CardBox>
                                 <CardBox
@@ -208,7 +231,7 @@ class GameScreen extends React.Component {
                                     top="50%"
                                     left="58%">
 
-                                <FrontCardBox></FrontCardBox>
+                                <FrontCardBox>{this.getRiverCard(1)}</FrontCardBox>
 
                                 </CardBox>
                                 <CardBox
@@ -216,7 +239,7 @@ class GameScreen extends React.Component {
                                     height="80%"
                                     top="50%"
                                     left="48%">
-                                <FrontCardBox></FrontCardBox>
+                                <FrontCardBox>{this.getRiverCard(2)}</FrontCardBox>
 
                                 </CardBox>
                                 <CardBox
@@ -224,7 +247,7 @@ class GameScreen extends React.Component {
                                     height="80%"
                                     top="50%"
                                     left="38%">
-                                <FrontCardBox></FrontCardBox>
+                                <FrontCardBox>{this.getRiverCard(3)}</FrontCardBox>
 
                                 </CardBox>
                                 <CardBox
@@ -232,7 +255,7 @@ class GameScreen extends React.Component {
                                     height="80%"
                                     top="50%"
                                     left="28%">
-                                <FrontCardBox></FrontCardBox>
+                                <FrontCardBox>{this.getRiverCard(4)}</FrontCardBox>
 
                                 </CardBox>
                                 <CardBox
@@ -355,7 +378,7 @@ class GameScreen extends React.Component {
                                 width="60%"
                                 height="30%"
                                 color="black">
-                                Hacker Money: 20.000
+                                {this.user2.username} Money : {this.user2.money}
                             </PlayerInfoContainer>
                             <PlayerCardsContainer
                                 top="72.5%"
@@ -387,7 +410,7 @@ class GameScreen extends React.Component {
                                 width="60%"
                                 height="30%"
                                 color="black">
-                                Stanley Money: 20.000
+                                {this.user3.username} Money : {this.user3.money}
                             </PlayerInfoContainer>
                             <PlayerCardsContainer
                                 top="72.5%"
@@ -421,7 +444,7 @@ class GameScreen extends React.Component {
                                 width="50%"
                                 height="60%"
                                 color="black">
-                                PokerNoob Money: 20.000
+                                {this.user1.username} Money : {this.user1.money}
                             </PlayerInfoContainer>
                             <PlayerCardsContainer
                                 top="50%"
@@ -447,42 +470,42 @@ class GameScreen extends React.Component {
                             </PlayerCardsContainer>
                         </PlayerLeftContainer>
                         <TableComponentsContainer>
-                            <TotalPotContainer>Total Pot: 20.000</TotalPotContainer>
+                            <TotalPotContainer>Total Pot: {this.game.pot.total}</TotalPotContainer>
                             <MiddleCardsContainer>
                                 <CardBox
                                     width="9%"
                                     height="80%"
                                     top="50%"
                                     left="68%">
-                                    <FrontCardBox>{}</FrontCardBox>
+                                    <FrontCardBox>{this.getRiverCard(0)}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
                                     width="9%"
                                     height="80%"
                                     top="50%"
                                     left="58%">
-                                    <FrontCardBox>{}</FrontCardBox>
+                                    <FrontCardBox>{this.getRiverCard(1)}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
                                     width="9%"
                                     height="80%"
                                     top="50%"
                                     left="48%">
-                                    <FrontCardBox>{}</FrontCardBox>
+                                    <FrontCardBox>{this.getRiverCard(2)}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
                                     width="9%"
                                     height="80%"
                                     top="50%"
                                     left="38%">
-                                    <FrontCardBox>{}</FrontCardBox>
+                                    <FrontCardBox>{this.getRiverCard(3)}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
                                     width="9%"
                                     height="80%"
                                     top="50%"
                                     left="28%">
-                                    <FrontCardBox>{}</FrontCardBox>
+                                    <FrontCardBox>{this.getRiverCard(4)}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
                                     width="9%"
@@ -492,7 +515,9 @@ class GameScreen extends React.Component {
                                 </CardBox>
                             </MiddleCardsContainer>
                             <CallContainer>
-                                <CallButton>Call</CallButton>
+                                <CallButton onClick={() => {
+                                this.call();
+                                }} >Call</CallButton>
                             </CallContainer>
                             <RaiseContainer>
                                 <RaiseButton>Raise</RaiseButton>
@@ -506,7 +531,7 @@ class GameScreen extends React.Component {
                                 width="50%"
                                 height="60%"
                                 color="black">
-                                BestPokerPlayerEUWest Money: 20.000
+                                {this.user4.username} Money : {this.user4.money}
                             </PlayerInfoContainer>
                             <PlayerCardsContainer
                                 top="50%"
@@ -544,7 +569,9 @@ class GameScreen extends React.Component {
                             </InnerTextChatContainer>
                         </ChatContainer>
                         <CheckContainer>
-                            <CheckButton>Check</CheckButton>
+                            <CheckButton onClick={() => {
+                                this.check();
+                            }}>Check</CheckButton>
                         </CheckContainer>
                         <OwnCardsContainer>
                             <CardBox
@@ -563,14 +590,13 @@ class GameScreen extends React.Component {
                             </CardBox>
                         </OwnCardsContainer>
                         <FoldContainer>
-                            <FoldButton onClick={() => {
-                                            api.put("/games/1"+this.myselfUser.username+"/fold", localStorage.getItem("token"))
-                                        }}>Fold</FoldButton>
+                            <FoldButton>Fold</FoldButton>
                         </FoldContainer>
                         <LeaveTableContainer>
                             <LeaveTableButton
                             onClick={() => {
-                                this.logout();
+                                this.logout()
+
                             }}
                             >
                             Leave Table
