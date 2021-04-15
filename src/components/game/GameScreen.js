@@ -15,6 +15,7 @@ import { Writen, LeaveTableButton, CheckButton, CallButton, RaiseButton, RaiseIn
 
 document.body.style.backgroundColor = "green";
 
+//Normal PokerScreen
 class GameScreen extends React.Component {
     constructor() {
         super();
