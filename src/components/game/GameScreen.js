@@ -54,6 +54,8 @@ class GameScreen extends React.Component {
     user3=new User();
     user4=new User();
 
+    userOnTurn = new User();
+
 
 
 
@@ -66,6 +68,8 @@ class GameScreen extends React.Component {
         const myselfUserResponse = await api.get('/games/1/' + localStorage.getItem('userID'),{headers:{ Authorization: localStorage.getItem('token')}});
         this.myselfUser = myselfUserResponse.data;
         if(this.game.players.length==5){
+        this.userOnTurn = this.game.onTurn;
+
         for(var i=0; i<5; i++){
             if(this.game.players[i].username==this.myselfUser.username){
                 this.user4=this.game.players[(i+1)%5]
@@ -111,7 +115,7 @@ class GameScreen extends React.Component {
         console.log(this.game)
 
 
-        if(this.game.onTurn.username!=this.myselfUser.username){
+        if(this.userOnTurn.username!=this.myselfUser.username){
             return (
                 <GameContainer>
                     <TableCircleLeft></TableCircleLeft>
@@ -125,7 +129,7 @@ class GameScreen extends React.Component {
                                 width="60%"
                                 height="30%"
                                 color="black">
-                                {this.user2.username} Money : {this.user2.money} Blind : {this.user2.blind}
+                                {this.user2.getUsername()} Money : {this.user2.money} Blind : {this.user2.blind}
                             </PlayerInfoContainer>
                             <PlayerCardsContainer
                                 top="72.5%"
@@ -357,7 +361,7 @@ class GameScreen extends React.Component {
                             width="30%"
                             height="60%"
                             color="white">
-                            {this.myselfUser.username}
+                            {this.myselfUser.getUsername()}
                         </PlayerInfoContainer>
                     </BottomContainer>
                 </GameContainer>);
@@ -365,7 +369,7 @@ class GameScreen extends React.Component {
 
 
         //turn
-        if(this.game.onTurn.username==this.myselfUser.username) {
+        if(this.userOnTurn.username==this.myselfUser.username) {
             return (
                 <GameContainer>
                     <TableCircleLeft></TableCircleLeft>
