@@ -129,7 +129,7 @@ class GameScreen extends React.Component {
                                 width="60%"
                                 height="30%"
                                 color="black">
-                                {this.user2.getUsername()} Money : {this.user2.money} Blind : {this.user2.blind}
+                                {this.user2.username} Money : {this.user2.money} Blind : {this.user2.blind}
                             </PlayerInfoContainer>
                             <PlayerCardsContainer
                                 top="72.5%"
@@ -361,7 +361,7 @@ class GameScreen extends React.Component {
                             width="30%"
                             height="60%"
                             color="white">
-                            {this.myselfUser.getUsername()}
+                            {this.myselfUser.username}
                         </PlayerInfoContainer>
                     </BottomContainer>
                 </GameContainer>);
