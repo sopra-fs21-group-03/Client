@@ -20,7 +20,8 @@ class GameScreen extends React.Component {
     constructor() {
         super();
         this.state = {
-            token: null
+            token: null,
+            raiseAmount: null
         };
     }
 
@@ -33,12 +34,32 @@ class GameScreen extends React.Component {
         await api.put("/games/1/"+localStorage.getItem('userID')+"/check", this.returnToken()  )
     }
 
+    async fold(){
+        this.returnToken()
+        await api.put("/games/1/"+localStorage.getItem('userID')+"/fold", this.returnToken()  )
+    }
+
+    async raise(){
+        this.returnToken()
+        await api.put("/games/1/"+localStorage.getItem('userID')+"/raise",  this.returnRaiseAmount() + this.returnToken()  )
+        this.state.raiseAmount = null;
+    }
+
+
     returnToken(){
         const requestBody = JSON.stringify({
             token: localStorage.getItem('token')
         });
         console.log(requestBody)
         return requestBody
+    }
+
+    returnRaiseAmount(){
+        const requestBodyRaiseAmount = JSON.stringify({
+            raiseAmount: this.state.raiseAmount
+        });
+        console.log(requestBodyRaiseAmount)
+        return requestBodyRaiseAmount
     }
 
     logout() {
@@ -107,6 +128,12 @@ class GameScreen extends React.Component {
     returnCard(cardNumber, Suit){
         const card = new Card({cardNumber: cardNumber, suit: Suit});
         return card.card}
+
+    handleInputChange(key, value) {
+    // Example: if the key is username, this statement is the equivalent to the following one:
+    // this.setState({'username': value});
+    this.setState({ [key]: value });
+    }
 
     render() {
 
@@ -361,7 +388,7 @@ class GameScreen extends React.Component {
                             width="30%"
                             height="60%"
                             color="white">
-                            {this.myselfUser.username}
+                            {this.myselfUser.username} Money: {this.myselfUser.money}
                         </PlayerInfoContainer>
                     </BottomContainer>
                 </GameContainer>);
@@ -525,8 +552,14 @@ class GameScreen extends React.Component {
                                 }} >Call</CallButton>
                             </CallContainer>
                             <RaiseContainer>
-                                <RaiseButton>Raise</RaiseButton>
-                                <RaiseInput type="number"></RaiseInput>
+                                <RaiseButton onClick={() => {
+                                    this.raise();
+                                }}
+                                disabled={!this.state.raiseAmount}
+                                >Raise</RaiseButton>
+                                <RaiseInput type="number" onChange={e => {
+                                    this.handleInputChange('raiseAmount', e.target.value);
+                                }}></RaiseInput>
                             </RaiseContainer>
                         </TableComponentsContainer>
                         <PlayerRightContainer>
@@ -595,7 +628,9 @@ class GameScreen extends React.Component {
                             </CardBox>
                         </OwnCardsContainer>
                         <FoldContainer>
-                            <FoldButton>Fold</FoldButton>
+                            <FoldButton onClick={() => {
+                                this.fold();
+                            }} >Fold</FoldButton>
                         </FoldContainer>
                         <LeaveTableContainer>
                             <LeaveTableButton

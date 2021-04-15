@@ -23,19 +23,19 @@ class AppRouter extends React.Component {
         <Switch>
           <div>
             <Route
+                path="/login"
+                exact
+                render={() => (
+
+                    <Login />
+
+                )}
+            />
+            <Route
               path="/game"
               render={() => (
 
                   <GameRouter base={"/game"} />
-
-              )}
-            />
-            <Route
-              path="/login"
-              exact
-              render={() => (
-
-                  <Login />
 
               )}
             />
