@@ -548,6 +548,7 @@ export const CardBox = styled.div`
   padding-right: auto;
   transform: ${props => props.transform || null};
   display: ${props => props.display || null}; 
+  id: ${props => props.id || null}; 
 `;
 
 export const PlayerInfoContainer = styled.div`

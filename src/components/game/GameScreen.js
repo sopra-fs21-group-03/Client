@@ -99,6 +99,45 @@ class GameScreen extends React.Component {
                 this.user1=this.game.players[(i+4)%5]
             }
         }}
+
+        //not turn: if play.self has no cards, there should be no card displayed
+        if(document.getElementById("ownCardBox1") != null
+            && document.getElementById("ownCardBox2") != null){
+            if(this.myselfUser.cards.length == 0){
+                document.getElementById("ownCardBox1").style.display="none";
+                document.getElementById("ownCardBox2").style.display="none";
+            }
+            if(this.myselfUser.cards.length == 2){
+                document.getElementById("ownCardBox1").style.display="inline";
+                document.getElementById("ownCardBox2").style.display="inline";
+            }
+        }
+
+        //turn: if play.self has no cards, there should be no card displayed
+        if(document.getElementById("ownCardBox3") != null
+            && document.getElementById("ownCardBox4") != null){
+            if(this.myselfUser.cards.length == 0){
+                document.getElementById("ownCardBox3").style.display="none";
+                document.getElementById("ownCardBox4").style.display="none";
+            }
+            if(this.myselfUser.cards.length == 2){
+                document.getElementById("ownCardBox3").style.display="inline";
+                document.getElementById("ownCardBox4").style.display="inline";
+            }
+        }
+
+
+        /*
+        if(document.getElementById("ownCardBox1") == null){
+            if(this.myselfUser.cards.length == 2){
+                document.getElementById("ownCardBox1").style.display="inline";
+                document.getElementById("ownCardBox2").style.display="inline";
+                document.getElementById("ownCardBox3").style.display="inline";
+                document.getElementById("ownCardBox4").style.display="inline";
+            }
+        }
+
+         */
     }
 
     returnCard(cardNumber, Suit){
@@ -140,6 +179,7 @@ class GameScreen extends React.Component {
 
         this.updateGameScreen();
         console.log(this.game)
+        console.log(this.myselfUser.cards.length)
 
 
         if(this.userOnTurn.username!=this.myselfUser.username){
@@ -354,7 +394,8 @@ class GameScreen extends React.Component {
                                 width="35%"
                                 height="80%"
                                 top="50%"
-                                left="28%">
+                                left="28%"
+                                id="ownCardBox3">
                             <FrontCardBox>
                                 {new Card(this.myselfUser.cards[0]).card}
                             </FrontCardBox>
@@ -363,7 +404,8 @@ class GameScreen extends React.Component {
                                 width="35%"
                                 height="80%"
                                 top="50%"
-                                left="72%">
+                                left="72%"
+                                id="ownCardBox4">
                                 <FrontCardBox>
                                     {new Card(this.myselfUser.cards[1]).card}
                                 </FrontCardBox>
@@ -616,14 +658,17 @@ class GameScreen extends React.Component {
                                 width="35%"
                                 height="80%"
                                 top="50%"
-                                left="28%">
+                                left="28%"
+                                id="ownCardBox1">
                                 <FrontCardBox>{new Card(this.myselfUser.cards[0]).card}</FrontCardBox>
                             </CardBox>
                             <CardBox
                                 width="35%"
                                 height="80%"
                                 top="50%"
-                                left="72%">
+                                left="72%"
+                                id="ownCardBox2"
+                                visibility="hidden">
                                 <FrontCardBox>{new Card(this.myselfUser.cards[1]).card}</FrontCardBox>
                             </CardBox>
                         </OwnCardsContainer>
