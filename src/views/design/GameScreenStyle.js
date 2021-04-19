@@ -568,6 +568,7 @@ export const PlayerInfoContainer = styled.div`
   padding-top: 10px;
   overflow: auto;
   word-wrap:break-word;
+  id: ${props => props.id || null};
 `;
 
 export const FrontCardBox = styled.div`

@@ -100,6 +100,9 @@ class GameScreen extends React.Component {
             }
         }}
 
+
+        //From here GameUpdate it is only style stuff (display etc)
+
         //not turn: if play.self has no cards, there should be no card displayed
         if(document.getElementById("ownCardBox1") != null
             && document.getElementById("ownCardBox2") != null){
@@ -126,18 +129,117 @@ class GameScreen extends React.Component {
             }
         }
 
+        //If User is on turn his name should display in red
 
-        /*
-        if(document.getElementById("ownCardBox1") == null){
-            if(this.myselfUser.cards.length == 2){
-                document.getElementById("ownCardBox1").style.display="inline";
-                document.getElementById("ownCardBox2").style.display="inline";
-                document.getElementById("ownCardBox3").style.display="inline";
-                document.getElementById("ownCardBox4").style.display="inline";
+        if(document.getElementById("player1InfoNotTurn") != null
+            && this.user1.username != null && this.userOnTurn.username != null
+        ){
+            if(this.user1.username == this.userOnTurn.username){
+                document.getElementById("player1InfoNotTurn").style.color="red";
+            }
+            if(this.user1.username != this.userOnTurn.username){
+                document.getElementById("player1InfoNotTurn").style.color="black";
             }
         }
 
-         */
+        if(document.getElementById("player2InfoNotTurn") != null
+            && this.user2.username != null && this.userOnTurn.username != null
+        ){
+            if(this.user2.username == this.userOnTurn.username){
+                document.getElementById("player2InfoNotTurn").style.color="red";
+            }
+            if(this.user2.username != this.userOnTurn.username){
+                document.getElementById("player2InfoNotTurn").style.color="black";
+            }
+        }
+
+        if(document.getElementById("player3InfoNotTurn") != null
+            && this.user3.username != null && this.userOnTurn.username != null
+        ){
+            if(this.user3.username == this.userOnTurn.username){
+                document.getElementById("player3InfoNotTurn").style.color="red";
+            }
+            if(this.user3.username != this.userOnTurn.username){
+                document.getElementById("player3InfoNotTurn").style.color="black";
+            }
+        }
+
+        if(document.getElementById("player4InfoNotTurn") != null
+            && this.user4.username != null && this.userOnTurn.username != null
+        ){
+            if(this.user4.username == this.userOnTurn.username){
+                document.getElementById("player4InfoNotTurn").style.color="red";
+            }
+            if(this.user4.username != this.userOnTurn.username){
+                document.getElementById("player4InfoNotTurn").style.color="black";
+            }
+        }
+
+        if(document.getElementById("playerOwnInfoNotTurn") != null
+            && this.myselfUser.username != null && this.userOnTurn.username != null
+        ){
+            if(this.myselfUser.username == this.userOnTurn.username){
+                document.getElementById("playerOwnInfoNotTurn").style.color="red";
+            }
+            if(this.myselfUser.username != this.userOnTurn.username){
+                document.getElementById("playerOwnInfoNotTurn").style.color="white";
+            }
+        }
+
+        if(document.getElementById("player1InfoOnTurn") != null
+            && this.user1.username != null && this.userOnTurn.username != null
+        ){
+            if(this.user1.username == this.userOnTurn.username){
+                document.getElementById("player1InfoOnTurn").style.color="red";
+            }
+            if(this.user1.username != this.userOnTurn.username){
+                document.getElementById("player1InfoOnTurn").style.color="black";
+            }
+        }
+
+        if(document.getElementById("player2InfoOnTurn") != null
+            && this.user2.username != null && this.userOnTurn.username != null
+        ){
+            if(this.user2.username == this.userOnTurn.username){
+                document.getElementById("player2InfoOnTurn").style.color="red";
+            }
+            if(this.user2.username != this.userOnTurn.username){
+                document.getElementById("player2InfoOnTurn").style.color="black";
+            }
+        }
+
+        if(document.getElementById("player3InfoOnTurn") != null
+            && this.user3.username != null && this.userOnTurn.username != null
+        ){
+            if(this.user3.username == this.userOnTurn.username){
+                document.getElementById("player3InfoOnTurn").style.color="red";
+            }
+            if(this.user3.username != this.userOnTurn.username){
+                document.getElementById("player3InfoOnTurn").style.color="black";
+            }
+        }
+
+        if(document.getElementById("player4InfoOnTurn") != null
+            && this.user4.username != null && this.userOnTurn.username != null
+        ){
+            if(this.user4.username == this.userOnTurn.username){
+                document.getElementById("player4InfoOnTurn").style.color="red";
+            }
+            if(this.user4.username != this.userOnTurn.username){
+                document.getElementById("player4InfoOnTurn").style.color="black";
+            }
+        }
+
+        if(document.getElementById("playerOwnInfoOnTurn") != null
+            && this.myselfUser.username != null && this.userOnTurn.username != null
+        ){
+            if(this.myselfUser.username == this.userOnTurn.username){
+                document.getElementById("playerOwnInfoOnTurn").style.color="red";
+            }
+            if(this.myselfUser.username != this.userOnTurn.username){
+                document.getElementById("playerOwnInfoOnTurn").style.color="white";
+            }
+        }
     }
 
     returnCard(cardNumber, Suit){
@@ -181,7 +283,7 @@ class GameScreen extends React.Component {
         console.log(this.game)
         console.log(this.myselfUser.cards.length)
 
-
+        //not turn
         if(this.userOnTurn.username!=this.myselfUser.username){
             return (
                 <GameContainer>
@@ -195,7 +297,8 @@ class GameScreen extends React.Component {
                                 left="70%"
                                 width="60%"
                                 height="30%"
-                                color="black">
+                                color="black"
+                                id="player2InfoNotTurn">
                                 {this.user2.username} Money : {this.user2.money} Blind : {this.user2.blind}
                             </PlayerInfoContainer>
                             <PlayerCardsContainer
@@ -227,7 +330,8 @@ class GameScreen extends React.Component {
                                 left="40%"
                                 width="60%"
                                 height="30%"
-                                color="black">
+                                color="black"
+                                id="player3InfoNotTurn">
                                 {this.user3.username} Money : {this.user3.money} Blind : {this.user3.blind}
                             </PlayerInfoContainer>
                             <PlayerCardsContainer
@@ -261,7 +365,8 @@ class GameScreen extends React.Component {
                                 left="25%"
                                 width="50%"
                                 height="60%"
-                                color="black">
+                                color="black"
+                                id="player1InfoNotTurn">
                                 {this.user1.username} Money : {this.user1.money} Blind : {this.user1.blind}
                             </PlayerInfoContainer>
                             <PlayerCardsContainer
@@ -349,7 +454,8 @@ class GameScreen extends React.Component {
                                 left="75%"
                                 width="50%"
                                 height="60%"
-                                color="black">
+                                color="black"
+                                id="player4InfoNotTurn">
                                 {this.user4.username} Money : {this.user4.money} Blind : {this.user4.blind}
                             </PlayerInfoContainer>
                             <PlayerCardsContainer
@@ -429,7 +535,8 @@ class GameScreen extends React.Component {
                             left="50%"
                             width="30%"
                             height="60%"
-                            color="white">
+                            color="white"
+                            id="playerOwnInfoNotTurn">
                             {this.myselfUser.username} Money: {this.myselfUser.money}
                         </PlayerInfoContainer>
                     </BottomContainer>
@@ -451,7 +558,8 @@ class GameScreen extends React.Component {
                                 left="70%"
                                 width="60%"
                                 height="30%"
-                                color="black">
+                                color="black"
+                                id="player2InfoOnTurn">
                                 {this.user2.username} Money : {this.user2.money}
                             </PlayerInfoContainer>
                             <PlayerCardsContainer
@@ -483,7 +591,8 @@ class GameScreen extends React.Component {
                                 left="40%"
                                 width="60%"
                                 height="30%"
-                                color="black">
+                                color="black"
+                                id="player3InfoOnTurn">
                                 {this.user3.username} Money : {this.user3.money}
                             </PlayerInfoContainer>
                             <PlayerCardsContainer
@@ -517,7 +626,8 @@ class GameScreen extends React.Component {
                                 left="25%"
                                 width="50%"
                                 height="60%"
-                                color="black">
+                                color="black"
+                                id="player1InfoOnTurn">
                                 {this.user1.username} Money : {this.user1.money}
                             </PlayerInfoContainer>
                             <PlayerCardsContainer
@@ -610,7 +720,8 @@ class GameScreen extends React.Component {
                                 left="75%"
                                 width="50%"
                                 height="60%"
-                                color="black">
+                                color="black"
+                                id="player4InfoOnTurn">
                                 {this.user4.username} Money : {this.user4.money}
                             </PlayerInfoContainer>
                             <PlayerCardsContainer
@@ -694,7 +805,8 @@ class GameScreen extends React.Component {
                             left="50%"
                             width="30%"
                             height="60%"
-                            color="white">
+                            color="white"
+                            id="playerOwnUserInfoOnTurn">
                             {this.myselfUser.username} Money : {this.myselfUser.money}
                         </PlayerInfoContainer>
                     </BottomContainer>
