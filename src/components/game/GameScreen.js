@@ -351,7 +351,7 @@ class GameScreen extends React.Component {
                             <ProfileCircle
                                 top="15%"
                                 left="30%"
-                                background='url("")'></ProfileCircle>
+                                background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user1.jpg")'></ProfileCircle>
                             <BigBlind
                                 top="70%"
                                 left="45%"
