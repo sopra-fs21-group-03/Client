@@ -348,29 +348,33 @@ class GameScreen extends React.Component {
                     <Tablesquare></Tablesquare>
                     <UpperContainer>
                         <TopLeftPlayerContainer>
+                            <PlayerInfoContainer
+                                top="25%"
+                                left="57.5%"
+                                width="40%"
+                                height="20%"
+                                color="white"
+                                background="grey"
+                                padding= "0 0 0 70px"
+                                id="player2InfoOnTurn"
+                                borderradius="10px"
+                                border="solid white 1px">
+                                {this.user2.username}Money : {this.user2.money}
+                            </PlayerInfoContainer>
                             <ProfileCircle
                                 top="15%"
                                 left="30%"
                                 background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user1.jpg")'></ProfileCircle>
                             <BigBlind
                                 top="70%"
-                                left="45%"
+                                left="75%"
                                 id="2B"
                                 transform="rotate(180deg)">B</BigBlind>
                             <SmallBlind
                                 top="70%"
-                                left="45%"
+                                left="75%"
                                 id="2S"
                                 transform="rotate(180deg)">S</SmallBlind>
-                            <PlayerInfoContainer
-                                top="25%"
-                                left="70%"
-                                width="60%"
-                                height="30%"
-                                color="black"
-                                id="player2InfoOnTurn">
-                                {this.user2.username} Money : {this.user2.money}
-                            </PlayerInfoContainer>
                             <PlayerCardsContainer
                                 top="72.5%"
                                 left="60%"
@@ -407,13 +411,21 @@ class GameScreen extends React.Component {
                                 transform="rotate(180deg)">S</SmallBlind>
                             <PlayerInfoContainer
                                 top="25%"
-                                left="40%"
-                                width="60%"
-                                height="30%"
-                                color="black"
-                                id="player3InfoOnTurn">
+                                left="67.5%"
+                                width="40%"
+                                height="20%"
+                                color="white"
+                                background="grey"
+                                padding= "0 0 0 70px"
+                                id="player3InfoOnTurn"
+                                borderradius="10px"
+                                border="solid white 1px">
                                 {this.user3.username} Money : {this.user3.money}
                             </PlayerInfoContainer>
+                            <ProfileCircle
+                                top="15%"
+                                left="40%"
+                                background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user2.jpg")'></ProfileCircle>
                             <PlayerCardsContainer
                                 top="72.5%"
                                 left="20%"
@@ -451,14 +463,22 @@ class GameScreen extends React.Component {
                                 id="1S"
                                 transform="rotate(90deg)">S</SmallBlind>
                             <PlayerInfoContainer
-                                top="45%"
-                                left="25%"
-                                width="50%"
-                                height="60%"
-                                color="black"
-                                id="player1InfoOnTurn">
+                                top="11.5%"
+                                left="73%"
+                                width="90%"
+                                height="13%"
+                                color="white"
+                                background="grey"
+                                padding= "0 0 0 70px"
+                                id="player1InfoOnTurn"
+                                borderradius="10px"
+                                border="solid white 1px">
                                 {this.user1.username} Money : {this.user1.money}
                             </PlayerInfoContainer>
+                            <ProfileCircle
+                                top="5%"
+                                left="10%"
+                                background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user3.jpg")'></ProfileCircle>
                             <PlayerCardsContainer
                                 top="50%"
                                 left="78%"
@@ -558,14 +578,22 @@ class GameScreen extends React.Component {
                                 id="4S"
                                 transform="rotate(270deg)">S</SmallBlind>
                             <PlayerInfoContainer
-                                top="45%"
-                                left="75%"
-                                width="50%"
-                                height="60%"
-                                color="black"
-                                id="player4InfoOnTurn">
+                                top="11.5%"
+                                left="25%"
+                                width="90%"
+                                height="13%"
+                                color="white"
+                                background="grey"
+                                padding= "0 70px 0 10px"
+                                id="player4InfoOnTurn"
+                                borderradius="10px"
+                                border="solid white 1px">
                                 {this.user4.username} Money : {this.user4.money}
                             </PlayerInfoContainer>
+                            <ProfileCircle
+                                top="5%"
+                                left="50%"
+                                background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user4.jpg")'></ProfileCircle>
                             <PlayerCardsContainer
                                 top="50%"
                                 left="22%"
@@ -654,13 +682,17 @@ class GameScreen extends React.Component {
                     <BottomContainer>
                         <PlayerInfoContainer
                             top="50%"
-                            left="50%"
+                            left="55%"
                             width="30%"
                             height="60%"
                             color="white"
                             id="playerOwnUserInfoOnTurn">
                             {this.myselfUser.username} Money : {this.myselfUser.money}
                         </PlayerInfoContainer>
+                        <ProfileCircle
+                        top="-120%"
+                        left="30%"
+                        background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user5.jpg")'></ProfileCircle>
                     </BottomContainer>
                 </GameContainer>);
         }

@@ -25,7 +25,8 @@ export const ProfileCircle = styled.div`
   vertical-align: middle;
   line-height: 40px; 
   transform: ${props => props.transform || null};   
-  background: ${props => props.background || null};  
+  background: ${props => props.background || null} center;  
+  border: solid white;
 `;
 
 export const BigBlind = styled.div`
@@ -346,7 +347,7 @@ export const LowerContainer = styled.div`
 `;
 
 export const BottomContainer = styled.div`
-background-color: black;
+background-color: grey;
   margin: 0;
   position: absolute;
   top: 95%;
@@ -359,6 +360,7 @@ background-color: black;
   padding-left: 15px;
   margin-right: auto;
   padding-right: 15px;
+  border-top: solid white;
 `;
 
 export const ChatContainer = styled.div`
@@ -617,19 +619,22 @@ export const PlayerInfoContainer = styled.div`
   height: ${props => props.height || null};
   top: ${props => props.top || null};
   left: ${props => props.left || null};
+  padding: ${props => props.padding || null};
   margin: 0;
   position: absolute;
   margin-right: 0%;
   transform: translate(-50%, -50%);
   margin-left: auto;
   margin-right: auto;
-  padding-left: 5px;
   font-size: 18pt;
+  font-size: ${props => props.fontsize || null};
   color: ${props => props.color || null};
-  padding-top: 10px;
+  background: ${props => props.background || null};
+  border-radius: ${props => props.borderradius || null};
   overflow: auto;
   word-wrap:break-word;
   id: ${props => props.id || null};
+  border: ${props => props.border || null};
 `;
 
 export const FrontCardBox = styled.div`
