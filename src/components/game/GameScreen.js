@@ -41,7 +41,7 @@ class GameScreen extends React.Component {
 
     async raise(){
         this.returnToken()
-        await api.put("/games/1/"+localStorage.getItem('userID')+"/raise",  this.returnRaiseAmount() + this.returnToken()  )
+        await api.put("/games/1/"+localStorage.getItem('userID')+"/raise",  this.returnRaiseAmountAndToken())
         this.state.raiseAmount = null;
     }
 
@@ -54,9 +54,10 @@ class GameScreen extends React.Component {
         return requestBody
     }
 
-    returnRaiseAmount(){
+    returnRaiseAmountAndToken(){
         const requestBodyRaiseAmount = JSON.stringify({
-            raiseAmount: this.state.raiseAmount
+            raiseAmount: this.state.raiseAmount,
+            token: localStorage.getItem('token')
         });
         console.log(requestBodyRaiseAmount)
         return requestBodyRaiseAmount

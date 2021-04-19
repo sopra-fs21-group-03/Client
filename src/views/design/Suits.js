@@ -10,10 +10,10 @@ export const Spades = styled.div`
     `;
 export const Diamond = styled.div`
       background-image: url("https://www.thatsoftwaredude.com/images/post/0f631eeb-6c4a-4bfd-9f86-e0a08ae8584b.png");
-      height: 80px;
+      height: 72px;
       width: 70px;
       background-size: contain;
-      margin-top: -33px;
+      margin-top: -34px;
       margin-left: 2px;
       `;
 
