@@ -8,6 +8,11 @@ import AppRouter from "./components/shared/routers/AppRouter";
  */
 class App extends Component {
   render() {
+      window.onbeforeunload = () => {
+          // Clear localStorage when window/browser is closed
+          localStorage.clear();
+
+      }
     return (
       <div>
         <Header height={"100"} />

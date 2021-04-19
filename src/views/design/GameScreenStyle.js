@@ -11,6 +11,23 @@ import Deck from "../../components/shared/models/Deck";
 import {BlackButton} from "../../views/design/BlackButton";
 import Game from "../../components/shared/models/Game";
 
+export const ProfileCircle = styled.div`
+  position: absolute;
+  width: 150px; 
+  left: ${props => props.left || null}; 
+  top: ${props => props.top || null}; 
+  color: red;
+  height: 150px; 
+  border-radius: 75px; 
+  display: ${props => props.display || null}; 
+  id: ${props => props.id || null}; 
+  text-align: center;
+  vertical-align: middle;
+  line-height: 40px; 
+  transform: ${props => props.transform || null};   
+  background: ${props => props.background || null};  
+`;
+
 export const BigBlind = styled.div`
   position: absolute;
   width: 40px; 
@@ -577,7 +594,7 @@ export const TopRightPlayerContainer = styled.div`
 export const CardBox = styled.div`
   border: solid;
   border-color: white;
-  background-color: red;
+  background-color: #dd1630;
   margin: 0;
   position: absolute;
   margin-right: 0%;

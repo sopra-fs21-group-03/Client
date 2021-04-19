@@ -11,7 +11,7 @@ import Card from "../shared/models/Card";
 import Deck from "../shared/models/Deck";
 import {BlackButton} from "../../views/design/BlackButton";
 import Game from "../shared/models/Game";
-import { BigBlind, SmallBlind, Writen, LeaveTableButton, CheckButton, CallButton, RaiseButton, RaiseInput, FoldButton, InnerTextChatContainer, TextBacklogChatContainer, ChatInputField, Tablesquare, TableCircleLeft, TableCircleRight, GameContainer, UpperContainer, MiddleContainer, LowerContainer, BottomContainer, ChatContainer, LeaveTableContainer, CheckContainer, FoldContainer, OwnCardsContainer, PlayerLeftContainer, PlayerRightContainer, PlayerCardsContainer, TableComponentsContainer, TotalPotContainer, MiddleCardsContainer, CallContainer, RaiseContainer, TopLeftPlayerContainer, TopRightPlayerContainer, CardBox, PlayerInfoContainer, FrontCardBox} from "../../views/design/GameScreenStyle";
+import { ProfileCircle, BigBlind, SmallBlind, Writen, LeaveTableButton, CheckButton, CallButton, RaiseButton, RaiseInput, FoldButton, InnerTextChatContainer, TextBacklogChatContainer, ChatInputField, Tablesquare, TableCircleLeft, TableCircleRight, GameContainer, UpperContainer, MiddleContainer, LowerContainer, BottomContainer, ChatContainer, LeaveTableContainer, CheckContainer, FoldContainer, OwnCardsContainer, PlayerLeftContainer, PlayerRightContainer, PlayerCardsContainer, TableComponentsContainer, TotalPotContainer, MiddleCardsContainer, CallContainer, RaiseContainer, TopLeftPlayerContainer, TopRightPlayerContainer, CardBox, PlayerInfoContainer, FrontCardBox} from "../../views/design/GameScreenStyle";
 
 document.body.style.backgroundColor = "green";
 
@@ -348,6 +348,10 @@ class GameScreen extends React.Component {
                     <Tablesquare></Tablesquare>
                     <UpperContainer>
                         <TopLeftPlayerContainer>
+                            <ProfileCircle
+                                top="15%"
+                                left="30%"
+                                background='url("")'></ProfileCircle>
                             <BigBlind
                                 top="70%"
                                 left="45%"
@@ -520,12 +524,6 @@ class GameScreen extends React.Component {
                                     left="28%"
                                     id="riverCard4">
                                     <FrontCardBox>{this.getRiverCard(4)}</FrontCardBox>
-                                </CardBox>
-                                <CardBox
-                                    width="9%"
-                                    height="80%"
-                                    top="50%"
-                                    left="80%">
                                 </CardBox>
                             </MiddleCardsContainer>
                             <CallContainer>
