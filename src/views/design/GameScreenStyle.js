@@ -43,6 +43,8 @@ export const CheckButton = styled(RedButton)`
   left: 10%;
   top: 8%;
   color: white;
+  display: ${props => props.display || null}; 
+  id: ${props => props.id || null}; 
 `;
 
 export const CallButton = styled(RedButton)`
@@ -59,6 +61,8 @@ export const CallButton = styled(RedButton)`
   left: 10%;
   top: 25%;
   color: white;
+  display: ${props => props.display || null}; 
+  id: ${props => props.id || null}; 
 `;
 
 export const RaiseButton = styled(RedButton)`
@@ -76,6 +80,8 @@ export const RaiseButton = styled(RedButton)`
   top: 25%;
   color: white;
   border-radius: 10px 0 0 10px;
+  display: ${props => props.display || null}; 
+  id: ${props => props.id || null}; 
 `;
 
 export const RaiseInput = styled.input`
@@ -90,6 +96,8 @@ export const RaiseInput = styled.input`
   border: solid red;
   type: number;
   padding-left: 15px;
+  display: ${props => props.display || null}; 
+  id: ${props => props.id || null}; 
 `;
 
 export const FoldButton = styled(RedButton)`
@@ -106,6 +114,8 @@ export const FoldButton = styled(RedButton)`
   left: 10%;
   top: 8%;
   color: white;
+  display: ${props => props.display || null}; 
+  id: ${props => props.id || null}; 
 `;
 
 export const InnerTextChatContainer = styled.div`

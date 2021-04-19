@@ -103,6 +103,23 @@ class GameScreen extends React.Component {
 
         //From here GameUpdate it is only style stuff (display etc)
 
+        //Buttons should only display when player on Turn
+        if(this.myselfUser.username != this.userOnTurn.username){
+            document.getElementById("callButton").style.display="none";
+            document.getElementById("raiseButton").style.display="none";
+            document.getElementById("raiseInput").style.display="none";
+            document.getElementById("checkButton").style.display="none";
+            document.getElementById("foldButton").style.display="none";
+        }
+
+        if(this.myselfUser.username == this.userOnTurn.username){
+            document.getElementById("callButton").style.display="inline";
+            document.getElementById("raiseButton").style.display="inline";
+            document.getElementById("raiseInput").style.display="inline";
+            document.getElementById("checkButton").style.display="inline";
+            document.getElementById("foldButton").style.display="inline";
+        }
+
         //not turn: if play.self has no cards, there should be no card displayed
         if(document.getElementById("ownCardBox1") != null
             && document.getElementById("ownCardBox2") != null){
@@ -116,75 +133,7 @@ class GameScreen extends React.Component {
             }
         }
 
-        //turn: if play.self has no cards, there should be no card displayed
-        if(document.getElementById("ownCardBox3") != null
-            && document.getElementById("ownCardBox4") != null){
-            if(this.myselfUser.cards.length == 0){
-                document.getElementById("ownCardBox3").style.display="none";
-                document.getElementById("ownCardBox4").style.display="none";
-            }
-            if(this.myselfUser.cards.length == 2){
-                document.getElementById("ownCardBox3").style.display="inline";
-                document.getElementById("ownCardBox4").style.display="inline";
-            }
-        }
-
         //If User is on turn his name should display in red
-
-        if(document.getElementById("player1InfoNotTurn") != null
-            && this.user1.username != null && this.userOnTurn.username != null
-        ){
-            if(this.user1.username == this.userOnTurn.username){
-                document.getElementById("player1InfoNotTurn").style.color="red";
-            }
-            if(this.user1.username != this.userOnTurn.username){
-                document.getElementById("player1InfoNotTurn").style.color="black";
-            }
-        }
-
-        if(document.getElementById("player2InfoNotTurn") != null
-            && this.user2.username != null && this.userOnTurn.username != null
-        ){
-            if(this.user2.username == this.userOnTurn.username){
-                document.getElementById("player2InfoNotTurn").style.color="red";
-            }
-            if(this.user2.username != this.userOnTurn.username){
-                document.getElementById("player2InfoNotTurn").style.color="black";
-            }
-        }
-
-        if(document.getElementById("player3InfoNotTurn") != null
-            && this.user3.username != null && this.userOnTurn.username != null
-        ){
-            if(this.user3.username == this.userOnTurn.username){
-                document.getElementById("player3InfoNotTurn").style.color="red";
-            }
-            if(this.user3.username != this.userOnTurn.username){
-                document.getElementById("player3InfoNotTurn").style.color="black";
-            }
-        }
-
-        if(document.getElementById("player4InfoNotTurn") != null
-            && this.user4.username != null && this.userOnTurn.username != null
-        ){
-            if(this.user4.username == this.userOnTurn.username){
-                document.getElementById("player4InfoNotTurn").style.color="red";
-            }
-            if(this.user4.username != this.userOnTurn.username){
-                document.getElementById("player4InfoNotTurn").style.color="black";
-            }
-        }
-
-        if(document.getElementById("playerOwnInfoNotTurn") != null
-            && this.myselfUser.username != null && this.userOnTurn.username != null
-        ){
-            if(this.myselfUser.username == this.userOnTurn.username){
-                document.getElementById("playerOwnInfoNotTurn").style.color="red";
-            }
-            if(this.myselfUser.username != this.userOnTurn.username){
-                document.getElementById("playerOwnInfoNotTurn").style.color="white";
-            }
-        }
 
         if(document.getElementById("player1InfoOnTurn") != null
             && this.user1.username != null && this.userOnTurn.username != null
@@ -230,14 +179,14 @@ class GameScreen extends React.Component {
             }
         }
 
-        if(document.getElementById("playerOwnInfoOnTurn") != null
+        if(document.getElementById("playerOwnUserInfoOnTurn") != null
             && this.myselfUser.username != null && this.userOnTurn.username != null
         ){
             if(this.myselfUser.username == this.userOnTurn.username){
-                document.getElementById("playerOwnInfoOnTurn").style.color="red";
+                document.getElementById("playerOwnUserInfoOnTurn").style.color="red";
             }
             if(this.myselfUser.username != this.userOnTurn.username){
-                document.getElementById("playerOwnInfoOnTurn").style.color="white";
+                document.getElementById("playerOwnUserInfoOnTurn").style.color="white";
             }
         }
     }
@@ -283,269 +232,8 @@ class GameScreen extends React.Component {
         console.log(this.game)
         console.log(this.myselfUser.cards.length)
 
-        //not turn
-        if(this.userOnTurn.username!=this.myselfUser.username){
-            return (
-                <GameContainer>
-                    <TableCircleLeft></TableCircleLeft>
-                    <TableCircleRight></TableCircleRight>
-                    <Tablesquare></Tablesquare>
-                    <UpperContainer>
-                        <TopLeftPlayerContainer>
-                            <PlayerInfoContainer
-                                top="25%"
-                                left="70%"
-                                width="60%"
-                                height="30%"
-                                color="black"
-                                id="player2InfoNotTurn">
-                                {this.user2.username} Money : {this.user2.money} Blind : {this.user2.blind}
-                            </PlayerInfoContainer>
-                            <PlayerCardsContainer
-                                top="72.5%"
-                                left="60%"
-                                width="30%"
-                                height="55%">
-                                <CardBox
-                                    width="30%"
-                                    top="0"
-                                    left="29%"
-                                    height="100%"
-                                    transform="rotate(180deg)">
-
-                                </CardBox>
-                                <CardBox
-                                    width="30%"
-                                    top="0"
-                                    left="61%"
-                                    height="100%"
-                                    transform="rotate(180deg)">
-
-                                </CardBox>
-                            </PlayerCardsContainer>
-                        </TopLeftPlayerContainer>
-                        <TopRightPlayerContainer>
-                            <PlayerInfoContainer
-                                top="25%"
-                                left="40%"
-                                width="60%"
-                                height="30%"
-                                color="black"
-                                id="player3InfoNotTurn">
-                                {this.user3.username} Money : {this.user3.money} Blind : {this.user3.blind}
-                            </PlayerInfoContainer>
-                            <PlayerCardsContainer
-                                top="72.5%"
-                                left="20%"
-                                width="30%"
-                                height="55%">
-                                <CardBox
-                                    width="30%"
-                                    top="0"
-                                    left="29%"
-                                    height="100%"
-                                    transform="rotate(180deg)">
-
-                                </CardBox>
-                                <CardBox
-                                    width="30%"
-                                    top="0"
-                                    left="61%"
-                                    height="100%"
-                                    transform="rotate(180deg)">
-
-                                </CardBox>
-                            </PlayerCardsContainer>
-                        </TopRightPlayerContainer>
-                    </UpperContainer>
-                    <MiddleContainer>
-                        <PlayerLeftContainer>
-                            <PlayerInfoContainer
-                                top="45%"
-                                left="25%"
-                                width="50%"
-                                height="60%"
-                                color="black"
-                                id="player1InfoNotTurn">
-                                {this.user1.username} Money : {this.user1.money} Blind : {this.user1.blind}
-                            </PlayerInfoContainer>
-                            <PlayerCardsContainer
-                                top="50%"
-                                left="78%"
-                                width="40%"
-                                height="50%">
-                                <CardBox
-                                    width="60%"
-                                    height="80%"
-                                    top="-15%"
-                                    left="20%"
-                                    transform="rotate(90deg)">
-                                </CardBox>
-                                <CardBox
-                                    width="60%"
-                                    height="80%"
-                                    top="35%"
-                                    left="20%"
-                                    transform="rotate(90deg)">
-
-                                </CardBox>
-                            </PlayerCardsContainer>
-                        </PlayerLeftContainer>
-                        <TableComponentsContainer>
-                            <TotalPotContainer>Total Pot: {this.game.pot.total}</TotalPotContainer>
-                            <MiddleCardsContainer>
-                                <CardBox
-                                    width="9%"
-                                    height="80%"
-                                    top="50%"
-                                    left="68%">
-                                <FrontCardBox>{this.getRiverCard(0)}</FrontCardBox>
-
-                                </CardBox>
-                                <CardBox
-                                    width="9%"
-                                    height="80%"
-                                    top="50%"
-                                    left="58%">
-
-                                <FrontCardBox>{this.getRiverCard(1)}</FrontCardBox>
-
-                                </CardBox>
-                                <CardBox
-                                    width="9%"
-                                    height="80%"
-                                    top="50%"
-                                    left="48%">
-                                <FrontCardBox>{this.getRiverCard(2)}</FrontCardBox>
-
-                                </CardBox>
-                                <CardBox
-                                    width="9%"
-                                    height="80%"
-                                    top="50%"
-                                    left="38%">
-                                <FrontCardBox>{this.getRiverCard(3)}</FrontCardBox>
-
-                                </CardBox>
-                                <CardBox
-                                    width="9%"
-                                    height="80%"
-                                    top="50%"
-                                    left="28%">
-                                <FrontCardBox>{this.getRiverCard(4)}</FrontCardBox>
-
-                                </CardBox>
-                                <CardBox
-                                    width="9%"
-                                    height="80%"
-                                    top="50%"
-                                    left="80%">
-
-                                </CardBox>
-                            </MiddleCardsContainer>
-                            <CallContainer>
-                            </CallContainer>
-                            <RaiseContainer>
-                            </RaiseContainer>
-                        </TableComponentsContainer>
-                        <PlayerRightContainer>
-                            <PlayerInfoContainer
-                                top="45%"
-                                left="75%"
-                                width="50%"
-                                height="60%"
-                                color="black"
-                                id="player4InfoNotTurn">
-                                {this.user4.username} Money : {this.user4.money} Blind : {this.user4.blind}
-                            </PlayerInfoContainer>
-                            <PlayerCardsContainer
-                                top="50%"
-                                left="22%"
-                                width="40%"
-                                height="50%">
-                                <CardBox
-                                    width="60%"
-                                    height="80%"
-                                    top="-15%"
-                                    left="20%"
-                                    transform="rotate(270deg)">
-
-                                </CardBox>
-                                <CardBox
-                                    width="60%"
-                                    height="80%"
-                                    top="35%"
-                                    left="20%"
-                                    transform="rotate(270deg)">
-
-                                </CardBox>
-                            </PlayerCardsContainer>
-                        </PlayerRightContainer>
-                    </MiddleContainer>
-                    <LowerContainer>
-                        <ChatContainer>
-                            <InnerTextChatContainer>
-                                <TextBacklogChatContainer>
-                                    <Writen>BestPokerPlayerEUWest: Hello Guys</Writen>
-                                    <Writen>Hacker: hi</Writen>
-                                    <Writen>Stanley: EZ</Writen>
-                                </TextBacklogChatContainer>
-                                <ChatInputField placeholder = "Type in your message"></ChatInputField>
-                            </InnerTextChatContainer>
-                        </ChatContainer>
-                        <CheckContainer>
-                        </CheckContainer>
-                        <OwnCardsContainer>
-                            <CardBox
-                                width="35%"
-                                height="80%"
-                                top="50%"
-                                left="28%"
-                                id="ownCardBox3">
-                            <FrontCardBox>
-                                {new Card(this.myselfUser.cards[0]).card}
-                            </FrontCardBox>
-                            </CardBox>
-                            <CardBox
-                                width="35%"
-                                height="80%"
-                                top="50%"
-                                left="72%"
-                                id="ownCardBox4">
-                                <FrontCardBox>
-                                    {new Card(this.myselfUser.cards[1]).card}
-                                </FrontCardBox>
-                            </CardBox>
-                        </OwnCardsContainer>
-                        <FoldContainer>
-                        </FoldContainer>
-                        <LeaveTableContainer>
-                            <LeaveTableButton
-                                onClick={() => {
-                                    this.logout();
-                                }}
-                            >
-                                Leave Table
-                            </LeaveTableButton>
-                        </LeaveTableContainer>
-                    </LowerContainer>
-                    <BottomContainer>
-                        <PlayerInfoContainer
-                            top="50%"
-                            left="50%"
-                            width="30%"
-                            height="60%"
-                            color="white"
-                            id="playerOwnInfoNotTurn">
-                            {this.myselfUser.username} Money: {this.myselfUser.money}
-                        </PlayerInfoContainer>
-                    </BottomContainer>
-                </GameContainer>);
-        }
-
-
-        //turn
-        if(this.userOnTurn.username==this.myselfUser.username) {
+        //not turn and on turn
+        if(1==1) {
             return (
                 <GameContainer>
                     <TableCircleLeft></TableCircleLeft>
@@ -701,17 +389,21 @@ class GameScreen extends React.Component {
                             <CallContainer>
                                 <CallButton onClick={() => {
                                 this.call();
-                                }} >Call</CallButton>
+                                }}
+                                id="callButton"
+                                >Call</CallButton>
                             </CallContainer>
                             <RaiseContainer>
                                 <RaiseButton onClick={() => {
                                     this.raise();
                                 }}
                                 disabled={!this.state.raiseAmount}
+                                id="raiseButton"
                                 >Raise</RaiseButton>
                                 <RaiseInput type="number" onChange={e => {
                                     this.handleInputChange('raiseAmount', e.target.value);
-                                }}></RaiseInput>
+                                }}
+                                id="raiseInput"></RaiseInput>
                             </RaiseContainer>
                         </TableComponentsContainer>
                         <PlayerRightContainer>
@@ -762,7 +454,8 @@ class GameScreen extends React.Component {
                         <CheckContainer>
                             <CheckButton onClick={() => {
                                 this.check();
-                            }}>Check</CheckButton>
+                            }}
+                            id="checkButton">Check</CheckButton>
                         </CheckContainer>
                         <OwnCardsContainer>
                             <CardBox
@@ -786,7 +479,8 @@ class GameScreen extends React.Component {
                         <FoldContainer>
                             <FoldButton onClick={() => {
                                 this.fold();
-                            }} >Fold</FoldButton>
+                            }}
+                            id="foldButton">Fold</FoldButton>
                         </FoldContainer>
                         <LeaveTableContainer>
                             <LeaveTableButton
