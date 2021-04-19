@@ -241,7 +241,7 @@ class GameScreen extends React.Component {
             document.getElementById("1S").style.display="none";
             document.getElementById("1B").style.display="inline";
         }
-        if (this.user1.blind == "NEUTRAL"){
+        if (this.user1.blind == "NEUTRAL" || this.user1.blind==null){
             document.getElementById("1S").style.display="none";
             document.getElementById("1B").style.display="none";
         }
@@ -254,7 +254,7 @@ class GameScreen extends React.Component {
             document.getElementById("2S").style.display="none";
             document.getElementById("2B").style.display="inline";
         }
-        if (this.user2.blind == "NEUTRAL"){
+        if (this.user2.blind == "NEUTRAL" || this.user1.blind==null){
             document.getElementById("2S").style.display="none";
             document.getElementById("2B").style.display="none";
         }
@@ -267,7 +267,7 @@ class GameScreen extends React.Component {
             document.getElementById("3S").style.display="none";
             document.getElementById("3B").style.display="inline";
         }
-        if (this.user3.blind == "NEUTRAL"){
+        if (this.user3.blind == "NEUTRAL" || this.user1.blind==null){
             document.getElementById("3S").style.display="none";
             document.getElementById("3B").style.display="none";
         }
@@ -280,7 +280,7 @@ class GameScreen extends React.Component {
             document.getElementById("4S").style.display="none";
             document.getElementById("4B").style.display="inline";
         }
-        if (this.user4.blind == "NEUTRAL"){
+        if (this.user4.blind == "NEUTRAL" || this.user1.blind==null){
             document.getElementById("4S").style.display="none";
             document.getElementById("4B").style.display="none";
         }
@@ -293,7 +293,7 @@ class GameScreen extends React.Component {
             document.getElementById("OwnS").style.display="none";
             document.getElementById("OwnB").style.display="inline";
         }
-        if (this.myselfUser.blind == "NEUTRAL"){
+        if (this.myselfUser.blind == "NEUTRAL" || this.user1.blind==null){
             document.getElementById("OwnS").style.display="none";
             document.getElementById("OwnB").style.display="none";
         }
