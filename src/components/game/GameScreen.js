@@ -411,12 +411,12 @@ class GameScreen extends React.Component {
                                 transform="rotate(180deg)">S</SmallBlind>
                             <PlayerInfoContainer
                                 top="25%"
-                                left="67.5%"
+                                left="27.5%"
                                 width="40%"
                                 height="20%"
                                 color="white"
                                 background="grey"
-                                padding= "0 0 0 70px"
+                                padding= "0 70px 0 10px"
                                 id="player3InfoOnTurn"
                                 borderradius="10px"
                                 border="solid white 1px">
