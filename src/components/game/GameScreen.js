@@ -11,7 +11,7 @@ import Card from "../shared/models/Card";
 import Deck from "../shared/models/Deck";
 import {BlackButton} from "../../views/design/BlackButton";
 import Game from "../shared/models/Game";
-import { Writen, LeaveTableButton, CheckButton, CallButton, RaiseButton, RaiseInput, FoldButton, InnerTextChatContainer, TextBacklogChatContainer, ChatInputField, Tablesquare, TableCircleLeft, TableCircleRight, GameContainer, UpperContainer, MiddleContainer, LowerContainer, BottomContainer, ChatContainer, LeaveTableContainer, CheckContainer, FoldContainer, OwnCardsContainer, PlayerLeftContainer, PlayerRightContainer, PlayerCardsContainer, TableComponentsContainer, TotalPotContainer, MiddleCardsContainer, CallContainer, RaiseContainer, TopLeftPlayerContainer, TopRightPlayerContainer, CardBox, PlayerInfoContainer, FrontCardBox} from "../../views/design/GameScreenStyle";
+import { BigBlind, SmallBlind, Writen, LeaveTableButton, CheckButton, CallButton, RaiseButton, RaiseInput, FoldButton, InnerTextChatContainer, TextBacklogChatContainer, ChatInputField, Tablesquare, TableCircleLeft, TableCircleRight, GameContainer, UpperContainer, MiddleContainer, LowerContainer, BottomContainer, ChatContainer, LeaveTableContainer, CheckContainer, FoldContainer, OwnCardsContainer, PlayerLeftContainer, PlayerRightContainer, PlayerCardsContainer, TableComponentsContainer, TotalPotContainer, MiddleCardsContainer, CallContainer, RaiseContainer, TopLeftPlayerContainer, TopRightPlayerContainer, CardBox, PlayerInfoContainer, FrontCardBox} from "../../views/design/GameScreenStyle";
 
 document.body.style.backgroundColor = "green";
 
@@ -230,6 +230,72 @@ class GameScreen extends React.Component {
                 document.getElementById("playerOwnUserInfoOnTurn").style.color="white";
             }
         }
+
+        //If display blinds
+        if (this.user1.blind == "SMALL"){
+            document.getElementById("1S").style.display="inline";
+            document.getElementById("1B").style.display="none";
+        }
+        if (this.user1.blind == "BIG"){
+            document.getElementById("1S").style.display="none";
+            document.getElementById("1B").style.display="inline";
+        }
+        if (this.user1.blind == "NEUTRAL"){
+            document.getElementById("1S").style.display="none";
+            document.getElementById("1B").style.display="none";
+        }
+
+        if (this.user2.blind == "SMALL"){
+            document.getElementById("2S").style.display="inline";
+            document.getElementById("2B").style.display="none";
+        }
+        if (this.user2.blind == "BIG"){
+            document.getElementById("2S").style.display="none";
+            document.getElementById("2B").style.display="inline";
+        }
+        if (this.user2.blind == "NEUTRAL"){
+            document.getElementById("2S").style.display="none";
+            document.getElementById("2B").style.display="none";
+        }
+
+        if (this.user3.blind == "SMALL"){
+            document.getElementById("3S").style.display="inline";
+            document.getElementById("3B").style.display="none";
+        }
+        if (this.user3.blind == "BIG"){
+            document.getElementById("3S").style.display="none";
+            document.getElementById("3B").style.display="inline";
+        }
+        if (this.user3.blind == "NEUTRAL"){
+            document.getElementById("3S").style.display="none";
+            document.getElementById("3B").style.display="none";
+        }
+
+        if (this.user4.blind == "SMALL"){
+            document.getElementById("4S").style.display="inline";
+            document.getElementById("4B").style.display="none";
+        }
+        if (this.user4.blind == "BIG"){
+            document.getElementById("4S").style.display="none";
+            document.getElementById("4B").style.display="inline";
+        }
+        if (this.user4.blind == "NEUTRAL"){
+            document.getElementById("4S").style.display="none";
+            document.getElementById("4B").style.display="none";
+        }
+
+        if (this.myselfUser.blind == "SMALL"){
+            document.getElementById("OwnS").style.display="inline";
+            document.getElementById("OwnB").style.display="none";
+        }
+        if (this.myselfUser.blind == "BIG"){
+            document.getElementById("OwnS").style.display="none";
+            document.getElementById("OwnB").style.display="inline";
+        }
+        if (this.myselfUser.blind == "NEUTRAL"){
+            document.getElementById("OwnS").style.display="none";
+            document.getElementById("OwnB").style.display="none";
+        }
     }
 
     returnCard(cardNumber, Suit){
@@ -271,7 +337,6 @@ class GameScreen extends React.Component {
 
         this.updateGameScreen();
         console.log(this.game)
-        console.log(this.myselfUser.cards.length)
 
         //not turn and on turn
         if(1==1) {
@@ -282,6 +347,16 @@ class GameScreen extends React.Component {
                     <Tablesquare></Tablesquare>
                     <UpperContainer>
                         <TopLeftPlayerContainer>
+                            <BigBlind
+                                top="70%"
+                                left="45%"
+                                id="2B"
+                                transform="rotate(180deg)">B</BigBlind>
+                            <SmallBlind
+                                top="70%"
+                                left="45%"
+                                id="2S"
+                                transform="rotate(180deg)">S</SmallBlind>
                             <PlayerInfoContainer
                                 top="25%"
                                 left="70%"
@@ -315,6 +390,16 @@ class GameScreen extends React.Component {
                             </PlayerCardsContainer>
                         </TopLeftPlayerContainer>
                         <TopRightPlayerContainer>
+                            <BigBlind
+                                top="70%"
+                                left="35%"
+                                id="3B"
+                                transform="rotate(180deg)">B</BigBlind>
+                            <SmallBlind
+                                top="70%"
+                                left="35%"
+                                id="3S"
+                                transform="rotate(180deg)">S</SmallBlind>
                             <PlayerInfoContainer
                                 top="25%"
                                 left="40%"
@@ -350,6 +435,16 @@ class GameScreen extends React.Component {
                     </UpperContainer>
                     <MiddleContainer>
                         <PlayerLeftContainer>
+                            <BigBlind
+                                top="80%"
+                                left="75%"
+                                id="1B"
+                                transform="rotate(90deg)">B</BigBlind>
+                            <SmallBlind
+                                top="80%"
+                                left="75%"
+                                id="1S"
+                                transform="rotate(90deg)">S</SmallBlind>
                             <PlayerInfoContainer
                                 top="45%"
                                 left="25%"
@@ -453,6 +548,16 @@ class GameScreen extends React.Component {
                             </RaiseContainer>
                         </TableComponentsContainer>
                         <PlayerRightContainer>
+                            <BigBlind
+                                top="80%"
+                                left="15%"
+                                id="4B"
+                                transform="rotate(270deg)">B</BigBlind>
+                            <SmallBlind
+                                top="80%"
+                                left="15%"
+                                id="4S"
+                                transform="rotate(270deg)">S</SmallBlind>
                             <PlayerInfoContainer
                                 top="45%"
                                 left="75%"
@@ -497,6 +602,14 @@ class GameScreen extends React.Component {
                                 <ChatInputField placeholder = "Type in your message"></ChatInputField>
                             </InnerTextChatContainer>
                         </ChatContainer>
+                        <BigBlind
+                            top="-10%"
+                            left="49%"
+                            id="OwnB">B</BigBlind>
+                        <SmallBlind
+                            top="-10%"
+                            left="49%"
+                            id="OwnS">S</SmallBlind>
                         <CheckContainer>
                             <CheckButton onClick={() => {
                                 this.check();

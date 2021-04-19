@@ -11,6 +11,40 @@ import Deck from "../../components/shared/models/Deck";
 import {BlackButton} from "../../views/design/BlackButton";
 import Game from "../../components/shared/models/Game";
 
+export const BigBlind = styled.div`
+  position: absolute;
+  width: 40px; 
+  left: ${props => props.left || null}; 
+  top: ${props => props.top || null}; 
+  color: red;
+  background-color: black;
+  height: 40px; 
+  border-radius: 20px; 
+  display: ${props => props.display || null}; 
+  id: ${props => props.id || null}; 
+  text-align: center;
+  vertical-align: middle;
+  line-height: 40px;  
+  transform: ${props => props.transform || null};   
+`;
+
+export const SmallBlind = styled.div`
+  position: absolute;
+  width: 40px; 
+  left: ${props => props.left || null}; 
+  top: ${props => props.top || null}; 
+  color: black;
+  background-color: red;
+  height: 40px; 
+  border-radius: 20px; 
+  display: ${props => props.display || null}; 
+  id: ${props => props.id || null}; 
+  text-align: center;
+  vertical-align: middle;
+  line-height: 40px;   
+  transform: ${props => props.transform || null};   
+`;
+
 export const Writen = styled.p`
     margin-top: 0;
     margin-bottom: 2px;
