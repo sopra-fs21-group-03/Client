@@ -120,6 +120,47 @@ class GameScreen extends React.Component {
             document.getElementById("foldButton").style.display="inline";
         }
 
+        //RiverCards will not be displayed when there is none
+        if(this.game.river.cards.length >= 1){
+            document.getElementById("riverCard0").style.display="inline";
+        }
+
+        if(this.game.river.cards.length >= 2){
+            document.getElementById("riverCard1").style.display="inline";
+        }
+
+        if(this.game.river.cards.length >= 3){
+            document.getElementById("riverCard2").style.display="inline";
+        }
+
+        if(this.game.river.cards.length >= 4){
+            document.getElementById("riverCard3").style.display="inline";
+        }
+
+        if(this.game.river.cards.length >= 5){
+            document.getElementById("riverCard4").style.display="inline";
+        }
+
+        if(this.game.river.cards.length < 1){
+            document.getElementById("riverCard0").style.display="none";
+        }
+
+        if(this.game.river.cards.length < 2){
+            document.getElementById("riverCard1").style.display="none";
+        }
+
+        if(this.game.river.cards.length < 3){
+            document.getElementById("riverCard2").style.display="none";
+        }
+
+        if(this.game.river.cards.length < 4){
+            document.getElementById("riverCard3").style.display="none";
+        }
+
+        if(this.game.river.cards.length < 5){
+            document.getElementById("riverCard4").style.display="none";
+        }
+
         //not turn: if play.self has no cards, there should be no card displayed
         if(document.getElementById("ownCardBox1") != null
             && document.getElementById("ownCardBox2") != null){
@@ -348,35 +389,40 @@ class GameScreen extends React.Component {
                                     width="9%"
                                     height="80%"
                                     top="50%"
-                                    left="68%">
+                                    left="68%"
+                                    id="riverCard0">
                                     <FrontCardBox>{this.getRiverCard(0)}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
                                     width="9%"
                                     height="80%"
                                     top="50%"
-                                    left="58%">
+                                    left="58%"
+                                    id="riverCard1">
                                     <FrontCardBox>{this.getRiverCard(1)}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
                                     width="9%"
                                     height="80%"
                                     top="50%"
-                                    left="48%">
+                                    left="48%"
+                                    id="riverCard2">
                                     <FrontCardBox>{this.getRiverCard(2)}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
                                     width="9%"
                                     height="80%"
                                     top="50%"
-                                    left="38%">
+                                    left="38%"
+                                    id="riverCard3">
                                     <FrontCardBox>{this.getRiverCard(3)}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
                                     width="9%"
                                     height="80%"
                                     top="50%"
-                                    left="28%">
+                                    left="28%"
+                                    id="riverCard4">
                                     <FrontCardBox>{this.getRiverCard(4)}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
