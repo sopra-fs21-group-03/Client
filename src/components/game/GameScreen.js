@@ -45,7 +45,7 @@ class GameScreen extends React.Component {
         this.state.raiseAmount = null;
     }
     async showdown(){
-        const showdown= api.put('/games/1/showdown', {headers:{ Authorization: "e433026f-ebcd-4934-94a9-34ae1d760b74"}})
+        const showdown= api.get('/games/1/showdown', {headers:{ Authorization: localStorage.getItem('token')}})
         console.log(showdown.data)
     }
 
