@@ -44,6 +44,10 @@ class GameScreen extends React.Component {
         await api.put("/games/1/"+localStorage.getItem('userID')+"/raise",  this.returnRaiseAmountAndToken())
         this.state.raiseAmount = null;
     }
+    async showdown(){
+        const showdown= api.put('/games/1/showdown', {headers:{ Authorization: "e433026f-ebcd-4934-94a9-34ae1d760b74"}})
+        console.log(showdown.data)
+    }
 
 
     returnToken(){
@@ -335,13 +339,15 @@ class GameScreen extends React.Component {
 
     render() {
 
-
         this.updateGameScreen();
         console.log(this.game)
+        console.log(this.returnToken())
+        this.showdown();
 
         //not turn and on turn
         if(1==1) {
             return (
+
                 <GameContainer>
                     <TableCircleLeft></TableCircleLeft>
                     <TableCircleRight></TableCircleRight>
