@@ -127,8 +127,7 @@ class GameScreen extends React.Component {
 
         //From here GameUpdate it is only style stuff (display etc)
 
-    if(this.game.gameName!=null){    //Buttons should only display when player on Turn
-    if(this.game.showdown==false){
+    if(document.getElementById("callButton")!=null){    //Buttons should only display when player on Turn
         if(this.myselfUser.username != this.userOnTurn.username){
             document.getElementById("callButton").style.display="none";
             document.getElementById("raiseButton").style.display="none";
@@ -320,7 +319,7 @@ class GameScreen extends React.Component {
         if (this.myselfUser.blind == "NEUTRAL" || this.user1.blind==null){
             document.getElementById("OwnS").style.display="none";
             document.getElementById("OwnB").style.display="none";
-        }}}
+        }}
     }
 
     returnCard(cardNumber, Suit){
