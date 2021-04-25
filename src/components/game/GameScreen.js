@@ -44,9 +44,23 @@ class GameScreen extends React.Component {
         await api.put("/games/1/"+localStorage.getItem('userID')+"/raise",  this.returnRaiseAmountAndToken())
         this.state.raiseAmount = null;
     }
-    async showdown(){
-        const showdown= api.get('/games/1/showdown', {headers:{ Authorization: localStorage.getItem('token')}})
-        console.log(showdown.data)
+    async showdown(username){
+        const showdown=await api.delete('/games/1/showdown', {headers:{ Authorization: localStorage.getItem('token')}})
+        const playerList=showdown.data;
+        console.log(playerList);
+        for(let i=0; i<5; i++){
+            if(playerList[i].username==this.myselfUser.username){
+                this.showdownUser4=new User(playerList[(i+1)%5]);
+                this.showdownUser3=new User(playerList[(i+2)%5]);
+                this.showdownUser2=new User(playerList[(i+3)%5]);
+                this.showdownUser1=new User(playerList[(i+4)%5]);
+            }
+        }}
+
+    getUserCard(user, index){
+        if (user.cards!=null && user.cards.length!=0){
+        return new Card(user.cards[index]).card}
+        else{return null;}
     }
 
 
@@ -74,6 +88,10 @@ class GameScreen extends React.Component {
     }
 
     game = new Game();
+    showdownUser1= new User();
+    showdownUser2=new User();
+    showdownUser3=new User();
+    showdownUser4=new User();
     myselfUser = new User();
     user1=new User();
     user2=new User();
@@ -81,7 +99,6 @@ class GameScreen extends React.Component {
     user4=new User();
 
     userOnTurn = new User();
-
 
 
 
@@ -106,9 +123,12 @@ class GameScreen extends React.Component {
         }}
 
 
+
+
         //From here GameUpdate it is only style stuff (display etc)
 
-        //Buttons should only display when player on Turn
+    if(this.game.gameName!=null){    //Buttons should only display when player on Turn
+    if(this.game.showdown==false){
         if(this.myselfUser.username != this.userOnTurn.username){
             document.getElementById("callButton").style.display="none";
             document.getElementById("raiseButton").style.display="none";
@@ -300,7 +320,7 @@ class GameScreen extends React.Component {
         if (this.myselfUser.blind == "NEUTRAL" || this.user1.blind==null){
             document.getElementById("OwnS").style.display="none";
             document.getElementById("OwnB").style.display="none";
-        }
+        }}}
     }
 
     returnCard(cardNumber, Suit){
@@ -342,10 +362,12 @@ class GameScreen extends React.Component {
         this.updateGameScreen();
         console.log(this.game)
         console.log(this.returnToken())
-        this.showdown();
+        this.showdown(this.user1.username,)
+
 
         //not turn and on turn
-        if(1==1) {
+        console.log(this.game.showdown)
+        if(this.game.gameName!=null && this.game.showdown==false) {
             return (
 
                 <GameContainer>
@@ -702,38 +724,349 @@ class GameScreen extends React.Component {
                     </BottomContainer>
                 </GameContainer>);
         }
+
         //showdown
-        else{
+        if(this.game.gameName!=null && this.game.showdown==true){
+
             return (
+
                 <GameContainer>
                     <TableCircleLeft></TableCircleLeft>
                     <TableCircleRight></TableCircleRight>
                     <Tablesquare></Tablesquare>
                     <UpperContainer>
-                        <TopLeftPlayerContainer>Top Left Player</TopLeftPlayerContainer>
-                        <TopRightPlayerContainer>Top Right Player</TopRightPlayerContainer>
+                        <TopLeftPlayerContainer>
+                            <PlayerInfoContainer
+                                top="25%"
+                                left="57.5%"
+                                width="40%"
+                                height="20%"
+                                color="white"
+                                background="grey"
+                                padding= "0 0 0 70px"
+                                borderradius="10px"
+                                border="solid white 1px">
+                                {this.user2.username}Money : {this.user2.money}
+                            </PlayerInfoContainer>
+                            <ProfileCircle
+                                top="15%"
+                                left="30%"
+                                background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user1.jpg")'></ProfileCircle>
+                            <BigBlind
+                                top="70%"
+                                left="75%"
+
+                                transform="rotate(180deg)">B</BigBlind>
+                            <SmallBlind
+                                top="70%"
+                                left="75%"
+
+                                transform="rotate(180deg)">S</SmallBlind>
+                            <PlayerCardsContainer
+                                top="72.5%"
+                                left="60%"
+                                width="30%"
+                                height="55%">
+                                <CardBox
+                                    width="30%"
+                                    top="0"
+                                    left="29%"
+                                    height="100%"
+                                    transform="rotate(180deg)">
+                                    <FrontCardBox>{this.getUserCard(this.showdownUser2,0)}</FrontCardBox>
+                                </CardBox>
+                                <CardBox
+                                    width="30%"
+                                    top="0"
+                                    left="61%"
+                                    height="100%"
+                                    transform="rotate(180deg)">
+                                    <FrontCardBox>{this.getUserCard(this.showdownUser2,1)}</FrontCardBox>
+                                </CardBox>
+                            </PlayerCardsContainer>
+                        </TopLeftPlayerContainer>
+                        <TopRightPlayerContainer>
+                            <BigBlind
+                                top="70%"
+                                left="35%"
+
+                                transform="rotate(180deg)">B</BigBlind>
+                            <SmallBlind
+                                top="70%"
+                                left="35%"
+
+                                transform="rotate(180deg)">S</SmallBlind>
+                            <PlayerInfoContainer
+                                top="25%"
+                                left="27.5%"
+                                width="40%"
+                                height="20%"
+                                color="white"
+                                background="grey"
+                                padding= "0 70px 0 10px"
+
+                                borderradius="10px"
+                                border="solid white 1px">
+                                {this.user3.username} Money : {this.user3.money}
+                            </PlayerInfoContainer>
+                            <ProfileCircle
+                                top="15%"
+                                left="40%"
+                                background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user2.jpg")'></ProfileCircle>
+                            <PlayerCardsContainer
+                                top="72.5%"
+                                left="20%"
+                                width="30%"
+                                height="55%">
+                                <CardBox
+                                    width="30%"
+                                    top="0"
+                                    left="29%"
+                                    height="100%"
+                                    transform="rotate(180deg)">
+                                    <FrontCardBox>{this.getUserCard(this.showdownUser3,0)}</FrontCardBox>
+                                </CardBox>
+                                <CardBox
+                                    width="30%"
+                                    top="0"
+                                    left="61%"
+                                    height="100%"
+                                    transform="rotate(180deg)">
+                                    <FrontCardBox>{this.getUserCard(this.showdownUser3,1)}</FrontCardBox>
+                                </CardBox>
+                            </PlayerCardsContainer>
+                        </TopRightPlayerContainer>
                     </UpperContainer>
                     <MiddleContainer>
-                        <PlayerLeftContainer>Left Player</PlayerLeftContainer>
+                        <PlayerLeftContainer>
+                            <BigBlind
+                                top="80%"
+                                left="75%"
+
+                                transform="rotate(90deg)">B</BigBlind>
+                            <SmallBlind
+                                top="80%"
+                                left="75%"
+
+                                transform="rotate(90deg)">S</SmallBlind>
+                            <PlayerInfoContainer
+                                top="11.5%"
+                                left="73%"
+                                width="90%"
+                                height="13%"
+                                color="white"
+                                background="grey"
+                                padding= "0 0 0 70px"
+
+                                borderradius="10px"
+                                border="solid white 1px">
+                                {this.user1.username} Money : {this.user1.money}
+                            </PlayerInfoContainer>
+                            <ProfileCircle
+                                top="5%"
+                                left="10%"
+                                background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user3.jpg")'></ProfileCircle>
+                            <PlayerCardsContainer
+                                top="50%"
+                                left="78%"
+                                width="40%"
+                                height="50%">
+                                <CardBox
+                                    width="60%"
+                                    height="80%"
+                                    top="-15%"
+                                    left="20%"
+                                    transform="rotate(90deg)">
+                                    <FrontCardBox>{this.getUserCard(this.showdownUser1,0)}</FrontCardBox>
+                                </CardBox>
+                                <CardBox
+                                    width="60%"
+                                    height="80%"
+                                    top="35%"
+                                    left="20%"
+                                    transform="rotate(90deg)">
+                                    <FrontCardBox>{this.getUserCard(this.showdownUser1,1)}</FrontCardBox>
+                                </CardBox>
+                            </PlayerCardsContainer>
+                        </PlayerLeftContainer>
                         <TableComponentsContainer>
-                            <TotalPotContainer>Total Pot</TotalPotContainer>
-                            <MiddleCardsContainer>Middle Cards</MiddleCardsContainer>
-                            <CallContainer>Call Button</CallContainer>
-                            <RaiseContainer>Raise Button</RaiseContainer>
+                            <TotalPotContainer>Total Pot: {this.game.pot.total}</TotalPotContainer>
+                            <MiddleCardsContainer>
+                                <CardBox
+                                    width="9%"
+                                    height="80%"
+                                    top="50%"
+                                    left="68%"
+                                   >
+                                    <FrontCardBox>{this.getRiverCard(0)}</FrontCardBox>
+                                </CardBox>
+                                <CardBox
+                                    width="9%"
+                                    height="80%"
+                                    top="50%"
+                                    left="58%"
+                                    >
+                                    <FrontCardBox>{this.getRiverCard(1)}</FrontCardBox>
+                                </CardBox>
+                                <CardBox
+                                    width="9%"
+                                    height="80%"
+                                    top="50%"
+                                    left="48%"
+                                    >
+                                    <FrontCardBox>{this.getRiverCard(2)}</FrontCardBox>
+                                </CardBox>
+                                <CardBox
+                                    width="9%"
+                                    height="80%"
+                                    top="50%"
+                                    left="38%"
+                                    >
+                                    <FrontCardBox>{this.getRiverCard(3)}</FrontCardBox>
+                                </CardBox>
+                                <CardBox
+                                    width="9%"
+                                    height="80%"
+                                    top="50%"
+                                    left="28%"
+                                    >
+                                    <FrontCardBox>{this.getRiverCard(4)}</FrontCardBox>
+                                </CardBox>
+                            </MiddleCardsContainer>
+                            <CallContainer>
+                                <CallButton onClick={() => {
+
+                                }}
+
+                                >Reveal Cards</CallButton>
+                            </CallContainer>
+                            <RaiseContainer>
+                                <CallButton onClick={() => {
+
+                                }}
+
+                                >Don't Reveal Cards</CallButton>
+                            </RaiseContainer>
                         </TableComponentsContainer>
-                        <PlayerRightContainer>Right Player</PlayerRightContainer>
+                        <PlayerRightContainer>
+                            <BigBlind
+                                top="80%"
+                                left="15%"
+
+                                transform="rotate(270deg)">B</BigBlind>
+                            <SmallBlind
+                                top="80%"
+                                left="15%"
+
+                                transform="rotate(270deg)">S</SmallBlind>
+                            <PlayerInfoContainer
+                                top="11.5%"
+                                left="25%"
+                                width="90%"
+                                height="13%"
+                                color="white"
+                                background="grey"
+                                padding= "0 70px 0 10px"
+
+                                borderradius="10px"
+                                border="solid white 1px">
+                                {this.user4.username} Money : {this.user4.money}
+                            </PlayerInfoContainer>
+                            <ProfileCircle
+                                top="5%"
+                                left="50%"
+                                background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user4.jpg")'></ProfileCircle>
+                            <PlayerCardsContainer
+                                top="50%"
+                                left="22%"
+                                width="40%"
+                                height="50%">
+                                <CardBox
+                                    width="60%"
+                                    height="80%"
+                                    top="-15%"
+                                    left="20%"
+                                    transform="rotate(270deg)">
+                                    <FrontCardBox>{this.getUserCard(this.showdownUser4,0)}</FrontCardBox>
+                                </CardBox>
+                                <CardBox
+                                    width="60%"
+                                    height="80%"
+                                    top="35%"
+                                    left="20%"
+                                    transform="rotate(270deg)">
+                                    <FrontCardBox>{this.getUserCard(this.showdownUser4,1)}</FrontCardBox>
+                                </CardBox>
+                            </PlayerCardsContainer>
+                        </PlayerRightContainer>
                     </MiddleContainer>
                     <LowerContainer>
-                        <ChatContainer>Chat</ChatContainer>
-                        <CheckContainer>CheckButton</CheckContainer>
-                        <OwnCardsContainer>Own Cards</OwnCardsContainer>
-                        <FoldContainer>FoldButton</FoldContainer>
-                        <LeaveTableContainer>Leave Tabel Button</LeaveTableContainer>
+                        <ChatContainer>
+                            <InnerTextChatContainer>
+                                <TextBacklogChatContainer>
+                                    <Writen>BestPokerPlayerEUWest: Hello Guys</Writen>
+                                    <Writen>Hacker: hi</Writen>
+                                    <Writen>Stanley: EZ</Writen>
+                                </TextBacklogChatContainer>
+                                <ChatInputField placeholder = "Type in your message"></ChatInputField>
+                            </InnerTextChatContainer>
+                        </ChatContainer>
+                        <BigBlind
+                            top="-10%"
+                            left="49%"
+                            >B</BigBlind>
+                        <SmallBlind
+                            top="-10%"
+                            left="49%"
+                           >S</SmallBlind>
+                        <OwnCardsContainer>
+                            <CardBox
+                                width="35%"
+                                height="80%"
+                                top="50%"
+                                left="28%"
+                                >
+                                <FrontCardBox>{new Card(this.myselfUser.cards[0]).card}</FrontCardBox>
+                            </CardBox>
+                            <CardBox
+                                width="35%"
+                                height="80%"
+                                top="50%"
+                                left="72%"
+
+                                visibility="hidden">
+                                <FrontCardBox>{new Card(this.myselfUser.cards[1]).card}</FrontCardBox>
+                            </CardBox>
+                        </OwnCardsContainer>
+                        <LeaveTableContainer>
+                            <LeaveTableButton
+                                onClick={() => {
+                                    this.logout()
+
+                                }}
+                            >
+                                Leave Table
+                            </LeaveTableButton>
+                        </LeaveTableContainer>
                     </LowerContainer>
                     <BottomContainer>
+                        <PlayerInfoContainer
+                            top="50%"
+                            left="55%"
+                            width="30%"
+                            height="60%"
+                            color="white"
+                            >
+                            {this.myselfUser.username} Money : {this.myselfUser.money}
+                        </PlayerInfoContainer>
+                        <ProfileCircle
+                            top="-120%"
+                            left="30%"
+                            background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user5.jpg")'></ProfileCircle>
                     </BottomContainer>
                 </GameContainer>);
         }
+        else{return(<GameContainer> LOADING </GameContainer>)}
     }
 }
 

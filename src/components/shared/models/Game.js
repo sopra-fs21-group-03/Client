@@ -6,7 +6,7 @@ import User from "./User";
 
 class Game {
     constructor(data = {}) {
-        this.name = null;
+        this.gameName = null;
         this.players = null;
         this.river= null;
         this.pot=null;
