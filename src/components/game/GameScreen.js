@@ -87,6 +87,20 @@ class GameScreen extends React.Component {
         this.props.history.push('/login');
     }
 
+
+    returnTokenAndIfReveal(boolean){
+        const requestBodyRevealCards = JSON.stringify({
+            token: localStorage.getItem('token'),
+            wantsToShow: boolean
+        });
+        console.log(requestBodyRevealCards)
+        return requestBodyRevealCards
+    }
+
+    async revealCards(boolean){
+        await api.get('/games/1/' + localStorage.getItem('userID') + 'show', this.returnTokenAndIfReveal(boolean));
+    }
+
     game = new Game();
     showdownUser1= new User();
     showdownUser2=new User();
@@ -123,7 +137,19 @@ class GameScreen extends React.Component {
         }}
 
 
+        //If to display reveal Cards Button
 
+        if(document.getElementById("notRevealButton" != null)){
+            if(this.myselfUser.username != this.userOnTurn.username){
+                document.getElementById("notRevealButton").style.display="none";
+                document.getElementById("revealButton").style.display="none";
+            }
+
+            if(this.myselfUser.username == this.userOnTurn.username){
+                document.getElementById("notRevealButton").style.display="inline";
+                document.getElementById("revealButton").style.display="inline";
+            }
+        }
 
         //From here GameUpdate it is only style stuff (display etc)
 
@@ -751,16 +777,6 @@ class GameScreen extends React.Component {
                                 top="15%"
                                 left="30%"
                                 background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user1.jpg")'></ProfileCircle>
-                            <BigBlind
-                                top="70%"
-                                left="75%"
-
-                                transform="rotate(180deg)">B</BigBlind>
-                            <SmallBlind
-                                top="70%"
-                                left="75%"
-
-                                transform="rotate(180deg)">S</SmallBlind>
                             <PlayerCardsContainer
                                 top="72.5%"
                                 left="60%"
@@ -785,16 +801,6 @@ class GameScreen extends React.Component {
                             </PlayerCardsContainer>
                         </TopLeftPlayerContainer>
                         <TopRightPlayerContainer>
-                            <BigBlind
-                                top="70%"
-                                left="35%"
-
-                                transform="rotate(180deg)">B</BigBlind>
-                            <SmallBlind
-                                top="70%"
-                                left="35%"
-
-                                transform="rotate(180deg)">S</SmallBlind>
                             <PlayerInfoContainer
                                 top="25%"
                                 left="27.5%"
@@ -838,16 +844,7 @@ class GameScreen extends React.Component {
                     </UpperContainer>
                     <MiddleContainer>
                         <PlayerLeftContainer>
-                            <BigBlind
-                                top="80%"
-                                left="75%"
 
-                                transform="rotate(90deg)">B</BigBlind>
-                            <SmallBlind
-                                top="80%"
-                                left="75%"
-
-                                transform="rotate(90deg)">S</SmallBlind>
                             <PlayerInfoContainer
                                 top="11.5%"
                                 left="73%"
@@ -933,31 +930,20 @@ class GameScreen extends React.Component {
                                 </CardBox>
                             </MiddleCardsContainer>
                             <CallContainer>
-                                <CallButton onClick={() => {
-
-                                }}
-
+                                //CallButtons used for Reveal Card Buttons
+                                <CallButton  onClick={() => {
+                                    this.revealCards(true);
+                                }} id="revealButton"
                                 >Reveal Cards</CallButton>
                             </CallContainer>
                             <RaiseContainer>
-                                <CallButton onClick={() => {
-
-                                }}
-
+                                <CallButton  onClick={() => {
+                                    this.revealCards(false);
+                                }} id="notRevealButton"
                                 >Don't Reveal Cards</CallButton>
                             </RaiseContainer>
                         </TableComponentsContainer>
                         <PlayerRightContainer>
-                            <BigBlind
-                                top="80%"
-                                left="15%"
-
-                                transform="rotate(270deg)">B</BigBlind>
-                            <SmallBlind
-                                top="80%"
-                                left="15%"
-
-                                transform="rotate(270deg)">S</SmallBlind>
                             <PlayerInfoContainer
                                 top="11.5%"
                                 left="25%"
@@ -1010,14 +996,6 @@ class GameScreen extends React.Component {
                                 <ChatInputField placeholder = "Type in your message"></ChatInputField>
                             </InnerTextChatContainer>
                         </ChatContainer>
-                        <BigBlind
-                            top="-10%"
-                            left="49%"
-                            >B</BigBlind>
-                        <SmallBlind
-                            top="-10%"
-                            left="49%"
-                           >S</SmallBlind>
                         <OwnCardsContainer>
                             <CardBox
                                 width="35%"
