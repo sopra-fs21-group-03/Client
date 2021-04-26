@@ -86,7 +86,7 @@ class GameScreen extends React.Component {
         await api.put("/games/1/"+localStorage.getItem('userID')+"/raise",  this.returnRaiseAmountAndToken())
         this.state.raiseAmount = null;
     }
-    async showdown(username){
+    async showdown(){
         const showdown=await api.get('/games/1/showdown', {headers:{ Authorization: localStorage.getItem('token')}})
         const playerList=showdown.data;
         console.log(playerList);
@@ -140,7 +140,7 @@ class GameScreen extends React.Component {
     }
 
     async revealCards(boolean){
-        await api.put('/games/1/' + localStorage.getItem('userID') + 'show', this.returnTokenAndIfReveal(boolean));
+        await api.put('/games/1/' + localStorage.getItem('userID') + '/show', this.returnTokenAndIfReveal(boolean));
     }
 
     game = new Game();
@@ -793,6 +793,8 @@ class GameScreen extends React.Component {
 
         //showdown
         if(this.game.gameName!=null && this.game.showdown==true){
+
+            this.showdown()
 
             return (
 
