@@ -140,7 +140,7 @@ class GameScreen extends React.Component {
     }
 
     async revealCards(boolean){
-        await api.get('/games/1/' + localStorage.getItem('userID') + 'show', this.returnTokenAndIfReveal(boolean));
+        await api.put('/games/1/' + localStorage.getItem('userID') + 'show', this.returnTokenAndIfReveal(boolean));
     }
 
     game = new Game();
