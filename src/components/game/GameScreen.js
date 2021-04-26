@@ -972,7 +972,6 @@ class GameScreen extends React.Component {
                                 </CardBox>
                             </MiddleCardsContainer>
                             <CallContainer>
-                                //CallButtons used for Reveal Card Buttons
                                 <CallButton  onClick={() => {
                                     this.revealCards(true);
                                 }} id="revealButton"
