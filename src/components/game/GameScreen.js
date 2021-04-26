@@ -11,7 +11,49 @@ import Card from "../shared/models/Card";
 import Deck from "../shared/models/Deck";
 import {BlackButton} from "../../views/design/BlackButton";
 import Game from "../shared/models/Game";
-import { ProfileCircle, BigBlind, SmallBlind, Writen, LeaveTableButton, CheckButton, CallButton, RaiseButton, RaiseInput, FoldButton, InnerTextChatContainer, TextBacklogChatContainer, ChatInputField, Tablesquare, TableCircleLeft, TableCircleRight, GameContainer, UpperContainer, MiddleContainer, LowerContainer, BottomContainer, ChatContainer, LeaveTableContainer, CheckContainer, FoldContainer, OwnCardsContainer, PlayerLeftContainer, PlayerRightContainer, PlayerCardsContainer, TableComponentsContainer, TotalPotContainer, MiddleCardsContainer, CallContainer, RaiseContainer, TopLeftPlayerContainer, TopRightPlayerContainer, CardBox, PlayerInfoContainer, FrontCardBox} from "../../views/design/GameScreenStyle";
+import {
+    Loader,
+    ProfileCircle,
+    BigBlind,
+    SmallBlind,
+    Writen,
+    LeaveTableButton,
+    CheckButton,
+    CallButton,
+    RaiseButton,
+    RaiseInput,
+    FoldButton,
+    InnerTextChatContainer,
+    TextBacklogChatContainer,
+    ChatInputField,
+    Tablesquare,
+    TableCircleLeft,
+    TableCircleRight,
+    GameContainer,
+    UpperContainer,
+    MiddleContainer,
+    LowerContainer,
+    BottomContainer,
+    ChatContainer,
+    LeaveTableContainer,
+    CheckContainer,
+    FoldContainer,
+    OwnCardsContainer,
+    PlayerLeftContainer,
+    PlayerRightContainer,
+    PlayerCardsContainer,
+    TableComponentsContainer,
+    TotalPotContainer,
+    MiddleCardsContainer,
+    CallContainer,
+    RaiseContainer,
+    TopLeftPlayerContainer,
+    TopRightPlayerContainer,
+    CardBox,
+    PlayerInfoContainer,
+    FrontCardBox,
+    LoadingGameContainer
+} from "../../views/design/GameScreenStyle";
 
 document.body.style.backgroundColor = "green";
 
@@ -1043,7 +1085,9 @@ class GameScreen extends React.Component {
                     </BottomContainer>
                 </GameContainer>);
         }
-        else{return(<GameContainer> LOADING </GameContainer>)}
+
+        //If Game did not start yet
+        else{return(<LoadingGameContainer> LOADING <Loader top = '360px' left = '57%'></Loader> </LoadingGameContainer>)}
     }
 }
 

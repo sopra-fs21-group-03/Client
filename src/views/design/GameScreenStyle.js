@@ -301,6 +301,41 @@ export const GameContainer = styled.div`
   max-width: 100%;
 `;
 
+export const LoadingGameContainer = styled.div`
+  background-color: rgb(169,170,172);
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: 0%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  margin-left: auto;
+  padding-left: 15px;
+  margin-right: auto;
+  padding-right: 15px;
+  max-width: 100%;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 800px; 
+  font-size: 32pt;
+  color: white;
+`;
+
+export const Loader = styled.div`
+  border: 10px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 10px solid #dd1630;
+  width: 80px;
+  height: 80px;
+  -webkit-animation: spin 2s linear infinite; 
+  animation: spin 2s linear infinite;
+  left: ${props => props.left || null}; 
+  top: ${props => props.top || null}; 
+  position: absolute;
+`
+
 export const UpperContainer = styled.div`
   margin: 0;
   position: absolute;
