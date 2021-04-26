@@ -195,6 +195,63 @@ class GameScreen extends React.Component {
 
         //From here GameUpdate it is only style stuff (display etc)
 
+
+        if(document.getElementById("player1InfoOnTurnShowdown") != null
+            && this.user1.username != null && this.userOnTurn.username != null
+        ){
+            if(this.user1.username == this.userOnTurn.username){
+                document.getElementById("player1InfoOnTurnShowdown").style.color="red";
+            }
+            if(this.user1.username != this.userOnTurn.username){
+                document.getElementById("player1InfoOnTurnShowdown").style.color="white";
+            }
+        }
+
+        if(document.getElementById("player2InfoOnTurnShowdown") != null
+            && this.user2.username != null && this.userOnTurn.username != null
+        ){
+            if(this.user2.username == this.userOnTurn.username){
+                document.getElementById("player2InfoOnTurnShowdown").style.color="red";
+            }
+            if(this.user2.username != this.userOnTurn.username){
+                document.getElementById("player2InfoOnTurnShowdown").style.color="white";
+            }
+        }
+
+        if(document.getElementById("player3InfoOnTurnShowdown") != null
+            && this.user3.username != null && this.userOnTurn.username != null
+        ){
+            if(this.user3.username == this.userOnTurn.username){
+                document.getElementById("player3InfoOnTurnShowdown").style.color="red";
+            }
+            if(this.user3.username != this.userOnTurn.username){
+                document.getElementById("player3InfoOnTurnShowdown").style.color="white";
+            }
+        }
+
+        if(document.getElementById("player4InfoOnTurnShowdown") != null
+            && this.user4.username != null && this.userOnTurn.username != null
+        ){
+            if(this.user4.username == this.userOnTurn.username){
+                document.getElementById("player4InfoOnTurnShowdown").style.color="red";
+            }
+            if(this.user4.username != this.userOnTurn.username){
+                document.getElementById("player4InfoOnTurnShowdown").style.color="white";
+            }
+        }
+
+        if(document.getElementById("playerOwnInfoOnTurnShowdown") != null
+            && this.myselfUser.username != null && this.userOnTurn.username != null
+        ){
+            if(this.myselfUser.username == this.userOnTurn.username){
+                document.getElementById("playerOwnInfoOnTurnShowdown").style.color="red";
+            }
+            if(this.myselfUser.username != this.userOnTurn.username){
+                document.getElementById("playerOwnInfoOnTurnShowdown").style.color="white";
+            }
+        }
+
+
     if(document.getElementById("callButton")!=null){    //Buttons should only display when player on Turn
         if(this.myselfUser.username != this.userOnTurn.username){
             document.getElementById("callButton").style.display="none";
@@ -320,61 +377,6 @@ class GameScreen extends React.Component {
             }
             if(this.myselfUser.username != this.userOnTurn.username){
                 document.getElementById("playerOwnUserInfoOnTurn").style.color="white";
-            }
-        }
-
-        if(document.getElementById("player1InfoOnTurnShowdown") != null
-            && this.user1.username != null && this.userOnTurn.username != null
-        ){
-            if(this.user1.username == this.userOnTurn.username){
-                document.getElementById("player1InfoOnTurnShowdown").style.color="red";
-            }
-            if(this.user1.username != this.userOnTurn.username){
-                document.getElementById("player1InfoOnTurnShowdown").style.color="white";
-            }
-        }
-
-        if(document.getElementById("player2InfoOnTurnShowdown") != null
-            && this.user2.username != null && this.userOnTurn.username != null
-        ){
-            if(this.user2.username == this.userOnTurn.username){
-                document.getElementById("player2InfoOnTurnShowdown").style.color="red";
-            }
-            if(this.user2.username != this.userOnTurn.username){
-                document.getElementById("player2InfoOnTurnShowdown").style.color="white";
-            }
-        }
-
-        if(document.getElementById("player3InfoOnTurnShowdown") != null
-            && this.user3.username != null && this.userOnTurn.username != null
-        ){
-            if(this.user3.username == this.userOnTurn.username){
-                document.getElementById("player3InfoOnTurnShowdown").style.color="red";
-            }
-            if(this.user3.username != this.userOnTurn.username){
-                document.getElementById("player3InfoOnTurnShowdown").style.color="white";
-            }
-        }
-
-        if(document.getElementById("player4InfoOnTurnShowdown") != null
-            && this.user4.username != null && this.userOnTurn.username != null
-        ){
-            if(this.user4.username == this.userOnTurn.username){
-                document.getElementById("player4InfoOnTurnShowdown").style.color="red";
-            }
-            if(this.user4.username != this.userOnTurn.username){
-                document.getElementById("player4InfoOnTurnShowdown").style.color="white";
-            }
-        }
-
-        if(document.getElementById("playerOwnInfoOnTurnShowdown") != null
-            && this.myselfUser.username != null && this.userOnTurn.username != null
-        ){
-            if(this.myselfUser.username == this.userOnTurn.username){
-                document.getElementById("playerOwnInfoOnTurnShowdown").style.color="red";
-            }
-            if(this.myselfUser.username != this.userOnTurn.username){
-                document.getElementById("playerOwnInfoOnTurnShowdown").style.color="white";
             }
         }
 
