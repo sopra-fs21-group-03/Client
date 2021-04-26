@@ -428,6 +428,7 @@ class GameScreen extends React.Component {
 
         this.updateGameScreen();
         console.log(this.game)
+        //
 
 
         //not turn and on turn
