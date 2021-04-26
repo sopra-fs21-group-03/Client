@@ -299,6 +299,10 @@ export const GameContainer = styled.div`
   margin-right: auto;
   padding-right: 15px;
   max-width: 100%;
+  background-image: url('https://steamcdn-a.akamaihd.net/steamcommunity/public/images/items/508550/5ec0a209f73c1d9ffc5e007b433cb3aebaa06b8d.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 
 export const LoadingGameContainer = styled.div`
@@ -327,6 +331,7 @@ export const Loader = styled.div`
   border: 10px solid #f3f3f3;
   border-radius: 50%;
   border-top: 10px solid #dd1630;
+  border-bottom: 10px solid #dd1630;
   width: 80px;
   height: 80px;
   -webkit-animation: spin 2s linear infinite; 
@@ -334,7 +339,13 @@ export const Loader = styled.div`
   left: ${props => props.left || null}; 
   top: ${props => props.top || null}; 
   position: absolute;
-`
+  color: white;
+  background-color:#dd1630;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 60px; 
+  font-size: 20pt
+  `
 
 export const UpperContainer = styled.div`
   margin: 0;

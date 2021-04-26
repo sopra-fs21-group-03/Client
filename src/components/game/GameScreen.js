@@ -1087,7 +1087,7 @@ class GameScreen extends React.Component {
         }
 
         //If Game did not start yet
-        else{return(<LoadingGameContainer> LOADING <Loader top = '360px' left = '57%'></Loader> </LoadingGameContainer>)}
+        else{return(<LoadingGameContainer> LOADING <Loader top = '360px' left = '57%'>500</Loader> </LoadingGameContainer>)}
     }
 }
 
