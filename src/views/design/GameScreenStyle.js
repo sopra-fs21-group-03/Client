@@ -299,7 +299,7 @@ export const GameContainer = styled.div`
   margin-right: auto;
   padding-right: 15px;
   max-width: 100%;
-  background-image: url('https://steamcdn-a.akamaihd.net/steamcommunity/public/images/items/508550/5ec0a209f73c1d9ffc5e007b433cb3aebaa06b8d.jpg');
+  background-image: url('https://wallpaperaccess.com/full/2924715.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
