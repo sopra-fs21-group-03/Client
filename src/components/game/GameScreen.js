@@ -181,7 +181,7 @@ class GameScreen extends React.Component {
 
         //If to display reveal Cards Button
 
-        if(document.getElementById("notRevealButton" != null)){
+        if(document.getElementById("notRevealButton") != null){
             if(this.myselfUser.username != this.userOnTurn.username){
                 document.getElementById("notRevealButton").style.display="none";
                 document.getElementById("revealButton").style.display="none";
@@ -970,7 +970,6 @@ class GameScreen extends React.Component {
                                 </CardBox>
                             </MiddleCardsContainer>
                             <CallContainer>
-                                //CallButtons used for Reveal Card Buttons
                                 <CallButton  onClick={() => {
                                     this.revealCards(true);
                                 }} id="revealButton"
