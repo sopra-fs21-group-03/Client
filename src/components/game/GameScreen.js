@@ -275,7 +275,7 @@ class GameScreen extends React.Component {
                 document.getElementById("player1InfoOnTurn").style.color="red";
             }
             if(this.user1.username != this.userOnTurn.username){
-                document.getElementById("player1InfoOnTurn").style.color="black";
+                document.getElementById("player1InfoOnTurn").style.color="white";
             }
         }
 
@@ -286,7 +286,7 @@ class GameScreen extends React.Component {
                 document.getElementById("player2InfoOnTurn").style.color="red";
             }
             if(this.user2.username != this.userOnTurn.username){
-                document.getElementById("player2InfoOnTurn").style.color="black";
+                document.getElementById("player2InfoOnTurn").style.color="white";
             }
         }
 
@@ -297,7 +297,7 @@ class GameScreen extends React.Component {
                 document.getElementById("player3InfoOnTurn").style.color="red";
             }
             if(this.user3.username != this.userOnTurn.username){
-                document.getElementById("player3InfoOnTurn").style.color="black";
+                document.getElementById("player3InfoOnTurn").style.color="white";
             }
         }
 
@@ -308,7 +308,7 @@ class GameScreen extends React.Component {
                 document.getElementById("player4InfoOnTurn").style.color="red";
             }
             if(this.user4.username != this.userOnTurn.username){
-                document.getElementById("player4InfoOnTurn").style.color="black";
+                document.getElementById("player4InfoOnTurn").style.color="white";
             }
         }
 
@@ -320,6 +320,61 @@ class GameScreen extends React.Component {
             }
             if(this.myselfUser.username != this.userOnTurn.username){
                 document.getElementById("playerOwnUserInfoOnTurn").style.color="white";
+            }
+        }
+
+        if(document.getElementById("player1InfoOnTurnShowdown") != null
+            && this.user1.username != null && this.userOnTurn.username != null
+        ){
+            if(this.user1.username == this.userOnTurn.username){
+                document.getElementById("player1InfoOnTurnShowdown").style.color="red";
+            }
+            if(this.user1.username != this.userOnTurn.username){
+                document.getElementById("player1InfoOnTurnShowdown").style.color="white";
+            }
+        }
+
+        if(document.getElementById("player2InfoOnTurnShowdown") != null
+            && this.user2.username != null && this.userOnTurn.username != null
+        ){
+            if(this.user2.username == this.userOnTurn.username){
+                document.getElementById("player2InfoOnTurnShowdown").style.color="red";
+            }
+            if(this.user2.username != this.userOnTurn.username){
+                document.getElementById("player2InfoOnTurnShowdown").style.color="white";
+            }
+        }
+
+        if(document.getElementById("player3InfoOnTurnShowdown") != null
+            && this.user3.username != null && this.userOnTurn.username != null
+        ){
+            if(this.user3.username == this.userOnTurn.username){
+                document.getElementById("player3InfoOnTurnShowdown").style.color="red";
+            }
+            if(this.user3.username != this.userOnTurn.username){
+                document.getElementById("player3InfoOnTurnShowdown").style.color="white";
+            }
+        }
+
+        if(document.getElementById("player4InfoOnTurnShowdown") != null
+            && this.user4.username != null && this.userOnTurn.username != null
+        ){
+            if(this.user4.username == this.userOnTurn.username){
+                document.getElementById("player4InfoOnTurnShowdown").style.color="red";
+            }
+            if(this.user4.username != this.userOnTurn.username){
+                document.getElementById("player4InfoOnTurnShowdown").style.color="white";
+            }
+        }
+
+        if(document.getElementById("playerOwnInfoOnTurnShowdown") != null
+            && this.myselfUser.username != null && this.userOnTurn.username != null
+        ){
+            if(this.myselfUser.username == this.userOnTurn.username){
+                document.getElementById("playerOwnInfoOnTurnShowdown").style.color="red";
+            }
+            if(this.myselfUser.username != this.userOnTurn.username){
+                document.getElementById("playerOwnInfoOnTurnShowdown").style.color="white";
             }
         }
 
@@ -813,7 +868,8 @@ class GameScreen extends React.Component {
                                 background="grey"
                                 padding= "0 0 0 70px"
                                 borderradius="10px"
-                                border="solid white 1px">
+                                border="solid white 1px"
+                                id="player2InfoOnTurnShowdown">
                                 {this.user2.username}Money : {this.user2.money}
                             </PlayerInfoContainer>
                             <ProfileCircle
@@ -852,7 +908,7 @@ class GameScreen extends React.Component {
                                 color="white"
                                 background="grey"
                                 padding= "0 70px 0 10px"
-
+                                id="player3InfoOnTurnShowdown"
                                 borderradius="10px"
                                 border="solid white 1px">
                                 {this.user3.username} Money : {this.user3.money}
@@ -896,7 +952,7 @@ class GameScreen extends React.Component {
                                 color="white"
                                 background="grey"
                                 padding= "0 0 0 70px"
-
+                                id="player1InfoOnTurnShowdown"
                                 borderradius="10px"
                                 border="solid white 1px">
                                 {this.user1.username} Money : {this.user1.money}
@@ -994,7 +1050,7 @@ class GameScreen extends React.Component {
                                 color="white"
                                 background="grey"
                                 padding= "0 70px 0 10px"
-
+                                id="player4InfoOnTurnShowdown"
                                 borderradius="10px"
                                 border="solid white 1px">
                                 {this.user4.username} Money : {this.user4.money}
@@ -1075,6 +1131,7 @@ class GameScreen extends React.Component {
                             width="30%"
                             height="60%"
                             color="white"
+                            id="playerOwnInfoOnTurnShowdown"
                             >
                             {this.myselfUser.username} Money : {this.myselfUser.money}
                         </PlayerInfoContainer>
