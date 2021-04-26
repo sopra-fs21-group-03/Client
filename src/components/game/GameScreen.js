@@ -87,7 +87,7 @@ class GameScreen extends React.Component {
         this.state.raiseAmount = null;
     }
     async showdown(username){
-        const showdown=await api.delete('/games/1/showdown', {headers:{ Authorization: localStorage.getItem('token')}})
+        const showdown=await api.get('/games/1/showdown', {headers:{ Authorization: localStorage.getItem('token')}})
         const playerList=showdown.data;
         console.log(playerList);
         for(let i=0; i<5; i++){
