@@ -428,8 +428,6 @@ class GameScreen extends React.Component {
 
         this.updateGameScreen();
         console.log(this.game)
-        console.log(this.returnToken())
-        this.showdown(this.user1.username,)
 
 
         //not turn and on turn
