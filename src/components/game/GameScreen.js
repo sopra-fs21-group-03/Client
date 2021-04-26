@@ -445,6 +445,73 @@ class GameScreen extends React.Component {
             document.getElementById("OwnS").style.display="none";
             document.getElementById("OwnB").style.display="none";
         }}
+
+        //If display blinds in Showdown
+        if(document.getElementById("playerOwnInfoOnTurnShowdown") != null){
+        if (this.user1.blind == "SMALL"){
+            document.getElementById("1SS").style.display="inline";
+            document.getElementById("1BS").style.display="none";
+        }
+        if (this.user1.blind == "BIG"){
+            document.getElementById("1SS").style.display="none";
+            document.getElementById("1BS").style.display="inline";
+        }
+        if (this.user1.blind == "NEUTRAL" || this.user1.blind==null){
+            document.getElementById("1SS").style.display="none";
+            document.getElementById("1BS").style.display="none";
+        }
+
+        if (this.user2.blind == "SMALL"){
+            document.getElementById("2SS").style.display="inline";
+            document.getElementById("2BS").style.display="none";
+        }
+        if (this.user2.blind == "BIG"){
+            document.getElementById("2SS").style.display="none";
+            document.getElementById("2BS").style.display="inline";
+        }
+        if (this.user2.blind == "NEUTRAL" || this.user1.blind==null){
+            document.getElementById("2SS").style.display="none";
+            document.getElementById("2BS").style.display="none";
+        }
+
+        if (this.user3.blind == "SMALL"){
+            document.getElementById("3SS").style.display="inline";
+            document.getElementById("3BS").style.display="none";
+        }
+        if (this.user3.blind == "BIG"){
+            document.getElementById("3SS").style.display="none";
+            document.getElementById("3BS").style.display="inline";
+        }
+        if (this.user3.blind == "NEUTRAL" || this.user1.blind==null){
+            document.getElementById("3SS").style.display="none";
+            document.getElementById("3BS").style.display="none";
+        }
+
+        if (this.user4.blind == "SMALL"){
+            document.getElementById("4SS").style.display="inline";
+            document.getElementById("4BS").style.display="none";
+        }
+        if (this.user4.blind == "BIG"){
+            document.getElementById("4SS").style.display="none";
+            document.getElementById("4BS").style.display="inline";
+        }
+        if (this.user4.blind == "NEUTRAL" || this.user1.blind==null){
+            document.getElementById("4SS").style.display="none";
+            document.getElementById("4BS").style.display="none";
+        }
+
+        if (this.myselfUser.blind == "SMALL"){
+            document.getElementById("OwnSS").style.display="inline";
+            document.getElementById("OwnBS").style.display="none";
+        }
+        if (this.myselfUser.blind == "BIG"){
+            document.getElementById("OwnSS").style.display="none";
+            document.getElementById("OwnBS").style.display="inline";
+        }
+        if (this.myselfUser.blind == "NEUTRAL" || this.user1.blind==null){
+            document.getElementById("OwnSS").style.display="none";
+            document.getElementById("OwnBS").style.display="none";
+        }}
     }
 
     returnCard(cardNumber, Suit){
@@ -878,6 +945,16 @@ class GameScreen extends React.Component {
                                 top="15%"
                                 left="30%"
                                 background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user1.jpg")'></ProfileCircle>
+                            <BigBlind
+                                top="70%"
+                                left="75%"
+                                id="2BS"
+                                transform="rotate(180deg)">B</BigBlind>
+                            <SmallBlind
+                                top="70%"
+                                left="75%"
+                                id="2SS"
+                                transform="rotate(180deg)">S</SmallBlind>
                             <PlayerCardsContainer
                                 top="72.5%"
                                 left="60%"
@@ -902,6 +979,16 @@ class GameScreen extends React.Component {
                             </PlayerCardsContainer>
                         </TopLeftPlayerContainer>
                         <TopRightPlayerContainer>
+                            <BigBlind
+                                top="70%"
+                                left="35%"
+                                id="3BS"
+                                transform="rotate(180deg)">B</BigBlind>
+                            <SmallBlind
+                                top="70%"
+                                left="35%"
+                                id="3SS"
+                                transform="rotate(180deg)">S</SmallBlind>
                             <PlayerInfoContainer
                                 top="25%"
                                 left="27.5%"
@@ -945,7 +1032,16 @@ class GameScreen extends React.Component {
                     </UpperContainer>
                     <MiddleContainer>
                         <PlayerLeftContainer>
-
+                            <BigBlind
+                                top="80%"
+                                left="75%"
+                                id="1BS"
+                                transform="rotate(90deg)">B</BigBlind>
+                            <SmallBlind
+                                top="80%"
+                                left="75%"
+                                id="1SS"
+                                transform="rotate(90deg)">S</SmallBlind>
                             <PlayerInfoContainer
                                 top="11.5%"
                                 left="73%"
@@ -1044,6 +1140,16 @@ class GameScreen extends React.Component {
                             </RaiseContainer>
                         </TableComponentsContainer>
                         <PlayerRightContainer>
+                            <BigBlind
+                                top="80%"
+                                left="15%"
+                                id="4BS"
+                                transform="rotate(270deg)">B</BigBlind>
+                            <SmallBlind
+                                top="80%"
+                                left="15%"
+                                id="4SS"
+                                transform="rotate(270deg)">S</SmallBlind>
                             <PlayerInfoContainer
                                 top="11.5%"
                                 left="25%"
@@ -1096,6 +1202,14 @@ class GameScreen extends React.Component {
                                 <ChatInputField placeholder = "Type in your message"></ChatInputField>
                             </InnerTextChatContainer>
                         </ChatContainer>
+                        <BigBlind
+                            top="-10%"
+                            left="49%"
+                            id="OwnBS">B</BigBlind>
+                        <SmallBlind
+                            top="-10%"
+                            left="49%"
+                            id="OwnSS">S</SmallBlind>
                         <OwnCardsContainer>
                             <CardBox
                                 width="35%"
