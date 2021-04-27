@@ -146,7 +146,7 @@ class GameScreen extends React.Component {
         await api.put('/games/1/' + localStorage.getItem('userID') + '/show', this.returnTokenAndIfReveal(boolean));
     }
     lostPlayersCounter=null;
-    END=null;
+    gameEnd=null;
     game = new Game();
     showdownUser1= new User();
     showdownUser2=new User();
@@ -190,7 +190,7 @@ class GameScreen extends React.Component {
             if(this.game.players[i].money==0){
                 this.lostPlayersCounter=this.lostPlayersCounter+1;
                 if(this.lostPlayersCounter==4){
-                    this.END=true;
+                    this.gameEnd=true;
                 }
 
             }
@@ -574,7 +574,7 @@ class GameScreen extends React.Component {
         console.log(this.lostPlayersCounter)
 
 
-        if(this.END==true){
+        if(this.gameEnd==true){
             if(this.myselfUser.money!=0){
                 return(<GameContainer>YOU WIN!!</GameContainer>)
             }
