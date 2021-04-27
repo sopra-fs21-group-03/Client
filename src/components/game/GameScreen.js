@@ -132,10 +132,21 @@ class GameScreen extends React.Component {
         return requestBodyRevealCards
     }
 
+    displayUser(user){
+        let maxBet=0
+        for (let i=1; i<6; i++){
+            if(this.game.pot.contribution[i.toString()]>maxBet){
+                maxBet=this.game.pot.contribution[i.toString()]
+            }
+        }
+        return user.username+ " Money : "+ user.money+  " Betting : " +user.moneyInPot + " missing : "+ (maxBet-user.moneyInPot);
+    }
+
     async revealCards(boolean){
         await api.put('/games/1/' + localStorage.getItem('userID') + '/show', this.returnTokenAndIfReveal(boolean));
     }
-
+    lostPlayersCounter=null;
+    END=null;
     game = new Game();
     showdownUser1= new User();
     showdownUser2=new User();
@@ -146,12 +157,14 @@ class GameScreen extends React.Component {
     user2=new User();
     user3=new User();
     user4=new User();
-
     userOnTurn = new User();
 
 
 
     async updateGameScreen(){
+        this.lostPlayersCounter=0
+
+
         const gameResponse = await api.get('/games/1',{headers:{ Authorization: localStorage.getItem('token')}});
         this.game = gameResponse.data;
 
@@ -164,11 +177,24 @@ class GameScreen extends React.Component {
 
         for(var i=0; i<5; i++){
             if(this.game.players[i].username==this.myselfUser.username){
+                this.myselfUser.moneyInPot=this.game.pot.contribution[(i+1).toString()]
                 this.user4=this.game.players[(i+1)%5]
+                this.user4.moneyInPot=this.game.pot.contribution[((i+1)%5+1).toString()]
                 this.user3=this.game.players[(i+2)%5]
+                this.user3.moneyInPot=this.game.pot.contribution[((i+2)%5+1).toString()]
                 this.user2=this.game.players[(i+3)%5]
+                this.user2.moneyInPot=this.game.pot.contribution[((i+3)%5+1).toString()]
                 this.user1=this.game.players[(i+4)%5]
+                this.user1.moneyInPot=this.game.pot.contribution[((i+4)%5+1).toString()]
             }
+            if(this.game.players[i].money==0){
+                this.lostPlayersCounter=this.lostPlayersCounter+1;
+                if(this.lostPlayersCounter==4){
+                    this.END=true;
+                }
+
+            }
+
         }}
 
 
@@ -545,12 +571,19 @@ class GameScreen extends React.Component {
 
         this.updateGameScreen();
         console.log(this.game)
-        //
+        console.log(this.lostPlayersCounter)
 
 
-        //not turn and on turn
-        console.log(this.game.showdown)
-        if(this.game.gameName!=null && this.game.showdown==false) {
+        if(this.END==true){
+            if(this.myselfUser.money!=0){
+                return(<GameContainer>YOU WIN!!</GameContainer>)
+            }
+            else{return(<GameContainer>YOU LOSE :( </GameContainer>)}
+        }
+
+
+        else if(this.game.gameName!=null && this.game.showdown==false) {
+
             return (
 
                 <GameContainer>
@@ -570,7 +603,7 @@ class GameScreen extends React.Component {
                                 id="player2InfoOnTurn"
                                 borderradius="10px"
                                 border="solid white 1px">
-                                {this.user2.username}Money : {this.user2.money}
+                                {this.displayUser(this.user2)}
                             </PlayerInfoContainer>
                             <ProfileCircle
                                 top="15%"
@@ -631,7 +664,7 @@ class GameScreen extends React.Component {
                                 id="player3InfoOnTurn"
                                 borderradius="10px"
                                 border="solid white 1px">
-                                {this.user3.username} Money : {this.user3.money}
+                                {this.displayUser(this.user3)}
                             </PlayerInfoContainer>
                             <ProfileCircle
                                 top="15%"
@@ -684,7 +717,7 @@ class GameScreen extends React.Component {
                                 id="player1InfoOnTurn"
                                 borderradius="10px"
                                 border="solid white 1px">
-                                {this.user1.username} Money : {this.user1.money}
+                                {this.displayUser(this.user1)}
                             </PlayerInfoContainer>
                             <ProfileCircle
                                 top="5%"
@@ -799,7 +832,7 @@ class GameScreen extends React.Component {
                                 id="player4InfoOnTurn"
                                 borderradius="10px"
                                 border="solid white 1px">
-                                {this.user4.username} Money : {this.user4.money}
+                                {this.displayUser(this.user4)}
                             </PlayerInfoContainer>
                             <ProfileCircle
                                 top="5%"
@@ -898,7 +931,7 @@ class GameScreen extends React.Component {
                             height="60%"
                             color="white"
                             id="playerOwnUserInfoOnTurn">
-                            {this.myselfUser.username} Money : {this.myselfUser.money}
+                            {this.displayUser(this.myselfUser)}
                         </PlayerInfoContainer>
                         <ProfileCircle
                         top="-120%"
@@ -909,7 +942,7 @@ class GameScreen extends React.Component {
         }
 
         //showdown
-        if(this.game.gameName!=null && this.game.showdown==true){
+        else if(this.game.gameName!=null && this.game.showdown==true){
 
             this.showdown()
 
@@ -932,7 +965,7 @@ class GameScreen extends React.Component {
                                 borderradius="10px"
                                 border="solid white 1px"
                                 id="player2InfoOnTurnShowdown">
-                                {this.user2.username}Money : {this.user2.money}
+                                {this.displayUser(this.user2)}
                             </PlayerInfoContainer>
                             <ProfileCircle
                                 top="15%"
@@ -993,7 +1026,7 @@ class GameScreen extends React.Component {
                                 id="player3InfoOnTurnShowdown"
                                 borderradius="10px"
                                 border="solid white 1px">
-                                {this.user3.username} Money : {this.user3.money}
+                                {this.displayUser(this.user3)}
                             </PlayerInfoContainer>
                             <ProfileCircle
                                 top="15%"
@@ -1046,7 +1079,7 @@ class GameScreen extends React.Component {
                                 id="player1InfoOnTurnShowdown"
                                 borderradius="10px"
                                 border="solid white 1px">
-                                {this.user1.username} Money : {this.user1.money}
+                                {this.displayUser(this.user1)}
                             </PlayerInfoContainer>
                             <ProfileCircle
                                 top="5%"
@@ -1154,7 +1187,7 @@ class GameScreen extends React.Component {
                                 id="player4InfoOnTurnShowdown"
                                 borderradius="10px"
                                 border="solid white 1px">
-                                {this.user4.username} Money : {this.user4.money}
+                                {this.displayUser(this.user4)}
                             </PlayerInfoContainer>
                             <ProfileCircle
                                 top="5%"
@@ -1242,7 +1275,7 @@ class GameScreen extends React.Component {
                             color="white"
                             id="playerOwnInfoOnTurnShowdown"
                             >
-                            {this.myselfUser.username} Money : {this.myselfUser.money}
+                            {this.displayUser(this.myselfUser)}
                         </PlayerInfoContainer>
                         <ProfileCircle
                             top="-120%"
