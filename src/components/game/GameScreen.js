@@ -187,7 +187,7 @@ class GameScreen extends React.Component {
                 this.user1=this.game.players[(i+4)%5]
                 this.user1.moneyInPot=this.game.pot.contribution[((i+4)%5+1).toString()]
             }
-            if(this.game.players[i].money==0){
+            if(this.game.players[i].money==0 && this.game.pot.contribution[(i+1).toString()]==0){
                 this.lostPlayersCounter=this.lostPlayersCounter+1;
                 if(this.lostPlayersCounter==4){
                     this.gameEnd=true;
@@ -567,11 +567,11 @@ class GameScreen extends React.Component {
     this.setState({ [key]: value });
     }
 
+
     render() {
 
         this.updateGameScreen();
         console.log(this.game)
-        console.log(this.lostPlayersCounter)
 
 
         if(this.gameEnd==true){

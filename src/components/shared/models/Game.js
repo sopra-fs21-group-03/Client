@@ -5,6 +5,7 @@ import Pot from "./Pot";
 import User from "./User";
 
 class Game {
+
     constructor(data = {}) {
         this.gameName = null;
         this.players = null;
@@ -16,7 +17,10 @@ class Game {
         Object.assign(this, data);
         this.river=new River(this.river)
         this.pot=new Pot(this.pot)
-        this.onTurn=new User(this.onTurn)}
+        this.onTurn=new User(this.onTurn)
+
+
+    }
 
 }
 export default Game;

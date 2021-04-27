@@ -19,9 +19,11 @@ class User {
     }
     Object.assign(this, data);
   }
-  display = (x) =>{
-    return x
+  lol(){
+    return "lol"
   }
+
+
 
 }
 
