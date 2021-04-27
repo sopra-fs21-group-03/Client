@@ -1,15 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
-import { BaseContainer } from '../../helpers/layout';
-import { api, handleError } from '../../helpers/api';
-import Player from '../../views/Player';
-import { Spinner } from '../../views/design/Spinner';
-import { RedButton } from '../../views/design/RedButton';
+import { api} from '../../helpers/api';
 import { withRouter } from 'react-router-dom';
 import User from '../shared/models/User';
 import Card from "../shared/models/Card";
-import Deck from "../shared/models/Deck";
-import {BlackButton} from "../../views/design/BlackButton";
 import Game from "../shared/models/Game";
 import {
     Loader,
