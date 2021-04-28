@@ -51,6 +51,8 @@ import {
     FrontCardBox,
     LoadingGameContainer, LeaveTableButtonEndScreen, LooserPicture, LooserContainer
 } from "../../views/design/GameScreenStyle";
+import Player from "../../views/Player";
+import ChatMessageField from "../../views/ChatMessageField";
 
 document.body.style.backgroundColor = "green";
 
@@ -60,8 +62,15 @@ class GameScreen extends React.Component {
         super();
         this.state = {
             token: null,
-            raiseAmount: null
+            raiseAmount: null,
+            chatLog: null
         };
+    }
+
+    async fetchChat(){
+        const response = await api.get("/games/1/"+localStorage.getItem('userID')+"/chats", {headers:{ Authorization: localStorage.getItem('token')}} );
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        this.setState({ chatLog: response.data });
     }
 
     async call(){
@@ -176,6 +185,8 @@ class GameScreen extends React.Component {
 
 
     async updateGameScreen(){
+        await this.fetchChat();
+
         this.lostPlayersCounter=0
 
 
@@ -919,9 +930,11 @@ class GameScreen extends React.Component {
                         <ChatContainer>
                             <InnerTextChatContainer>
                                 <TextBacklogChatContainer>
-                                    <Writen>BestPokerPlayerEUWest: Hello Guys</Writen>
-                                    <Writen>Hacker: hi</Writen>
-                                    <Writen>Stanley: EZ</Writen>
+                                    {this.state.chatLog.map(ChatMessage => {
+                                        return (
+                                                <ChatMessageField ChatMessage={ChatMessage} />
+                                        );
+                                    })}
                                 </TextBacklogChatContainer>
                                 <ChatInputField placeholder = "Type in your message"></ChatInputField>
                             </InnerTextChatContainer>
@@ -1275,9 +1288,11 @@ class GameScreen extends React.Component {
                         <ChatContainer>
                             <InnerTextChatContainer>
                                 <TextBacklogChatContainer>
-                                    <Writen>BestPokerPlayerEUWest: Hello Guys</Writen>
-                                    <Writen>Hacker: hi</Writen>
-                                    <Writen>Stanley: EZ</Writen>
+                                    {this.state.chatLog.map(ChatMessage => {
+                                        return (
+                                            <ChatMessageField ChatMessage={ChatMessage} />
+                                        );
+                                    })}
                                 </TextBacklogChatContainer>
                                 <ChatInputField placeholder = "Type in your message"></ChatInputField>
                             </InnerTextChatContainer>

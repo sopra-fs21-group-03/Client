@@ -180,7 +180,7 @@ export const FoldButton = styled(RedButton)`
 `;
 
 export const InnerTextChatContainer = styled.div`
-  background: rgb(0,0,0,0.7);
+  background: rgb(0,0,0,0.8);
   margin: 0;
   position: absolute;
   left: 50%;
