@@ -69,7 +69,6 @@ class GameScreen extends React.Component {
 
     async fetchChat() {
         const response = await api.get("/games/1/" + localStorage.getItem('userID') + "/chats", {headers: {Authorization: localStorage.getItem('token')}});
-        await new Promise(resolve => setTimeout(resolve, 1000));
         this.setState({chatLog: response.data});
     }
 
@@ -175,7 +174,6 @@ class GameScreen extends React.Component {
                 maxBet = valueList[index];
             }
         }
-        console.log(maxBet)
 
         return maxBet - this.findMoneyInPot(user);
     }
@@ -626,17 +624,11 @@ class GameScreen extends React.Component {
         this.setState({[key]: value});
     }
 
-    returnChatLog() {
-        if (this.state.chatLog != null) {
-            this.state.chatLog.map(ChatMessage => {
-                return (
-                    <ChatMessageField ChatMessage={ChatMessage}/>
-                );
-            })
-        }
-    }
 
     render() {
+
+        console.log(this.state.chatLog == null)
+
         if (this.gameEnd == true) {
             if (this.myselfUser.money != 0) {
                 return (
@@ -968,7 +960,13 @@ class GameScreen extends React.Component {
                         <ChatContainer>
                             <InnerTextChatContainer>
                                 <TextBacklogChatContainer>
-                                    {this.returnChatLog()}
+                                    {!this.state.chatLog ? (<h1></h1> ) : (
+
+                                    this.state.chatLog.map(ChatMessage => {
+                                    return (
+                                    <ChatMessageField ChatMessage={ChatMessage}/>
+                                    );
+                                }))}
                                 </TextBacklogChatContainer>
                                 <ChatInputField placeholder="Type in your message"></ChatInputField>
                             </InnerTextChatContainer>
