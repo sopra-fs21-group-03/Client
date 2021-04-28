@@ -85,6 +85,11 @@ export const LeaveTableButtonEndScreen = styled(BlackButton)`
   border-color: ${props => props.bordercolor || null}; 
 `;
 
+export const DisplayUserInfo = styled.p`
+  padding: 0;
+  margin: 0;
+`;
+
 export const CheckButton = styled(RedButton)`
   &:hover {
     transform: translateY(0px);
