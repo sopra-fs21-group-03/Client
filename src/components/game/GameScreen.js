@@ -157,9 +157,15 @@ class GameScreen extends React.Component {
                 maxBet = this.game.pot.contribution[i.toString()]
             }
         }
-        return <DisplayUserInfo>{user.username} Money : {user.money} <br></br> Betting : {user.moneyInPot} Missing
-            : {maxBet - user.moneyInPot}</DisplayUserInfo>;
+        return <DisplayUserInfo>{user.username} Money : {user.money} <br></br> Betting : {this.findMoneyInPot(user)} Missing
+            : {maxBet - this.findMoneyInPot(user)}</DisplayUserInfo>;
     }
+
+    findMoneyInPot(user){
+        for (let i = 0; i < 5; i++) {
+            if (this.game.players[i].username == user.username) {
+                return this.game.pot.contribution[(i + 1).toString()]
+    }}}
 
     displayHowMuchCall(user) {
         let maxBet = 0
@@ -168,7 +174,7 @@ class GameScreen extends React.Component {
                 maxBet = this.game.pot.contribution[i.toString()]
             }
         }
-        return maxBet - user.moneyInPot;
+        return maxBet - this.findMoneyInPot(user);
     }
 
     async revealCards(boolean) {
@@ -209,15 +215,15 @@ class GameScreen extends React.Component {
 
             for (let i = 0; i < 5; i++) {
                 if (this.game.players[i].username == this.myselfUser.username) {
-                    this.myselfUser.moneyInPot = this.game.pot.contribution[(i + 1).toString()]
+
                     this.user4 = this.game.players[(i + 1) % 5]
-                    this.user4.moneyInPot = this.game.pot.contribution[((i + 1) % 5 + 1).toString()]
+
                     this.user3 = this.game.players[(i + 2) % 5]
-                    this.user3.moneyInPot = this.game.pot.contribution[((i + 2) % 5 + 1).toString()]
+
                     this.user2 = this.game.players[(i + 3) % 5]
-                    this.user2.moneyInPot = this.game.pot.contribution[((i + 3) % 5 + 1).toString()]
+
                     this.user1 = this.game.players[(i + 4) % 5]
-                    this.user1.moneyInPot = this.game.pot.contribution[((i + 4) % 5 + 1).toString()]
+
                 }
                 if (this.game.players[i].money == 0 && this.game.pot.contribution[(i + 1).toString()] == 0) {
                     this.lostPlayersCounter = this.lostPlayersCounter + 1;
