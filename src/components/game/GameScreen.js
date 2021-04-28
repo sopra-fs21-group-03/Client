@@ -157,23 +157,26 @@ class GameScreen extends React.Component {
                 maxBet = this.game.pot.contribution[i.toString()]
             }
         }
-        return <DisplayUserInfo>{user.username} Money : {user.money} <br></br> Betting : {this.findMoneyInPot(user)} Missing
-            : {maxBet - this.findMoneyInPot(user)}</DisplayUserInfo>;
+        return <DisplayUserInfo>{user.username} <br></br> Money : {user.money} Betting
+            : {this.findMoneyInPot(user)}
+        </DisplayUserInfo>;
     }
 
-    findMoneyInPot(user){
-        for (let i = 0; i < 5; i++) {
-            if (this.game.players[i].username == user.username) {
-                return this.game.pot.contribution[(i + 1).toString()]
-    }}}
+    findMoneyInPot(user) {
+        return this.game.pot.contribution[user.username];
+    }
 
     displayHowMuchCall(user) {
         let maxBet = 0
-        for (let i = 1; i < 6; i++) {
-            if (this.game.pot.contribution[i.toString()] > maxBet) {
-                maxBet = this.game.pot.contribution[i.toString()]
+        let valueList = Object.values(this.game.pot.contribution);
+
+        for (let index in valueList) {
+            if (valueList[index] > maxBet) {
+                maxBet = valueList[index];
             }
         }
+        console.log(maxBet)
+
         return maxBet - this.findMoneyInPot(user);
     }
 
@@ -193,6 +196,12 @@ class GameScreen extends React.Component {
     user2 = new User();
     user3 = new User();
     user4 = new User();
+    userList = [this.myselfUser,
+        this.user1,
+        this.user2,
+        this.user3,
+        this.user4
+    ];
     userOnTurn = new User();
 
 
@@ -676,7 +685,6 @@ class GameScreen extends React.Component {
 
         //InGame
         else if (this.game.gameName != null && this.game.showdown == false) {
-
             return (
 
                 <GameContainer>
