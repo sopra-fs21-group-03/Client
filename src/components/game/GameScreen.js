@@ -48,7 +48,7 @@ import {
     CardBox,
     PlayerInfoContainer,
     FrontCardBox,
-    LoadingGameContainer, LeaveTableButtonEndScreen, LooserPicture
+    LoadingGameContainer, LeaveTableButtonEndScreen, LooserPicture, LooserContainer
 } from "../../views/design/GameScreenStyle";
 
 document.body.style.backgroundColor = "green";
@@ -580,7 +580,7 @@ class GameScreen extends React.Component {
         if(/*this.gameEnd==true*/ 1== 1){
             if(this.myselfUser.money/*!=*/==0){
                 return(
-                    <WinnerContainer>
+                    <WinnerContainer color = 'white'>
                     <WinnerPicture top = '25%' left = '10%'></WinnerPicture>
                         <WinnerSlogan top = '50%' left = '60%'>
                             WINNER WINNER <br></br>CHICKENDINNER !!!
@@ -594,13 +594,16 @@ class GameScreen extends React.Component {
                             this.logout()
 
                         }}
+                        background = 'rgb(255,0,0,0.2)'
+                        color = 'white'
+                        bordercolor = 'white'
                     >
                         Leave Table
                     </LeaveTableButtonEndScreen>
                 </WinnerContainer>)
             }
             else{return(
-                <WinnerContainer>
+                <LooserContainer>
                 <LooserPicture top = '25%' left = '10%'></LooserPicture>
                 <WinnerSlogan top = '50%' left = '60%'>
                     BETTER LUCK <br></br>NEXT TIME !!!
@@ -610,10 +613,13 @@ class GameScreen extends React.Component {
                         this.logout()
 
                     }}
+                    background = 'rgb(255,0,0,1)'
+                    color = 'black'
+                    bordercolor = 'black'
                 >
                     Leave Table
                 </LeaveTableButtonEndScreen>
-            </WinnerContainer>)}
+            </LooserContainer>)}
         }
 
 

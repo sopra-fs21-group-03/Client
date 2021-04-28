@@ -76,14 +76,13 @@ export const LeaveTableButtonEndScreen = styled(BlackButton)`
   position: absolute;
   top: 80%;
   left: 30%;
-  background: rgb(255,0,0,0.2);
   height: 10%;
   width: 20%;
   font-size: 24pt;
   font-weight: 200;
-  border-color: white;
-  color: white;
-  
+  background: ${props => props.background || null}; 
+  color: ${props => props.color || null}; 
+  border-color: ${props => props.bordercolor || null}; 
 `;
 
 export const CheckButton = styled(RedButton)`
@@ -331,6 +330,27 @@ export const WinnerContainer = styled.div`
   background-size: cover;
 `;
 
+export const LooserContainer = styled.div`
+  background-color: white;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: 0%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  margin-left: auto;
+  padding-left: 15px;
+  margin-right: auto;
+  padding-right: 15px;
+  max-width: 100%;
+  max-height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+`;
+
 export const WinnerPicture = styled.div`
   position: absolute;
   width: 512px; 
@@ -350,13 +370,11 @@ export const LooserPicture = styled.div`
   top: ${props => props.top || null}; 
   color: red;
   height: 450px; 
-  -webkit-animation: halfSpin 4s linear infinite; 
-  animation: halfSpin 4s linear infinite;
   background-image: url('https://i0.wp.com/firewireblog.com/wp-content/uploads/2013/10/tumblr_mqnn5ug9tv1snftoqo1_500.gif');
 `;
 
 export const WinnerSlogan = styled.div`
-  color: white;
+  color: ${props => props.left || null}; 
   font-size: 64pt;
   position: absolute;
   left: ${props => props.left || null}; 

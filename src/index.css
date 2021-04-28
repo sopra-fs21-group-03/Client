@@ -71,6 +71,12 @@ button {
   100% { transform: rotate(-20deg); }
 }
 
+@-webkit-keyframes jump {
+  0% { -webkit-transform: rotate(-20deg); }
+  50% { -webkit-transform: rotate(20deg); }
+  100% { -webkit-transform: rotate(-20deg);}
+}
+
 .pyro > .before, .pyro > .after {
   position: absolute;
   width: 5px;
