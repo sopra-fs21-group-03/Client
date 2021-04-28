@@ -187,7 +187,9 @@ class GameScreen extends React.Component {
 
 
     async updateGameScreen(){
-        await this.fetchChat();
+        if(this.game.gameName != null){
+            await this.fetchChat();
+        }
 
         this.lostPlayersCounter=0
 
@@ -567,7 +569,7 @@ class GameScreen extends React.Component {
 
 
     componentDidMount() {
-        this.interval = setInterval(() => this.setState({ time: Date.now() }), 500);
+        this.interval = setInterval(() => this.setState({ time: Date.now() }), 1000);
         this.updateGameScreen();
     }
     componentWillUnmount() {
