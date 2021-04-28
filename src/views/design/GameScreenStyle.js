@@ -340,7 +340,19 @@ export const WinnerPicture = styled.div`
   height: 512px; 
   -webkit-animation: halfSpin 4s linear infinite; 
   animation: halfSpin 4s linear infinite;
-  background-image: url('https://img.stickers.cloud/packs/9f1040cc-6481-4ae8-85b4-8b661b693958/webp/e5cd9b91-dbca-4653-8d9d-e4e4874831c0.webp');
+  background-image: url('https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/Winner_Picture.png');
+`;
+
+export const LooserPicture = styled.div`
+  position: absolute;
+  width: 450px; 
+  left: ${props => props.left || null}; 
+  top: ${props => props.top || null}; 
+  color: red;
+  height: 450px; 
+  -webkit-animation: halfSpin 4s linear infinite; 
+  animation: halfSpin 4s linear infinite;
+  background-image: url('https://i0.wp.com/firewireblog.com/wp-content/uploads/2013/10/tumblr_mqnn5ug9tv1snftoqo1_500.gif');
 `;
 
 export const WinnerSlogan = styled.div`

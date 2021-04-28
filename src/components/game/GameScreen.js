@@ -48,7 +48,7 @@ import {
     CardBox,
     PlayerInfoContainer,
     FrontCardBox,
-    LoadingGameContainer, LeaveTableButtonEndScreen
+    LoadingGameContainer, LeaveTableButtonEndScreen, LooserPicture
 } from "../../views/design/GameScreenStyle";
 
 document.body.style.backgroundColor = "green";
@@ -601,7 +601,7 @@ class GameScreen extends React.Component {
             }
             else{return(
                 <WinnerContainer>
-                <WinnerPicture top = '25%' left = '10%'></WinnerPicture>
+                <LooserPicture top = '25%' left = '10%'></LooserPicture>
                 <WinnerSlogan top = '50%' left = '60%'>
                     BETTER LUCK <br></br>NEXT TIME !!!
                 </WinnerSlogan>
