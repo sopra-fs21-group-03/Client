@@ -72,6 +72,20 @@ export const LeaveTableButton = styled(BlackButton)`
   font-weight: 200;
 `;
 
+export const LeaveTableButtonEndScreen = styled(BlackButton)`
+  position: absolute;
+  top: 80%;
+  left: 30%;
+  background: rgb(255,0,0,0.2);
+  height: 10%;
+  width: 20%;
+  font-size: 24pt;
+  font-weight: 200;
+  border-color: white;
+  color: white;
+  
+`;
+
 export const CheckButton = styled(RedButton)`
   &:hover {
     transform: translateY(0px);
@@ -294,6 +308,51 @@ export const GameContainer = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+`;
+
+export const WinnerContainer = styled.div`
+  background-color: black;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: 0%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  margin-left: auto;
+  padding-left: 15px;
+  margin-right: auto;
+  padding-right: 15px;
+  max-width: 100%;
+  max-height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+`;
+
+export const WinnerPicture = styled.div`
+  position: absolute;
+  width: 512px; 
+  left: ${props => props.left || null}; 
+  top: ${props => props.top || null}; 
+  color: red;
+  height: 512px; 
+  -webkit-animation: halfSpin 4s linear infinite; 
+  animation: halfSpin 4s linear infinite;
+  background-image: url('https://img.stickers.cloud/packs/9f1040cc-6481-4ae8-85b4-8b661b693958/webp/e5cd9b91-dbca-4653-8d9d-e4e4874831c0.webp');
+`;
+
+export const WinnerSlogan = styled.div`
+  color: white;
+  font-size: 64pt;
+  position: absolute;
+  left: ${props => props.left || null}; 
+  top: ${props => props.top || null}; 
+  transform: translate(-50%, -50%);
+  width: ${props => props.width || null}; 
+  height: ${props => props.height || null}; 
+  text-shadow: 3px 3px 0 red;
 `;
 
 export const LoadingGameContainer = styled.div`

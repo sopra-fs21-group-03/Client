@@ -5,6 +5,9 @@ import User from '../shared/models/User';
 import Card from "../shared/models/Card";
 import Game from "../shared/models/Game";
 import {
+    WinnerSlogan,
+    WinnerPicture,
+    WinnerContainer,
     Loader,
     ProfileCircle,
     BigBlind,
@@ -45,7 +48,7 @@ import {
     CardBox,
     PlayerInfoContainer,
     FrontCardBox,
-    LoadingGameContainer
+    LoadingGameContainer, LeaveTableButtonEndScreen
 } from "../../views/design/GameScreenStyle";
 
 document.body.style.backgroundColor = "green";
@@ -574,11 +577,43 @@ class GameScreen extends React.Component {
         console.log(this.game)
 
 
-        if(this.gameEnd==true){
-            if(this.myselfUser.money!=0){
-                return(<GameContainer>YOU WIN!!</GameContainer>)
+        if(/*this.gameEnd==true*/ 1== 1){
+            if(this.myselfUser.money/*!=*/==0){
+                return(
+                    <WinnerContainer>
+                    <WinnerPicture top = '25%' left = '10%'></WinnerPicture>
+                        <WinnerSlogan top = '50%' left = '60%'>
+                            WINNER WINNER <br></br>CHICKENDINNER !!!
+                        </WinnerSlogan>
+                    <div className="pyro">
+                        <div className="before"></div>
+                        <div className="after"></div>
+                    </div>
+                    <LeaveTableButtonEndScreen
+                        onClick={() => {
+                            this.logout()
+
+                        }}
+                    >
+                        Leave Table
+                    </LeaveTableButtonEndScreen>
+                </WinnerContainer>)
             }
-            else{return(<GameContainer>YOU LOSE :( </GameContainer>)}
+            else{return(
+                <WinnerContainer>
+                <WinnerPicture top = '25%' left = '10%'></WinnerPicture>
+                <WinnerSlogan top = '50%' left = '60%'>
+                    BETTER LUCK <br></br>NEXT TIME !!!
+                </WinnerSlogan>
+                <LeaveTableButtonEndScreen
+                    onClick={() => {
+                        this.logout()
+
+                    }}
+                >
+                    Leave Table
+                </LeaveTableButtonEndScreen>
+            </WinnerContainer>)}
         }
 
 
