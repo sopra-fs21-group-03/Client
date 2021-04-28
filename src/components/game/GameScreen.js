@@ -575,8 +575,10 @@ class GameScreen extends React.Component {
 
 
     async componentDidMount() {
-        this.interval = setInterval(() => this.setState({time: Date.now()}), 1000);
-        await this.updateGameScreen();
+        this.interval = setInterval(async () => {
+            await this.updateGameScreen();
+            this.setState({time: Date.now()})
+        }, 1000);
     }
 
     componentWillUnmount() {
