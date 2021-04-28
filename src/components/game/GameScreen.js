@@ -146,6 +146,16 @@ class GameScreen extends React.Component {
         return <DisplayUserInfo>{user.username} Money : {user.money}  <br></br>  Betting : {user.moneyInPot} Missing :  {maxBet-user.moneyInPot}</DisplayUserInfo>;
     }
 
+    displayHowMuchCall(user){
+        let maxBet=0
+        for (let i=1; i<6; i++){
+            if(this.game.pot.contribution[i.toString()]>maxBet){
+                maxBet=this.game.pot.contribution[i.toString()]
+            }
+        }
+        return maxBet-user.moneyInPot;
+    }
+
     async revealCards(boolean){
         await api.put('/games/1/' + localStorage.getItem('userID') + '/show', this.returnTokenAndIfReveal(boolean));
     }
@@ -837,7 +847,8 @@ class GameScreen extends React.Component {
                                 this.call();
                                 }}
                                 id="callButton"
-                                >Call</CallButton>
+                                disabled={this.displayHowMuchCall(this.myselfUser) == 0}
+                                >Call {this.displayHowMuchCall(this.myselfUser)}</CallButton>
                             </CallContainer>
                             <RaiseContainer>
                                 <RaiseButton onClick={() => {
@@ -927,7 +938,8 @@ class GameScreen extends React.Component {
                             <CheckButton onClick={() => {
                                 this.check();
                             }}
-                            id="checkButton">Check</CheckButton>
+                            id="checkButton"
+                            disabled={this.displayHowMuchCall(this.myselfUser) != 0}>Check</CheckButton>
                         </CheckContainer>
                         <OwnCardsContainer>
                             <CardBox
