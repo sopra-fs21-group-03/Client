@@ -184,6 +184,8 @@ class GameScreen extends React.Component {
 
 
 
+
+
     async updateGameScreen(){
         await this.fetchChat();
 
@@ -562,12 +564,17 @@ class GameScreen extends React.Component {
     const card = new Card({cardNumber: cardNumber, suit: Suit});
     return card.card}
 
+
+
     componentDidMount() {
-        this.interval = setInterval(() => this.setState({ time: Date.now() }), 4000);
+        this.interval = setInterval(() => this.setState({ time: Date.now() }), 500);
+        this.updateGameScreen();
     }
     componentWillUnmount() {
         clearInterval(this.interval);
     }
+
+
 
 
 
@@ -594,11 +601,6 @@ class GameScreen extends React.Component {
 
 
     render() {
-
-        this.updateGameScreen();
-        console.log(this.game)
-
-
         if(this.gameEnd==true){
             if(this.myselfUser.money !=0){
                 return(
@@ -1355,7 +1357,7 @@ class GameScreen extends React.Component {
         }
 
         //If Game did not start yet
-        else{return(<LoadingGameContainer> LOADING <Loader top = '360px' left = '77%'>500</Loader> Game will start when 5 people called</LoadingGameContainer>)}
+        else{return(<LoadingGameContainer> LOADING <Loader top = '360px' left = '77%'>500</Loader> Game will start when 5 people joined</LoadingGameContainer>)}
     }
 }
 
