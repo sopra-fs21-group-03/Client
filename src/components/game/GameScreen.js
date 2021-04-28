@@ -207,7 +207,7 @@ class GameScreen extends React.Component {
         if (this.game.players.length == 5) {
             this.userOnTurn = this.game.onTurn;
 
-            for (var i = 0; i < 5; i++) {
+            for (let i = 0; i < 5; i++) {
                 if (this.game.players[i].username == this.myselfUser.username) {
                     this.myselfUser.moneyInPot = this.game.pot.contribution[(i + 1).toString()]
                     this.user4 = this.game.players[(i + 1) % 5]
