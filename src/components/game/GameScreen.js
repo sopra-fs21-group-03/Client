@@ -563,7 +563,7 @@ class GameScreen extends React.Component {
     return card.card}
 
     componentDidMount() {
-        this.interval = setInterval(() => this.setState({ time: Date.now() }), 500);
+        this.interval = setInterval(() => this.setState({ time: Date.now() }), 4000);
     }
     componentWillUnmount() {
         clearInterval(this.interval);
@@ -1355,7 +1355,7 @@ class GameScreen extends React.Component {
         }
 
         //If Game did not start yet
-        else{return(<LoadingGameContainer> LOADING <Loader top = '360px' left = '57%'>500</Loader> </LoadingGameContainer>)}
+        else{return(<LoadingGameContainer> LOADING <Loader top = '360px' left = '77%'>500</Loader> Game will start when 5 people called</LoadingGameContainer>)}
     }
 }
 
