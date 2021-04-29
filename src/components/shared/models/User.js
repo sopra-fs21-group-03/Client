@@ -18,13 +18,8 @@ class User {
       this.cards = [new Card({"suit": "NULL"}), new Card({"suit": "NULL"})]
     }
     Object.assign(this, data);
+    this.inGame = true;
   }
-  lol(){
-    return "lol"
-  }
-
-
-
 }
 
 export default User;

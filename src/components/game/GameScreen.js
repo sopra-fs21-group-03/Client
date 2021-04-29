@@ -96,7 +96,6 @@ class GameScreen extends React.Component {
     async showdown() {
         const showdown = await api.get('/games/1/showdown', {headers: {Authorization: localStorage.getItem('token')}})
         const playerList = showdown.data;
-        console.log(playerList);
         for (let i = 0; i < 5; i++) {
             if (playerList[i].username == this.myselfUser.username) {
                 this.showdownUser4 = new User(playerList[(i + 1) % 5]);
@@ -120,7 +119,6 @@ class GameScreen extends React.Component {
         const requestBody = JSON.stringify({
             token: localStorage.getItem('token')
         });
-        console.log(requestBody)
         return requestBody
     }
 
@@ -129,7 +127,6 @@ class GameScreen extends React.Component {
             raiseAmount: this.state.raiseAmount,
             token: localStorage.getItem('token')
         });
-        console.log(requestBodyRaiseAmount)
         return requestBodyRaiseAmount
     }
 
@@ -145,7 +142,6 @@ class GameScreen extends React.Component {
             token: localStorage.getItem('token'),
             wantsToShow: boolean
         });
-        console.log(requestBodyRevealCards)
         return requestBodyRevealCards
     }
 
@@ -183,7 +179,7 @@ class GameScreen extends React.Component {
     }
 
     lostPlayersCounter = null;
-    gameEnd = null;
+    gameEnd = false;
     game = new Game();
     showdownUser1 = new User();
     showdownUser2 = new User();
@@ -194,12 +190,6 @@ class GameScreen extends React.Component {
     user2 = new User();
     user3 = new User();
     user4 = new User();
-    userList = [this.myselfUser,
-        this.user1,
-        this.user2,
-        this.user3,
-        this.user4
-    ];
     userOnTurn = new User();
 
 
@@ -208,8 +198,32 @@ class GameScreen extends React.Component {
             await this.fetchChat();
         }
 
+        let userList = [this.myselfUser,
+            this.user1,
+            this.user2,
+            this.user3,
+            this.user4
+        ];
+
+        //Checks if game is over
+        for (let index in userList) {
+
+            if (userList[index].money == 0 && this.findMoneyInPot(userList[index]) == 0) {
+                userList[index].inGame = false;
+            }
+        }
+
         this.lostPlayersCounter = 0
 
+        for (let index in userList) {
+            if (userList[index].inGame == false) {
+                this.lostPlayersCounter++;
+            }
+        }
+
+        if(this.lostPlayersCounter == 4){
+            this.gameEnd = true;
+        }
 
         const gameResponse = await api.get('/games/1', {headers: {Authorization: localStorage.getItem('token')}});
         this.game = gameResponse.data;
@@ -230,13 +244,6 @@ class GameScreen extends React.Component {
                     this.user2 = this.game.players[(i + 3) % 5]
 
                     this.user1 = this.game.players[(i + 4) % 5]
-
-                }
-                if (this.game.players[i].money == 0 && this.game.pot.contribution[(i + 1).toString()] == 0) {
-                    this.lostPlayersCounter = this.lostPlayersCounter + 1;
-                    if (this.lostPlayersCounter == 4) {
-                        this.gameEnd = true;
-                    }
 
                 }
 
@@ -627,8 +634,6 @@ class GameScreen extends React.Component {
 
     render() {
 
-        console.log(this.state.chatLog == null)
-
         if (this.gameEnd == true) {
             if (this.myselfUser.money != 0) {
                 return (
@@ -678,7 +683,6 @@ class GameScreen extends React.Component {
         //InGame
         else if (this.game.gameName != null && this.game.showdown == false) {
             return (
-
                 <GameContainer>
                     <TableCircleLeft></TableCircleLeft>
                     <TableCircleRight></TableCircleRight>
