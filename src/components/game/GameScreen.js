@@ -136,6 +136,13 @@ class GameScreen extends React.Component {
         this.props.history.push('/login');
     }
 
+    async logoutEndGame(){
+        await api.put('/users/' + localStorage.getItem('userID') + '/logout', this.returnToken())
+        localStorage.removeItem('token');
+        localStorage.removeItem('userID');
+        this.props.history.push('/login');
+    }
+
 
     returnTokenAndIfReveal(boolean) {
         const requestBodyRevealCards = JSON.stringify({
@@ -648,7 +655,7 @@ class GameScreen extends React.Component {
                         </div>
                         <LeaveTableButtonEndScreen
                             onClick={() => {
-                                this.logout()
+                                this.logoutEndGame()
 
                             }}
                             background='rgb(255,0,0,0.2)'
@@ -667,7 +674,7 @@ class GameScreen extends React.Component {
                         </WinnerSlogan>
                         <LeaveTableButtonEndScreen
                             onClick={() => {
-                                this.logout()
+                                this.logoutEndGame()
 
                             }}
                             background='rgb(255,0,0,1)'
