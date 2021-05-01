@@ -137,7 +137,7 @@ class GameScreen extends React.Component {
         this.props.history.push('/login');
     }
 
-    async logoutEndGame(){
+    async       logoutEndGame(){
         await api.put('/users/' + localStorage.getItem('userID') + '/logout', this.returnToken())
         localStorage.removeItem('token');
         localStorage.removeItem('userID');
@@ -214,32 +214,7 @@ class GameScreen extends React.Component {
             await this.fetchChat();
         }
 
-        let userList = [this.myselfUser,
-            this.user1,
-            this.user2,
-            this.user3,
-            this.user4
-        ];
 
-        //Checks if game is over
-        for (let index in userList) {
-
-            if (userList[index].money == 0 && this.findMoneyInPot(userList[index]) == 0) {
-                userList[index].inGame = false;
-            }
-        }
-
-        this.lostPlayersCounter = 0
-
-        for (let index in userList) {
-            if (userList[index].inGame == false) {
-                this.lostPlayersCounter++;
-            }
-        }
-
-        if(this.lostPlayersCounter == 4){
-            this.gameEnd = true;
-        }
 
         const gameResponse = await api.get('/games/1', {headers: {Authorization: localStorage.getItem('token')}});
         this.game = gameResponse.data;
@@ -661,8 +636,9 @@ class GameScreen extends React.Component {
 
 
     render() {
+        console.log(this.game)
 
-        if (this.gameEnd == true) {
+        if (this.game.round == "ENDED") {
             if (this.myselfUser.money != 0) {
                 return (
                     <WinnerContainer color='white'>
