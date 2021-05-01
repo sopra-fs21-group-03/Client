@@ -96,6 +96,7 @@ class GameScreen extends React.Component {
     async showdown() {
         const showdown = await api.get('/games/1/showdown', {headers: {Authorization: localStorage.getItem('token')}})
         const playerList = showdown.data;
+        console.log(playerList);
         for (let i = 0; i < 5; i++) {
             if (playerList[i].username == this.myselfUser.username) {
                 this.showdownUser4 = new User(playerList[(i + 1) % 5]);
@@ -141,6 +142,7 @@ class GameScreen extends React.Component {
         localStorage.removeItem('token');
         localStorage.removeItem('userID');
         this.props.history.push('/login');
+        this.gameEnd = false;
     }
 
 
@@ -201,6 +203,13 @@ class GameScreen extends React.Component {
 
 
     async updateGameScreen() {
+        if(this.game.showdown == false){
+            this.showdownUser1 = new User();
+            this.showdownUser2 = new User();
+            this.showdownUser3 = new User();
+            this.showdownUser4 = new User();
+        }
+
         if (this.game.gameName != null) {
             await this.fetchChat();
         }
@@ -399,6 +408,18 @@ class GameScreen extends React.Component {
                 if (this.myselfUser.cards.length == 2) {
                     document.getElementById("ownCardBox1").style.display = "inline";
                     document.getElementById("ownCardBox2").style.display = "inline";
+                }
+            }
+
+            if (document.getElementById("ownCardBox1ShowDown") != null
+                && document.getElementById("ownCardBox2ShowDown") != null) {
+                if (this.myselfUser.cards.length == 0) {
+                    document.getElementById("ownCardBox1ShowDown").style.display = "none";
+                    document.getElementById("ownCardBox2ShowDown").style.display = "none";
+                }
+                if (this.myselfUser.cards.length == 2) {
+                    document.getElementById("ownCardBox1ShowDown").style.display = "inline";
+                    document.getElementById("ownCardBox2ShowDown").style.display = "inline";
                 }
             }
 
@@ -1356,6 +1377,7 @@ class GameScreen extends React.Component {
                                 height="80%"
                                 top="50%"
                                 left="28%"
+                                id = "ownCardBox1ShowDown"
                             >
                                 <FrontCardBox>{new Card(this.myselfUser.cards[0]).card}</FrontCardBox>
                             </CardBox>
@@ -1364,7 +1386,7 @@ class GameScreen extends React.Component {
                                 height="80%"
                                 top="50%"
                                 left="72%"
-
+                                id = "ownCardBox2ShowDown"
                                 visibility="hidden">
                                 <FrontCardBox>{new Card(this.myselfUser.cards[1]).card}</FrontCardBox>
                             </CardBox>
