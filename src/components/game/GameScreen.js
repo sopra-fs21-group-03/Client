@@ -636,7 +636,7 @@ class GameScreen extends React.Component {
 
 
     render() {
-        console.log(this.game)
+
 
         if (this.game.round == "ENDED") {
             if (this.myselfUser.money != 0) {
