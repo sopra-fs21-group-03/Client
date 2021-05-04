@@ -217,24 +217,20 @@ class GameScreen extends React.Component {
 
 
         const gameResponse = await api.get('/games/1', {headers: {Authorization: localStorage.getItem('token')}});
-        this.game = gameResponse.data;
+        this.game = new Game(gameResponse.data);
 
 
         const myselfUserResponse = await api.get('/games/1/' + localStorage.getItem('userID'), {headers: {Authorization: localStorage.getItem('token')}});
-        this.myselfUser = myselfUserResponse.data;
+        this.myselfUser = new User(myselfUserResponse.data);
         if (this.game.players.length == 5) {
             this.userOnTurn = this.game.onTurn;
 
             for (let i = 0; i < 5; i++) {
                 if (this.game.players[i].username == this.myselfUser.username) {
-
-                    this.user4 = this.game.players[(i + 1) % 5]
-
-                    this.user3 = this.game.players[(i + 2) % 5]
-
-                    this.user2 = this.game.players[(i + 3) % 5]
-
-                    this.user1 = this.game.players[(i + 4) % 5]
+                    this.user4 = new User(this.game.players[(i + 1) % 5])
+                    this.user3 = new User(this.game.players[(i + 2) % 5])
+                    this.user2 =new User(this.game.players[(i + 3) % 5])
+                    this.user1 = new User(this.game.players[(i + 4) % 5])
 
                 }
 
@@ -637,7 +633,7 @@ class GameScreen extends React.Component {
 
     render() {
 
-
+        console.log(this.game)
         if (this.game.round == "ENDED") {
             if (this.myselfUser.money != 0) {
                 return (
@@ -704,7 +700,7 @@ class GameScreen extends React.Component {
                                 id="player2InfoOnTurn"
                                 borderradius="10px"
                                 border="solid white 1px">
-                                {this.displayUser(this.user2)}
+                                {this.user2.displayUser(this.game)}
                             </PlayerInfoContainer>
                             <ProfileCircle
                                 top="12.5%"
@@ -765,7 +761,7 @@ class GameScreen extends React.Component {
                                 id="player3InfoOnTurn"
                                 borderradius="10px"
                                 border="solid white 1px">
-                                {this.displayUser(this.user3)}
+                                {this.user3.displayUser(this.game)}
                             </PlayerInfoContainer>
                             <ProfileCircle
                                 top="12.5%"
@@ -818,7 +814,7 @@ class GameScreen extends React.Component {
                                 id="player1InfoOnTurn"
                                 borderradius="10px"
                                 border="solid white 1px">
-                                {this.displayUser(this.user1)}
+                                {this.user1.displayUser(this.game)}
                             </PlayerInfoContainer>
                             <ProfileCircle
                                 top="2%"
@@ -856,7 +852,7 @@ class GameScreen extends React.Component {
                                     top="50%"
                                     left="68%"
                                     id="riverCard0">
-                                    <FrontCardBox>{this.getRiverCard(0)}</FrontCardBox>
+                                    <FrontCardBox>{this.game.river.getCard(0)}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
                                     width="9%"
@@ -864,7 +860,7 @@ class GameScreen extends React.Component {
                                     top="50%"
                                     left="58%"
                                     id="riverCard1">
-                                    <FrontCardBox>{this.getRiverCard(1)}</FrontCardBox>
+                                    <FrontCardBox>{this.game.river.getCard(1)}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
                                     width="9%"
@@ -872,7 +868,7 @@ class GameScreen extends React.Component {
                                     top="50%"
                                     left="48%"
                                     id="riverCard2">
-                                    <FrontCardBox>{this.getRiverCard(2)}</FrontCardBox>
+                                    <FrontCardBox>{this.game.river.getCard(2)}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
                                     width="9%"
@@ -880,7 +876,7 @@ class GameScreen extends React.Component {
                                     top="50%"
                                     left="38%"
                                     id="riverCard3">
-                                    <FrontCardBox>{this.getRiverCard(3)}</FrontCardBox>
+                                    <FrontCardBox>{this.game.river.getCard(3)}</FrontCardBox>
                                 </CardBox>
                                 <CardBox
                                     width="9%"
@@ -888,7 +884,7 @@ class GameScreen extends React.Component {
                                     top="50%"
                                     left="28%"
                                     id="riverCard4">
-                                    <FrontCardBox>{this.getRiverCard(4)}</FrontCardBox>
+                                    <FrontCardBox>{this.game.river.getCard(4)}</FrontCardBox>
                                 </CardBox>
                             </MiddleCardsContainer>
                             <CallContainer>
@@ -934,7 +930,7 @@ class GameScreen extends React.Component {
                                 id="player4InfoOnTurn"
                                 borderradius="10px"
                                 border="solid white 1px">
-                                {this.displayUser(this.user4)}
+                                {this.user4.displayUser(this.game)}
                             </PlayerInfoContainer>
                             <ProfileCircle
                                 top="2%"
@@ -1001,7 +997,7 @@ class GameScreen extends React.Component {
                                 top="50%"
                                 left="28%"
                                 id="ownCardBox1">
-                                <FrontCardBox>{new Card(this.myselfUser.cards[0]).card}</FrontCardBox>
+                                <FrontCardBox>{this.myselfUser.getCard(0)}</FrontCardBox>
                             </CardBox>
                             <CardBox
                                 width="35%"
@@ -1010,7 +1006,7 @@ class GameScreen extends React.Component {
                                 left="72%"
                                 id="ownCardBox2"
                                 visibility="hidden">
-                                <FrontCardBox>{new Card(this.myselfUser.cards[1]).card}</FrontCardBox>
+                                <FrontCardBox>{this.myselfUser.getCard(1)}</FrontCardBox>
                             </CardBox>
                         </OwnCardsContainer>
                         <FoldContainer>
@@ -1038,7 +1034,7 @@ class GameScreen extends React.Component {
                             height="80%"
                             color="white"
                             id="playerOwnUserInfoOnTurn">
-                            {this.displayUser(this.myselfUser)}
+                            {this.myselfUser.displayUser(this.game)}
                         </PlayerInfoContainer>
                         <ProfileCircle
                             top="-120%"

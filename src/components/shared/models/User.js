@@ -2,25 +2,27 @@
  * User model
  */
 import Card from "./Card";
+import {DisplayUserInfo} from "../../../views/design/GameScreenStyle";
 
 class User {
-  moneyInPot = null;
 
   constructor(data = {}) {
-    this.cards = null;
-    this.id = null;
-    this.username = null;
-    this.token = null;
     this.blind = null;
+    this.cards = null;
     this.money = null;
-    this.display=null;
-    if (this.cards == null) {
-      this.cards = [new Card({"suit": "NULL"}), new Card({"suit": "NULL"})]
-    }
+    this.username = null;
+
     Object.assign(this, data);
-    this.inGame = true;
   }
+  getCard(index){
+    return new Card(this.cards[index]).card
+  }
+  displayUser(game) {
+    return <DisplayUserInfo>{this.username} <br></br> Money : {this.money} Betting
+      : {game.pot.contribution[this.username]}
+    </DisplayUserInfo>;}
 }
+
 
 export default User;
 
