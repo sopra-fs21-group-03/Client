@@ -9,9 +9,7 @@ export const ProfileCircle = styled.div`
   top: ${props => props.top || null}; 
   color: red;
   height: 150px; 
-  border-radius: 75px; 
-  display: ${props => props.display || null}; 
-  id: ${props => props.id || null}; 
+  border-radius: 75px;  
   text-align: center;
   vertical-align: middle;
   line-height: 40px; 
@@ -29,9 +27,7 @@ export const BigBlind = styled.div`
   color: red;
   background-color: black;
   height: 40px; 
-  border-radius: 20px; 
-  display: ${props => props.display || null}; 
-  id: ${props => props.id || null}; 
+  border-radius: 20px;  
   text-align: center;
   vertical-align: middle;
   line-height: 40px;  
@@ -46,9 +42,7 @@ export const SmallBlind = styled.div`
   color: black;
   background-color: red;
   height: 40px; 
-  border-radius: 20px; 
-  display: ${props => props.display || null}; 
-  id: ${props => props.id || null}; 
+  border-radius: 20px;  
   text-align: center;
   vertical-align: middle;
   line-height: 40px;   
@@ -104,9 +98,7 @@ export const CheckButton = styled(RedButton)`
   width: 80%;
   left: 10%;
   top: 8%;
-  color: white;
-  display: ${props => props.display || null}; 
-  id: ${props => props.id || null}; 
+  color: white; 
 `;
 
 export const CallButton = styled(RedButton)`
@@ -122,9 +114,7 @@ export const CallButton = styled(RedButton)`
   width: 80%;
   left: 10%;
   top: 25%;
-  color: white;
-  display: ${props => props.display || null}; 
-  id: ${props => props.id || null}; 
+  color: white; 
 `;
 
 export const RaiseButton = styled(RedButton)`
@@ -141,9 +131,7 @@ export const RaiseButton = styled(RedButton)`
   left: 10%;
   top: 25%;
   color: white;
-  border-radius: 10px 0 0 10px;
-  display: ${props => props.display || null}; 
-  id: ${props => props.id || null}; 
+  border-radius: 10px 0 0 10px; 
 `;
 
 export const RaiseInput = styled.input`
@@ -158,7 +146,6 @@ export const RaiseInput = styled.input`
   border: solid red;
   type: number;
   padding-left: 15px;
-  display: ${props => props.display || null}; 
   id: ${props => props.id || null}; 
 `;
 
@@ -176,8 +163,6 @@ export const FoldButton = styled(RedButton)`
   left: 10%;
   top: 8%;
   color: white;
-  display: ${props => props.display || null}; 
-  id: ${props => props.id || null}; 
 `;
 
 export const InnerTextChatContainer = styled.div`
@@ -218,7 +203,7 @@ export const ChatInputField = styled.input`
   &::placeholder {
     color: rgba(0, 0, 0, 0.8);
   }
-  width: 90%;
+  width: 75%;
   height: 10%;
   padding-left: 15px;
   margin-left: -4px;
@@ -228,7 +213,26 @@ export const ChatInputField = styled.input`
   background: rgba(255, 255, 255);
   position: absolute;
   top: 87.5%;
+  id: ${props => props.id || null}; 
+  value: ${props => props.value || null}; 
 `;
+
+export const ChatSendButton = styled.button`
+  &:hover {
+    transform: scale(1.1);
+  }
+  position: absolute;
+  top: 87.5%;
+  left: 80%;
+  width: 12%;
+  height: 10%;
+  border: none;
+  border-radius: 10px;
+  color: black;
+  background-color: red;
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
+  transition: all 0.3s ease;
+`
 
 export const Tablesquare = styled.div`
 background-color: green;
@@ -741,9 +745,7 @@ export const CardBox = styled.div`
   padding-left: auto;
   margin-right: auto;
   padding-right: auto;
-  transform: ${props => props.transform || null};
-  display: ${props => props.display || null}; 
-  id: ${props => props.id || null}; 
+  transform: ${props => props.transform || null}; 
 `;
 
 export const PlayerInfoContainer = styled.div`
@@ -765,12 +767,10 @@ export const PlayerInfoContainer = styled.div`
   border-radius: ${props => props.borderradius || null};
   overflow: auto;
   word-wrap:break-word;
-  id: ${props => props.id || null};
   border: ${props => props.border || null};
 `;
 
 export const FrontCardBox = styled.div`
   width: 100%;
-  height: 100%;
-  display: ${props => props.display || null};  
+  height: 100%;  
 `;

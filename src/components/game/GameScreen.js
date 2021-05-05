@@ -49,7 +49,7 @@ import {
     CardBox,
     PlayerInfoContainer,
     FrontCardBox,
-    LoadingGameContainer, LeaveTableButtonEndScreen, LooserPicture, LooserContainer
+    LoadingGameContainer, LeaveTableButtonEndScreen, LooserPicture, LooserContainer, ChatSendButton
 } from "../../views/design/GameScreenStyle";
 import Player from "../../views/Player";
 import ChatMessageField from "../../views/ChatMessageField";
@@ -64,6 +64,7 @@ class GameScreen extends React.Component {
         this.state = {
             token: null,
             raiseAmount: null,
+            chatMessage: null,
             chatLog: null
         };
     }
@@ -74,24 +75,27 @@ class GameScreen extends React.Component {
     }
 
     async call() {
-        this.returnToken()
         await api.put("/games/1/" + localStorage.getItem('userID') + "/call", this.returnToken())
     }
 
     async check() {
-        this.returnToken()
         await api.put("/games/1/" + localStorage.getItem('userID') + "/check", this.returnToken())
     }
 
     async fold() {
-        this.returnToken()
         await api.put("/games/1/" + localStorage.getItem('userID') + "/fold", this.returnToken())
     }
 
     async raise() {
-        this.returnToken()
         await api.put("/games/1/" + localStorage.getItem('userID') + "/raise", this.returnRaiseAmountAndToken())
         this.state.raiseAmount = null;
+        document.getElementById("raiseInputField").value = "";
+    }
+
+    async sendMessage(){
+        await api.put("/games/1/" + localStorage.getItem('userID') + "/chats", this.returnChatMessageAndToken())
+        this.state.chatMessage = null;
+        document.getElementById("chatInputField").value = "";
     }
 
     async showdown() {
@@ -129,6 +133,14 @@ class GameScreen extends React.Component {
             token: localStorage.getItem('token')
         });
         return requestBodyRaiseAmount
+    }
+
+    returnChatMessageAndToken() {
+        const requestBodyChatMessage = JSON.stringify({
+            token: localStorage.getItem('token'),
+            message: this.state.chatMessage
+        });
+        return requestBodyChatMessage
     }
 
     logout() {
@@ -204,8 +216,6 @@ class GameScreen extends React.Component {
 
     async updateGameScreen() {
 
-        console.log(this.userOnTurn.username)
-
         if (this.game.showdown == true) {
             this.showdown();
         }
@@ -239,21 +249,6 @@ class GameScreen extends React.Component {
 
                 }
 
-            }
-        }
-
-
-        //If to display reveal Cards Button
-
-        if (document.getElementById("notRevealButton") != null) {
-            if (this.myselfUser.username != this.userOnTurn.username) {
-                document.getElementById("notRevealButton").style.display = "none";
-                document.getElementById("revealButton").style.display = "none";
-            }
-
-            if (this.myselfUser.username == this.userOnTurn.username) {
-                document.getElementById("notRevealButton").style.display = "inline";
-                document.getElementById("revealButton").style.display = "inline";
             }
         }
     }
@@ -300,6 +295,7 @@ class GameScreen extends React.Component {
         // this.setState({'username': value});
         this.setState({[key]: value});
     }
+
 
 
     render() {
@@ -550,33 +546,37 @@ class GameScreen extends React.Component {
                             </MiddleCardsContainer>
                             <CallContainer>
                                 {this.game.showdown == true ?
-                                    (<CallButton onClick={() => {
+                                    (this.myselfUser.username == this.userOnTurn.username ? (
+                                        <CallButton onClick={() => {
                                         this.revealCards(true);
                                     }}
-                                    >Reveal Cards</CallButton>) :
-                                    (<CallButton onClick={() => {
+                                    >Reveal Cards</CallButton>) :(<h1></h1>)) :
+                                    (this.myselfUser.username == this.userOnTurn.username ? (
+                                        <CallButton onClick={() => {
                                         this.call();
                                     }}
                                                  disabled={this.displayHowMuchCall(this.myselfUser) == 0}
-                                    >Call {this.displayHowMuchCall(this.myselfUser)}</CallButton>)}
+                                    >Call {this.displayHowMuchCall(this.myselfUser)}</CallButton>) : (<h1></h1>))}
                             </CallContainer>
                             {this.game.showdown == true ?
-                                (<RaiseContainer>
-                                    <CallButton onClick={() => {
-                                        this.revealCards(false);
-                                    }}
-                                    >Don't Reveal Cards</CallButton>
-                                </RaiseContainer>) :
-                                (<RaiseContainer>
+                                (this.myselfUser.username == this.userOnTurn.username ? (<RaiseContainer>
+                                        <CallButton onClick={() => {
+                                            this.revealCards(false);
+                                        }}
+                                        >Don't Reveal Cards</CallButton>
+                                    </RaiseContainer>):(<h1></h1>)
+                                    ) :
+                                (this.myselfUser.username == this.userOnTurn.username ? (
+                                    <RaiseContainer>
                                     <RaiseButton onClick={() => {
                                         this.raise();
                                     }} disabled={!this.state.raiseAmount}
                                     >Raise</RaiseButton>
-                                    <RaiseInput type="number" onChange={e => {
+                                    <RaiseInput id = "raiseInputField" type="number" onChange={e => {
                                         this.handleInputChange('raiseAmount', e.target.value);
                                     }}
                                     ></RaiseInput>
-                                </RaiseContainer>)}
+                                </RaiseContainer>) : (<h1></h1>))}
                         </TableComponentsContainer>
                         <PlayerRightContainer>
                             {this.user4.blind == "BIG" ?
@@ -638,7 +638,17 @@ class GameScreen extends React.Component {
                                             );
                                         }))}
                                 </TextBacklogChatContainer>
-                                <ChatInputField placeholder="Type in your message"></ChatInputField>
+                                <ChatInputField id = "chatInputField"
+                                                placeholder="Type in your message"
+                                                onChange={e => {
+                                                    this.handleInputChange('chatMessage', e.target.value);}}
+                                                >
+                                </ChatInputField>
+                                <ChatSendButton onClick={() => {
+                                    this.sendMessage();
+                                }}>
+                                    Send
+                                </ChatSendButton>
                             </InnerTextChatContainer>
                         </ChatContainer>
                         {this.myselfUser.blind == "BIG" ?
@@ -650,11 +660,12 @@ class GameScreen extends React.Component {
                         <CheckContainer>
                             {this.game.showdown == true ?
                                 (<h1></h1>) :
-                                (<CheckButton onClick={() => {
+                                (this.myselfUser.username == this.userOnTurn.username ? (
+                                    <CheckButton onClick={() => {
                                         this.check();
                                     }}
                                               disabled={this.displayHowMuchCall(this.myselfUser) != 0}>Check</CheckButton>
-                                )}
+                                ) : (<h1></h1>))}
                         </CheckContainer>
                         {this.myselfUser.cards.length == 0 ? (<h1></h1>) : (
                             <OwnCardsContainer>
@@ -672,9 +683,10 @@ class GameScreen extends React.Component {
                         <FoldContainer>
                             {this.game.showdown == true ?
                                 (<h1></h1>) :
-                                (<FoldButton onClick={() => {
+                                (this.myselfUser.username == this.userOnTurn.username ? (
+                                    <FoldButton onClick={() => {
                                     this.fold();
-                                }}>Fold</FoldButton>)}
+                                }}>Fold</FoldButton>) : (<h1></h1>))}
                         </FoldContainer>
                         <LeaveTableContainer>
                             <LeaveTableButton onClick={() => {
