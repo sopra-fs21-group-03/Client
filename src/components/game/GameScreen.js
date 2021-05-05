@@ -633,9 +633,9 @@ class GameScreen extends React.Component {
                                 <TextBacklogChatContainer>
                                     {!this.state.chatLog ? (<h1></h1>) : (
                                         this.state.chatLog.map(ChatMessage => {
-                                            return (
-                                                <ChatMessageField ChatMessage={ChatMessage}/>
-                                            );
+                                                return (
+                                                    <ChatMessageField ChatMessage={ChatMessage}/>
+                                                );
                                         }))}
                                 </TextBacklogChatContainer>
                                 <ChatInputField id = "chatInputField"

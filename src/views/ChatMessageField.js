@@ -5,7 +5,7 @@ const ActionLog = styled.div`
   font-weight: lighter;
   margin-top: 5px;
   border: none;
-  color: red;
+  color: ${props => props.color || null};
 `;
 
 /**
@@ -16,9 +16,9 @@ const ActionLog = styled.div`
  * https://reactjs.org/docs/components-and-props.html
  * @FunctionalComponent
  */
-const ChatMessageField = ({ ChatMessage }) => {
+const ChatMessageField = ({ ChatMessage}) => {
   return (
-      <ActionLog>{ChatMessage.message}</ActionLog>
+      ChatMessage.messageType == "CHAT" ? (<ActionLog color = "white">{ChatMessage.message}</ActionLog>) : (<ActionLog color = "red">{ChatMessage.message}</ActionLog>)
   );
 };
 
