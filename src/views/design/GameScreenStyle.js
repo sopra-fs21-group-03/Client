@@ -17,7 +17,8 @@ export const ProfileCircle = styled.div`
   line-height: 40px; 
   transform: ${props => props.transform || null};   
   background: ${props => props.background || null} center;  
-  border: solid white;
+  border: solid;
+  border-color: ${props => props.bordercolor || null};
 `;
 
 export const BigBlind = styled.div`
@@ -491,7 +492,7 @@ background-color: grey;
   padding-left: 15px;
   margin-right: auto;
   padding-right: 15px;
-  border-top: solid white;
+  border-top: solid ${props => props.bordercolor || null}; 
 `;
 
 export const ChatContainer = styled.div`
