@@ -6,6 +6,7 @@ import { LoginGuard } from "../routeProtectors/LoginGuard";
 import Login from "../../login/Login";
 import Register from "../../login/Register";
 import GameScreen from "../../game/GameScreen";
+import Lobby from "../../login/Lobby";
 
 /**
  * Main router of your application.
@@ -46,6 +47,15 @@ class AppRouter extends React.Component {
                       <GameGuard>
                         <GameScreen />
                       </GameGuard>
+                  )}
+              />
+              <Route
+                  path="/lobby"
+                  exact
+                  render={() => (
+
+                          <Lobby />
+
                   )}
               />
               <Route path="/" exact render={() => <Redirect to={"/login"} />} />
