@@ -13,7 +13,6 @@ import {
     ProfileCircle,
     BigBlind,
     SmallBlind,
-    Writen,
     LeaveTableButton,
     CheckButton,
     CallButton,

@@ -3,18 +3,51 @@ import {withRouter} from "react-router-dom";
 import {BaseContainer} from "../../helpers/layout";
 import styled from "styled-components";
 import Lobby from "../shared/models/Lobby";
+import {LeaveTableButton} from "../../views/design/GameScreenStyle";
+
+const LogoutButton = styled(LeaveTableButton)`
+  position: absolute;
+  top: 85%;
+  left: 25%;
+  background: rgb(0,0,0,0.8);
+  height: 10%;
+  width: 30%;
+  font-size: 24pt;
+  font-weight: 200;
+`;
+
+const PokerInstructionsButton = styled(LeaveTableButton)`
+  position: absolute;
+  top: 70%;
+  left: 10%;
+  background: rgb(0,0,0,0.8);
+  height: 10%;
+  width: 60%;
+  font-size: 24pt;
+  font-weight: 200;
+`;
+
+const LobbbyScreenBaseContainer = styled.div`
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 70%;
+  height: 80%;
+  width: 40%;
+  top: 55%;
+`;
 
 const FormContainer = styled.div`
-  margin-top: 2em;
   display: flex;
   flex-direction: column;
-  align-items: center;
   min-height: 300px;
-  justify-content: center;
-  width: 45%;
+  width: 80%;
   height: 100%;
-  margin-left: 25%;
   position: absolute;
+  margin-left: 10%;
+  border-radius: 5px;
+  background-color: rgb(0, 0, 0, 0.8);
+  padding-bottom: 100px;
 `;
 
 
@@ -23,23 +56,27 @@ const Form = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: 80%;
   font-size: 16px;
   font-weight: 300;
   padding-left: 37px;
   padding-right: 37px;
-  border-radius: 5px;
-  background-color: rgb(0, 0, 0, 0.92);
   transition: opacity 0.5s ease, transform 0.5s ease;
 `;
 
 
 class LobbyScreen extends React.Component{
-    testLobby=[new Lobby({"name":"test","playerCount":4,"inGame":false, "lobbyID":1}),new Lobby({"name":"TEST","playerCount":4,"inGame":false, "lobbyID":1})]
+    logout() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userID');
+        this.props.history.push('/login');
+    }
+
+    testLobby=[new Lobby({"name":"test","playerCount":4,"inGame":false, "lobbyID":1}),new Lobby({"name":"TEST","playerCount":4,"inGame":false, "lobbyID":1}),new Lobby({"name":"TEST2","playerCount":4,"inGame":false, "lobbyID":1}),new Lobby({"name":"TEST3","playerCount":4,"inGame":false, "lobbyID":1})]
 
     render() {
         return (
-            <BaseContainer>
+            <LobbbyScreenBaseContainer>
 
                 <FormContainer>
                     <Form onClick={() => {
@@ -47,7 +84,17 @@ class LobbyScreen extends React.Component{
                     }}>
                         {this.testLobby.map((lobby) => new Lobby(lobby).getLobby())}
                     </Form>
+                    <LogoutButton onClick={() => {
+                        this.logout()
+                    }}>
+                        Logout
+                    </LogoutButton>
+                    <PokerInstructionsButton onClick={() => {
+                        this.logout()
+                    }}>
+                        Poker Instructions
+                    </PokerInstructionsButton>
                 </FormContainer>
-            </BaseContainer>)}
+            </LobbbyScreenBaseContainer>)}
 }
 export default withRouter(LobbyScreen);
