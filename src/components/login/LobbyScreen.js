@@ -2,6 +2,7 @@ import React from 'react';
 import {withRouter} from "react-router-dom";
 import {BaseContainer} from "../../helpers/layout";
 import styled from "styled-components";
+import Lobby from "../shared/models/Lobby";
 
 const FormContainer = styled.div`
   margin-top: 2em;
@@ -33,16 +34,20 @@ const Form = styled.div`
 `;
 
 
-class Lobby extends React.Component{
+class LobbyScreen extends React.Component{
+    testLobby=[new Lobby({"name":"test","playerCount":4,"inGame":false, "lobbyID":1}),new Lobby({"name":"TEST","playerCount":4,"inGame":false, "lobbyID":1})]
 
     render() {
         return (
             <BaseContainer>
-                <FormContainer>
-                    <Form>
 
+                <FormContainer>
+                    <Form onClick={() => {
+                        this.props.history.push(`/gamescreen`);
+                    }}>
+                        {this.testLobby.map((lobby) => new Lobby(lobby).getLobby())}
                     </Form>
                 </FormContainer>
             </BaseContainer>)}
 }
-export default withRouter(Lobby);
+export default withRouter(LobbyScreen);
