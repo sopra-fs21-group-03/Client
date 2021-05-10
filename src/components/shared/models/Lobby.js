@@ -62,13 +62,13 @@ class Lobby{
         this.name=null;
         this.playerCount=null;
         this.inGame=null;
-        this.lobbyID=null;
+        this.id=null;
         Object.assign(this, data);
     }
     getLobby(){
         return(
                 <Border onClick={() => {
-                    localStorage.setItem("gameId", this.lobbyID);
+                    localStorage.setItem("gameId", this.id);
                 }}>
                     <LobbyNumber>{this.lobbyID}</LobbyNumber>
                     <LobbyInfo>

@@ -3,7 +3,8 @@ import {withRouter} from "react-router-dom";
 import {BaseContainer} from "../../helpers/layout";
 import styled from "styled-components";
 import Lobby from "../shared/models/Lobby";
-import {LeaveTableButton} from "../../views/design/GameScreenStyle";
+import {LeaveTableButton, Loader, LoadingGameContainer} from "../../views/design/GameScreenStyle";
+import {api} from "../../helpers/api";
 
 const LogoutButton = styled(LeaveTableButton)`
   position: absolute;
@@ -66,6 +67,21 @@ const Form = styled.div`
 
 
 class LobbyScreen extends React.Component{
+    constructor() {
+        super();
+        this.state = {
+            lobbies: null
+        };
+    }
+
+    async componentDidMount(){
+        const response = await api.get('/lobbies');
+
+        this.setState({ lobbies: response.data });
+
+        console.log(this.state.lobbies);
+    }
+
     logout() {
         localStorage.removeItem('token');
         localStorage.removeItem('userID');
@@ -75,14 +91,13 @@ class LobbyScreen extends React.Component{
     testLobby=[new Lobby({"name":"test","playerCount":4,"inGame":false, "lobbyID":1}),new Lobby({"name":"TEST","playerCount":4,"inGame":false, "lobbyID":1}),new Lobby({"name":"TEST2","playerCount":4,"inGame":false, "lobbyID":1}),new Lobby({"name":"TEST3","playerCount":4,"inGame":false, "lobbyID":1})]
 
     render() {
-        return (
+        if(this.state.lobbies != null){ return (
             <LobbbyScreenBaseContainer>
-
                 <FormContainer>
                     <Form onClick={() => {
                         this.props.history.push(`/gamescreen`);
                     }}>
-                        {this.testLobby.map((lobby) => new Lobby(lobby).getLobby())}
+                        {this.state.lobbies.map((lobby) => new Lobby(lobby).getLobby())}
                     </Form>
                     <LogoutButton onClick={() => {
                         this.logout()
@@ -96,5 +111,12 @@ class LobbyScreen extends React.Component{
                     </PokerInstructionsButton>
                 </FormContainer>
             </LobbbyScreenBaseContainer>)}
+        else{
+            return(
+                <LoadingGameContainer> LOADING <Loader top='360px' left='77%'>500</Loader></LoadingGameContainer>
+            )
+        }
+
+       }
 }
 export default withRouter(LobbyScreen);
