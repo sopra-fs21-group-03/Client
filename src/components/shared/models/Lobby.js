@@ -70,7 +70,7 @@ class Lobby{
                 <Border onClick={() => {
                     localStorage.setItem("gameId", this.id);
                 }}>
-                    <LobbyNumber>{this.lobbyID}</LobbyNumber>
+                    <LobbyNumber>{this.id}</LobbyNumber>
                     <LobbyInfo>
                         {this.name}
                         <LobbyPlayerCount>{this.playerCount+"/5 Players"}</LobbyPlayerCount>
