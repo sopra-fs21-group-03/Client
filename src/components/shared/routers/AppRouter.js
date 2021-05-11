@@ -7,6 +7,7 @@ import Login from "../../login/Login";
 import Register from "../../login/Register";
 import GameScreen from "../../game/GameScreen";
 import Lobby from "../../login/LobbyScreen";
+import LobbyScreen from "../../login/LobbyScreen";
 
 /**
  * Main router of your application.
@@ -50,12 +51,10 @@ class AppRouter extends React.Component {
                   )}
               />
               <Route
-                  path="/lobby"
+                  path="/lobbyscreen"
                   exact
                   render={() => (
-
-                          <Lobby />
-
+                          <LobbyScreen />
                   )}
               />
               <Route path="/" exact render={() => <Redirect to={"/login"} />} />

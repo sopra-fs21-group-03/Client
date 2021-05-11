@@ -113,10 +113,9 @@ class LobbyScreen extends React.Component{
             </LobbbyScreenBaseContainer>)}
         else{
             return(
-                <LoadingGameContainer> LOADING <Loader top='360px' left='77%'>500</Loader></LoadingGameContainer>
+                <LoadingGameContainer> LOADING <Loader top='360px' left='57%'>500</Loader></LoadingGameContainer>
             )
         }
-
        }
 }
 export default withRouter(LobbyScreen);

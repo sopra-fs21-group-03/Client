@@ -78,6 +78,5 @@ class Lobby{
                 </Border>
             )
     }
-
 }
 export default Lobby;
