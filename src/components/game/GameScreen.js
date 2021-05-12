@@ -721,8 +721,7 @@ class GameScreen extends React.Component {
         else {
             return (
 
-                <LoadingGameContainer> LOADING <Loader top='360px' left='77%'>500</Loader> Game will start when 5 people
-                    joined</LoadingGameContainer>)
+                <LoadingGameContainer> LOADING <Loader top='360px' left='57%'>500</Loader> </LoadingGameContainer>)
         }
     }
 }

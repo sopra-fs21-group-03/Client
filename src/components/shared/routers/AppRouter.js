@@ -8,6 +8,7 @@ import Register from "../../login/Register";
 import GameScreen from "../../game/GameScreen";
 import Lobby from "../../login/LobbyScreen";
 import LobbyScreen from "../../login/LobbyScreen";
+import InLobbyScreen from "../../login/InLobbyScreen";
 
 /**
  * Main router of your application.
@@ -55,6 +56,14 @@ class AppRouter extends React.Component {
                   exact
                   render={() => (
                           <LobbyScreen />
+                  )}
+              />
+              <Route path="/" exact render={() => <Redirect to={"/login"} />} />
+              <Route
+                  path="/lobby"
+                  exact
+                  render={() => (
+                      <InLobbyScreen />
                   )}
               />
               <Route path="/" exact render={() => <Redirect to={"/login"} />} />

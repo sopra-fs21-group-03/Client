@@ -9,10 +9,9 @@ import LobbyScreen from "../../login/InLobbyScreen";
 class Lobby{
 
     constructor(data = {}) {
+        this.gameCanStart=null;
         this.name=null;
-        this.playerCount=null;
-        this.inGame=null;
-        this.id=null;
+        this.players=null;
         Object.assign(this, data);
     }
 }

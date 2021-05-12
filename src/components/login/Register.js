@@ -150,6 +150,7 @@ class Register extends React.Component {
 
       // Store the token into the local storage.
       localStorage.setItem('token', user.token);
+      localStorage.setItem('username', user.username);
 
       const secondResponse = await api.get('/users/ids',{headers:{ Authorization: localStorage.getItem('token')}});
 
@@ -158,7 +159,7 @@ class Register extends React.Component {
       localStorage.setItem('userID', userForUserID.id);
 
       // Login successfully worked --> navigate to the route /game in the GameRouter
-      this.props.history.push(`/gamescreen`);
+      this.props.history.push(`/lobbyscreen`);
     } catch (error) {
       alert(`Something went wrong during the login: \n${handleError(error)}`);
     }

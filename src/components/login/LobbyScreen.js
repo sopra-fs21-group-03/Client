@@ -1,10 +1,61 @@
 import React from 'react';
 import {withRouter} from "react-router-dom";
-import {BaseContainer} from "../../helpers/layout";
 import styled from "styled-components";
-import Lobby from "../shared/models/Lobby";
 import {LeaveTableButton, Loader, LoadingGameContainer} from "../../views/design/GameScreenStyle";
 import {api} from "../../helpers/api";
+
+const Border = styled.button`
+  margin: 10px;
+  width: 450px;
+  color: white;
+  height: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+  background: none;
+`;
+
+const LobbyNumber = styled.div`
+  background: white;
+  color: red;
+  width: 80px;
+  height: 80px;
+  left: 20%;
+  background: white;
+  float: left;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  border-radius: 5px 0 0 5px;
+  font-size: 32pt;
+  line-height: 70px;
+  text-align: center;
+`;
+
+const LobbyInfo = styled.div`
+  color: red;
+  width: 358px;
+  height: 80px;
+  background: black; 
+  float: right;
+  border-radius: 0 5px 5px 0;
+  border-top: 2px solid white;
+  border-right: 2px solid white;
+  border-bottom: 2px solid white;
+  color: white;
+  line-height: 70px;
+  text-align: left;
+  padding-left: 15px;
+  font-size: 16pt;
+`;
+
+const LobbyPlayerCount = styled.div`
+  color: red;
+  float: right;
+  padding-right: 25px;
+  font-size: 12pt;
+  line-height: 75px;
+`;
 
 const LogoutButton = styled(LeaveTableButton)`
   position: absolute;
@@ -74,12 +125,16 @@ class LobbyScreen extends React.Component{
         };
     }
 
-    async componentDidMount(){
-        const response = await api.get('/lobbies');
+    returnToken() {
+        const requestBody = JSON.stringify({
+            token: localStorage.getItem('token')
+        });
+        return requestBody
+    }
 
-        this.setState({ lobbies: response.data });
-
-        console.log(this.state.lobbies);
+    async joinLobby(lobbyId){
+        this.props.history.push(`/lobby`);
+        await api.put('/lobbies/' + localStorage.getItem("gameId") + '/join', this.returnToken());
     }
 
     logout() {
@@ -88,16 +143,40 @@ class LobbyScreen extends React.Component{
         this.props.history.push('/login');
     }
 
-    testLobby=[new Lobby({"name":"test","playerCount":4,"inGame":false, "lobbyID":1}),new Lobby({"name":"TEST","playerCount":4,"inGame":false, "lobbyID":1}),new Lobby({"name":"TEST2","playerCount":4,"inGame":false, "lobbyID":1}),new Lobby({"name":"TEST3","playerCount":4,"inGame":false, "lobbyID":1})]
+    async updateLobbyScreen(){
+        const response = await api.get('/lobbies', {headers: {Authorization: localStorage.getItem('token')}});
+
+        this.setState({ lobbies: response.data });
+    }
+
+    async componentDidMount() {
+        this.interval = setInterval(async () => {
+            await this.updateLobbyScreen();
+            this.setState({time: Date.now()})
+        }, 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
 
     render() {
         if(this.state.lobbies != null){ return (
             <LobbbyScreenBaseContainer>
                 <FormContainer>
-                    <Form onClick={() => {
-                        this.props.history.push(`/gamescreen`);
-                    }}>
-                        {this.state.lobbies.map((lobby) => new Lobby(lobby).getLobby())}
+                    <Form>
+                        {this.state.lobbies.map(lobby => {return(
+                            <Border onClick={() => {
+                                localStorage.setItem("gameId", lobby.id);
+                                this.joinLobby(lobby.id);
+                            }}>
+                                <LobbyNumber>{lobby.id}</LobbyNumber>
+                                <LobbyInfo>
+                                    {lobby.name}
+                                    <LobbyPlayerCount>{lobby.playerCount+"/5 Players"}</LobbyPlayerCount>
+                                </LobbyInfo>
+                            </Border>
+                        );})}
                     </Form>
                     <LogoutButton onClick={() => {
                         this.logout()
