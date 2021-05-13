@@ -98,7 +98,7 @@ class GameScreen extends React.Component {
     }
 
     async showdown() {
-        const showdown = await api.get('/games/" + localStorage.getItem("gameId") + "/showdown', {headers: {Authorization: localStorage.getItem('token')}})
+        const showdown = await api.get('/games/' + localStorage.getItem('gameId') + '/showdown', {headers: {Authorization: localStorage.getItem('token')}})
         const playerList = showdown.data;
         for (let i = 0; i < 5; i++) {
             if (playerList[i].username == this.myselfUser.username) {
@@ -193,7 +193,7 @@ class GameScreen extends React.Component {
     }
 
     async revealCards(boolean) {
-        await api.put('/games/" + localStorage.getItem("gameId") + "/' + localStorage.getItem('userID') + '/show', this.returnTokenAndIfReveal(boolean));
+        await api.put('/games/' + localStorage.getItem("gameId") + '/' + localStorage.getItem('userID') + '/show', this.returnTokenAndIfReveal(boolean));
     }
 
     lostPlayersCounter = null;
@@ -228,11 +228,11 @@ class GameScreen extends React.Component {
             await this.fetchChat();
         }
 
-        const gameResponse = await api.get('/games/" + localStorage.getItem("gameId") + "', {headers: {Authorization: localStorage.getItem('token')}});
+        const gameResponse = await api.get('/games/' + localStorage.getItem("gameId"), {headers: {Authorization: localStorage.getItem('token')}});
         this.game = new Game(gameResponse.data);
 
 
-        const myselfUserResponse = await api.get('/games/" + localStorage.getItem("gameId") + "/' + localStorage.getItem('userID'), {headers: {Authorization: localStorage.getItem('token')}});
+        const myselfUserResponse = await api.get('/games/' + localStorage.getItem("gameId") + '/' + localStorage.getItem('userID'), {headers: {Authorization: localStorage.getItem('token')}});
         this.myselfUser = new User(myselfUserResponse.data);
         if (this.game.players.length == 5) {
             this.userOnTurn = this.game.onTurn;
