@@ -105,9 +105,11 @@ class GameScreen extends React.Component {
     }
 
     async sendMessage(){
-        await api.put("/games/" + localStorage.getItem("gameId") + "/" + localStorage.getItem('userID') + "/chats", this.returnChatMessageAndToken())
-        this.state.chatMessage = null;
-        document.getElementById("chatInputField").value = "";
+        if(this.state.chatMessage != null) {
+            await api.put("/games/" + localStorage.getItem("gameId") + "/" + localStorage.getItem('userID') + "/chats", this.returnChatMessageAndToken())
+            this.state.chatMessage = null;
+            document.getElementById("chatInputField").value = "";
+        }
     }
 
     async showdown() {
@@ -224,10 +226,6 @@ class GameScreen extends React.Component {
 
     async updateGameScreen() {
 
-        //if(document.getElementById("chatList") != null){
-        //    this.scrollToEnd();
-        //}
-
         if (this.game.showdown == true) {
             this.showdown();
         }
@@ -282,7 +280,6 @@ class GameScreen extends React.Component {
         clearInterval(this.interval);
     }
 
-
     getRiverCard(index) {
 
         if (this.game.river.cards != null) {
@@ -297,6 +294,13 @@ class GameScreen extends React.Component {
         }
     }
 
+    enterPressed(event){
+        var code = event.keyCode || event.which;
+        if(code === 13){
+            this.sendMessage();
+        }
+    }
+
     returnCard(cardNumber, Suit) {
         const card = new Card({cardNumber: cardNumber, suit: Suit});
         return card.card
@@ -307,8 +311,6 @@ class GameScreen extends React.Component {
         // this.setState({'username': value});
         this.setState({[key]: value});
     }
-
-
 
     render() {
         if (this.game.round == "ENDED") {
@@ -654,9 +656,16 @@ class GameScreen extends React.Component {
                                                 placeholder="Type in your message"
                                                 onChange={e => {
                                                     this.handleInputChange('chatMessage', e.target.value);}}
+                                                onKeyPress={this.enterPressed.bind(this)}
                                                 >
                                 </ChatInputField>
-                                <ChatSendButton onClick={() => {
+                                <script>
+
+                                </script>
+                                <ChatSendButton
+                                    id = "chatButton"
+                                    disabled={!this.state.chatMessage}
+                                    onClick={() => {
                                     this.sendMessage();
                                 }}>
                                     Send

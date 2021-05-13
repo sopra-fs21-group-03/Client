@@ -233,6 +233,8 @@ export const ChatSendButton = styled.button`
   background-color: red;
   cursor: ${props => (props.disabled ? "default" : "pointer")};
   transition: all 0.3s ease;
+  id: ${props => props.id || null}; 
+  type: submit;
 `
 
 export const Tablesquare = styled.div`
@@ -733,12 +735,8 @@ export const TopRightPlayerContainer = styled.div`
 export const CardBox = styled.div`
   border: solid;
   border-color: white;
-  background: 
-  linear-gradient(60deg, darkblue 25%, transparent 25%), 
-  linear-gradient(-45deg, darkblue 25%, transparent 25%),
-  linear-gradient(60deg, transparent 75%, darkblue 75%),
-  linear-gradient(-45deg, white 75%, darkblue 75%);
-  background-size:15px 15px; 
+  background: url('https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/cardBackground.png');
+  background-size: cover;
   margin: 0;
   position: absolute;
   margin-right: 0%;
