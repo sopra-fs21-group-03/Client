@@ -21,7 +21,6 @@ const Border = styled.button`
 `;
 
 const ReadyBox = styled.div`
-  background: white;
   color: red;
   width: 80px;
   height: 80px;
@@ -39,7 +38,7 @@ const ReadyBox = styled.div`
 
 const PlayerName = styled.div`
   color: red;
-  width: 358px;
+  width: calc(100% - 80px);
   height: 80px;
   background: black; 
   float: right;
@@ -62,24 +61,13 @@ const LobbyPlayerCount = styled.div`
   line-height: 75px;
 `;
 
-const LogoutButton = styled(LeaveTableButton)`
+const ReadyButton = styled(LeaveTableButton)`
   position: absolute;
   top: 80%;
   left: 25%;
   background: rgb(0,0,0,0.8);
   height: 10%;
   width: 30%;
-  font-size: 24pt;
-  font-weight: 200;
-`;
-
-const PokerInstructionsButton = styled(LeaveTableButton)`
-  position: absolute;
-  top: 70%;
-  left: 10%;
-  background: rgb(0,0,0,0.8);
-  height: 10%;
-  width: 60%;
   font-size: 24pt;
   font-weight: 200;
 `;
@@ -130,12 +118,6 @@ class LobbyScreen extends React.Component{
         };
     }
 
-    logout() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('userID');
-        this.props.history.push('/login');
-    }
-
     lobby = new LobbyInfo();
 
     async updateLobby(){
@@ -156,12 +138,25 @@ class LobbyScreen extends React.Component{
         clearInterval(this.interval);
     }
 
+    async ready() {
+        await api.put('lobbies/' + localStorage.getItem("gameId") + '/' + localStorage.getItem("userID") + '/ready', this.returnToken())
+    }
+
+    returnToken() {
+        const requestBody = JSON.stringify({
+            token: localStorage.getItem('token')
+        });
+        return requestBody
+    }
+
     render() {
         if(this.lobby.players != null){ return (
             <LobbbyScreenBaseContainer>
                 <FormContainer>
                         <Border margintop = '50px'>
-                            <ReadyBox></ReadyBox>
+                            <ReadyBox>
+                                    <i className="gg-close"></i>
+                            </ReadyBox>
                             {this.lobby.players.length > 0 ? (
                                 <PlayerName>
                                     {this.lobby.players[0].username}
@@ -173,7 +168,9 @@ class LobbyScreen extends React.Component{
                             )}
                         </Border>
                     <Border>
-                        <ReadyBox></ReadyBox>
+                        <ReadyBox>
+                            <i className="notReadyCards"></i>
+                        </ReadyBox>
                         {this.lobby.players.length > 1 ? (
                             <PlayerName>
                                 {this.lobby.players[1].username}
@@ -220,11 +217,11 @@ class LobbyScreen extends React.Component{
                             </PlayerName>
                         )}
                     </Border>
-                    <LogoutButton onClick={() => {
-                        this.logout()
+                    <ReadyButton onClick={() => {
+                        this.ready()
                     }}>
                         Ready
-                    </LogoutButton>
+                    </ReadyButton>
 
                 </FormContainer>
             </LobbbyScreenBaseContainer>)}

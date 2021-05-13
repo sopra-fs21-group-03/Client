@@ -34,7 +34,7 @@ const LobbyNumber = styled.div`
 
 const LobbyInfo = styled.div`
   color: red;
-  width: 358px;
+  width: calc(100% - 80px);
   height: 80px;
   background: black; 
   float: right;
