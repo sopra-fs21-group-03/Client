@@ -71,6 +71,17 @@ const ReadyButton = styled(LeaveTableButton)`
   font-weight: 200;
 `;
 
+const ReadyButtonClicked = styled(LeaveTableButton)`
+  position: absolute;
+  top: 80%;
+  left: 25%;
+  background: rgb(0,0,0,0.8);
+  height: 10%;
+  width: 30%;
+  font-size: 24pt;
+  font-weight: 200;
+`;
+
 const LobbbyScreenBaseContainer = styled.div`
   position: absolute;
   left: 50%;
@@ -275,7 +286,8 @@ class LobbyScreen extends React.Component{
                             </PlayerName>
                         )}
                     </Border>
-                    <ReadyButton onClick={() => {
+                    <ReadyButton
+                        onClick={() => {
                         this.ready()
                     }}>
                         Ready

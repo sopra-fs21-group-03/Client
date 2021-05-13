@@ -69,36 +69,36 @@ class GameScreen extends React.Component {
     }
 
     async fetchChat() {
-        const response = await api.get("/games/1/" + localStorage.getItem('userID') + "/chats", {headers: {Authorization: localStorage.getItem('token')}});
+        const response = await api.get("/games/" + localStorage.getItem("gameId") + "/" + localStorage.getItem('userID') + "/chats", {headers: {Authorization: localStorage.getItem('token')}});
         this.setState({chatLog: response.data});
     }
 
     async call() {
-        await api.put("/games/1/" + localStorage.getItem('userID') + "/call", this.returnToken())
+        await api.put("/games/" + localStorage.getItem("gameId") + "/" + localStorage.getItem('userID') + "/call", this.returnToken())
     }
 
     async check() {
-        await api.put("/games/1/" + localStorage.getItem('userID') + "/check", this.returnToken())
+        await api.put("/games/" + localStorage.getItem("gameId") + "/" + localStorage.getItem('userID') + "/check", this.returnToken())
     }
 
     async fold() {
-        await api.put("/games/1/" + localStorage.getItem('userID') + "/fold", this.returnToken())
+        await api.put("/games/" + localStorage.getItem("gameId") + "/" + localStorage.getItem('userID') + "/fold", this.returnToken())
     }
 
     async raise() {
-        await api.put("/games/1/" + localStorage.getItem('userID') + "/raise", this.returnRaiseAmountAndToken())
+        await api.put("/games/" + localStorage.getItem("gameId") + "/" + localStorage.getItem('userID') + "/raise", this.returnRaiseAmountAndToken())
         this.state.raiseAmount = null;
         document.getElementById("raiseInputField").value = "";
     }
 
     async sendMessage(){
-        await api.put("/games/1/" + localStorage.getItem('userID') + "/chats", this.returnChatMessageAndToken())
+        await api.put("/games/" + localStorage.getItem("gameId") + "/" + localStorage.getItem('userID') + "/chats", this.returnChatMessageAndToken())
         this.state.chatMessage = null;
         document.getElementById("chatInputField").value = "";
     }
 
     async showdown() {
-        const showdown = await api.get('/games/1/showdown', {headers: {Authorization: localStorage.getItem('token')}})
+        const showdown = await api.get('/games/" + localStorage.getItem("gameId") + "/showdown', {headers: {Authorization: localStorage.getItem('token')}})
         const playerList = showdown.data;
         for (let i = 0; i < 5; i++) {
             if (playerList[i].username == this.myselfUser.username) {
@@ -149,10 +149,8 @@ class GameScreen extends React.Component {
     }
 
     async logoutEndGame() {
-        await api.put('/users/' + localStorage.getItem('userID') + '/logout', this.returnToken())
-        localStorage.removeItem('token');
-        localStorage.removeItem('userID');
-        this.props.history.push('/login');
+        await api.put('/games/' + localStorage.getItem('gameId') + '/' + localStorage.getItem('userID') + 'leave', this.returnToken())
+        this.props.history.push('/lobbyscreen');
         this.gameEnd = false;
     }
 
@@ -195,7 +193,7 @@ class GameScreen extends React.Component {
     }
 
     async revealCards(boolean) {
-        await api.put('/games/1/' + localStorage.getItem('userID') + '/show', this.returnTokenAndIfReveal(boolean));
+        await api.put('/games/" + localStorage.getItem("gameId") + "/' + localStorage.getItem('userID') + '/show', this.returnTokenAndIfReveal(boolean));
     }
 
     lostPlayersCounter = null;
@@ -230,11 +228,11 @@ class GameScreen extends React.Component {
             await this.fetchChat();
         }
 
-        const gameResponse = await api.get('/games/1', {headers: {Authorization: localStorage.getItem('token')}});
+        const gameResponse = await api.get('/games/" + localStorage.getItem("gameId") + "', {headers: {Authorization: localStorage.getItem('token')}});
         this.game = new Game(gameResponse.data);
 
 
-        const myselfUserResponse = await api.get('/games/1/' + localStorage.getItem('userID'), {headers: {Authorization: localStorage.getItem('token')}});
+        const myselfUserResponse = await api.get('/games/" + localStorage.getItem("gameId") + "/' + localStorage.getItem('userID'), {headers: {Authorization: localStorage.getItem('token')}});
         this.myselfUser = new User(myselfUserResponse.data);
         if (this.game.players.length == 5) {
             this.userOnTurn = this.game.onTurn;
