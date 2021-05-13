@@ -36,11 +36,12 @@ const ReadyBox = styled.div`
   padding: 8px;
 `;
 
-const NotReadySymbol = styled.div`
-  background: url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/greenplayingcards.png");
-  width: 100px;
-  height: 100px;
-  object-fit: fill;
+const IfSelfBox = styled.div`
+  width: 80px;
+  height: 100%;
+  background: white;
+  float: right;
+  padding: 8px;
 `;
 
 const PlayerName = styled.div`
@@ -58,14 +59,6 @@ const PlayerName = styled.div`
   text-align: left;
   padding-left: 15px;
   font-size: 16pt;
-`;
-
-const LobbyPlayerCount = styled.div`
-  color: red;
-  float: right;
-  padding-right: 25px;
-  font-size: 12pt;
-  line-height: 75px;
 `;
 
 const ReadyButton = styled(LeaveTableButton)`
@@ -100,20 +93,6 @@ const FormContainer = styled.div`
   border-radius: 5px;
   background-color: rgb(0, 0, 0, 0.8);
   padding-bottom: 100px;
-`;
-
-
-const Form = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  height: 80%;
-  font-size: 16px;
-  font-weight: 300;
-  padding-left: 37px;
-  padding-right: 37px;
-  transition: opacity 0.5s ease, transform 0.5s ease;
 `;
 
 
@@ -178,10 +157,9 @@ class LobbyScreen extends React.Component{
                             {this.lobby.players.length > 0 ? (
                                 <PlayerName>
                                     {this.lobby.players[0].username}
-                                    <LobbyPlayerCount></LobbyPlayerCount>
+                                    <IfSelfBox></IfSelfBox>
                                 </PlayerName>) : (
                                 <PlayerName>
-                                    <LobbyPlayerCount></LobbyPlayerCount>
                                 </PlayerName>
                             )}
                         </Border>
@@ -200,10 +178,8 @@ class LobbyScreen extends React.Component{
                         {this.lobby.players.length > 1 ? (
                             <PlayerName>
                                 {this.lobby.players[1].username}
-                                <LobbyPlayerCount></LobbyPlayerCount>
                             </PlayerName>) : (
                             <PlayerName>
-                                <LobbyPlayerCount></LobbyPlayerCount>
                             </PlayerName>
                         )}
                     </Border>
@@ -222,10 +198,8 @@ class LobbyScreen extends React.Component{
                         {this.lobby.players.length > 2 ? (
                             <PlayerName>
                                 {this.lobby.players[2].username}
-                                <LobbyPlayerCount></LobbyPlayerCount>
                             </PlayerName>) : (
                             <PlayerName>
-                                <LobbyPlayerCount></LobbyPlayerCount>
                             </PlayerName>
                         )}
                     </Border>
@@ -244,10 +218,8 @@ class LobbyScreen extends React.Component{
                         {this.lobby.players.length > 3 ? (
                             <PlayerName>
                                 {this.lobby.players[3].username}
-                                <LobbyPlayerCount></LobbyPlayerCount>
                             </PlayerName>) : (
                             <PlayerName>
-                                <LobbyPlayerCount></LobbyPlayerCount>
                             </PlayerName>
                         )}
                     </Border>
@@ -266,10 +238,8 @@ class LobbyScreen extends React.Component{
                         {this.lobby.players.length > 4 ? (
                             <PlayerName>
                                 {this.lobby.players[4].username}
-                                <LobbyPlayerCount></LobbyPlayerCount>
                             </PlayerName>) : (
                             <PlayerName>
-                                <LobbyPlayerCount></LobbyPlayerCount>
                             </PlayerName>
                         )}
                     </Border>
