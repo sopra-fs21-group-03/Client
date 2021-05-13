@@ -39,9 +39,8 @@ const ReadyBox = styled.div`
 const IfSelfBox = styled.div`
   width: 80px;
   height: 100%;
-  background: white;
   float: right;
-  padding: 8px;
+  padding: 8px 18px 8px 8px ;
 `;
 
 const PlayerName = styled.div`
@@ -109,7 +108,7 @@ class LobbyScreen extends React.Component{
     async updateLobby(){
         const response = await api.get('/lobbies/' + localStorage.getItem("gameId"), {headers: {Authorization: localStorage.getItem('token')}});
         this.lobby = new LobbyInfo(response.data);
-        console.log(this.lobby.gameCanStart);
+        console.log(this.lobby.players[1].username + localStorage.getItem("username"));
         if(this.lobby.gameCanStart){
             this.props.history.push('/gamescreen');
         }
@@ -157,7 +156,13 @@ class LobbyScreen extends React.Component{
                             {this.lobby.players.length > 0 ? (
                                 <PlayerName>
                                     {this.lobby.players[0].username}
-                                    <IfSelfBox></IfSelfBox>
+                                    {this.lobby.players[0].username == localStorage.getItem("username") ? (
+                                        <IfSelfBox>
+                                            <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/crown.png"/>
+                                        </IfSelfBox>
+                                    ) : (
+                                        <IfSelfBox></IfSelfBox>
+                                    )}
                                 </PlayerName>) : (
                                 <PlayerName>
                                 </PlayerName>
@@ -178,6 +183,13 @@ class LobbyScreen extends React.Component{
                         {this.lobby.players.length > 1 ? (
                             <PlayerName>
                                 {this.lobby.players[1].username}
+                                {this.lobby.players[1].username == localStorage.getItem("username") ? (
+                                    <IfSelfBox>
+                                        <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/crown.png"/>
+                                    </IfSelfBox>
+                                ) : (
+                                    <IfSelfBox></IfSelfBox>
+                                )}
                             </PlayerName>) : (
                             <PlayerName>
                             </PlayerName>
@@ -198,6 +210,13 @@ class LobbyScreen extends React.Component{
                         {this.lobby.players.length > 2 ? (
                             <PlayerName>
                                 {this.lobby.players[2].username}
+                                {this.lobby.players[2].username == localStorage.getItem("username") ? (
+                                    <IfSelfBox>
+                                        <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/crown.png"/>
+                                    </IfSelfBox>
+                                ) : (
+                                    <IfSelfBox></IfSelfBox>
+                                )}
                             </PlayerName>) : (
                             <PlayerName>
                             </PlayerName>
@@ -218,6 +237,13 @@ class LobbyScreen extends React.Component{
                         {this.lobby.players.length > 3 ? (
                             <PlayerName>
                                 {this.lobby.players[3].username}
+                                {this.lobby.players[3].username == localStorage.getItem("username") ? (
+                                    <IfSelfBox>
+                                        <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/crown.png"/>
+                                    </IfSelfBox>
+                                ) : (
+                                    <IfSelfBox></IfSelfBox>
+                                )}
                             </PlayerName>) : (
                             <PlayerName>
                             </PlayerName>
@@ -238,6 +264,13 @@ class LobbyScreen extends React.Component{
                         {this.lobby.players.length > 4 ? (
                             <PlayerName>
                                 {this.lobby.players[4].username}
+                                {this.lobby.players[4].username == localStorage.getItem("username") ? (
+                                    <IfSelfBox>
+                                        <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/crown.png"/>
+                                    </IfSelfBox>
+                                ) : (
+                                    <IfSelfBox></IfSelfBox>
+                                )}
                             </PlayerName>) : (
                             <PlayerName>
                             </PlayerName>

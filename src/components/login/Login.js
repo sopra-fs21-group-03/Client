@@ -140,6 +140,9 @@ class Login extends React.Component {
    */
   async login() {
     try {
+
+      localStorage.setItem('username', this.state.username);
+      
       const requestBody = JSON.stringify({
         username: this.state.username,
         password: this.state.password
@@ -150,7 +153,6 @@ class Login extends React.Component {
 
       // Store the token into the local storage.
       localStorage.setItem('token', user.token);
-      localStorage.setItem('username', user.username);
 
       const secondResponse = await api.get('/users/ids',{headers:{ Authorization: localStorage.getItem('token')}});
 
