@@ -108,7 +108,6 @@ class LobbyScreen extends React.Component{
     async updateLobby(){
         const response = await api.get('/lobbies/' + localStorage.getItem("gameId"), {headers: {Authorization: localStorage.getItem('token')}});
         this.lobby = new LobbyInfo(response.data);
-        console.log(this.lobby.players[1].username + localStorage.getItem("username"));
         if(this.lobby.gameCanStart){
             this.props.history.push('/gamescreen');
         }

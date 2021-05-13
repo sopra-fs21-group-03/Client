@@ -167,14 +167,19 @@ class LobbyScreen extends React.Component{
                 <FormContainer>
                     <Form>
                         {this.state.lobbies.map(lobby => {return(
-                            <Border onClick={() => {
+                            <Border
+                                onClick={() => {
                                 localStorage.setItem("gameId", lobby.id);
                                 this.joinLobby(lobby.id);
                             }}>
                                 <LobbyNumber>{lobby.id}</LobbyNumber>
                                 <LobbyInfo>
                                     {lobby.name}
-                                    <LobbyPlayerCount>{lobby.playerCount+"/5 Players"}</LobbyPlayerCount>
+                                    {lobby.inGame ? (
+                                        <LobbyPlayerCount>In Game</LobbyPlayerCount>
+                                    ) : (
+                                        <LobbyPlayerCount>{lobby.playerCount+"/5 Players"}</LobbyPlayerCount>
+                                    )}
                                 </LobbyInfo>
                             </Border>
                         );})}
