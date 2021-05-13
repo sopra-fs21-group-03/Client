@@ -21,7 +21,6 @@ const Border = styled.button`
 `;
 
 const ReadyBox = styled.div`
-  color: red;
   width: 80px;
   height: 80px;
   left: 20%;
@@ -34,6 +33,14 @@ const ReadyBox = styled.div`
   font-size: 32pt;
   line-height: 70px;
   text-align: center;
+  padding: 8px;
+`;
+
+const NotReadySymbol = styled.div`
+  background: url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/greenplayingcards.png");
+  width: 100px;
+  height: 100px;
+  object-fit: fill;
 `;
 
 const PlayerName = styled.div`
@@ -123,7 +130,7 @@ class LobbyScreen extends React.Component{
     async updateLobby(){
         const response = await api.get('/lobbies/' + localStorage.getItem("gameId"), {headers: {Authorization: localStorage.getItem('token')}});
         this.lobby = new LobbyInfo(response.data);
-        console.log(this.lobby.players.length);
+        console.log(this.lobby.players[0].readyStatus);
         //this.setState({ lobbies: response.data });
     }
 
@@ -154,9 +161,17 @@ class LobbyScreen extends React.Component{
             <LobbbyScreenBaseContainer>
                 <FormContainer>
                         <Border margintop = '50px'>
-                            <ReadyBox>
-                                    <i className="gg-close"></i>
-                            </ReadyBox>
+                            {this.lobby.players.length > 0 ? (
+                                <ReadyBox>
+                                    {this.lobby.players[0].readyStatus == 'READY' ? (
+                                        <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/greenplayingcards.png"/>
+                                    ) : (
+                                        <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/redcards.png"/>
+                                    )}
+                                </ReadyBox>
+                            ) : (
+                                <ReadyBox></ReadyBox>
+                            )}
                             {this.lobby.players.length > 0 ? (
                                 <PlayerName>
                                     {this.lobby.players[0].username}
@@ -168,9 +183,17 @@ class LobbyScreen extends React.Component{
                             )}
                         </Border>
                     <Border>
-                        <ReadyBox>
-                            <i className="notReadyCards"></i>
-                        </ReadyBox>
+                        {this.lobby.players.length > 1 ? (
+                            <ReadyBox>
+                                {this.lobby.players[1].readyStatus == 'READY' ? (
+                                    <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/greenplayingcards.png"/>
+                                ) : (
+                                    <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/redcards.png"/>
+                                )}
+                            </ReadyBox>
+                        ) : (
+                            <ReadyBox></ReadyBox>
+                        )}
                         {this.lobby.players.length > 1 ? (
                             <PlayerName>
                                 {this.lobby.players[1].username}
@@ -182,7 +205,17 @@ class LobbyScreen extends React.Component{
                         )}
                     </Border>
                     <Border>
-                        <ReadyBox></ReadyBox>
+                        {this.lobby.players.length > 2 ? (
+                            <ReadyBox>
+                                {this.lobby.players[2].readyStatus == 'READY' ? (
+                                    <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/greenplayingcards.png"/>
+                                ) : (
+                                    <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/redcards.png"/>
+                                )}
+                            </ReadyBox>
+                        ) : (
+                            <ReadyBox></ReadyBox>
+                        )}
                         {this.lobby.players.length > 2 ? (
                             <PlayerName>
                                 {this.lobby.players[2].username}
@@ -194,7 +227,17 @@ class LobbyScreen extends React.Component{
                         )}
                     </Border>
                     <Border>
-                        <ReadyBox></ReadyBox>
+                        {this.lobby.players.length > 3 ? (
+                            <ReadyBox>
+                                {this.lobby.players[3].readyStatus == 'READY' ? (
+                                    <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/greenplayingcards.png"/>
+                                ) : (
+                                    <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/redcards.png"/>
+                                )}
+                            </ReadyBox>
+                        ) : (
+                            <ReadyBox></ReadyBox>
+                        )}
                         {this.lobby.players.length > 3 ? (
                             <PlayerName>
                                 {this.lobby.players[3].username}
@@ -206,7 +249,17 @@ class LobbyScreen extends React.Component{
                         )}
                     </Border>
                     <Border>
-                        <ReadyBox></ReadyBox>
+                        {this.lobby.players.length > 4 ? (
+                            <ReadyBox>
+                                {this.lobby.players[4].readyStatus == 'READY' ? (
+                                    <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/greenplayingcards.png"/>
+                                ) : (
+                                    <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/redcards.png"/>
+                                )}
+                            </ReadyBox>
+                        ) : (
+                            <ReadyBox></ReadyBox>
+                        )}
                         {this.lobby.players.length > 4 ? (
                             <PlayerName>
                                 {this.lobby.players[4].username}

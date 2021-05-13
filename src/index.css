@@ -289,56 +289,7 @@ button {
   }
 }
 
-.gg-check {
-  box-sizing: border-box;
-  position: relative;
-  display: block;
-  transform: scale(var(--ggs,1));
-  width: calc(22px * 4);
-  height: calc(22px * 4);
-  border: 2px solid transparent;
-  border-radius: 100px
-}
-.gg-check::after {
-  content: "";
-  display: block;
-  box-sizing: border-box;
-  position: absolute;
-  left: 10px;
-  top: -10px;
-  width: calc(6px * 5);
-  height: calc(10px * 5);
-  border-width: 0 8px 8px 0;
-  border-style: solid;
-  border-color: limegreen;
-  transform-origin: bottom left;
-  transform: rotate(45deg)
-}
-
-.gg-close {
-  box-sizing: border-box;
-  position: relative;
-  display: block;
-  transform: scale(var(--ggs,1));
-  width: calc(22px * 5);
-  height: calc(22px * 5);
-  border: 2px solid transparent;
-  border-radius: 40px;
-}
-.gg-close::after,
-.gg-close::before {
-  content: "";
-  display: block;
-  box-sizing: border-box;
-  position: absolute;
-  width: calc(16px * 2);
-  height: calc(2px * 2);
-  background: currentColor;
-  transform: rotate(45deg);
-  border-radius: 5px;
-  top: 22px;
-  left: 8px
-}
-.gg-close::after {
-  transform: rotate(-45deg)
+.resize {
+  width: 100%;
+  height: auto;
 }
