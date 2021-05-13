@@ -13,6 +13,7 @@ const Border = styled.button`
   margin-right: auto;
   border: none;
   background: none;
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
 `;
 
 const LobbyNumber = styled.div`
