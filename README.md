@@ -66,3 +66,4 @@ Looser Picture: https://i0.wp.com/firewireblog.com/wp-content/uploads/2013/10/tu
 Cards without hand: https://www.flaticon.com/svg/vstatic/svg/4330/4330439.svg?token=exp=1620903499~hmac=f1cd894f803e1054d0d19ab060831d6d
 Cards with hand: https://www.flaticon.com/svg/vstatic/svg/4363/4363224.svg?token=exp=1620903485~hmac=0f94682c2e77c174419b61b61b747f48
 Crown: https://www.flaticon.com/svg/vstatic/svg/1804/1804177.svg?token=exp=1620909398~hmac=f5cbed5bbf9be9043a1fb8ab4506078e
+CardBackground: https://images.cdn2.stockunlimited.net/preview1300/playing-cards-background_1608080.jpg

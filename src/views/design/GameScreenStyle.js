@@ -197,6 +197,7 @@ export const TextBacklogChatContainer = styled.div`
   overflow: auto;
   color: white;
   word-wrap:break-word;
+  id: ${props => props.id || null}; 
 `;
 
 export const ChatInputField = styled.input`
@@ -313,7 +314,7 @@ export const GameContainer = styled.div`
   margin-right: auto;
   padding-right: 15px;
   max-width: 100%;
-  background-image: url('https://wallpaperaccess.com/full/2924715.jpg');
+  background-image: url('http://st.gde-fon.com/wallpapers_original/336962_korichnevyj_parket_fonovaya_1920x1080_www.Gde-Fon.com.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -732,7 +733,12 @@ export const TopRightPlayerContainer = styled.div`
 export const CardBox = styled.div`
   border: solid;
   border-color: white;
-  background-color: #dd1630;
+  background: 
+  linear-gradient(60deg, darkblue 25%, transparent 25%), 
+  linear-gradient(-45deg, darkblue 25%, transparent 25%),
+  linear-gradient(60deg, transparent 75%, darkblue 75%),
+  linear-gradient(-45deg, white 75%, darkblue 75%);
+  background-size:15px 15px; 
   margin: 0;
   position: absolute;
   margin-right: 0%;
@@ -745,6 +751,7 @@ export const CardBox = styled.div`
   padding-left: auto;
   margin-right: auto;
   padding-right: auto;
+  border-radius: 5px;
   transform: ${props => props.transform || null}; 
 `;
 

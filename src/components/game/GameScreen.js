@@ -68,9 +68,22 @@ class GameScreen extends React.Component {
         };
     }
 
+    scrollToEnd(){
+        let chatList = document.getElementById("chatList");
+        chatList.scrollTop = chatList.scrollHeight;
+    }
+
+    chatCounter = 0;
+
     async fetchChat() {
         const response = await api.get("/games/" + localStorage.getItem("gameId") + "/" + localStorage.getItem('userID') + "/chats", {headers: {Authorization: localStorage.getItem('token')}});
         this.setState({chatLog: response.data});
+        if (response.data.length > this.chatCounter){
+            if(document.getElementById("chatList") != null){
+                this.scrollToEnd();
+            }
+        }
+        this.chatCounter = response.data.length;
     }
 
     async call() {
@@ -142,9 +155,7 @@ class GameScreen extends React.Component {
         return requestBodyChatMessage
     }
 
-    logout() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('userID');
+    leaveTable() {
         this.props.history.push('/login');
     }
 
@@ -212,6 +223,10 @@ class GameScreen extends React.Component {
 
 
     async updateGameScreen() {
+
+        //if(document.getElementById("chatList") != null){
+        //    this.scrollToEnd();
+        //}
 
         if (this.game.showdown == true) {
             this.showdown();
@@ -364,7 +379,7 @@ class GameScreen extends React.Component {
                                     {this.displayUser(this.user2)}
                                 </PlayerInfoContainer>
                             )
-                            };
+                            }
                             {this.user2.username == this.userOnTurn.username ? (
                                 <ProfileCircle
                                     top="12.5%" left="30%" bordercolor = "red"
@@ -374,7 +389,7 @@ class GameScreen extends React.Component {
                                     top="12.5%" left="30%" bordercolor = "white"
                                     background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user1.jpg")'></ProfileCircle>
                             )
-                            };
+                            }
                             {this.user2.blind == "BIG" ?
                                 (<BigBlind
                                     top="70%" left="75%" transform="rotate(180deg)">B</BigBlind>) :
@@ -423,7 +438,7 @@ class GameScreen extends React.Component {
                                     {this.displayUser(this.user3)}
                                 </PlayerInfoContainer>
                             )
-                            };
+                            }
                             {this.user3.username == this.userOnTurn.username ? (
                                 <ProfileCircle
                                     top="12.5%" left="40%" bordercolor = "red"
@@ -432,7 +447,7 @@ class GameScreen extends React.Component {
                                 <ProfileCircle
                                     top="12.5%" left="40%" bordercolor = "white"
                                     background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user2.jpg")'></ProfileCircle>
-                            )};
+                            )}
                             <PlayerCardsContainer
                                 top="72.5%" left="20%" width="30%" height="55%">
                                 <CardBox
@@ -476,7 +491,7 @@ class GameScreen extends React.Component {
                                     borderradius="10px" border="solid white 1px">
                                     {this.displayUser(this.user1)}
                                 </PlayerInfoContainer>
-                            )};
+                            )}
                             {this.user1.username == this.userOnTurn.username ? (
                                 <ProfileCircle
                                     top="2%" left="0%" bordercolor = "red"
@@ -486,7 +501,7 @@ class GameScreen extends React.Component {
                                     top="2%" left="0%" bordercolor = "white"
                                     background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user3.jpg")'></ProfileCircle>
                             )
-                            };
+                            }
                             <PlayerCardsContainer
                                 top="50%" left="78%" width="40%" height="50%">
                                 <CardBox
@@ -627,7 +642,7 @@ class GameScreen extends React.Component {
                     <LowerContainer>
                         <ChatContainer>
                             <InnerTextChatContainer>
-                                <TextBacklogChatContainer>
+                                <TextBacklogChatContainer id = 'chatList'>
                                     {!this.state.chatLog ? (<h1></h1>) : (
                                         this.state.chatLog.map(ChatMessage => {
                                                 return (
@@ -676,7 +691,6 @@ class GameScreen extends React.Component {
                                 </CardBox>
                             </OwnCardsContainer>
                         )}
-
                         <FoldContainer>
                             {this.game.showdown == true ?
                                 (<h1></h1>) :
@@ -687,7 +701,7 @@ class GameScreen extends React.Component {
                         </FoldContainer>
                         <LeaveTableContainer>
                             <LeaveTableButton onClick={() => {
-                                this.logout()
+                                this.leaveTable()
                             }}>
                                 Leave Table
                             </LeaveTableButton>

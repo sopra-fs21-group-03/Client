@@ -160,6 +160,8 @@ class Register extends React.Component {
 
       localStorage.setItem('userID', userForUserID.id);
 
+      localStorage.removeItem('gameId');
+
       // Login successfully worked --> navigate to the route /game in the GameRouter
       this.props.history.push(`/lobbyscreen`);
     } catch (error) {
