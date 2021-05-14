@@ -79,23 +79,23 @@ class GameScreen extends React.Component {
 
         let profilepicture = null;
         if(game.players[0].username == userFrontEnd.username){
-            profilepicture = <ProfilePicture background = 'url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user1.jpg")'></ProfilePicture>
+            profilepicture = <ProfilePicture background = 'url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user1.jpg") center'></ProfilePicture>
             return profilepicture
         }
         else if(game.players[1].username == userFrontEnd.username){
-            profilepicture = <ProfilePicture background = 'url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user2.jpg")'></ProfilePicture>
+            profilepicture = <ProfilePicture background = 'url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user2.jpg") center'></ProfilePicture>
             return profilepicture
         }
         else if(game.players[2].username == userFrontEnd.username){
-            profilepicture = <ProfilePicture background = 'url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user3.jpg")'></ProfilePicture>
+            profilepicture = <ProfilePicture background = 'url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user3.jpg") center'></ProfilePicture>
             return profilepicture
         }
         else if(game.players[3].username == userFrontEnd.username){
-            profilepicture = <ProfilePicture background = 'url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user4.jpg")'></ProfilePicture>
+            profilepicture = <ProfilePicture background = 'url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user4.jpg") center'></ProfilePicture>
             return profilepicture
         }
         else if(game.players[4].username == userFrontEnd.username){
-            profilepicture = <ProfilePicture background = 'url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user5.jpg")'></ProfilePicture>
+            profilepicture = <ProfilePicture background = 'url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user5.jpg") center'></ProfilePicture>
             return profilepicture
         }
     }
