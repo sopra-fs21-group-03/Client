@@ -65,11 +65,11 @@ const ProfilePicture = styled.div`
 
 const BottomTable = styled.div`
   position: absolute;
-  top: 70%;
-  width: 100%;
+  top: 68%;
+  width: 130%;
+  left: -10%;
   height: 100%;
-  margin-top: 0;
-  background: url('https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/whiskeykantefertigmuster1.png'); 
+  background: url(''); 
 `;
 
 //Normal PokerScreen
@@ -766,7 +766,6 @@ class GameScreen extends React.Component {
                             </LeaveTableButton>
                         </LeaveTableContainer>
                     </LowerContainer>
-                    <BottomTable></BottomTable>
                     {this.myselfUser.username == this.userOnTurn.username ?
                         (<BottomContainer bordercolor="red">
                             <PlayerInfoContainer
