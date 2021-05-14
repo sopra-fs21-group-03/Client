@@ -64,9 +64,12 @@ const ProfilePicture = styled.div`
 `;
 
 const BottomTable = styled.div`
+  position: absolute;
+  top: 70%;
   width: 100%;
   height: 100%;
-  background: url('https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/Tischkanteready.png'); 
+  margin-top: 0;
+  background: url('https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/whiskeykantefertigmuster1.png'); 
 `;
 
 //Normal PokerScreen
@@ -763,6 +766,7 @@ class GameScreen extends React.Component {
                             </LeaveTableButton>
                         </LeaveTableContainer>
                     </LowerContainer>
+                    <BottomTable></BottomTable>
                     {this.myselfUser.username == this.userOnTurn.username ?
                         (<BottomContainer bordercolor="red">
                             <PlayerInfoContainer
@@ -775,7 +779,6 @@ class GameScreen extends React.Component {
                             </ProfileCircle>
                         </BottomContainer>) :
                         (<BottomContainer bordercolor="white">
-                            <BottomTable></BottomTable>
                             <PlayerInfoContainer
                                 top="50%" left="55%" width="30%" height="80%" color="white">
                                 {this.displayUser(this.myselfUser)}

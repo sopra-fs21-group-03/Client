@@ -487,7 +487,7 @@ export const LowerContainer = styled.div`
 `;
 
 export const BottomContainer = styled.div`
-background-color: grey;
+background-color: transparent;
   margin: 0;
   position: absolute;
   top: 95%;
