@@ -63,6 +63,12 @@ const ProfilePicture = styled.div`
   background: ${props => props.background || null}; 
 `;
 
+const BottomTable = styled.div`
+  width: 100%;
+  height: 100%;
+  background: url('https://i.pinimg.com/originals/17/27/ac/1727ac629f102cc37ca87cb703f3b1c9.jpg'); 
+`;
+
 //Normal PokerScreen
 class GameScreen extends React.Component {
     constructor() {
@@ -769,6 +775,7 @@ class GameScreen extends React.Component {
                             </ProfileCircle>
                         </BottomContainer>) :
                         (<BottomContainer bordercolor="white">
+                            <BottomTable></BottomTable>
                             <PlayerInfoContainer
                                 top="50%" left="55%" width="30%" height="80%" color="white">
                                 {this.displayUser(this.myselfUser)}
