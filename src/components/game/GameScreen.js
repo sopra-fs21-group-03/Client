@@ -53,8 +53,15 @@ import {
 import Player from "../../views/Player";
 import ChatMessageField from "../../views/ChatMessageField";
 import {Spinner} from "../../views/design/Spinner";
+import styled from "styled-components";
 
 document.body.style.backgroundColor = "green";
+
+const ProfilePicture = styled.div`
+  width: 100%;
+  height: 100%;
+  background: ${props => props.background || null}; 
+`;
 
 //Normal PokerScreen
 class GameScreen extends React.Component {
@@ -66,6 +73,31 @@ class GameScreen extends React.Component {
             chatMessage: null,
             chatLog: null
         };
+    }
+
+    returnProfilePicture(game, userFrontEnd){
+
+        let profilepicture = null;
+        if(game.players[0].username == userFrontEnd.username){
+            profilepicture = <ProfilePicture background = 'url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user1.jpg")'></ProfilePicture>
+            return profilepicture
+        }
+        else if(game.players[1].username == userFrontEnd.username){
+            profilepicture = <ProfilePicture background = 'url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user2.jpg")'></ProfilePicture>
+            return profilepicture
+        }
+        else if(game.players[2].username == userFrontEnd.username){
+            profilepicture = <ProfilePicture background = 'url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user3.jpg")'></ProfilePicture>
+            return profilepicture
+        }
+        else if(game.players[3].username == userFrontEnd.username){
+            profilepicture = <ProfilePicture background = 'url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user4.jpg")'></ProfilePicture>
+            return profilepicture
+        }
+        else if(game.players[4].username == userFrontEnd.username){
+            profilepicture = <ProfilePicture background = 'url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user5.jpg")'></ProfilePicture>
+            return profilepicture
+        }
     }
 
     scrollToEnd(){
@@ -313,6 +345,7 @@ class GameScreen extends React.Component {
     }
 
     render() {
+        console.log(this.game)
         if (this.game.round == "ENDED") {
             if (this.myselfUser.money != 0) {
                 return (
@@ -384,12 +417,14 @@ class GameScreen extends React.Component {
                             }
                             {this.user2.username == this.userOnTurn.username ? (
                                 <ProfileCircle
-                                    top="12.5%" left="30%" bordercolor = "red"
-                                    background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user1.jpg")'></ProfileCircle>
+                                    top="12.5%" left="30%" bordercolor = "red">
+                                    {this.returnProfilePicture(this.game, this.user2)}
+                                </ProfileCircle>
                             ) : (
                                 <ProfileCircle
-                                    top="12.5%" left="30%" bordercolor = "white"
-                                    background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user1.jpg")'></ProfileCircle>
+                                    top="12.5%" left="30%" bordercolor = "white">
+                                    {this.returnProfilePicture(this.game, this.user2)}
+                                </ProfileCircle>
                             )
                             }
                             {this.user2.blind == "BIG" ?
@@ -443,12 +478,14 @@ class GameScreen extends React.Component {
                             }
                             {this.user3.username == this.userOnTurn.username ? (
                                 <ProfileCircle
-                                    top="12.5%" left="40%" bordercolor = "red"
-                                    background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user2.jpg")'></ProfileCircle>
+                                    top="12.5%" left="40%" bordercolor = "red">
+                                    {this.returnProfilePicture(this.game, this.user3)}
+                                </ProfileCircle>
                             ) : (
                                 <ProfileCircle
-                                    top="12.5%" left="40%" bordercolor = "white"
-                                    background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user2.jpg")'></ProfileCircle>
+                                    top="12.5%" left="40%" bordercolor = "white">
+                                    {this.returnProfilePicture(this.game, this.user3)}
+                                </ProfileCircle>
                             )}
                             <PlayerCardsContainer
                                 top="72.5%" left="20%" width="30%" height="55%">
@@ -496,12 +533,14 @@ class GameScreen extends React.Component {
                             )}
                             {this.user1.username == this.userOnTurn.username ? (
                                 <ProfileCircle
-                                    top="2%" left="0%" bordercolor = "red"
-                                    background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user3.jpg")'></ProfileCircle>
+                                    top="2%" left="0%" bordercolor = "red">
+                                    {this.returnProfilePicture(this.game, this.user1)}
+                                </ProfileCircle>
                             ) : (
                                 <ProfileCircle
-                                    top="2%" left="0%" bordercolor = "white"
-                                    background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user3.jpg")'></ProfileCircle>
+                                    top="2%" left="0%" bordercolor = "white">
+                                    {this.returnProfilePicture(this.game, this.user1)}
+                                </ProfileCircle>
                             )
                             }
                             <PlayerCardsContainer
@@ -615,12 +654,14 @@ class GameScreen extends React.Component {
                             )}
                             {this.user4.username == this.userOnTurn.username ? (
                                 <ProfileCircle
-                                    top="2%" left="60%" bordercolor="red"
-                                    background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user4.jpg")'></ProfileCircle>
+                                    top="2%" left="60%" bordercolor="red">
+                                    {this.returnProfilePicture(this.game, this.user4)}
+                                </ProfileCircle>
                             ) : (
                                 <ProfileCircle
-                                    top="2%" left="60%" bordercolor="white"
-                                    background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user4.jpg")'></ProfileCircle>
+                                    top="2%" left="60%" bordercolor="white">
+                                    {this.returnProfilePicture(this.game, this.user4)}
+                                </ProfileCircle>
                             )}
                             <PlayerCardsContainer
                                 top="50%" left="22%" width="40%" height="50%">
@@ -723,8 +764,9 @@ class GameScreen extends React.Component {
                                 {this.displayUser(this.myselfUser)}
                             </PlayerInfoContainer>
                             <ProfileCircle
-                                top="-120%" left="30%" bordercolor="red"
-                                background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user5.jpg")'></ProfileCircle>
+                                top="-120%" left="30%" bordercolor="red">
+                                {this.returnProfilePicture(this.game, this.myselfUser)}
+                            </ProfileCircle>
                         </BottomContainer>) :
                         (<BottomContainer bordercolor="white">
                             <PlayerInfoContainer
@@ -732,8 +774,9 @@ class GameScreen extends React.Component {
                                 {this.displayUser(this.myselfUser)}
                             </PlayerInfoContainer>
                             <ProfileCircle
-                                top="-120%" left="30%" bordercolor="white"
-                                background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user5.jpg")'></ProfileCircle>
+                                top="-120%" left="30%" bordercolor="white">
+                                {this.returnProfilePicture(this.game, this.myselfUser)}
+                            </ProfileCircle>
                         </BottomContainer>)}
                 </GameContainer>);
         }

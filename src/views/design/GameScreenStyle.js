@@ -17,6 +17,7 @@ export const ProfileCircle = styled.div`
   background: ${props => props.background || null} center;  
   border: solid;
   border-color: ${props => props.bordercolor || null};
+  overflow: hidden;
 `;
 
 export const BigBlind = styled.div`
