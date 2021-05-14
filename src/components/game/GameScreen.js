@@ -66,7 +66,7 @@ const ProfilePicture = styled.div`
 const BottomTable = styled.div`
   width: 100%;
   height: 100%;
-  background: url('https://i.pinimg.com/originals/17/27/ac/1727ac629f102cc37ca87cb703f3b1c9.jpg'); 
+  background: url('https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/Tischkanteready.png'); 
 `;
 
 //Normal PokerScreen

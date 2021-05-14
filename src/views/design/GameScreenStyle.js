@@ -497,9 +497,7 @@ background-color: grey;
   width: 100%;
   height: 10%;
   margin-left: auto;
-  padding-left: 15px;
   margin-right: auto;
-  padding-right: 15px;
   border-top: solid ${props => props.bordercolor || null}; 
 `;
 
