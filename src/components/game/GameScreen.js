@@ -48,7 +48,13 @@ import {
     CardBox,
     PlayerInfoContainer,
     FrontCardBox,
-    LoadingGameContainer, LeaveTableButtonEndScreen, LooserPicture, LooserContainer, ChatSendButton
+    LoadingGameContainer,
+    LeaveTableButtonEndScreen,
+    LooserPicture,
+    LooserContainer,
+    ChatSendButton,
+    EmojiButton,
+    EmojiContainer, SingleEmojiButton
 } from "../../views/design/GameScreenStyle";
 import Player from "../../views/Player";
 import ChatMessageField from "../../views/ChatMessageField";
@@ -63,6 +69,7 @@ const ProfilePicture = styled.div`
   background: ${props => props.background || null}; 
 `;
 
+//For picture in bottomContainer´´
 const BottomTable = styled.div`
   position: absolute;
   top: 68%;
@@ -151,6 +158,11 @@ class GameScreen extends React.Component {
             this.state.chatMessage = null;
             document.getElementById("chatInputField").value = "";
         }
+    }
+
+    addEmoji(emoji){
+        document.getElementById("chatInputField").value = document.getElementById("chatInputField").value + emoji;
+        this.handleInputChange('chatMessage', document.getElementById("chatInputField").value);
     }
 
     async showdown() {
@@ -354,7 +366,6 @@ class GameScreen extends React.Component {
     }
 
     render() {
-        console.log(this.game)
         if (this.game.round == "ENDED") {
             if (this.myselfUser.money != 0) {
                 return (
@@ -709,9 +720,139 @@ class GameScreen extends React.Component {
                                                 onKeyPress={this.enterPressed.bind(this)}
                                                 >
                                 </ChatInputField>
-                                <script>
-
-                                </script>
+                                <EmojiButton
+                                    onClick={() => {
+                                        var x = document.getElementById("EmojiContainer")
+                                        if(window.getComputedStyle(x).display === "none"){
+                                            document.getElementById("EmojiContainer").style.display = 'inline'}
+                                        else{
+                                            document.getElementById("EmojiContainer").style.display = 'none'
+                                        }
+                                }}
+                                >😀</EmojiButton>
+                                <EmojiContainer id = "EmojiContainer">
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("😃");
+                                        }}
+                                    >
+                                        😃
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("🤑");
+                                        }}>
+                                        🤑
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("🥱");
+                                        }}>
+                                        🥱
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("😴");
+                                        }}>
+                                        😴
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("😜");
+                                        }}>
+                                        😜
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("🤪");
+                                        }}>
+                                        🤪
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("😢");
+                                        }}>
+                                        😢
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("😭");
+                                        }}>
+                                        😭
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("😤");
+                                        }}>
+                                        😤
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("🤢");
+                                        }}>
+                                        🤢
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("🤮");
+                                        }}>
+                                        🤮
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("🤬");
+                                        }}>
+                                        🤬
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("🤯");
+                                        }}>
+                                        🤯
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("🥳");
+                                        }}>
+                                        🥳
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("👨‍🎓");
+                                        }}>
+                                        👨‍🎓
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("🤵");
+                                        }}>
+                                        🤵
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("👨🏻‍💻");
+                                        }}>
+                                        👨🏻‍💻
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("🤡");
+                                        }}>
+                                        🤡
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("👽");
+                                        }}>
+                                        👽
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("💩");
+                                        }}>
+                                        💩
+                                    </SingleEmojiButton>
+                                </EmojiContainer>
                                 <ChatSendButton
                                     id = "chatButton"
                                     disabled={!this.state.chatMessage}

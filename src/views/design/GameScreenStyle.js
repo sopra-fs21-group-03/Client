@@ -205,7 +205,7 @@ export const ChatInputField = styled.input`
   &::placeholder {
     color: rgba(0, 0, 0, 0.8);
   }
-  width: 75%;
+  width: 65%;
   height: 10%;
   padding-left: 15px;
   margin-left: -4px;
@@ -237,6 +237,68 @@ export const ChatSendButton = styled.button`
   id: ${props => props.id || null}; 
   type: submit;
 `
+
+export const EmojiButton = styled.button`
+  &:hover {
+    transform: scale(1.1);
+  }
+  position: absolute;
+  top: 87.5%;
+  left: 70%;
+  width: 8%;
+  height: 10%;
+  border: none;
+  border-radius: 10px;
+  color: black;
+  background-color: black;
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
+  transition: all 0.3s ease;
+  border: solid 1px red;
+`
+
+export const SingleEmojiButton = styled.button`
+  &:hover {
+    transform: scale(1.1);
+  }
+  width: 18%;
+  height: 18%;
+  line-height: 15%;
+  border: none;
+  border-radius: 10px;
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
+  transition: all 0.3s ease;
+  text-align: center;
+  margin-top: 2%;
+  margin-left: 2%;
+  font-size: 16pt;
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+`
+
+export const EmojiContainer = styled.div`
+  background: rgb(0,0,0,0.9);
+  margin: 0;
+  margin-top:5px;
+  position: absolute;
+  left: 74%;
+  top: 52.5%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 60%;
+  margin-left: auto;
+  padding-right: 15px;
+  margin-right: auto;
+  overflow: auto;
+  color: white;
+  word-wrap:break-word;
+  border: solid 1px red;
+  border-radius: 10px;
+  id: ${props => props.id || null};
+  display: none;
+`;
 
 export const Tablesquare = styled.div`
 background-color: green;
