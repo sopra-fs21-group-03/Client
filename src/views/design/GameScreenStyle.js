@@ -5,10 +5,10 @@ import {BlackButton} from "../../views/design/BlackButton";
 export const ProfileCircle = styled.div`
   position: absolute;
   width: 150px; 
+  height: 150px; 
   left: ${props => props.left || null}; 
   top: ${props => props.top || null}; 
   color: red;
-  height: 150px; 
   border-radius: 75px;  
   text-align: center;
   vertical-align: middle;
@@ -66,6 +66,7 @@ export const LeaveTableButton = styled(BlackButton)`
   width: 60%;
   font-size: 24pt;
   font-weight: 200;
+  overflow: hidden;
 `;
 
 export const LeaveTableButtonEndScreen = styled(BlackButton)`
@@ -94,12 +95,14 @@ export const CheckButton = styled(RedButton)`
     border-color: red;
     color: red;
   }
-  transition: all 2s ease;
+  transition: all 1s ease;
   position: absolute;
   width: 80%;
   left: 10%;
   top: 8%;
   color: white; 
+  height: 20%;
+  overflow: hidden;
 `;
 
 export const CallButton = styled(RedButton)`
@@ -110,12 +113,14 @@ export const CallButton = styled(RedButton)`
     border-color: red;
     color: red;
   }
-  transition: all 2s ease;
+  transition: all 1s ease;
   position: absolute;
   width: 80%;
   left: 10%;
   top: 25%;
   color: white; 
+  height: 50%;
+  overflow: hidden;
 `;
 
 export const RaiseButton = styled(RedButton)`
@@ -126,13 +131,15 @@ export const RaiseButton = styled(RedButton)`
     border-color: red;
     color: red;
   }
-  transition: all 2s ease;
+  transition: all 1s ease;
   position: absolute;
   width: 50%;
   left: 10%;
   top: 25%;
   color: white;
   border-radius: 10px 0 0 10px; 
+  height: 50%;
+  overflow: hidden;
 `;
 
 export const RaiseInput = styled.input`
@@ -142,7 +149,8 @@ export const RaiseInput = styled.input`
   left: 60%;
   top: 25%;
   color: red;
-  height: 50px;
+  height: 50%;
+  overflow: hidden;
   border-radius: 0 10px 10px 0;
   border: solid red;
   type: number;
@@ -158,12 +166,14 @@ export const FoldButton = styled(RedButton)`
     border-color: red;
     color: red;
   }
-  transition: all 2s ease;
+  transition: all 1s ease;
   position: absolute;
   width: 80%;
   left: 10%;
   top: 8%;
   color: white;
+  height: 20%;
+  overflow: hidden;
 `;
 
 export const InnerTextChatContainer = styled.div`
@@ -236,6 +246,7 @@ export const ChatSendButton = styled.button`
   transition: all 0.3s ease;
   id: ${props => props.id || null}; 
   type: submit;
+  overflow: hidden;
 `
 
 export const EmojiButton = styled.button`
@@ -254,6 +265,7 @@ export const EmojiButton = styled.button`
   cursor: ${props => (props.disabled ? "default" : "pointer")};
   transition: all 0.3s ease;
   border: solid 1px red;
+  overflow: hidden;
 `
 
 export const SingleEmojiButton = styled.button`
@@ -716,6 +728,7 @@ export const TotalPotContainer = styled.div`
   text-align: center;
   font-size: 24pt;
   color: red;
+  overflow: hidden;
 `;
 
 export const MiddleCardsContainer = styled.div`
@@ -811,7 +824,8 @@ export const CardBox = styled.div`
   margin-right: auto;
   padding-right: auto;
   border-radius: 5px;
-  transform: ${props => props.transform || null}; 
+  transform: ${props => props.transform || null};
+  overflow: hidden; 
 `;
 
 export const PlayerInfoContainer = styled.div`
