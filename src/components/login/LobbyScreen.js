@@ -2,7 +2,7 @@ import React from 'react';
 import {withRouter} from "react-router-dom";
 import styled from "styled-components";
 import {LeaveTableButton, Loader, LoadingGameContainer} from "../../views/design/GameScreenStyle";
-import {api} from "../../helpers/api";
+import {api, handleError} from "../../helpers/api";
 
 const Border = styled.button`
   margin: 10px;
@@ -13,6 +13,7 @@ const Border = styled.button`
   margin-right: auto;
   border: none;
   background: none;
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
 `;
 
 const LobbyNumber = styled.div`
@@ -34,7 +35,7 @@ const LobbyNumber = styled.div`
 
 const LobbyInfo = styled.div`
   color: red;
-  width: 358px;
+  width: calc(100% - 80px);
   height: 80px;
   background: black; 
   float: right;
@@ -133,8 +134,12 @@ class LobbyScreen extends React.Component{
     }
 
     async joinLobby(lobbyId){
-        this.props.history.push(`/lobby`);
-        await api.put('/lobbies/' + localStorage.getItem("gameId") + '/join', this.returnToken());
+        try{
+            await api.put('/lobbies/' + localStorage.getItem("gameId") + '/join', this.returnToken());
+            this.props.history.push(`/lobby`);
+        } catch (e){
+            alert(`Something went wrong. Probably you are in another lobby \n${handleError(e)}`);
+        }
     }
 
     logout() {
@@ -166,14 +171,24 @@ class LobbyScreen extends React.Component{
                 <FormContainer>
                     <Form>
                         {this.state.lobbies.map(lobby => {return(
-                            <Border onClick={() => {
-                                localStorage.setItem("gameId", lobby.id);
-                                this.joinLobby(lobby.id);
+                            <Border
+                                onClick={() => {
+                                try{
+                                    localStorage.setItem("gameId", lobby.id);
+                                    this.joinLobby(lobby.id);
+                                }catch (e){
+                                    alert(`Something went wrong. Probably you are in another lobby \n${handleError(e)}`);
+                                    localStorage.removeItem('gameId')
+                                }
                             }}>
                                 <LobbyNumber>{lobby.id}</LobbyNumber>
                                 <LobbyInfo>
                                     {lobby.name}
-                                    <LobbyPlayerCount>{lobby.playerCount+"/5 Players"}</LobbyPlayerCount>
+                                    {lobby.inGame ? (
+                                        <LobbyPlayerCount>In Game</LobbyPlayerCount>
+                                    ) : (
+                                        <LobbyPlayerCount>{lobby.playerCount+"/5 Players"}</LobbyPlayerCount>
+                                    )}
                                 </LobbyInfo>
                             </Border>
                         );})}

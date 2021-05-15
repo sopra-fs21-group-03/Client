@@ -17,6 +17,7 @@ export const ProfileCircle = styled.div`
   background: ${props => props.background || null} center;  
   border: solid;
   border-color: ${props => props.bordercolor || null};
+  overflow: hidden;
 `;
 
 export const BigBlind = styled.div`
@@ -197,13 +198,14 @@ export const TextBacklogChatContainer = styled.div`
   overflow: auto;
   color: white;
   word-wrap:break-word;
+  id: ${props => props.id || null}; 
 `;
 
 export const ChatInputField = styled.input`
   &::placeholder {
     color: rgba(0, 0, 0, 0.8);
   }
-  width: 75%;
+  width: 65%;
   height: 10%;
   padding-left: 15px;
   margin-left: -4px;
@@ -232,7 +234,71 @@ export const ChatSendButton = styled.button`
   background-color: red;
   cursor: ${props => (props.disabled ? "default" : "pointer")};
   transition: all 0.3s ease;
+  id: ${props => props.id || null}; 
+  type: submit;
 `
+
+export const EmojiButton = styled.button`
+  &:hover {
+    transform: scale(1.1);
+  }
+  position: absolute;
+  top: 87.5%;
+  left: 70%;
+  width: 8%;
+  height: 10%;
+  border: none;
+  border-radius: 10px;
+  color: black;
+  background-color: black;
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
+  transition: all 0.3s ease;
+  border: solid 1px red;
+`
+
+export const SingleEmojiButton = styled.button`
+  &:hover {
+    transform: scale(1.1);
+  }
+  width: 18%;
+  height: 18%;
+  line-height: 15%;
+  border: none;
+  border-radius: 10px;
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
+  transition: all 0.3s ease;
+  text-align: center;
+  margin-top: 2%;
+  margin-left: 2%;
+  font-size: 16pt;
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+`
+
+export const EmojiContainer = styled.div`
+  background: rgb(0,0,0,0.9);
+  margin: 0;
+  margin-top:5px;
+  position: absolute;
+  left: 74%;
+  top: 52.5%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 60%;
+  margin-left: auto;
+  padding-right: 15px;
+  margin-right: auto;
+  overflow: auto;
+  color: white;
+  word-wrap:break-word;
+  border: solid 1px red;
+  border-radius: 10px;
+  id: ${props => props.id || null};
+  display: none;
+`;
 
 export const Tablesquare = styled.div`
 background-color: green;
@@ -313,7 +379,7 @@ export const GameContainer = styled.div`
   margin-right: auto;
   padding-right: 15px;
   max-width: 100%;
-  background-image: url('https://wallpaperaccess.com/full/2924715.jpg');
+  background-image: url('http://st.gde-fon.com/wallpapers_original/336962_korichnevyj_parket_fonovaya_1920x1080_www.Gde-Fon.com.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -493,9 +559,7 @@ background-color: grey;
   width: 100%;
   height: 10%;
   margin-left: auto;
-  padding-left: 15px;
   margin-right: auto;
-  padding-right: 15px;
   border-top: solid ${props => props.bordercolor || null}; 
 `;
 
@@ -732,7 +796,8 @@ export const TopRightPlayerContainer = styled.div`
 export const CardBox = styled.div`
   border: solid;
   border-color: white;
-  background-color: #dd1630;
+  background: url('https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/cardBackground.png');
+  background-size: cover;
   margin: 0;
   position: absolute;
   margin-right: 0%;
@@ -745,6 +810,7 @@ export const CardBox = styled.div`
   padding-left: auto;
   margin-right: auto;
   padding-right: auto;
+  border-radius: 5px;
   transform: ${props => props.transform || null}; 
 `;
 

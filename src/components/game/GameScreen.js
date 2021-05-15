@@ -48,13 +48,36 @@ import {
     CardBox,
     PlayerInfoContainer,
     FrontCardBox,
-    LoadingGameContainer, LeaveTableButtonEndScreen, LooserPicture, LooserContainer, ChatSendButton
+    LoadingGameContainer,
+    LeaveTableButtonEndScreen,
+    LooserPicture,
+    LooserContainer,
+    ChatSendButton,
+    EmojiButton,
+    EmojiContainer, SingleEmojiButton
 } from "../../views/design/GameScreenStyle";
 import Player from "../../views/Player";
 import ChatMessageField from "../../views/ChatMessageField";
 import {Spinner} from "../../views/design/Spinner";
+import styled from "styled-components";
 
 document.body.style.backgroundColor = "green";
+
+const ProfilePicture = styled.div`
+  width: 100%;
+  height: 100%;
+  background: ${props => props.background || null}; 
+`;
+
+//For picture in bottomContainer´´
+const BottomTable = styled.div`
+  position: absolute;
+  top: 68%;
+  width: 130%;
+  left: -10%;
+  height: 100%;
+  background: url(''); 
+`;
 
 //Normal PokerScreen
 class GameScreen extends React.Component {
@@ -68,37 +91,82 @@ class GameScreen extends React.Component {
         };
     }
 
+    returnProfilePicture(game, userFrontEnd){
+
+        let profilepicture = null;
+        if(game.players[0].username == userFrontEnd.username){
+            profilepicture = <ProfilePicture background = 'url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user1.jpg") center'></ProfilePicture>
+            return profilepicture
+        }
+        else if(game.players[1].username == userFrontEnd.username){
+            profilepicture = <ProfilePicture background = 'url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user2.jpg") center'></ProfilePicture>
+            return profilepicture
+        }
+        else if(game.players[2].username == userFrontEnd.username){
+            profilepicture = <ProfilePicture background = 'url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user3.jpg") center'></ProfilePicture>
+            return profilepicture
+        }
+        else if(game.players[3].username == userFrontEnd.username){
+            profilepicture = <ProfilePicture background = 'url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user4.jpg") center'></ProfilePicture>
+            return profilepicture
+        }
+        else if(game.players[4].username == userFrontEnd.username){
+            profilepicture = <ProfilePicture background = 'url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user5.jpg") center'></ProfilePicture>
+            return profilepicture
+        }
+    }
+
+    scrollToEnd(){
+        let chatList = document.getElementById("chatList");
+        chatList.scrollTop = chatList.scrollHeight;
+    }
+
+    chatCounter = 0;
+
     async fetchChat() {
-        const response = await api.get("/games/1/" + localStorage.getItem('userID') + "/chats", {headers: {Authorization: localStorage.getItem('token')}});
+        const response = await api.get("/games/" + localStorage.getItem("gameId") + "/" + localStorage.getItem('userID') + "/chats", {headers: {Authorization: localStorage.getItem('token')}});
         this.setState({chatLog: response.data});
+        if (response.data.length > this.chatCounter){
+            if(document.getElementById("chatList") != null){
+                this.scrollToEnd();
+            }
+        }
+        this.chatCounter = response.data.length;
     }
 
     async call() {
-        await api.put("/games/1/" + localStorage.getItem('userID') + "/call", this.returnToken())
+        await api.put("/games/" + localStorage.getItem("gameId") + "/" + localStorage.getItem('userID') + "/call", this.returnToken())
     }
 
     async check() {
-        await api.put("/games/1/" + localStorage.getItem('userID') + "/check", this.returnToken())
+        await api.put("/games/" + localStorage.getItem("gameId") + "/" + localStorage.getItem('userID') + "/check", this.returnToken())
     }
 
     async fold() {
-        await api.put("/games/1/" + localStorage.getItem('userID') + "/fold", this.returnToken())
+        await api.put("/games/" + localStorage.getItem("gameId") + "/" + localStorage.getItem('userID') + "/fold", this.returnToken())
     }
 
     async raise() {
-        await api.put("/games/1/" + localStorage.getItem('userID') + "/raise", this.returnRaiseAmountAndToken())
+        await api.put("/games/" + localStorage.getItem("gameId") + "/" + localStorage.getItem('userID') + "/raise", this.returnRaiseAmountAndToken())
         this.state.raiseAmount = null;
         document.getElementById("raiseInputField").value = "";
     }
 
     async sendMessage(){
-        await api.put("/games/1/" + localStorage.getItem('userID') + "/chats", this.returnChatMessageAndToken())
-        this.state.chatMessage = null;
-        document.getElementById("chatInputField").value = "";
+        if(this.state.chatMessage != null) {
+            await api.put("/games/" + localStorage.getItem("gameId") + "/" + localStorage.getItem('userID') + "/chats", this.returnChatMessageAndToken())
+            this.state.chatMessage = null;
+            document.getElementById("chatInputField").value = "";
+        }
+    }
+
+    addEmoji(emoji){
+        document.getElementById("chatInputField").value = document.getElementById("chatInputField").value + emoji;
+        this.handleInputChange('chatMessage', document.getElementById("chatInputField").value);
     }
 
     async showdown() {
-        const showdown = await api.get('/games/1/showdown', {headers: {Authorization: localStorage.getItem('token')}})
+        const showdown = await api.get('/games/' + localStorage.getItem('gameId') + '/showdown', {headers: {Authorization: localStorage.getItem('token')}})
         const playerList = showdown.data;
         for (let i = 0; i < 5; i++) {
             if (playerList[i].username == this.myselfUser.username) {
@@ -142,17 +210,13 @@ class GameScreen extends React.Component {
         return requestBodyChatMessage
     }
 
-    logout() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('userID');
+    leaveTable() {
         this.props.history.push('/login');
     }
 
     async logoutEndGame() {
-        await api.put('/users/' + localStorage.getItem('userID') + '/logout', this.returnToken())
-        localStorage.removeItem('token');
-        localStorage.removeItem('userID');
-        this.props.history.push('/login');
+        await api.put('/games/' + localStorage.getItem('gameId') + '/' + localStorage.getItem('userID') + 'leave', this.returnToken())
+        this.props.history.push('/lobbyscreen');
         this.gameEnd = false;
     }
 
@@ -195,7 +259,7 @@ class GameScreen extends React.Component {
     }
 
     async revealCards(boolean) {
-        await api.put('/games/1/' + localStorage.getItem('userID') + '/show', this.returnTokenAndIfReveal(boolean));
+        await api.put('/games/' + localStorage.getItem("gameId") + '/' + localStorage.getItem('userID') + '/show', this.returnTokenAndIfReveal(boolean));
     }
 
     lostPlayersCounter = null;
@@ -230,11 +294,11 @@ class GameScreen extends React.Component {
             await this.fetchChat();
         }
 
-        const gameResponse = await api.get('/games/1', {headers: {Authorization: localStorage.getItem('token')}});
+        const gameResponse = await api.get('/games/' + localStorage.getItem("gameId"), {headers: {Authorization: localStorage.getItem('token')}});
         this.game = new Game(gameResponse.data);
 
 
-        const myselfUserResponse = await api.get('/games/1/' + localStorage.getItem('userID'), {headers: {Authorization: localStorage.getItem('token')}});
+        const myselfUserResponse = await api.get('/games/' + localStorage.getItem("gameId") + '/' + localStorage.getItem('userID'), {headers: {Authorization: localStorage.getItem('token')}});
         this.myselfUser = new User(myselfUserResponse.data);
         if (this.game.players.length == 5) {
             this.userOnTurn = this.game.onTurn;
@@ -269,7 +333,6 @@ class GameScreen extends React.Component {
         clearInterval(this.interval);
     }
 
-
     getRiverCard(index) {
 
         if (this.game.river.cards != null) {
@@ -284,6 +347,13 @@ class GameScreen extends React.Component {
         }
     }
 
+    enterPressed(event){
+        var code = event.keyCode || event.which;
+        if(code === 13){
+            this.sendMessage();
+        }
+    }
+
     returnCard(cardNumber, Suit) {
         const card = new Card({cardNumber: cardNumber, suit: Suit});
         return card.card
@@ -294,8 +364,6 @@ class GameScreen extends React.Component {
         // this.setState({'username': value});
         this.setState({[key]: value});
     }
-
-
 
     render() {
         if (this.game.round == "ENDED") {
@@ -366,17 +434,19 @@ class GameScreen extends React.Component {
                                     {this.displayUser(this.user2)}
                                 </PlayerInfoContainer>
                             )
-                            };
+                            }
                             {this.user2.username == this.userOnTurn.username ? (
                                 <ProfileCircle
-                                    top="12.5%" left="30%" bordercolor = "red"
-                                    background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user1.jpg")'></ProfileCircle>
+                                    top="12.5%" left="30%" bordercolor = "red">
+                                    {this.returnProfilePicture(this.game, this.user2)}
+                                </ProfileCircle>
                             ) : (
                                 <ProfileCircle
-                                    top="12.5%" left="30%" bordercolor = "white"
-                                    background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user1.jpg")'></ProfileCircle>
+                                    top="12.5%" left="30%" bordercolor = "white">
+                                    {this.returnProfilePicture(this.game, this.user2)}
+                                </ProfileCircle>
                             )
-                            };
+                            }
                             {this.user2.blind == "BIG" ?
                                 (<BigBlind
                                     top="70%" left="75%" transform="rotate(180deg)">B</BigBlind>) :
@@ -425,16 +495,18 @@ class GameScreen extends React.Component {
                                     {this.displayUser(this.user3)}
                                 </PlayerInfoContainer>
                             )
-                            };
+                            }
                             {this.user3.username == this.userOnTurn.username ? (
                                 <ProfileCircle
-                                    top="12.5%" left="40%" bordercolor = "red"
-                                    background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user2.jpg")'></ProfileCircle>
+                                    top="12.5%" left="40%" bordercolor = "red">
+                                    {this.returnProfilePicture(this.game, this.user3)}
+                                </ProfileCircle>
                             ) : (
                                 <ProfileCircle
-                                    top="12.5%" left="40%" bordercolor = "white"
-                                    background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user2.jpg")'></ProfileCircle>
-                            )};
+                                    top="12.5%" left="40%" bordercolor = "white">
+                                    {this.returnProfilePicture(this.game, this.user3)}
+                                </ProfileCircle>
+                            )}
                             <PlayerCardsContainer
                                 top="72.5%" left="20%" width="30%" height="55%">
                                 <CardBox
@@ -478,17 +550,19 @@ class GameScreen extends React.Component {
                                     borderradius="10px" border="solid white 1px">
                                     {this.displayUser(this.user1)}
                                 </PlayerInfoContainer>
-                            )};
+                            )}
                             {this.user1.username == this.userOnTurn.username ? (
                                 <ProfileCircle
-                                    top="2%" left="0%" bordercolor = "red"
-                                    background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user3.jpg")'></ProfileCircle>
+                                    top="2%" left="0%" bordercolor = "red">
+                                    {this.returnProfilePicture(this.game, this.user1)}
+                                </ProfileCircle>
                             ) : (
                                 <ProfileCircle
-                                    top="2%" left="0%" bordercolor = "white"
-                                    background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user3.jpg")'></ProfileCircle>
+                                    top="2%" left="0%" bordercolor = "white">
+                                    {this.returnProfilePicture(this.game, this.user1)}
+                                </ProfileCircle>
                             )
-                            };
+                            }
                             <PlayerCardsContainer
                                 top="50%" left="78%" width="40%" height="50%">
                                 <CardBox
@@ -600,12 +674,14 @@ class GameScreen extends React.Component {
                             )}
                             {this.user4.username == this.userOnTurn.username ? (
                                 <ProfileCircle
-                                    top="2%" left="60%" bordercolor="red"
-                                    background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user4.jpg")'></ProfileCircle>
+                                    top="2%" left="60%" bordercolor="red">
+                                    {this.returnProfilePicture(this.game, this.user4)}
+                                </ProfileCircle>
                             ) : (
                                 <ProfileCircle
-                                    top="2%" left="60%" bordercolor="white"
-                                    background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user4.jpg")'></ProfileCircle>
+                                    top="2%" left="60%" bordercolor="white">
+                                    {this.returnProfilePicture(this.game, this.user4)}
+                                </ProfileCircle>
                             )}
                             <PlayerCardsContainer
                                 top="50%" left="22%" width="40%" height="50%">
@@ -629,7 +705,7 @@ class GameScreen extends React.Component {
                     <LowerContainer>
                         <ChatContainer>
                             <InnerTextChatContainer>
-                                <TextBacklogChatContainer>
+                                <TextBacklogChatContainer id = 'chatList'>
                                     {!this.state.chatLog ? (<h1></h1>) : (
                                         this.state.chatLog.map(ChatMessage => {
                                                 return (
@@ -641,9 +717,146 @@ class GameScreen extends React.Component {
                                                 placeholder="Type in your message"
                                                 onChange={e => {
                                                     this.handleInputChange('chatMessage', e.target.value);}}
+                                                onKeyPress={this.enterPressed.bind(this)}
                                                 >
                                 </ChatInputField>
-                                <ChatSendButton onClick={() => {
+                                <EmojiButton
+                                    onClick={() => {
+                                        var x = document.getElementById("EmojiContainer")
+                                        if(window.getComputedStyle(x).display === "none"){
+                                            document.getElementById("EmojiContainer").style.display = 'inline'}
+                                        else{
+                                            document.getElementById("EmojiContainer").style.display = 'none'
+                                        }
+                                }}
+                                >😀</EmojiButton>
+                                <EmojiContainer id = "EmojiContainer">
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("😃");
+                                        }}
+                                    >
+                                        😃
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("🤑");
+                                        }}>
+                                        🤑
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("🥱");
+                                        }}>
+                                        🥱
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("😴");
+                                        }}>
+                                        😴
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("😜");
+                                        }}>
+                                        😜
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("🤪");
+                                        }}>
+                                        🤪
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("😢");
+                                        }}>
+                                        😢
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("😭");
+                                        }}>
+                                        😭
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("😤");
+                                        }}>
+                                        😤
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("🤢");
+                                        }}>
+                                        🤢
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("🤮");
+                                        }}>
+                                        🤮
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("🤬");
+                                        }}>
+                                        🤬
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("🤯");
+                                        }}>
+                                        🤯
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("🥳");
+                                        }}>
+                                        🥳
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("👨‍🎓");
+                                        }}>
+                                        👨‍🎓
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("🤵");
+                                        }}>
+                                        🤵
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("👨🏻‍💻");
+                                        }}>
+                                        👨🏻‍💻
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("🤡");
+                                        }}>
+                                        🤡
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("👽");
+                                        }}>
+                                        👽
+                                    </SingleEmojiButton>
+                                    <SingleEmojiButton
+                                        onClick={() => {
+                                            this.addEmoji("💩");
+                                        }}>
+                                        💩
+                                    </SingleEmojiButton>
+                                </EmojiContainer>
+                                <ChatSendButton
+                                    id = "chatButton"
+                                    disabled={!this.state.chatMessage}
+                                    onClick={() => {
                                     this.sendMessage();
                                 }}>
                                     Send
@@ -678,7 +891,6 @@ class GameScreen extends React.Component {
                                 </CardBox>
                             </OwnCardsContainer>
                         )}
-
                         <FoldContainer>
                             {this.game.showdown == true ?
                                 (<h1></h1>) :
@@ -689,7 +901,7 @@ class GameScreen extends React.Component {
                         </FoldContainer>
                         <LeaveTableContainer>
                             <LeaveTableButton onClick={() => {
-                                this.logout()
+                                this.leaveTable()
                             }}>
                                 Leave Table
                             </LeaveTableButton>
@@ -702,8 +914,9 @@ class GameScreen extends React.Component {
                                 {this.displayUser(this.myselfUser)}
                             </PlayerInfoContainer>
                             <ProfileCircle
-                                top="-120%" left="30%" bordercolor="red"
-                                background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user5.jpg")'></ProfileCircle>
+                                top="-120%" left="30%" bordercolor="red">
+                                {this.returnProfilePicture(this.game, this.myselfUser)}
+                            </ProfileCircle>
                         </BottomContainer>) :
                         (<BottomContainer bordercolor="white">
                             <PlayerInfoContainer
@@ -711,8 +924,9 @@ class GameScreen extends React.Component {
                                 {this.displayUser(this.myselfUser)}
                             </PlayerInfoContainer>
                             <ProfileCircle
-                                top="-120%" left="30%" bordercolor="white"
-                                background='url("https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/user5.jpg")'></ProfileCircle>
+                                top="-120%" left="30%" bordercolor="white">
+                                {this.returnProfilePicture(this.game, this.myselfUser)}
+                            </ProfileCircle>
                         </BottomContainer>)}
                 </GameContainer>);
         }

@@ -21,8 +21,6 @@ const Border = styled.button`
 `;
 
 const ReadyBox = styled.div`
-  background: white;
-  color: red;
   width: 80px;
   height: 80px;
   left: 20%;
@@ -35,11 +33,19 @@ const ReadyBox = styled.div`
   font-size: 32pt;
   line-height: 70px;
   text-align: center;
+  padding: 8px;
+`;
+
+const IfSelfBox = styled.div`
+  width: 80px;
+  height: 100%;
+  float: right;
+  padding: 8px 18px 8px 8px ;
 `;
 
 const PlayerName = styled.div`
   color: red;
-  width: 358px;
+  width: calc(100% - 80px);
   height: 80px;
   background: black; 
   float: right;
@@ -54,15 +60,7 @@ const PlayerName = styled.div`
   font-size: 16pt;
 `;
 
-const LobbyPlayerCount = styled.div`
-  color: red;
-  float: right;
-  padding-right: 25px;
-  font-size: 12pt;
-  line-height: 75px;
-`;
-
-const LogoutButton = styled(LeaveTableButton)`
+const ReadyButton = styled(LeaveTableButton)`
   position: absolute;
   top: 80%;
   left: 25%;
@@ -73,13 +71,13 @@ const LogoutButton = styled(LeaveTableButton)`
   font-weight: 200;
 `;
 
-const PokerInstructionsButton = styled(LeaveTableButton)`
+const ReadyButtonClicked = styled(LeaveTableButton)`
   position: absolute;
-  top: 70%;
-  left: 10%;
+  top: 80%;
+  left: 25%;
   background: rgb(0,0,0,0.8);
   height: 10%;
-  width: 60%;
+  width: 30%;
   font-size: 24pt;
   font-weight: 200;
 `;
@@ -108,20 +106,6 @@ const FormContainer = styled.div`
 `;
 
 
-const Form = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  height: 80%;
-  font-size: 16px;
-  font-weight: 300;
-  padding-left: 37px;
-  padding-right: 37px;
-  transition: opacity 0.5s ease, transform 0.5s ease;
-`;
-
-
 class LobbyScreen extends React.Component{
     constructor() {
         super();
@@ -130,18 +114,14 @@ class LobbyScreen extends React.Component{
         };
     }
 
-    logout() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('userID');
-        this.props.history.push('/login');
-    }
-
     lobby = new LobbyInfo();
 
     async updateLobby(){
         const response = await api.get('/lobbies/' + localStorage.getItem("gameId"), {headers: {Authorization: localStorage.getItem('token')}});
         this.lobby = new LobbyInfo(response.data);
-        console.log(this.lobby.players.length);
+        if(this.lobby.gameCanStart){
+            this.props.history.push('/gamescreen');
+        }
         //this.setState({ lobbies: response.data });
     }
 
@@ -156,75 +136,162 @@ class LobbyScreen extends React.Component{
         clearInterval(this.interval);
     }
 
+    async ready() {
+        await api.put('lobbies/' + localStorage.getItem("gameId") + '/' + localStorage.getItem("userID") + '/ready', this.returnToken())
+    }
+
+    returnToken() {
+        const requestBody = JSON.stringify({
+            token: localStorage.getItem('token')
+        });
+        return requestBody
+    }
+
     render() {
         if(this.lobby.players != null){ return (
             <LobbbyScreenBaseContainer>
                 <FormContainer>
                         <Border margintop = '50px'>
-                            <ReadyBox></ReadyBox>
+                            {this.lobby.players.length > 0 ? (
+                                <ReadyBox>
+                                    {this.lobby.players[0].readyStatus == 'READY' ? (
+                                        <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/greenplayingcards.png"/>
+                                    ) : (
+                                        <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/redcards.png"/>
+                                    )}
+                                </ReadyBox>
+                            ) : (
+                                <ReadyBox></ReadyBox>
+                            )}
                             {this.lobby.players.length > 0 ? (
                                 <PlayerName>
                                     {this.lobby.players[0].username}
-                                    <LobbyPlayerCount></LobbyPlayerCount>
+                                    {this.lobby.players[0].username == localStorage.getItem("username") ? (
+                                        <IfSelfBox>
+                                            <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/crown.png"/>
+                                        </IfSelfBox>
+                                    ) : (
+                                        <IfSelfBox></IfSelfBox>
+                                    )}
                                 </PlayerName>) : (
                                 <PlayerName>
-                                    <LobbyPlayerCount></LobbyPlayerCount>
                                 </PlayerName>
                             )}
                         </Border>
                     <Border>
-                        <ReadyBox></ReadyBox>
+                        {this.lobby.players.length > 1 ? (
+                            <ReadyBox>
+                                {this.lobby.players[1].readyStatus == 'READY' ? (
+                                    <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/greenplayingcards.png"/>
+                                ) : (
+                                    <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/redcards.png"/>
+                                )}
+                            </ReadyBox>
+                        ) : (
+                            <ReadyBox></ReadyBox>
+                        )}
                         {this.lobby.players.length > 1 ? (
                             <PlayerName>
                                 {this.lobby.players[1].username}
-                                <LobbyPlayerCount></LobbyPlayerCount>
+                                {this.lobby.players[1].username == localStorage.getItem("username") ? (
+                                    <IfSelfBox>
+                                        <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/crown.png"/>
+                                    </IfSelfBox>
+                                ) : (
+                                    <IfSelfBox></IfSelfBox>
+                                )}
                             </PlayerName>) : (
                             <PlayerName>
-                                <LobbyPlayerCount></LobbyPlayerCount>
                             </PlayerName>
                         )}
                     </Border>
                     <Border>
-                        <ReadyBox></ReadyBox>
+                        {this.lobby.players.length > 2 ? (
+                            <ReadyBox>
+                                {this.lobby.players[2].readyStatus == 'READY' ? (
+                                    <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/greenplayingcards.png"/>
+                                ) : (
+                                    <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/redcards.png"/>
+                                )}
+                            </ReadyBox>
+                        ) : (
+                            <ReadyBox></ReadyBox>
+                        )}
                         {this.lobby.players.length > 2 ? (
                             <PlayerName>
                                 {this.lobby.players[2].username}
-                                <LobbyPlayerCount></LobbyPlayerCount>
+                                {this.lobby.players[2].username == localStorage.getItem("username") ? (
+                                    <IfSelfBox>
+                                        <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/crown.png"/>
+                                    </IfSelfBox>
+                                ) : (
+                                    <IfSelfBox></IfSelfBox>
+                                )}
                             </PlayerName>) : (
                             <PlayerName>
-                                <LobbyPlayerCount></LobbyPlayerCount>
                             </PlayerName>
                         )}
                     </Border>
                     <Border>
-                        <ReadyBox></ReadyBox>
+                        {this.lobby.players.length > 3 ? (
+                            <ReadyBox>
+                                {this.lobby.players[3].readyStatus == 'READY' ? (
+                                    <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/greenplayingcards.png"/>
+                                ) : (
+                                    <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/redcards.png"/>
+                                )}
+                            </ReadyBox>
+                        ) : (
+                            <ReadyBox></ReadyBox>
+                        )}
                         {this.lobby.players.length > 3 ? (
                             <PlayerName>
                                 {this.lobby.players[3].username}
-                                <LobbyPlayerCount></LobbyPlayerCount>
+                                {this.lobby.players[3].username == localStorage.getItem("username") ? (
+                                    <IfSelfBox>
+                                        <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/crown.png"/>
+                                    </IfSelfBox>
+                                ) : (
+                                    <IfSelfBox></IfSelfBox>
+                                )}
                             </PlayerName>) : (
                             <PlayerName>
-                                <LobbyPlayerCount></LobbyPlayerCount>
                             </PlayerName>
                         )}
                     </Border>
                     <Border>
-                        <ReadyBox></ReadyBox>
+                        {this.lobby.players.length > 4 ? (
+                            <ReadyBox>
+                                {this.lobby.players[4].readyStatus == 'READY' ? (
+                                    <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/greenplayingcards.png"/>
+                                ) : (
+                                    <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/redcards.png"/>
+                                )}
+                            </ReadyBox>
+                        ) : (
+                            <ReadyBox></ReadyBox>
+                        )}
                         {this.lobby.players.length > 4 ? (
                             <PlayerName>
                                 {this.lobby.players[4].username}
-                                <LobbyPlayerCount></LobbyPlayerCount>
+                                {this.lobby.players[4].username == localStorage.getItem("username") ? (
+                                    <IfSelfBox>
+                                        <img className="resize" src="https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/crown.png"/>
+                                    </IfSelfBox>
+                                ) : (
+                                    <IfSelfBox></IfSelfBox>
+                                )}
                             </PlayerName>) : (
                             <PlayerName>
-                                <LobbyPlayerCount></LobbyPlayerCount>
                             </PlayerName>
                         )}
                     </Border>
-                    <LogoutButton onClick={() => {
-                        this.logout()
+                    <ReadyButton
+                        onClick={() => {
+                        this.ready()
                     }}>
                         Ready
-                    </LogoutButton>
+                    </ReadyButton>
 
                 </FormContainer>
             </LobbbyScreenBaseContainer>)}
