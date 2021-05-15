@@ -199,7 +199,7 @@ class LobbyScreen extends React.Component{
                         Logout
                     </LogoutButton>
                     <PokerInstructionsButton onClick={() => {
-                        this.logout()
+                        this.props.history.push(`/pokerInstructionsScreen`);
                     }}>
                         Poker Instructions
                     </PokerInstructionsButton>
