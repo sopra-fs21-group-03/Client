@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Header from "./views/Header";
 import AppRouter from "./components/shared/routers/AppRouter";
+import Spotify from "./components/music/Spotify";
 
 /**
  * Happy coding!
@@ -19,7 +20,8 @@ class App extends Component {
       <div>
         <Header height={"100"} />
         <AppRouter />
-      </div>
+        <Spotify />
+        </div>
     );
   }
 }
