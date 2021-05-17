@@ -11,15 +11,9 @@ class SpotifyPlayer extends Component {
             spotifyAccessToken: "",
             spotifyDeviceId: "",
             spotifyAccess: false,
-            spotifyPlayer: undefined,
             spotifyPlayerReady: false
         };
-
-        new ScriptCache([
-            {
-                name: "https://sdk.scdn.co/spotify-player.js",
-                callback: this.spotifySDKCallback
-            }]);
+        this.spotifyPlayer = undefined;
 
         window.addEventListener("storage", this.authorizeSpotifyFromStorage);
 
@@ -52,23 +46,33 @@ class SpotifyPlayer extends Component {
 
             const spotifyAccess = localStorage.getItem("SPOTIFY_ACCESS");
 
+            if (window.Spotify !== null) {
+                this.spotifyPlayer = new window.Spotify.Player({
+                    name: "Spotify Player",
+                    getOAuthToken: cb => {
+                        cb(spotifyAccess);
+                    },
+                });
+
+            }
+
             if (spotifyAccessToken !== null) {
                 this.setState({
                     spotifyAccessToken: spotifyAccessToken,
                     spotifyAccess: spotifyAccess,
                 });
                 console.log("Connecting to player...")
-                this.connectToPlayer();
+                this.connectToPlayer().then(() => this.startPlayback);
             }
         }
     }
 
     connectToPlayer = async () => {
-        if (this.state.spotifyPlayer) {
+        if (this.spotifyPlayer) {
             clearTimeout(this.connectToPlayerTimeout);
 
             // Ready
-            this.state.spotifyPlayer.addListener('ready', ({ device_id }) => {
+            this.spotifyPlayer.addListener('ready', ({ device_id }) => {
                 console.log('Ready with Device ID', device_id);
                 this.setState({
                     loadingState: "spotify player ready",
@@ -78,11 +82,11 @@ class SpotifyPlayer extends Component {
             });
 
             // Not Ready
-            this.state.spotifyPlayer.addListener('not_ready', ({ device_id }) => {
+            this.spotifyPlayer.addListener('not_ready', ({ device_id }) => {
                 console.log('Device ID has gone offline', device_id);
             });
 
-            this.state.spotifyPlayer.connect();
+            this.spotifyPlayer.connect();
             this.startPlayback();
         } else {
             this.connectToPlayerTimeout = setTimeout(this.connectToPlayer.bind(this), 1000);
