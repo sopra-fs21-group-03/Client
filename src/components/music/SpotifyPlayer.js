@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { ScriptCache } from "./ScriptCache";
 import SpotifyAuthWindow from "./SpotifyAuthWindow"
 
 class SpotifyPlayer extends Component {
