@@ -57,7 +57,7 @@ class SpotifyPlayer extends Component {
                     spotifyAccessToken: spotifyAccessToken,
                     spotifyAccess: spotifyAccess,
                 });
-
+                console.log("Connecting to player...")
                 this.connectToPlayer();
             }
         }
