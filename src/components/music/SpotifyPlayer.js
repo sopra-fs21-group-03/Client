@@ -19,24 +19,6 @@ class SpotifyPlayer extends Component {
 
     }
 
-    spotifySDKCallback = () => {
-        window.onSpotifyWebPlaybackSDKReady = () => {
-            if (this.state.spotifyAccess === true) {
-                const spotifyPlayer = new SpotifyPlayer(
-                    "SoPra Poker",
-                    cb => {
-                        cb(this.state.spotifyAccessToken)
-                    }
-                )
-
-                this.setState({
-                    spotifyPlayer: spotifyPlayer
-                });
-                console.log(this.spotifyPlayer);
-            }
-        }
-    }
-
     authorizeSpotifyFromStorage = (e) => {
         console.log("storage was changed")
 
@@ -46,25 +28,31 @@ class SpotifyPlayer extends Component {
 
             const spotifyAccess = localStorage.getItem("SPOTIFY_ACCESS");
 
-            if (window.Spotify !== null) {
-                this.spotifyPlayer = new window.Spotify.Player({
-                    name: "Spotify Player",
-                    getOAuthToken: cb => {
-                        cb(spotifyAccessToken);
-                    },
-                });
-
-            }
-
             if (spotifyAccessToken !== null) {
                 this.setState({
                     spotifyAccessToken: spotifyAccessToken,
                     spotifyAccess: spotifyAccess,
                 });
                 console.log("Connecting to player...")
-                this.connectToPlayer().then(() => this.startPlayback);
+            }
+            if (window.Spotify !== null) {
+                setTimeout(() => {
+                    this.spotifyPlayer = new window.Spotify.Player({
+                        name: "Spotify Player",
+                        getOAuthToken: cb => {
+                            cb(spotifyAccessToken);
+                        },
+                        volume: 0.01
+                    })
+                }, 1000)
+                setTimeout(() => {
+                    this.connectToPlayer().then(() => {
+                        this.startPlayback(this.props.trackId);
+                    });
+                }, 1000)
             }
         }
+
     }
 
     connectToPlayer = async () => {
@@ -86,8 +74,9 @@ class SpotifyPlayer extends Component {
                 console.log('Device ID has gone offline', device_id);
             });
 
-            this.spotifyPlayer.connect();
-            this.startPlayback();
+            this.spotifyPlayer.connect().then(() => {
+                this.startPlayback(this.props.trackId);
+            })
         } else {
             this.connectToPlayerTimeout = setTimeout(this.connectToPlayer.bind(this), 1000);
         }
@@ -95,8 +84,14 @@ class SpotifyPlayer extends Component {
     }
 
     startPlayback = (spotify_uri) => {
-        if(!this.state.spotifyPlayerReady) {
-            alert("player not ready")
+        console.log("Playback started")
+        if (this.state.device_id === "") {
+            setTimeout(() => {
+                this.startPlayback();
+            }, 1000);
+            return;
+        }
+        if (!this.state.spotifyPlayerReady) {
             return;
         }
         fetch("https://api.spotify.com/v1/me/player/play?" +
@@ -110,6 +105,7 @@ class SpotifyPlayer extends Component {
         }).then((ev) => {
             console.log(ev);
             if (ev.status === 403) {
+                console.log("403 from fetch")
                 this.setState({
                     loadingState: "you need to upgrade to premium for playback",
                     spotifyAccess: false
