@@ -14,13 +14,14 @@ export default class SpotifyAuthWindow extends Component {
     }
 
     componentDidMount() {
-
-        this.externalWindow = window.open("https://accounts.spotify.com/authorize?" +
-            "client_id=bbe3c778649648ebb67ea760608f30f2" +
-            "&response_type=token" +
-            "&redirect_uri=http://localhost:3000/" +
-            "&show_dialog=true" +
-            "&scope="+this.SCOPE_LIST, '', "width=600, height=500");
+        setTimeout(() => {
+            this.externalWindow = window.open("https://accounts.spotify.com/authorize?" +
+                "client_id=bbe3c778649648ebb67ea760608f30f2" +
+                "&response_type=token" +
+                "&redirect_uri=http://localhost:3000/" +
+                "&show_dialog=true" +
+                "&scope="+this.SCOPE_LIST, '', "width=600, height=500");
+        }, 1000)
     }
 
 
