@@ -296,6 +296,7 @@ class GameScreen extends React.Component {
 
         const gameResponse = await api.get('/games/' + localStorage.getItem("gameId"), {headers: {Authorization: localStorage.getItem('token')}});
         this.game = new Game(gameResponse.data);
+        console.log(gameResponse.data);
 
 
         const myselfUserResponse = await api.get('/games/' + localStorage.getItem("gameId") + '/' + localStorage.getItem('userID'), {headers: {Authorization: localStorage.getItem('token')}});
@@ -414,6 +415,7 @@ class GameScreen extends React.Component {
 
         //InGame
         else if (this.game.gameName != null) {
+            console.log(this.game)
             return (
                 <GameContainer>
                     <TableCircleLeft></TableCircleLeft>
@@ -483,19 +485,32 @@ class GameScreen extends React.Component {
                                 (<SmallBlind top="70%" left="35%" transform="rotate(180deg)">S</SmallBlind>) :
                                 (<h1></h1>)}
                             {this.user3.username == this.userOnTurn.username ? (
-                                <PlayerInfoContainer
-                                    top="27.5%" left="23.5%" width="50%" height="30%" color="red"
-                                    background="grey" padding="0 90px 0 10px" borderradius="10px" border="solid white 1px">
-                                    {this.displayUser(this.user3)}
-                                </PlayerInfoContainer>
-                            ) : (
-                                <PlayerInfoContainer
-                                    top="27.5%" left="23.5%" width="50%" height="30%" color="white"
-                                    background="grey" padding="0 90px 0 10px" borderradius="10px" border="solid white 1px">
-                                    {this.displayUser(this.user3)}
-                                </PlayerInfoContainer>
-                            )
-                            }
+                            <PlayerInfoContainer
+                                top="27.5%" left="62.5%" width="50%" height="30%" color="red" background="grey"
+                                padding="0 0 0 90px" borderradius="10px" border="solid white 1px">
+                                {this.displayUser(this.user3)}
+                            </PlayerInfoContainer>
+                        ) : (
+                            this.user3.inGame == false ? (
+                            <PlayerInfoContainer
+                                top="27.5%" left="62.5%" width="50%" height="30%" color="black" background="red"
+                                padding="0 0 0 90px" borderradius="10px" border="solid white 1px">
+                                {this.displayUser(this.user3)}
+                            </PlayerInfoContainer>
+                            ):(
+                            this.user3.folded == true ? (
+                            <PlayerInfoContainer
+                                top="27.5%" left="62.5%" width="50%" height="30%" color="black" background="grey"
+                                padding="0 0 0 90px" borderradius="10px" border="solid white 1px">
+                                {this.displayUser(this.user3)}
+                            </PlayerInfoContainer>
+                            ):(
+                            <PlayerInfoContainer
+                                top="27.5%" left="62.5%" width="50%" height="30%" color="white" background="grey"
+                                padding="0 0 0 90px" borderradius="10px" border="solid white 1px">
+                                {this.displayUser(this.user3)}
+                            </PlayerInfoContainer>
+                        )))}
                             {this.user3.username == this.userOnTurn.username ? (
                                 <ProfileCircle
                                     top="12.5%" left="40%" bordercolor = "red">

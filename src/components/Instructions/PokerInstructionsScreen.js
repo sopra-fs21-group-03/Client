@@ -46,6 +46,33 @@ const BlackButton2 = styled.button`
   margin-left: 7%;
 `;
 
+
+const LeaveButton = styled.button`
+  &:hover {
+    transform: translateY(-2px);
+  }
+  display: flex;
+  padding: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 13px;
+  text-align: center;
+  color: red;
+  width: 10%;
+  height: 50px;
+  border-radius: 10px;
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
+  opacity: ${props => (props.disabled ? 0.4 : 1)};
+  background: black;
+  transition: all 0.3s ease;
+  border: solid;
+  border-color: red;
+  margin-top: 50%;
+  margin-left: 110%;
+`;
+
+
+
 const ButtonContainer = styled.div`
   position: absolute;
   left: 0%;
@@ -95,6 +122,11 @@ class PokerInstructionsScreen extends React.Component{
     render() {
         return(
             <BaseContainer>
+                <LeaveButton onClick={() => {
+                    this.props.history.push(`/lobbyScreen`);
+                }}>
+                    Back to Lobby
+                </LeaveButton>
                 <InstructionsContainer>
 
                     {this.currentInfo}
