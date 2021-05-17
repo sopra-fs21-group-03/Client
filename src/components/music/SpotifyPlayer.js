@@ -50,7 +50,7 @@ class SpotifyPlayer extends Component {
                 this.spotifyPlayer = new window.Spotify.Player({
                     name: "Spotify Player",
                     getOAuthToken: cb => {
-                        cb(spotifyAccess);
+                        cb(spotifyAccessToken);
                     },
                 });
 
