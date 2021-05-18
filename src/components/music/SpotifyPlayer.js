@@ -3,8 +3,8 @@ import SpotifyAuthWindow from "./SpotifyAuthWindow"
 
 class SpotifyPlayer extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             spotifyAccessToken: "",
@@ -45,9 +45,7 @@ class SpotifyPlayer extends Component {
                     })
                 }, 1000)
                 setTimeout(() => {
-                    this.connectToPlayer().then(() => {
-                        this.startPlayback(this.props.trackId);
-                    });
+                    this.connectToPlayer();
                 }, 1000)
             }
         }
@@ -66,6 +64,7 @@ class SpotifyPlayer extends Component {
                     spotifyDeviceId: device_id,
                     spotifyPlayerReady: true
                 });
+                this.startPlayback(this.props.trackId);
             });
 
             // Not Ready
@@ -73,9 +72,7 @@ class SpotifyPlayer extends Component {
                 console.log('Device ID has gone offline', device_id);
             });
 
-            this.spotifyPlayer.connect().then(() => {
-                this.startPlayback(this.props.trackId);
-            })
+            this.spotifyPlayer.connect();
         } else {
             this.connectToPlayerTimeout = setTimeout(this.connectToPlayer.bind(this), 1000);
         }
