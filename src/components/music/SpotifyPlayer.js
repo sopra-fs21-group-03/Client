@@ -32,27 +32,23 @@ class SpotifyPlayer extends Component {
                     spotifyAccessToken: spotifyAccessToken,
                     spotifyAccess: spotifyAccess,
                 });
-                console.log("Connecting to player...")
             }
             if (window.Spotify !== null) {
-                setTimeout(() => {
-                    this.spotifyPlayer = new window.Spotify.Player({
-                        name: "Spotify Player",
-                        getOAuthToken: cb => {
-                            cb(spotifyAccessToken);
-                        },
-                        volume: 0.01
-                    })
-                }, 1000)
-                setTimeout(() => {
-                    this.connectToPlayer();
-                }, 1000)
+                this.spotifyPlayer = new window.Spotify.Player({
+                    name: "Spotify Player",
+                    getOAuthToken: cb => {
+                        cb(spotifyAccessToken);
+                    },
+                    volume: 0.01
+                })
+                console.log("connecting to player...")
+                this.connectToPlayer();
             }
         }
 
     }
 
-    connectToPlayer = async () => {
+    connectToPlayer = () => {
         if (this.spotifyPlayer) {
             clearTimeout(this.connectToPlayerTimeout);
 
@@ -71,8 +67,9 @@ class SpotifyPlayer extends Component {
             this.spotifyPlayer.addListener('not_ready', ({ device_id }) => {
                 console.log('Device ID has gone offline', device_id);
             });
-
-            this.spotifyPlayer.connect();
+            console.log("actual connecting call")
+            this.spotifyPlayer.connect(); // here the two responseExceptions happen
+            console.log("after actual connecting call")
         } else {
             this.connectToPlayerTimeout = setTimeout(this.connectToPlayer.bind(this), 1000);
         }
