@@ -7,7 +7,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Open Sans", sans-serif;
-  background-image: url("../src/backgroundImage.png"); /*picture from https://wallpaperaccess.com/full/1219582.png*/
+  background-image: url("https://wallpaperaccess.com/full/1219582.png"); /*picture from https://wallpaperaccess.com/full/1219582.png*/
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
