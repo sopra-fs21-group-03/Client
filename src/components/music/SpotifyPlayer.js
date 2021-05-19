@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SpotifyAuthWindow from "./SpotifyAuthWindow"
+import getTrackURIs from "./Playlist"
 
 class SpotifyPlayer extends Component {
 
@@ -77,7 +78,7 @@ class SpotifyPlayer extends Component {
     }
 
     startPlayback = (spotify_uri) => {
-        console.log("Playback started")
+        console.log("Playback starts")
         if (this.state.device_id === "") {
             setTimeout(() => {
                 this.startPlayback();
@@ -109,11 +110,44 @@ class SpotifyPlayer extends Component {
                     playbackOn: true, playbackPaused: false
                 });
                 console.log("Started playback", this.state);
+                this.addPlaylistToQueue();
             }
         }).catch((error) => {
             this.setState({ loadingState: "playback error: " + error });
         })
     };
+
+    addPlaylistToQueue = () => {
+        const trackURIs = getTrackURIs(this.state.spotifyAccessToken).then(
+            uris => {
+                console.log("promis uris", uris)
+                uris.reduce(async (memo, uri) => {
+                    await memo;
+                    console.log(uri)
+                    console.log("uris[0]", uris[0])
+                    await fetch("https://api.spotify.com/v1/me/player/queue?" +
+                        "uri=" + uri +
+                        "&device_id=" + this.state.spotifyDeviceId, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${this.state.spotifyAccessToken}`
+                        }
+                    }).then((ev) => {
+                        console.log(ev);
+                        if (ev.status === 403) {
+                            console.log("403 from fetch")
+                        } else {
+                            console.log("songs added to queue", this.state);
+                        }
+                    }).catch((error) => {
+                        this.setState({ loadingState: "playlist error: " + error });
+                    })
+                }, undefined);
+            });
+
+    }
+
 
     render() {
         return (

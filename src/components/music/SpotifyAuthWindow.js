@@ -8,7 +8,7 @@ export default class SpotifyAuthWindow extends Component {
 
     externalWindow;
     containerEl;
-    SCOPE_LIST = "streaming user-read-email user-read-private user-read-currently-playing" 
+    SCOPE_LIST = "streaming user-read-email user-read-private user-read-currently-playing user-modify-playback-state" 
 
     constructor() {
         super();
