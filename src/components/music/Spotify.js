@@ -23,7 +23,7 @@ class Spotify extends Component {
             window.close();
         } else {
             this.view = <SpotifyPlayer
-                trackId="spotify:track:5CwxHNNjOaWxQ5pc3ka7oc"
+                trackId="spotify:track:2AmSzVEGntmfAVvRy7W4ET"
             />;
         }
     }

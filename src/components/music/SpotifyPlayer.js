@@ -1,46 +1,22 @@
 import React, { Component } from 'react';
-import { ScriptCache } from "./ScriptCache";
 import SpotifyAuthWindow from "./SpotifyAuthWindow"
+import getTrackURIs from "./Playlist"
 
 class SpotifyPlayer extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             spotifyAccessToken: "",
             spotifyDeviceId: "",
             spotifyAccess: false,
-            spotifyPlayer: undefined,
             spotifyPlayerReady: false
         };
-
-        new ScriptCache([
-            {
-                name: "https://sdk.scdn.co/spotify-player.js",
-                callback: this.spotifySDKCallback
-            }]);
+        this.spotifyPlayer = undefined;
 
         window.addEventListener("storage", this.authorizeSpotifyFromStorage);
 
-    }
-
-    spotifySDKCallback = () => {
-        window.onSpotifyWebPlaybackSDKReady = () => {
-            if (this.state.spotifyAccess === true) {
-                const spotifyPlayer = new SpotifyPlayer(
-                    "SoPra Poker",
-                    cb => {
-                        cb(this.state.spotifyAccessToken)
-                    }
-                )
-
-                this.setState({
-                    spotifyPlayer: spotifyPlayer
-                });
-                console.log(this.spotifyPlayer);
-            }
-        }
     }
 
     authorizeSpotifyFromStorage = (e) => {
@@ -57,33 +33,44 @@ class SpotifyPlayer extends Component {
                     spotifyAccessToken: spotifyAccessToken,
                     spotifyAccess: spotifyAccess,
                 });
-                console.log("Connecting to player...")
+            }
+            if (window.Spotify !== null) {
+                this.spotifyPlayer = new window.Spotify.Player({
+                    name: "Spotify Player",
+                    getOAuthToken: cb => {
+                        cb(spotifyAccessToken);
+                    },
+                    volume: 0.01
+                })
+                console.log("connecting to player...")
                 this.connectToPlayer();
             }
         }
+
     }
 
-    connectToPlayer = async () => {
-        if (this.state.spotifyPlayer) {
+    connectToPlayer = () => {
+        if (this.spotifyPlayer) {
             clearTimeout(this.connectToPlayerTimeout);
 
             // Ready
-            this.state.spotifyPlayer.addListener('ready', ({ device_id }) => {
+            this.spotifyPlayer.addListener('ready', ({ device_id }) => {
                 console.log('Ready with Device ID', device_id);
                 this.setState({
                     loadingState: "spotify player ready",
                     spotifyDeviceId: device_id,
                     spotifyPlayerReady: true
                 });
+                this.startPlayback(this.props.trackId);
             });
 
             // Not Ready
-            this.state.spotifyPlayer.addListener('not_ready', ({ device_id }) => {
+            this.spotifyPlayer.addListener('not_ready', ({ device_id }) => {
                 console.log('Device ID has gone offline', device_id);
             });
-
-            this.state.spotifyPlayer.connect();
-            this.startPlayback();
+            console.log("actual connecting call")
+            this.spotifyPlayer.connect(); // here the two responseExceptions happen
+            console.log("after actual connecting call")
         } else {
             this.connectToPlayerTimeout = setTimeout(this.connectToPlayer.bind(this), 1000);
         }
@@ -91,8 +78,14 @@ class SpotifyPlayer extends Component {
     }
 
     startPlayback = (spotify_uri) => {
-        if(!this.state.spotifyPlayerReady) {
-            alert("player not ready")
+        console.log("Playback starts")
+        if (this.state.device_id === "") {
+            setTimeout(() => {
+                this.startPlayback();
+            }, 1000);
+            return;
+        }
+        if (!this.state.spotifyPlayerReady) {
             return;
         }
         fetch("https://api.spotify.com/v1/me/player/play?" +
@@ -106,6 +99,7 @@ class SpotifyPlayer extends Component {
         }).then((ev) => {
             console.log(ev);
             if (ev.status === 403) {
+                console.log("403 from fetch")
                 this.setState({
                     loadingState: "you need to upgrade to premium for playback",
                     spotifyAccess: false
@@ -116,11 +110,44 @@ class SpotifyPlayer extends Component {
                     playbackOn: true, playbackPaused: false
                 });
                 console.log("Started playback", this.state);
+                this.addPlaylistToQueue();
             }
         }).catch((error) => {
             this.setState({ loadingState: "playback error: " + error });
         })
     };
+
+    addPlaylistToQueue = () => {
+        const trackURIs = getTrackURIs(this.state.spotifyAccessToken).then(
+            uris => {
+                console.log("promis uris", uris)
+                uris.reduce(async (memo, uri) => {
+                    await memo;
+                    console.log(uri)
+                    console.log("uris[0]", uris[0])
+                    await fetch("https://api.spotify.com/v1/me/player/queue?" +
+                        "uri=" + uri +
+                        "&device_id=" + this.state.spotifyDeviceId, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${this.state.spotifyAccessToken}`
+                        }
+                    }).then((ev) => {
+                        console.log(ev);
+                        if (ev.status === 403) {
+                            console.log("403 from fetch")
+                        } else {
+                            console.log("songs added to queue", this.state);
+                        }
+                    }).catch((error) => {
+                        this.setState({ loadingState: "playlist error: " + error });
+                    })
+                }, undefined);
+            });
+
+    }
+
 
     render() {
         return (

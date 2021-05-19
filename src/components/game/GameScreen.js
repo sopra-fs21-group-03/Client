@@ -486,39 +486,39 @@ class GameScreen extends React.Component {
                                 (<h1></h1>)}
                             {this.user3.username == this.userOnTurn.username ? (
                             <PlayerInfoContainer
-                                top="27.5%" left="62.5%" width="50%" height="30%" color="red" background="grey"
-                                padding="0 0 0 90px" borderradius="10px" border="solid white 1px">
+                                top="27.5%" left="37.5%" width="50%" height="30%" color="red" background="grey"
+                                padding="0 90px 0 10px" borderradius="10px" border="solid white 1px">
                                 {this.displayUser(this.user3)}
                             </PlayerInfoContainer>
                         ) : (
                             this.user3.inGame == false ? (
                             <PlayerInfoContainer
-                                top="27.5%" left="62.5%" width="50%" height="30%" color="black" background="red"
-                                padding="0 0 0 90px" borderradius="10px" border="solid white 1px">
+                                top="27.5%" left="37.5%" width="50%" height="30%" color="black" background="red"
+                                padding="0 90px 0 10px" borderradius="10px" border="solid white 1px">
                                 {this.displayUser(this.user3)}
                             </PlayerInfoContainer>
                             ):(
                             this.user3.folded == true ? (
                             <PlayerInfoContainer
-                                top="27.5%" left="62.5%" width="50%" height="30%" color="black" background="grey"
-                                padding="0 0 0 90px" borderradius="10px" border="solid white 1px">
+                                top="27.5%" left="37.5%" width="50%" height="30%" color="black" background="grey"
+                                padding="0 90px 0 10px" borderradius="10px" border="solid white 1px">
                                 {this.displayUser(this.user3)}
                             </PlayerInfoContainer>
                             ):(
                             <PlayerInfoContainer
-                                top="27.5%" left="62.5%" width="50%" height="30%" color="white" background="grey"
-                                padding="0 0 0 90px" borderradius="10px" border="solid white 1px">
+                                top="27.5%" left="37.5%" width="50%" height="30%" color="white" background="grey"
+                                padding="0 90px 0 10px" borderradius="10px" border="solid white 1px">
                                 {this.displayUser(this.user3)}
                             </PlayerInfoContainer>
                         )))}
                             {this.user3.username == this.userOnTurn.username ? (
                                 <ProfileCircle
-                                    top="12.5%" left="40%" bordercolor = "red">
+                                    top="12.5%" left="45%" bordercolor = "red">
                                     {this.returnProfilePicture(this.game, this.user3)}
                                 </ProfileCircle>
                             ) : (
                                 <ProfileCircle
-                                    top="12.5%" left="40%" bordercolor = "white">
+                                    top="12.5%" left="54%" bordercolor = "white">
                                     {this.returnProfilePicture(this.game, this.user3)}
                                 </ProfileCircle>
                             )}
