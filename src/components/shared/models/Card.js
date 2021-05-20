@@ -1,6 +1,13 @@
 import {Clubs, Diamond, Heart, Spades} from "../../../views/design/Suits";
 import styled from "styled-components";
 
+const HeartsTwo = styled.div`
+      background-color: red;  
+      height: 100%;
+      width: 100%;
+      border: 2px solid black;
+`;
+
 const NULLBox = styled.div`
       background-color: red;  
       height: 100%;
@@ -15,7 +22,6 @@ const SymbolBox2 = styled.div`
       text-align: center;
       margin: auto;
       margin-top: 15px;
-     
 `;
 
 const CardBox = styled.div`
@@ -46,6 +52,7 @@ class Card {
         this.symbol= null;
         Object.assign(this, data)
         if(this.suit=="SPADE"){
+
             this.symbol=<SymbolBox2><Spades></Spades></SymbolBox2>}
         if(this.suit=="DIAMOND"){
             this.symbol=<SymbolBox2><Diamond></Diamond></SymbolBox2>}
@@ -56,6 +63,7 @@ class Card {
 
         this.cardNumberOnCard=<CardNumberOnCard>{this.rank}</CardNumberOnCard>;
         this.card=<CardBox>{this.cardNumberOnCard}{this.symbol}</CardBox>
+
         if(this.suit=="NULL"){
             this.card=<NULLBox></NULLBox>
         }
