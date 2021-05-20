@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { ReactLogo } from "./ReactLogo";
+import Spotify from "../components/music/Spotify"
 
 /**
  * Using styled-components you can visual HTML primitives and use props with it!
@@ -45,9 +46,10 @@ const Title = styled.h1`
 const Header = props => {
   return (
     <Container /**height={props.height}**/>
-        <Container2>
-            <Title>Sopra Poker</Title>
-        </Container2>
+      <Container2>
+        <Title>Sopra Poker</Title>
+      </Container2>
+      <Spotify align="right" />
     </Container>
   );
 };

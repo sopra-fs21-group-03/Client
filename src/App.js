@@ -20,7 +20,6 @@ class App extends Component {
       <div>
         <Header height={"100"} />
         <AppRouter />
-        <Spotify />
         </div>
     );
   }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SpotifyPlayer from './SpotifyPlayer';
+import Spotify_Logo_RGB_Green from "./Spotify_Logo_RGB_Green.png"
 
 class Spotify extends Component {
 
@@ -29,7 +30,12 @@ class Spotify extends Component {
     }
 
 render() {
-    return this.view;
+    return (
+        <div>
+            <img src={Spotify_Logo_RGB_Green} alt={"Spotify"} hight={"20%"} width={"20%"} />
+            {this.view}
+        </div>
+        )
 }
 
 }
