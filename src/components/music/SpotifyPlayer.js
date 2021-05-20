@@ -150,11 +150,7 @@ class SpotifyPlayer extends Component {
 
 
     render() {
-        return (
-            <div>
-                <SpotifyAuthWindow />
-            </div>
-        );
+        return null;
     }
 
 }

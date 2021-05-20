@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ReactLogo } from "./ReactLogo";
+import Spotify from "../components/music/Spotify"
 
 /**
  * Using styled-components you can visual HTML primitives and use props with it!
@@ -15,6 +15,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative
 `;
 //${props => props.height}px
 //default height
@@ -22,6 +23,16 @@ const Container = styled.div`
 const Container2 = styled.div`
     height: 100%;
     width: 40%;
+    align-items: center;
+    position: absolute;
+    margin-left: 20%;
+`;
+
+const SpotifyLogo = styled.div`
+    width: 40%;
+    position: absolute;
+    margin-top: 3em;
+    left: 75%;
 `;
 
 const Title = styled.h1`
@@ -43,13 +54,16 @@ const Title = styled.h1`
  * @FunctionalComponent
  */
 const Header = props => {
-  return (
-    <Container /**height={props.height}**/>
-        <Container2>
-            <Title>Sopra Poker</Title>
-        </Container2>
-    </Container>
-  );
+    return (
+        <Container /**height={props.height}**/>
+            <SpotifyLogo>
+                <Spotify/>
+            </SpotifyLogo>
+            <Container2>
+                <Title>Sopra Poker</Title>
+            </Container2>
+        </Container>
+    );
 };
 
 /**

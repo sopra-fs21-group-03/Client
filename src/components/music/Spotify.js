@@ -1,9 +1,14 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import SpotifyPlayer from './SpotifyPlayer';
+import Spotify_Logo_RGB_Green from "./Spotify_Logo_RGB_Green.png"
+import {SpotifyButton} from "../../views/design/SpotifyButton";
+import SpotifyAuthWindow from "./SpotifyAuthWindow";
+
 
 class Spotify extends Component {
 
     view = null;
+    authWindow = null;
 
     constructor() {
         super();
@@ -12,6 +17,10 @@ class Spotify extends Component {
         const searchStr = window.location.search; // everything in address after ?, here spotify puts access denials
         const hashParams = decodeHashParams(hashStr.slice(1, hashStr.length));
         const searchParams = decodeHashParams(searchStr.slice(1, searchStr.length));
+
+        this.state = {
+            showSpotifyAuthWindow: false,
+        };
 
         if (hashParams.access_token) {
             localStorage.setItem("SPOTIFY_ACCESS", "true");
@@ -25,18 +34,32 @@ class Spotify extends Component {
             this.view = <SpotifyPlayer
                 trackId="spotify:track:2AmSzVEGntmfAVvRy7W4ET"
             />;
+            this.authWindow = <div> <SpotifyAuthWindow/> </div>
         }
     }
 
-render() {
-    return this.view;
-}
+    render() {
+        return (
+            <SpotifyButton onClick={async () => {
+                this.setState({showSpotifyAuthWindow: true})
+                setTimeout(() =>{
+                    this.setState({showSpotifyAuthWindow: false})
+                }, 1000);
+            }}>
+                <img src={Spotify_Logo_RGB_Green} alt={"Spotify"} height={"15%"} width={"15%"}/>
+                {this.state.showSpotifyAuthWindow ?
+                    this.authWindow : null}
+                {this.view}
+            </SpotifyButton>
+
+        )
+    }
 
 }
 
 export default Spotify;
 
-    /**
+/**
  * decodes a parameter string (p1=v1&p2=v2&... syntax) into the object {p1: v1, p2: v2, ...}
  */
 function decodeHashParams(str) {
