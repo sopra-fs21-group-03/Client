@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { ReactLogo } from "./ReactLogo";
 import Spotify from "../components/music/Spotify"
 
 /**
@@ -25,6 +24,12 @@ const Container2 = styled.div`
     width: 40%;
 `;
 
+const SpotifyLogo = styled.div`
+    align-items: right;
+    margin-top: auto;
+    width: 40%;
+`;
+
 const Title = styled.h1`
   font-weight: bold;
   font-size: 36pt;
@@ -44,14 +49,16 @@ const Title = styled.h1`
  * @FunctionalComponent
  */
 const Header = props => {
-  return (
-    <Container /**height={props.height}**/>
-      <Container2>
-        <Title>Sopra Poker</Title>
-      </Container2>
-      <Spotify align="right" />
-    </Container>
-  );
+    return (
+        <Container /**height={props.height}**/>
+            <Container2>
+                <Title>Sopra Poker</Title>
+            </Container2>
+            <SpotifyLogo>
+                <Spotify/>
+            </SpotifyLogo>
+        </Container>
+    );
 };
 
 /**
