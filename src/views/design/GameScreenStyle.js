@@ -806,10 +806,30 @@ export const TopRightPlayerContainer = styled.div`
   padding-right: 15px;
 `;
 
-export const CardBox = styled.div`
+export const BackOfCard = styled.div`
   border: solid;
   border-color: white;
   background: url('https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/cardBackground.png');
+  background-size: cover;
+  margin: 0;
+  position: absolute;
+  margin-right: 0%;
+  transform: translate(-50%, -50%);
+  width: ${props => props.width || null};
+  height: ${props => props.height || null};
+  top: ${props => props.top || null};
+  left: ${props => props.left || null};
+  margin-left: auto;
+  padding-left: auto;
+  margin-right: auto;
+  padding-right: auto;
+  border-radius: 5px;
+  transform: ${props => props.transform || null};
+  overflow: hidden; 
+`;
+
+export const PictureCardBox = styled.div`
+  background: transparent;
   background-size: cover;
   margin: 0;
   position: absolute;
@@ -850,7 +870,7 @@ export const PlayerInfoContainer = styled.div`
   border: ${props => props.border || null};
 `;
 
-export const FrontCardBox = styled.div`
+export const PlaceHolderCard = styled.div`
   width: 100%;
   height: 100%;  
 `;
