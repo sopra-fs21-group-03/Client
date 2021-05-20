@@ -211,13 +211,13 @@ class GameScreen extends React.Component {
     }
 
     async leaveTable() {
-        await api.put('/games/' + localStorage.getItem('gameId') + '/' + localStorage.getItem('userID') + 'leave', this.returnToken());
+        await api.put('/games/' + localStorage.getItem('gameId') + '/' + localStorage.getItem('userID') + '/leave', this.returnToken());
         this.props.history.push('/lobbyscreen');
         localStorage.removeItem("gameId");
     }
 
     async logoutEndGame() {
-        await api.put('/games/' + localStorage.getItem('gameId') + '/' + localStorage.getItem('userID') + 'leave', this.returnToken());
+        await api.put('/games/' + localStorage.getItem('gameId') + '/' + localStorage.getItem('userID') + '/leave', this.returnToken());
         this.props.history.push('/lobbyscreen');
         localStorage.removeItem("gameId");
     }
