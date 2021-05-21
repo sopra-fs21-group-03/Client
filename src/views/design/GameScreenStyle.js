@@ -50,13 +50,6 @@ export const SmallBlind = styled.div`
   transform: ${props => props.transform || null};   
 `;
 
-export const Writen = styled.p`
-    margin-top: 0;
-    margin-bottom: 2px;
-    padding-top: 0;
-    padding-bottom: 0;
-`;
-
 export const LeaveTableButton = styled(BlackButton)`
   position: absolute;
   top: 60%;
@@ -561,7 +554,7 @@ export const LowerContainer = styled.div`
 `;
 
 export const BottomContainer = styled.div`
-background-color: grey;
+background: url('https://images4.alphacoders.com/184/thumb-1920-184506.jpg');
   margin: 0;
   position: absolute;
   top: 95%;
