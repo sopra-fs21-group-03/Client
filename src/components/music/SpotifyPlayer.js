@@ -61,7 +61,7 @@ class SpotifyPlayer extends Component {
                     spotifyDeviceId: device_id,
                     spotifyPlayerReady: true
                 });
-                this.startPlayback(this.props.trackId);
+                this.startPlayback();
             });
 
             // Not Ready
@@ -77,7 +77,7 @@ class SpotifyPlayer extends Component {
 
     }
 
-    startPlayback = (spotify_uri) => {
+    startPlayback = () => {
         console.log("Playback starts")
         if (this.state.device_id === "") {
             setTimeout(() => {
@@ -88,10 +88,12 @@ class SpotifyPlayer extends Component {
         if (!this.state.spotifyPlayerReady) {
             return;
         }
+        getTrackURIs(this.state.spotifyAccessToken).then(
+            uris => {
         fetch("https://api.spotify.com/v1/me/player/play?" +
             "device_id=" + this.state.spotifyDeviceId, {
             method: 'PUT',
-            body: JSON.stringify({ uris: [spotify_uri] }),
+            body: JSON.stringify({ uris: uris }),
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${this.state.spotifyAccessToken}`
@@ -110,44 +112,11 @@ class SpotifyPlayer extends Component {
                     playbackOn: true, playbackPaused: false
                 });
                 console.log("Started playback", this.state);
-                this.addPlaylistToQueue();
             }
         }).catch((error) => {
             this.setState({ loadingState: "playback error: " + error });
-        })
+        })})
     };
-
-    addPlaylistToQueue = () => {
-        const trackURIs = getTrackURIs(this.state.spotifyAccessToken).then(
-            uris => {
-                console.log("promis uris", uris)
-                uris.reduce(async (memo, uri) => {
-                    await memo;
-                    console.log(uri)
-                    console.log("uris[0]", uris[0])
-                    await fetch("https://api.spotify.com/v1/me/player/queue?" +
-                        "uri=" + uri +
-                        "&device_id=" + this.state.spotifyDeviceId, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${this.state.spotifyAccessToken}`
-                        }
-                    }).then((ev) => {
-                        console.log(ev);
-                        if (ev.status === 403) {
-                            console.log("403 from fetch")
-                        } else {
-                            console.log("songs added to queue", this.state);
-                        }
-                    }).catch((error) => {
-                        this.setState({ loadingState: "playlist error: " + error });
-                    })
-                }, undefined);
-            });
-
-    }
-
 
     render() {
         return null;

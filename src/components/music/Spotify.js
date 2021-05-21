@@ -31,9 +31,7 @@ class Spotify extends Component {
             localStorage.setItem("SPOTIFY_ACCESS", "false");
             window.close();
         } else {
-            this.view = <SpotifyPlayer
-                trackId="spotify:track:2AmSzVEGntmfAVvRy7W4ET"
-            />;
+            this.view = <SpotifyPlayer />;
             this.authWindow = <div> <SpotifyAuthWindow/> </div>
         }
     }
