@@ -212,14 +212,14 @@ class GameScreen extends React.Component {
 
     async leaveTable() {
         await api.put('/games/' + localStorage.getItem('gameId') + '/' + localStorage.getItem('userID') + '/leave', this.returnToken());
-        this.props.history.push('/lobbyscreen');
         localStorage.removeItem("gameId");
+        this.props.history.push('/lobbyscreen');
     }
 
     async logoutEndGame() {
         await api.put('/games/' + localStorage.getItem('gameId') + '/' + localStorage.getItem('userID') + '/leave', this.returnToken());
-        this.props.history.push('/lobbyscreen');
         localStorage.removeItem("gameId");
+        this.props.history.push('/lobbyscreen');
     }
 
 
@@ -666,31 +666,31 @@ class GameScreen extends React.Component {
                             <MiddleCardsContainer>
                                 {this.game.river.cards.length >= 1 ? (
                                     <PictureCardBox
-                                        width="9%" height="80%" top="50%" left="68%">
+                                        width="9%" height="84%" top="50%" left="68%">
                                         <PlaceHolderCard>{this.game.river.getCard(0)}</PlaceHolderCard>
                                     </PictureCardBox>
                                 ) : (<h1></h1>)}
                                 {this.game.river.cards.length >= 2 ? (
                                     <PictureCardBox
-                                        width="9%" height="80%" top="50%" left="58%">
+                                        width="9%" height="84%" top="50%" left="58%">
                                         <PlaceHolderCard>{this.game.river.getCard(1)}</PlaceHolderCard>
                                     </PictureCardBox>
                                 ) : (<h1></h1>)}
                                 {this.game.river.cards.length >= 3 ? (
                                     <PictureCardBox
-                                        width="9%" height="80%" top="50%" left="48%">
+                                        width="9%" height="84%" top="50%" left="48%">
                                         <PlaceHolderCard>{this.game.river.getCard(2)}</PlaceHolderCard>
                                     </PictureCardBox>
                                 ) : (<h1></h1>)}
                                 {this.game.river.cards.length >= 4 ? (
                                     <PictureCardBox
-                                        width="9%" height="80%" top="50%" left="38%">
+                                        width="9%" height="84%" top="50%" left="38%">
                                         <PlaceHolderCard>{this.game.river.getCard(3)}</PlaceHolderCard>
                                     </PictureCardBox>
                                 ) : (<h1></h1>)}
                                 {this.game.river.cards.length >= 5 ? (
                                     <PictureCardBox
-                                        width="9%" height="80%" top="50%" left="28%">
+                                        width="9%" height="84%" top="50%" left="28%">
                                         <PlaceHolderCard>{this.game.river.getCard(4)}</PlaceHolderCard>
                                     </PictureCardBox>
                                 ) : (<h1></h1>)}
@@ -984,7 +984,18 @@ class GameScreen extends React.Component {
                                 ) : (<h1></h1>))}
                         </CheckContainer>
                         {this.myselfUser.cards.length == 0 ? (<h1></h1>) : (
-                            this.myselfUser.folded ? (<h1></h1>) : (
+                            this.myselfUser.folded ? (
+                                <OwnCardsContainer>
+                                    <PictureCardBox
+                                        width="35%" height="90%" top="50%" left="28%">
+                                        <PlaceHolderCard>{new Card(this.myselfUser.cards[0]).card}</PlaceHolderCard>
+                                    </PictureCardBox>
+                                    <PictureCardBox
+                                        width="35%" height="90%" top="50%" left="72%">
+                                        <PlaceHolderCard>{new Card(this.myselfUser.cards[1]).card}</PlaceHolderCard>
+                                    </PictureCardBox>
+                                </OwnCardsContainer>
+                            ) : (
                             <OwnCardsContainer>
                                 <PictureCardBox
                                     width="35%" height="90%" top="50%" left="28%">

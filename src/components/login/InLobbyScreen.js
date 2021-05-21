@@ -63,7 +63,7 @@ const PlayerName = styled.div`
 const ReadyButton = styled(LeaveTableButton)`
   position: absolute;
   top: 80%;
-  left: 25%;
+  left: 4.5%;
   background: rgb(0,0,0,0.8);
   height: 10%;
   width: 30%;
@@ -71,15 +71,17 @@ const ReadyButton = styled(LeaveTableButton)`
   font-weight: 200;
 `;
 
-const ReadyButtonClicked = styled(LeaveTableButton)`
+const LeaveLobbyButton = styled(LeaveTableButton)`
   position: absolute;
   top: 80%;
-  left: 25%;
-  background: rgb(0,0,0,0.8);
+  left: 37.5%;
+  background: red;
   height: 10%;
-  width: 30%;
+  width: 38%;
   font-size: 24pt;
   font-weight: 200;
+  border: none;
+  color: black;
 `;
 
 const LobbbyScreenBaseContainer = styled.div`
@@ -115,6 +117,7 @@ class LobbyScreen extends React.Component{
     }
 
     lobby = new LobbyInfo();
+    myselfUser = null;
 
     async updateLobby(){
         const response = await api.get('/lobbies/' + localStorage.getItem("gameId"), {headers: {Authorization: localStorage.getItem('token')}});
@@ -122,7 +125,32 @@ class LobbyScreen extends React.Component{
         if(this.lobby.gameCanStart){
             this.props.history.push('/gamescreen');
         }
-        //this.setState({ lobbies: response.data });
+
+        if(this.lobby.players.length > 0){
+            if(this.lobby.players[0].username == localStorage.getItem('username')){
+                this.myselfUser = this.lobby.players[0];
+            }
+        }
+        if(this.lobby.players.length > 1){
+            if(this.lobby.players[1].username == localStorage.getItem('username')){
+                this.myselfUser = this.lobby.players[1];
+            }
+        }
+        if(this.lobby.players.length > 2){
+            if(this.lobby.players[2].username == localStorage.getItem('username')){
+                this.myselfUser = this.lobby.players[2];
+            }
+        }
+        if(this.lobby.players.length > 3){
+            if(this.lobby.players[3].username == localStorage.getItem('username')){
+                this.myselfUser = this.lobby.players[3];
+            }
+        }
+        if(this.lobby.players.length > 4){
+            if(this.lobby.players[4].username == localStorage.getItem('username')){
+                this.myselfUser = this.lobby.players[4];
+            }
+        }
     }
 
     async componentDidMount() {
@@ -140,6 +168,16 @@ class LobbyScreen extends React.Component{
         await api.put('lobbies/' + localStorage.getItem("gameId") + '/' + localStorage.getItem("userID") + '/ready', this.returnToken())
     }
 
+    async unReady() {
+        await api.put('lobbies/' + localStorage.getItem("gameId") + '/' + localStorage.getItem("userID") + '/unready', this.returnToken())
+    }
+
+    async leaveLobby() {
+        await api.put('lobbies/' + localStorage.getItem("gameId") + '/' + localStorage.getItem("userID") + '/leave', this.returnToken())
+        localStorage.removeItem('gameId')
+        this.props.history.push('/lobbyscreen')
+    }
+
     returnToken() {
         const requestBody = JSON.stringify({
             token: localStorage.getItem('token')
@@ -148,6 +186,7 @@ class LobbyScreen extends React.Component{
     }
 
     render() {
+
         if(this.lobby.players != null){ return (
             <LobbbyScreenBaseContainer>
                 <FormContainer>
@@ -286,13 +325,27 @@ class LobbyScreen extends React.Component{
                             </PlayerName>
                         )}
                     </Border>
-                    <ReadyButton
+                    {this.myselfUser.readyStatus == "NOTREADY" ? (
+                        <ReadyButton
+                            onClick={() => {
+                                this.ready()
+                            }}>
+                            Ready
+                        </ReadyButton>
+                    ) : (
+                        <ReadyButton
+                            onClick={() => {
+                                this.unReady()
+                            }}>
+                            Unready
+                        </ReadyButton>
+                    )}
+                    <LeaveLobbyButton
                         onClick={() => {
-                        this.ready()
+                        this.leaveLobby()
                     }}>
-                        Ready
-                    </ReadyButton>
-
+                        Leave Lobby
+                    </LeaveLobbyButton>
                 </FormContainer>
             </LobbbyScreenBaseContainer>)}
         else{
