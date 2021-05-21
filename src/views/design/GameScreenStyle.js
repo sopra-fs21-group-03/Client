@@ -384,7 +384,7 @@ export const GameContainer = styled.div`
   margin-right: auto;
   padding-right: 15px;
   max-width: 100%;
-  background-image: url('http://st.gde-fon.com/wallpapers_original/336962_korichnevyj_parket_fonovaya_1920x1080_www.Gde-Fon.com.jpg');
+  background-image: url('https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/Background.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -554,7 +554,7 @@ export const LowerContainer = styled.div`
 `;
 
 export const BottomContainer = styled.div`
-background: url('https://images4.alphacoders.com/184/thumb-1920-184506.jpg');
+background: url('https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/BottomPicture.jpg');
   margin: 0;
   position: absolute;
   top: 95%;
