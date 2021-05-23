@@ -154,6 +154,10 @@ class Login extends React.Component {
       // Store the token into the local storage.
       localStorage.setItem('token', user.token);
 
+      if(user.gameId != null){
+        localStorage.setItem('gameId', user.gameId)
+      }
+
       const secondResponse = await api.get('/users/ids',{headers:{ Authorization: localStorage.getItem('token')}});
 
       const userForUserID = new User(secondResponse.data);

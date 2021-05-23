@@ -13,6 +13,7 @@ class User {
     this.username = null;
     this.inGame = null;
     this.folded= null;
+    this.gameId = null;
 
     Object.assign(this, data);
   }
