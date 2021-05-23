@@ -799,6 +799,41 @@ export const TopRightPlayerContainer = styled.div`
   padding-right: 15px;
 `;
 
+export const Combinations = styled.div`
+      background: url('https://www.pokerharder.com/img/p/3/pokerhands_big.jpg');
+      margin-left: -37%;
+      margin-top: -114%;
+      border-radius: 30px;
+      height: 213%;
+      width: 140%;
+      
+  
+      
+`;
+
+export const CombinationButton = styled.button`
+  &:hover {
+    transform: translateY(-2px);
+  }
+  padding: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 13px;
+  text-align: center;
+  color: red;
+  width: ${props => props.width || null};
+  height: 50px;
+  border-radius: 10px;
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
+  opacity: ${props => (props.disabled ? 0.4 : 1)};
+  background: black;
+  transition: all 0.3s ease;
+  border: solid;
+  border-color: red;
+  margin-top: 20%;
+  margin-left: 60%;
+`;
+
 export const BackOfCard = styled.div`
   border: solid;
   border-color: white;

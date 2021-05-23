@@ -85,7 +85,21 @@ const ButtonContainer = styled.div`
   top: 55%;
 `;
 
+const Combinations = styled.div`
+      background: url('https://www.pokerharder.com/img/p/3/pokerhands_big.jpg');
+      background-size: cover;
+      margin-left: 10%;
+      margin-top: 2.5%;
+      border-radius: 30px;
+      height: 90%;
+      width: 80%;
+  
+      
+`;
+
 class PokerInstructionsScreen extends React.Component{
+
+    combinations=<Combinations></Combinations>
 
     call= "If you call, that means you go along with the current bet. You are staying in the round."
 
@@ -161,6 +175,11 @@ class PokerInstructionsScreen extends React.Component{
                         this.currentInfo=this.showdown
                     }}
                     > Showdown </BlackButton2>
+                    <BlackButton2 onClick={() => {
+                        this.currentInfo=this.combinations
+                    }}
+                    > Combinations </BlackButton2>
+
 
 
                 </ButtonContainer>

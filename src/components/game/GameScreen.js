@@ -54,14 +54,17 @@ import {
     LooserContainer,
     ChatSendButton,
     EmojiButton,
-    EmojiContainer, SingleEmojiButton, PictureCardBox
+    EmojiContainer, SingleEmojiButton, PictureCardBox, Combinations
 } from "../../views/design/GameScreenStyle";
 import Player from "../../views/Player";
 import ChatMessageField from "../../views/ChatMessageField";
 import {Spinner} from "../../views/design/Spinner";
 import styled from "styled-components";
+import {BlackButton} from "../../views/design/BlackButton";
 
 document.body.style.backgroundColor = "green";
+
+
 
 const ProfilePicture = styled.div`
   width: 100%;
@@ -77,6 +80,18 @@ const BottomTable = styled.div`
   left: -10%;
   height: 100%;
   background: url(''); 
+`;
+
+const CombinationButton = styled(BlackButton)`
+  position: absolute;
+  top: 33%;
+  left: 25%;
+  background: rgb(0,0,0,0.8);
+  height: 25%;
+  width: 60%;
+  font-size: 24pt;
+  font-weight: 200;
+  overflow: hidden;
 `;
 
 //Normal PokerScreen
@@ -276,7 +291,7 @@ class GameScreen extends React.Component {
     user3 = new User();
     user4 = new User();
     userOnTurn = new User();
-
+    combinations=null;
 
     async updateGameScreen() {
 
@@ -356,6 +371,15 @@ class GameScreen extends React.Component {
         }
     }
 
+    showCombinations(){
+        if(this.combinations==null) {
+            this.combinations = <Combinations></Combinations>
+        }
+        else{
+            this.combinations=null;
+        }
+    }
+
     returnCard(cardNumber, Suit) {
         const card = new Card({cardNumber: cardNumber, suit: Suit});
         return card.card
@@ -418,6 +442,7 @@ class GameScreen extends React.Component {
         else if (this.game.gameName != null) {
             return (
                 <GameContainer>
+
                     <TableCircleLeft></TableCircleLeft>
                     <TableCircleRight></TableCircleRight>
                     <Tablesquare></Tablesquare>
@@ -499,6 +524,7 @@ class GameScreen extends React.Component {
                                 </PlayerCardsContainer>
                                 )))}
                         </TopLeftPlayerContainer>
+
                         <TopRightPlayerContainer>
                             {this.user3.blind == "BIG" ?
                                 (<BigBlind
@@ -1021,6 +1047,12 @@ class GameScreen extends React.Component {
                             }}>
                                 Leave Table
                             </LeaveTableButton>
+                            <CombinationButton onClick={() => {
+                                this.showCombinations()
+                            }}>Poker Hands hide/show</CombinationButton>
+                            {this.combinations}
+
+
                         </LeaveTableContainer>
                     </LowerContainer>
                     {this.myselfUser.username == this.userOnTurn.username ?
