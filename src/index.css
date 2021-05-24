@@ -294,3 +294,67 @@ button {
   width: 100%;
   height: auto;
 }
+
+.infobox{
+  height: 100px;
+  width: 100px;
+  margin-top: 50px;
+}
+
+.infobox:before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.infobox span{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  box-sizing: border-box;
+}
+
+.infobox span:nth-child(1)
+{
+  transform: rotate(0deg);
+}
+
+.infobox span:nth-child(3)
+{
+  transform: rotate(180deg);
+}
+
+.infobox span:before{
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: red;
+  animation: animate 6s linear infinite;
+}
+
+@keyframes animate {
+  0%{
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  50%{
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  50.1%{
+    transform: scaleX(1);
+    transform-origin: right;
+  }
+  100%{
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+}
+
+
+

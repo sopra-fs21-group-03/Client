@@ -580,7 +580,7 @@ background: url('https://raw.githubusercontent.com/sopra-fs21-group-03/Client/ma
   height: 10%;
   margin-left: auto;
   margin-right: auto;
-  border-top: solid ${props => props.bordercolor || null}; 
+  border-top: ${props => props.bordercolor || null}; 
 `;
 
 export const ChatContainer = styled.div`
@@ -915,6 +915,10 @@ export const PlayerInfoContainer = styled.div`
   border: ${props => props.border || null};
   box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.6);
   box-shadow: ${props => props.boxShadow || null};
+  text-decoration: blink;
+  animation: blink 4s linear infinite;
+  border: none;
+  color: white;
 `;
 
 export const PlaceHolderCard = styled.div`

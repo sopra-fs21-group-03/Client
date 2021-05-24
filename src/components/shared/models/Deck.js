@@ -29,7 +29,6 @@ class Deck implements Element {
         }
     }
 }
-    //hearts10 = <hearts10></hearts10>;
 
 
 export default Deck;

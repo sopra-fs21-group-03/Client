@@ -1,11 +1,8 @@
 import React from 'react';
 import {withRouter} from "react-router-dom";
-import {BaseContainer} from "../../helpers/layout";
 import styled from "styled-components";
-import Lobby from "../shared/models/Lobby";
 import {LeaveTableButton, Loader, LoadingGameContainer} from "../../views/design/GameScreenStyle";
 import {api} from "../../helpers/api";
-import User from "../shared/models/User";
 import LobbyInfo from "../shared/models/LobbyInfo";
 
 const Border = styled.button`
@@ -123,6 +120,9 @@ class LobbyScreen extends React.Component{
         const response = await api.get('/lobbies/' + localStorage.getItem("gameId"), {headers: {Authorization: localStorage.getItem('token')}});
         this.lobby = new LobbyInfo(response.data);
         if(this.lobby.gameCanStart){
+            this.props.history.push('/gamescreen');
+        }
+        if(this.lobby.inGame){
             this.props.history.push('/gamescreen');
         }
 

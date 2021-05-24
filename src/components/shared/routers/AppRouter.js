@@ -1,12 +1,9 @@
 import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { GameGuard } from "../routeProtectors/GameGuard";
-import GameRouter from "./GameRouter";
-import { LoginGuard } from "../routeProtectors/LoginGuard";
 import Login from "../../login/Login";
 import Register from "../../login/Register";
 import GameScreen from "../../game/GameScreen";
-import Lobby from "../../login/LobbyScreen";
 import LobbyScreen from "../../login/LobbyScreen";
 import InLobbyScreen from "../../login/InLobbyScreen";
 import {LobbyGuard} from "../routeProtectors/LobbyGuard";

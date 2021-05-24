@@ -99,12 +99,6 @@ const InputField = styled.input`
   background: rgba(255, 255, 255);
 `;
 
-const Label = styled.label`
-  color: white;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-`;
-
 const ButtonContainer = styled.div`
   justify-content: center;
   margin-top: 20px;
@@ -187,7 +181,6 @@ class Register extends React.Component {
    * You may call setState() immediately in componentDidMount().
    * It will trigger an extra rendering, but it will happen before the browser updates the screen.
    */
-  componentDidMount() {}
 
   render() {
     return (

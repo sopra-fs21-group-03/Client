@@ -54,14 +54,11 @@ import {
     LooserContainer,
     ChatSendButton,
     EmojiButton,
-    EmojiContainer, SingleEmojiButton, PictureCardBox, Combinations, SpotifyLogo, SpotifyContainerInGame
+    EmojiContainer, SingleEmojiButton, PictureCardBox, Combinations, SpotifyContainerInGame
 } from "../../views/design/GameScreenStyle";
-import Player from "../../views/Player";
 import ChatMessageField from "../../views/ChatMessageField";
-import {Spinner} from "../../views/design/Spinner";
 import styled from "styled-components";
 import {BlackButton} from "../../views/design/BlackButton";
-import Spotify from "../music/Spotify";
 import SpotifyPlayer from "../music/SpotifyPlayer";
 
 document.body.style.backgroundColor = "green";
@@ -70,16 +67,6 @@ const ProfilePicture = styled.div`
   width: 100%;
   height: 100%;
   background: ${props => props.background || null}; 
-`;
-
-//For picture in bottomContainer´´
-const BottomTable = styled.div`
-  position: absolute;
-  top: 68%;
-  width: 130%;
-  left: -10%;
-  height: 100%;
-  background: url(''); 
 `;
 
 const CombinationButton = styled(BlackButton)`
@@ -203,26 +190,23 @@ class GameScreen extends React.Component {
 
 
     returnToken() {
-        const requestBody = JSON.stringify({
+        return JSON.stringify({
             token: localStorage.getItem('token')
-        });
-        return requestBody
+        })
     }
 
     returnRaiseAmountAndToken() {
-        const requestBodyRaiseAmount = JSON.stringify({
+        return JSON.stringify({
             raiseAmount: this.state.raiseAmount,
             token: localStorage.getItem('token')
-        });
-        return requestBodyRaiseAmount
+        })
     }
 
     returnChatMessageAndToken() {
-        const requestBodyChatMessage = JSON.stringify({
+        return JSON.stringify({
             token: localStorage.getItem('token'),
             message: this.state.chatMessage
-        });
-        return requestBodyChatMessage
+        })
     }
 
     async leaveTable() {
@@ -239,11 +223,10 @@ class GameScreen extends React.Component {
 
 
     returnTokenAndIfReveal(boolean) {
-        const requestBodyRevealCards = JSON.stringify({
+        return JSON.stringify({
             token: localStorage.getItem('token'),
             wantsToShow: boolean
-        });
-        return requestBodyRevealCards
+        })
     }
 
     displayUser(user) {
@@ -312,7 +295,6 @@ class GameScreen extends React.Component {
 
         const gameResponse = await api.get('/games/' + localStorage.getItem("gameId"), {headers: {Authorization: localStorage.getItem('token')}});
         this.game = new Game(gameResponse.data);
-        console.log(gameResponse.data);
 
 
         const myselfUserResponse = await api.get('/games/' + localStorage.getItem("gameId") + '/' + localStorage.getItem('userID'), {headers: {Authorization: localStorage.getItem('token')}});
@@ -442,7 +424,6 @@ class GameScreen extends React.Component {
         else if (this.game.gameName != null) {
             return (
                 <GameContainer>
-
                     <TableCircleLeft></TableCircleLeft>
                     <TableCircleRight></TableCircleRight>
                     <Tablesquare></Tablesquare>
@@ -452,7 +433,12 @@ class GameScreen extends React.Component {
                                     this.user2.username == this.userOnTurn.username ? (
                                             <PlayerInfoContainer
                                                 top="27.5%" left="62.5%" width="50%" height="30%" color="red" background="grey"
-                                                padding="0 0 0 90px" borderradius="10px" border="solid white 1px">
+                                                padding="0 0 0 90px" borderradius="10px"
+                                                className = "infobox">
+                                                <span></span>
+                                                <span></span>
+                                                <span></span>
+                                                <span></span>
                                                 {this.displayUser(this.user2)}
                                             </PlayerInfoContainer>
                                         ) : (
@@ -461,7 +447,7 @@ class GameScreen extends React.Component {
                                                 padding="0 0 0 90px" borderradius="10px" border="solid white 1px">
                                                 {this.displayUser(this.user2)}
                                             </PlayerInfoContainer>
-                                        )) : (<p1></p1>)}
+                                        )) : (null)}
                             {this.user2.inGame ? (
                                 this.user2.username == this.userOnTurn.username ? (
                                         <ProfileCircle
@@ -473,7 +459,7 @@ class GameScreen extends React.Component {
                                             top="12.5%" left="30%" bordercolor = "white">
                                             {this.returnProfilePicture(this.game, this.user2)}
                                         </ProfileCircle>
-                                    )) : (<p1></p1>)}
+                                    )) : (null)}
                             {this.user2.blind == "BIG" ?
                                 (<BigBlind
                                     top="70%" left="75%" transform="rotate(180deg)">B</BigBlind>) :
@@ -482,9 +468,9 @@ class GameScreen extends React.Component {
                                 (<SmallBlind top="70%" left="75%" transform="rotate(180deg)">S</SmallBlind>) :
                                 (<h1></h1>)}
 
-                            {this.user2.inGame == false ? (<p1></p1>) : (
-                                this.user2.folded == true ? (<p1></p1>) : (
-                            this.game.showdown == true ?
+                            {!this.user2.inGame ? (null) : (
+                                this.user2.folded ? (null) : (
+                            this.game.showdown ?
                                 (this.getUserCard(this.showdownUser2, 0) ? (
                                         <PlayerCardsContainer
                                             top="72.5%" left="60%" width="30%" height="55%">
@@ -536,12 +522,16 @@ class GameScreen extends React.Component {
                             {this.user3.username == this.userOnTurn.username ? (
                                 <PlayerInfoContainer
                                     top="27.5%" left="37.5%" width="50%" height="30%" color="red"
-                                    padding="0 90px 0 10px" borderradius="10px" border="solid white 1px">
+                                    padding="0 90px 0 10px" borderradius="10px" className = "infobox">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
                                     {this.displayUser(this.user3)}
                                 </PlayerInfoContainer>
                             ) : (
-                                this.user3.inGame == false ? (
-                                    <p1></p1>
+                                !this.user3.inGame ? (
+                                    null
                                 ):(
                                         <PlayerInfoContainer
                                             top="27.5%" left="37.5%" width="50%" height="30%" color="white"
@@ -561,12 +551,12 @@ class GameScreen extends React.Component {
                                     {this.returnProfilePicture(this.game, this.user3)}
                                 </ProfileCircle>
                             )
-                            ) : (<p1></p1>)}
+                            ) : (null)}
 
 
-                            {this.user3.inGame == false ? (<p1></p1>) : (
-                                this.user3.folded == true ? (<p1></p1>) : (
-                                    this.game.showdown == true ?
+                            {!this.user3.inGame ? (null) : (
+                                this.user3.folded ? (null) : (
+                                    this.game.showdown ?
                                         (this.getUserCard(this.showdownUser3, 0) ? (
                                                 <PlayerCardsContainer
                                                     top="72.5%" left="20%" width="30%" height="55%">
@@ -620,7 +610,11 @@ class GameScreen extends React.Component {
                                     <PlayerInfoContainer
                                         top="11.5%" left="75%" width="115%" height="19%" color="red"
                                         background="grey" padding="0 0 0 90px"
-                                        borderradius="10px" border="solid white 1px">
+                                        borderradius="10px" className = "infobox">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
                                         {this.displayUser(this.user1)}
                                     </PlayerInfoContainer>
                                 ) : (
@@ -644,9 +638,9 @@ class GameScreen extends React.Component {
                                 </ProfileCircle>
                                 )) : (<p1/>)}
 
-                            {this.user1.inGame == false ? (<p1></p1>) : (
-                                this.user1.folded == true ? (<p1></p1>) : (
-                                    this.game.showdown == true ?
+                            {!this.user1.inGame ? (null) : (
+                                this.user1.folded ? (null) : (
+                                    this.game.showdown ?
                                         (this.getUserCard(this.showdownUser1, 0) ? (
                                                 <PlayerCardsContainer
                                                     top="50%" left="78%" width="40%" height="50%">
@@ -767,7 +761,11 @@ class GameScreen extends React.Component {
                                 <PlayerInfoContainer
                                     top="11.5%" left="25%" width="115%" height="19%" color="red"
                                     background="grey" padding="0 90px 0 10px" borderradius="10px"
-                                    border="solid white 1px">
+                                    className = "infobox">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
                                     {this.displayUser(this.user4)}
                                 </PlayerInfoContainer>
                             ) : (
@@ -776,7 +774,7 @@ class GameScreen extends React.Component {
                                     padding="0 90px 0 10px" borderradius="10px" border="solid white 1px">
                                     {this.displayUser(this.user4)}
                                 </PlayerInfoContainer>
-                            )) : (<p1></p1>)}
+                            )) : (null)}
                             {this.user4.inGame ? (
                                 this.user4.username == this.userOnTurn.username ? (
                                 <ProfileCircle
@@ -788,10 +786,10 @@ class GameScreen extends React.Component {
                                     top="2%" left="60%" bordercolor="white">
                                     {this.returnProfilePicture(this.game, this.user4)}
                                 </ProfileCircle>
-                            )) : (<p1></p1>)}
-                            {this.user4.inGame == false ? (<p1></p1>) : (
-                                this.user4.folded == true ? (<p1></p1>) : (
-                                    this.game.showdown == true ?
+                            )) : (null)}
+                            {!this.user4.inGame ? (null) : (
+                                this.user4.folded ? (null) : (
+                                    this.game.showdown ?
                                         (this.getUserCard(this.showdownUser4, 0) ? (
                                                 <PlayerCardsContainer
                                                     top="50%" left="22%" width="40%" height="50%">
@@ -1012,14 +1010,6 @@ class GameScreen extends React.Component {
                         {this.myselfUser.cards.length == 0 ? (<h1></h1>) : (
                             this.myselfUser.folded ? (
                                 <OwnCardsContainer>
-                                    <PictureCardBox
-                                        width="35%" height="90%" top="50%" left="28%">
-                                        <PlaceHolderCard>{new Card(this.myselfUser.cards[0]).card}</PlaceHolderCard>
-                                    </PictureCardBox>
-                                    <PictureCardBox
-                                        width="35%" height="90%" top="50%" left="72%">
-                                        <PlaceHolderCard>{new Card(this.myselfUser.cards[1]).card}</PlaceHolderCard>
-                                    </PictureCardBox>
                                 </OwnCardsContainer>
                             ) : (
                             <OwnCardsContainer>
@@ -1056,7 +1046,8 @@ class GameScreen extends React.Component {
                         </LeaveTableContainer>
                     </LowerContainer>
                     {this.myselfUser.username == this.userOnTurn.username ?
-                        (<BottomContainer bordercolor="red">
+                        (<BottomContainer className = "infobox">
+                            <span></span>
                             <PlayerInfoContainer
                                 top="50%" left="55%" width="30%" height="80%" color="red" backgroundimage="none" boxShadow = "none">
                                 {this.displayUser(this.myselfUser)}
@@ -1070,7 +1061,7 @@ class GameScreen extends React.Component {
                                 setSpotifyPlayer={this.props.setSpotifyPlayer}/>
                             </SpotifyContainerInGame>
                         </BottomContainer>) :
-                        (<BottomContainer bordercolor="white">
+                        (<BottomContainer bordercolor="solid 2px white">
                             <PlayerInfoContainer
                                 top="50%" left="55%" width="30%" height="80%" color="white" backgroundimage="none" boxShadow = "none">
                                 {this.displayUser(this.myselfUser)}

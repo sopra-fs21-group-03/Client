@@ -1,10 +1,7 @@
 import React from "react";
-import { api, handleError } from "../../helpers/api";
-import { Loader, LoadingGameContainer } from "../../views/design/GameScreenStyle";
 import { withRouter } from "react-router-dom";
 import { BaseContainer } from "../../helpers/layout";
 import styled from "styled-components";
-import { BlackButton } from "../../views/design/BlackButton";
 
 
 
