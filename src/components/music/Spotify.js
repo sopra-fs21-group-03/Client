@@ -23,8 +23,8 @@ class Spotify extends Component {
     view = null;
     authWindow = null;
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         const hashStr = window.location.hash; // everything in address after #, here spotify puts successfull auth tokens
         const searchStr = window.location.search; // everything in address after ?, here spotify puts access denials
@@ -44,7 +44,7 @@ class Spotify extends Component {
             localStorage.setItem("SPOTIFY_ACCESS", "false");
             window.close();
         } else {
-            this.view = <SpotifyPlayer />;
+            this.view = <SpotifyPlayer setSpotifyPlayer={this.props.setSpotifyPlayer} />;
             this.authWindow = <div> <SpotifyAuthWindow /> </div>
         }
     }

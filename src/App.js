@@ -8,19 +8,40 @@ import Spotify from "./components/music/Spotify";
  * React Template by Lucas Pelloni
  */
 class App extends Component {
-  render() {
-      /*
-      window.onbeforeunload = () => {
-          // Clear localStorage when window/browser is closed
-          localStorage.clear();
-      }
 
-       */
+  constructor(props) {
+    super(props);
+    this.state = {
+      spotifyPlayer: undefined,
+    }
+  }
+
+  setSpotifyPlayer = spotifyPlayer => {
+    //let spotifyPlayer = spotifyPlayerObject;
+    console.log("param of function", spotifyPlayer)
+    this.setState({spotifyPlayer});
+    //console.log("new spotify Player", this.state.spotifyPlayer)
+  }
+
+  componentDidUpdate() {
+    console.log("new SpotifyPlayer after didUpdate", this.state.spotifyPlayer)
+  }
+
+  render() {
+    /*
+    window.onbeforeunload = () => {
+        // Clear localStorage when window/browser is closed
+        localStorage.clear();
+    }
+
+     */
     return (
       <div>
-        <Header height={"100"} />
-        <AppRouter />
-        </div>
+        <Header height={"100"} setSpotifyPlayer={this.setSpotifyPlayer} />
+        <AppRouter 
+        spotifyPlayer={this.state.spotifyPlayer}
+        setSpotifyPlayer={this.setSpotifyPlayer}/>
+      </div>
     );
   }
 }

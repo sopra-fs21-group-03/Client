@@ -66,7 +66,12 @@ import SpotifyPlayer from "../music/SpotifyPlayer";
 
 document.body.style.backgroundColor = "green";
 
+const SpotifyContainer = styled.div`
+    position: absolute;
+    bottom: 0;
+    right: 0;
 
+`
 
 const ProfilePicture = styled.div`
   width: 100%;
@@ -1067,6 +1072,8 @@ class GameScreen extends React.Component {
                                 top="-120%" left="30%" bordercolor="red">
                                 {this.returnProfilePicture(this.game, this.myselfUser)}
                             </ProfileCircle>
+                            <SpotifyPlayer spotifyPlayer={this.props.spotifyPlayer}
+                            setSpotifyPlayer={this.props.setSpotifyPlayer}/>
                         </BottomContainer>) :
                         (<BottomContainer bordercolor="white">
                             <PlayerInfoContainer
@@ -1077,10 +1084,8 @@ class GameScreen extends React.Component {
                                 top="-120%" left="30%" bordercolor="white">
                                 {this.returnProfilePicture(this.game, this.myselfUser)}
                             </ProfileCircle>
-                            <SpotifyPlayer />
-                            <SpotifyLogo>
-                                <Spotify/>
-                            </SpotifyLogo>
+                            <SpotifyPlayer spotifyPlayer={this.props.spotifyPlayer}
+                            setSpotifyPlayer={this.props.setSpotifyPlayer}/>
                         </BottomContainer>)}
                 </GameContainer>);
         }

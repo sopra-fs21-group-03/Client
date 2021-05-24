@@ -58,7 +58,7 @@ const Header = props => {
     return (
         <Container /**height={props.height}**/>
             <SpotifyLogo>
-                <Spotify/>
+                <Spotify setSpotifyPlayer={props.setSpotifyPlayer}/>
             </SpotifyLogo>
             <Container2>
                 <Title>Sopra Poker</Title>
