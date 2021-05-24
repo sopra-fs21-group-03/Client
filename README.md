@@ -69,4 +69,5 @@ Crown: https://www.flaticon.com/svg/vstatic/svg/1804/1804177.svg?token=exp=16209
 CardBackground: https://images.cdn2.stockunlimited.net/preview1300/playing-cards-background_1608080.jpg
 Bottom Pixture: https://images4.alphacoders.com/184/thumb-1920-184506.jpg
 White Volume Control Icon: https://www.iconsdb.com/white-icons/volume-control-8-icon.html
+Card-Pictures: http://acbl.mybigcommerce.com/52-playing-cards/
 

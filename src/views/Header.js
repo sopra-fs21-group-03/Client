@@ -39,7 +39,7 @@ const SpotifyLogo = styled.div`
 const Title = styled.h1`
   font-weight: bold;
   font-size: 36pt;
-  color: red;
+  color: white;
   width: 100%;
   text-align: left;
   white-space: nowrap;
