@@ -1,6 +1,10 @@
 import React, { Component } from "react"
 import {Slider, Handles } from "react-compound-slider"
 import WhiteVolumeIcon from "./volume-control-white.png"
+import styled from 'styled-components';
+
+const ReglerContainer = styled.div `
+`;
 
 export function Handle({
     // your handle component
@@ -13,7 +17,7 @@ export function Handle({
                 left: `${percent}%`,
                 position: "absolute",
                 marginLeft: -15,
-                marginTop: 25,
+                marginTop: 5,
                 zIndex: 2,
                 width: 30,
                 height: 30,
@@ -33,16 +37,19 @@ export function Handle({
 const sliderStyle = {
     // Give the slider some width
     position: "relative",
-    width: "20%",
-    height: 80,
-    margin: 50
+    width: "100%",
+    height: 30,
+    marginTop: 5,
+    marginRight: 50,
+    marginBottom: 5,
+    marginLeft: 50
 };
 
 const railStyle = {
     position: "absolute",
     width: "100%",
     height: 2,
-    marginTop: 38.5,
+    marginTop: 18.5,
     backgroundColor: "#8B9CB6"
 };
 
@@ -75,7 +82,7 @@ class VolumeSlider extends Component {
         } = this;
 
         return (
-            <div>
+            <ReglerContainer>
                 <Slider
                     mode={2}
                     step={1}
@@ -101,7 +108,7 @@ class VolumeSlider extends Component {
                         )}
                     </Handles>
                 </Slider>
-            </div>
+            </ReglerContainer>
         );
     }
 }

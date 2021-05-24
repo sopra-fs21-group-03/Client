@@ -3,7 +3,19 @@ import SpotifyPlayer from './SpotifyPlayer';
 import Spotify_Logo_RGB_Green from "./Spotify_Logo_RGB_Green.png"
 import { SpotifyButton } from "../../views/design/SpotifyButton";
 import SpotifyAuthWindow from "./SpotifyAuthWindow";
+import styled from 'styled-components';
 
+const SpotifyComponentsContainer = styled.div`
+    height: 50%;
+    display: flex;
+`;
+
+const BarComponentsContainer = styled.div`
+    height: 50%;
+    display: flex;
+    position: absolute;
+    left: 15%;
+`;
 
 class Spotify extends Component {
 
@@ -39,15 +51,20 @@ class Spotify extends Component {
     render() {
         return (
             <div>
+                <BarComponentsContainer>
                 {this.view}
-                <SpotifyButton>
+                </BarComponentsContainer>
+            <SpotifyComponentsContainer>
+
+                <SpotifyButton
+                    class = "spotifyButton"
+                    onClick={async () => {
+                        this.setState({ showSpotifyAuthWindow: true })
+                        setTimeout(() => {
+                            this.setState({ showSpotifyAuthWindow: false })
+                        }, 1000);
+                    }}>
                     <img
-                        onClick={async () => {
-                            this.setState({ showSpotifyAuthWindow: true })
-                            setTimeout(() => {
-                                this.setState({ showSpotifyAuthWindow: false })
-                            }, 1000);
-                        }}
                         src={Spotify_Logo_RGB_Green}
                         alt={"Spotify"}
                         height={"15%"}
@@ -56,6 +73,7 @@ class Spotify extends Component {
                     {this.state.showSpotifyAuthWindow ?
                         this.authWindow : null}
                 </SpotifyButton>
+            </SpotifyComponentsContainer>
             </div>
         )
     }

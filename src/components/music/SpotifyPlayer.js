@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import SpotifyAuthWindow from "./SpotifyAuthWindow"
 import getTrackURIs from "./Playlist"
 import VolumeSlider from './VolumeSlider';
+import styled from 'styled-components';
+import volumeControl from './volume-control-white.png';
+
+const VolumeSettings = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+`;
 
 class SpotifyPlayer extends Component {
 
@@ -127,9 +135,16 @@ class SpotifyPlayer extends Component {
     render() {
         if (this.spotifyPlayer) {
             return (
-                <VolumeSlider 
+                <VolumeSettings>
+                    <img
+                         class="soundImg"
+                         src ={volumeControl}
+                         height={"100%"}
+                         width={"auto"}/>
+                <VolumeSlider
                 onChange = {this.setVolume}
                 />
+                </VolumeSettings>
             );
         }
         else return null;
