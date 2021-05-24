@@ -33,6 +33,7 @@ const SpotifyLogo = styled.div`
     position: absolute;
     margin-top: 3em;
     left: 75%;
+    background: yellow;
 `;
 
 const Title = styled.h1`

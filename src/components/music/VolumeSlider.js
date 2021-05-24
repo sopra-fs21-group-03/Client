@@ -18,7 +18,6 @@ export function Handle({
                 position: "absolute",
                 marginLeft: -15,
                 marginTop: 5,
-                zIndex: 2,
                 width: 30,
                 height: 30,
                 border: 0,
@@ -82,33 +81,33 @@ class VolumeSlider extends Component {
         } = this;
 
         return (
-            <ReglerContainer>
-                <Slider
-                    mode={2}
-                    step={1}
-                    domain={domain}
-                    rootStyle={sliderStyle}
-                    onUpdate={this.onUpdate}
-                    onChange={this.onChange}
-                    values={values}
-                >
-                    <div style={railStyle} />
-                    <Handles>
-                        {({ handles, getHandleProps }) => (
-                            <div className="slider-handles">
-                                {handles.map(handle => (
-                                    <Handle
-                                        key={handle.id}
-                                        handle={handle}
-                                        domain={domain}
-                                        getHandleProps={getHandleProps}
-                                    />
-                                ))}
-                            </div>
-                        )}
-                    </Handles>
-                </Slider>
-            </ReglerContainer>
+                    <ReglerContainer>
+                            <Slider
+                                mode={2}
+                                step={1}
+                                domain={domain}
+                                rootStyle={sliderStyle}
+                                onUpdate={this.onUpdate}
+                                onChange={this.onChange}
+                                values={values}
+                            >
+                                <div style={railStyle} />
+                                <Handles>
+                                    {({ handles, getHandleProps }) => (
+                                        <div className="slider-handles">
+                                            {handles.map(handle => (
+                                                <Handle
+                                                    key={handle.id}
+                                                    handle={handle}
+                                                    domain={domain}
+                                                    getHandleProps={getHandleProps}
+                                                />
+                                            ))}
+                                        </div>
+                                    )}
+                                </Handles>
+                            </Slider>
+                    </ReglerContainer>
         );
     }
 }

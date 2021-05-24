@@ -54,13 +54,15 @@ import {
     LooserContainer,
     ChatSendButton,
     EmojiButton,
-    EmojiContainer, SingleEmojiButton, PictureCardBox, Combinations
+    EmojiContainer, SingleEmojiButton, PictureCardBox, Combinations, SpotifyLogo
 } from "../../views/design/GameScreenStyle";
 import Player from "../../views/Player";
 import ChatMessageField from "../../views/ChatMessageField";
 import {Spinner} from "../../views/design/Spinner";
 import styled from "styled-components";
 import {BlackButton} from "../../views/design/BlackButton";
+import Spotify from "../music/Spotify";
+import SpotifyPlayer from "../music/SpotifyPlayer";
 
 document.body.style.backgroundColor = "green";
 
@@ -1075,6 +1077,10 @@ class GameScreen extends React.Component {
                                 top="-120%" left="30%" bordercolor="white">
                                 {this.returnProfilePicture(this.game, this.myselfUser)}
                             </ProfileCircle>
+                            <SpotifyPlayer />
+                            <SpotifyLogo>
+                                <Spotify/>
+                            </SpotifyLogo>
                         </BottomContainer>)}
                 </GameContainer>);
         }

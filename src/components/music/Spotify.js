@@ -15,6 +15,7 @@ const BarComponentsContainer = styled.div`
     display: flex;
     position: absolute;
     left: 15%;
+    background: red;
 `;
 
 class Spotify extends Component {
