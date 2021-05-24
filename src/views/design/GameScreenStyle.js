@@ -892,6 +892,9 @@ export const PictureCardBox = styled.div`
 `;
 
 export const PlayerInfoContainer = styled.div`
+  background-image: url('https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/BottomPicture.jpg');
+  background-position: center;
+  background-image: ${props => props.backgroundimage || null};
   width: ${props => props.width || null};
   height: ${props => props.height || null};
   top: ${props => props.top || null};
@@ -906,11 +909,12 @@ export const PlayerInfoContainer = styled.div`
   font-size: 18pt;
   font-size: ${props => props.fontsize || null};
   color: ${props => props.color || null};
-  background: ${props => props.background || null};
   border-radius: ${props => props.borderradius || null};
   overflow: auto;
   word-wrap:break-word;
   border: ${props => props.border || null};
+  box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.6);
+  box-shadow: ${props => props.boxShadow || null};
 `;
 
 export const PlaceHolderCard = styled.div`

@@ -535,7 +535,7 @@ class GameScreen extends React.Component {
                                 (<h1></h1>)}
                             {this.user3.username == this.userOnTurn.username ? (
                                 <PlayerInfoContainer
-                                    top="27.5%" left="37.5%" width="50%" height="30%" color="red" background="grey"
+                                    top="27.5%" left="37.5%" width="50%" height="30%" color="red"
                                     padding="0 90px 0 10px" borderradius="10px" border="solid white 1px">
                                     {this.displayUser(this.user3)}
                                 </PlayerInfoContainer>
@@ -544,7 +544,7 @@ class GameScreen extends React.Component {
                                     <p1></p1>
                                 ):(
                                         <PlayerInfoContainer
-                                            top="27.5%" left="37.5%" width="50%" height="30%" color="white" background="grey"
+                                            top="27.5%" left="37.5%" width="50%" height="30%" color="white"
                                             padding="0 90px 0 10px" borderradius="10px" border="solid white 1px">
                                             {this.displayUser(this.user3)}
                                         </PlayerInfoContainer>
@@ -1058,7 +1058,7 @@ class GameScreen extends React.Component {
                     {this.myselfUser.username == this.userOnTurn.username ?
                         (<BottomContainer bordercolor="red">
                             <PlayerInfoContainer
-                                top="50%" left="55%" width="30%" height="80%" color="red">
+                                top="50%" left="55%" width="30%" height="80%" color="red" backgroundimage="none" boxShadow = "none">
                                 {this.displayUser(this.myselfUser)}
                             </PlayerInfoContainer>
                             <ProfileCircle
@@ -1072,7 +1072,7 @@ class GameScreen extends React.Component {
                         </BottomContainer>) :
                         (<BottomContainer bordercolor="white">
                             <PlayerInfoContainer
-                                top="50%" left="55%" width="30%" height="80%" color="white">
+                                top="50%" left="55%" width="30%" height="80%" color="white" backgroundimage="none" boxShadow = "none">
                                 {this.displayUser(this.myselfUser)}
                             </PlayerInfoContainer>
                             <ProfileCircle
