@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SpotifyAuthWindow from "./SpotifyAuthWindow"
 import getTrackURIs from "./Playlist"
+import VolumeSlider from './VolumeSlider';
 
 class SpotifyPlayer extends Component {
 
@@ -90,36 +91,48 @@ class SpotifyPlayer extends Component {
         }
         getTrackURIs(this.state.spotifyAccessToken).then(
             uris => {
-        fetch("https://api.spotify.com/v1/me/player/play?" +
-            "device_id=" + this.state.spotifyDeviceId, {
-            method: 'PUT',
-            body: JSON.stringify({ uris: uris }),
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.state.spotifyAccessToken}`
-            }
-        }).then((ev) => {
-            console.log(ev);
-            if (ev.status === 403) {
-                console.log("403 from fetch")
-                this.setState({
-                    loadingState: "you need to upgrade to premium for playback",
-                    spotifyAccess: false
-                });
-            } else {
-                this.setState({
-                    loadingState: "playback started",
-                    playbackOn: true, playbackPaused: false
-                });
-                console.log("Started playback", this.state);
-            }
-        }).catch((error) => {
-            this.setState({ loadingState: "playback error: " + error });
-        })})
+                fetch("https://api.spotify.com/v1/me/player/play?" +
+                    "device_id=" + this.state.spotifyDeviceId, {
+                    method: 'PUT',
+                    body: JSON.stringify({ uris: uris }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${this.state.spotifyAccessToken}`
+                    }
+                }).then((ev) => {
+                    console.log(ev);
+                    if (ev.status === 403) {
+                        console.log("403 from fetch")
+                        this.setState({
+                            loadingState: "you need to upgrade to premium for playback",
+                            spotifyAccess: false
+                        });
+                    } else {
+                        this.setState({
+                            loadingState: "playback started",
+                            playbackOn: true, playbackPaused: false
+                        });
+                        console.log("Started playback", this.state);
+                    }
+                }).catch((error) => {
+                    this.setState({ loadingState: "playback error: " + error });
+                })
+            })
     };
 
+    setVolume = volume => {
+        this.spotifyPlayer.setVolume(volume).then(() => console.log(this.spotifyPlayer.getVolume));
+    }
+
     render() {
-        return null;
+        if (this.spotifyPlayer) {
+            return (
+                <VolumeSlider 
+                onChange = {this.setVolume}
+                />
+            );
+        }
+        else return null;
     }
 
 }

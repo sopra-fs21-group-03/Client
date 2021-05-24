@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import SpotifyPlayer from './SpotifyPlayer';
 import Spotify_Logo_RGB_Green from "./Spotify_Logo_RGB_Green.png"
-import {SpotifyButton} from "../../views/design/SpotifyButton";
+import { SpotifyButton } from "../../views/design/SpotifyButton";
 import SpotifyAuthWindow from "./SpotifyAuthWindow";
 
 
@@ -32,24 +32,31 @@ class Spotify extends Component {
             window.close();
         } else {
             this.view = <SpotifyPlayer />;
-            this.authWindow = <div> <SpotifyAuthWindow/> </div>
+            this.authWindow = <div> <SpotifyAuthWindow /> </div>
         }
     }
 
     render() {
         return (
-            <SpotifyButton onClick={async () => {
-                this.setState({showSpotifyAuthWindow: true})
-                setTimeout(() =>{
-                    this.setState({showSpotifyAuthWindow: false})
-                }, 1000);
-            }}>
-                <img src={Spotify_Logo_RGB_Green} alt={"Spotify"} height={"15%"} width={"15%"}/>
-                {this.state.showSpotifyAuthWindow ?
-                    this.authWindow : null}
+            <div>
                 {this.view}
-            </SpotifyButton>
-
+                <SpotifyButton>
+                    <img
+                        onClick={async () => {
+                            this.setState({ showSpotifyAuthWindow: true })
+                            setTimeout(() => {
+                                this.setState({ showSpotifyAuthWindow: false })
+                            }, 1000);
+                        }}
+                        src={Spotify_Logo_RGB_Green}
+                        alt={"Spotify"}
+                        height={"15%"}
+                        width={"15%"}
+                    />
+                    {this.state.showSpotifyAuthWindow ?
+                        this.authWindow : null}
+                </SpotifyButton>
+            </div>
         )
     }
 
