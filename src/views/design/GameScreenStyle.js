@@ -5,10 +5,10 @@ import {BlackButton} from "../../views/design/BlackButton";
 export const ProfileCircle = styled.div`
   position: absolute;
   width: 150px; 
+  height: 150px; 
   left: ${props => props.left || null}; 
   top: ${props => props.top || null}; 
   color: red;
-  height: 150px; 
   border-radius: 75px;  
   text-align: center;
   vertical-align: middle;
@@ -50,13 +50,6 @@ export const SmallBlind = styled.div`
   transform: ${props => props.transform || null};   
 `;
 
-export const Writen = styled.p`
-    margin-top: 0;
-    margin-bottom: 2px;
-    padding-top: 0;
-    padding-bottom: 0;
-`;
-
 export const LeaveTableButton = styled(BlackButton)`
   position: absolute;
   top: 60%;
@@ -66,6 +59,7 @@ export const LeaveTableButton = styled(BlackButton)`
   width: 60%;
   font-size: 24pt;
   font-weight: 200;
+  overflow: hidden;
 `;
 
 export const LeaveTableButtonEndScreen = styled(BlackButton)`
@@ -94,12 +88,14 @@ export const CheckButton = styled(RedButton)`
     border-color: red;
     color: red;
   }
-  transition: all 2s ease;
+  transition: all 1s ease;
   position: absolute;
   width: 80%;
   left: 10%;
   top: 8%;
   color: white; 
+  height: 20%;
+  overflow: hidden;
 `;
 
 export const CallButton = styled(RedButton)`
@@ -110,12 +106,14 @@ export const CallButton = styled(RedButton)`
     border-color: red;
     color: red;
   }
-  transition: all 2s ease;
+  transition: all 1s ease;
   position: absolute;
   width: 80%;
   left: 10%;
   top: 25%;
   color: white; 
+  height: 50%;
+  overflow: hidden;
 `;
 
 export const RaiseButton = styled(RedButton)`
@@ -126,13 +124,15 @@ export const RaiseButton = styled(RedButton)`
     border-color: red;
     color: red;
   }
-  transition: all 2s ease;
+  transition: all 1s ease;
   position: absolute;
   width: 50%;
   left: 10%;
   top: 25%;
   color: white;
   border-radius: 10px 0 0 10px; 
+  height: 50%;
+  overflow: hidden;
 `;
 
 export const RaiseInput = styled.input`
@@ -142,7 +142,8 @@ export const RaiseInput = styled.input`
   left: 60%;
   top: 25%;
   color: red;
-  height: 50px;
+  height: 50%;
+  overflow: hidden;
   border-radius: 0 10px 10px 0;
   border: solid red;
   type: number;
@@ -158,12 +159,14 @@ export const FoldButton = styled(RedButton)`
     border-color: red;
     color: red;
   }
-  transition: all 2s ease;
+  transition: all 1s ease;
   position: absolute;
   width: 80%;
   left: 10%;
   top: 8%;
   color: white;
+  height: 20%;
+  overflow: hidden;
 `;
 
 export const InnerTextChatContainer = styled.div`
@@ -236,6 +239,7 @@ export const ChatSendButton = styled.button`
   transition: all 0.3s ease;
   id: ${props => props.id || null}; 
   type: submit;
+  overflow: hidden;
 `
 
 export const EmojiButton = styled.button`
@@ -254,6 +258,7 @@ export const EmojiButton = styled.button`
   cursor: ${props => (props.disabled ? "default" : "pointer")};
   transition: all 0.3s ease;
   border: solid 1px red;
+  overflow: hidden;
 `
 
 export const SingleEmojiButton = styled.button`
@@ -379,7 +384,7 @@ export const GameContainer = styled.div`
   margin-right: auto;
   padding-right: 15px;
   max-width: 100%;
-  background-image: url('http://st.gde-fon.com/wallpapers_original/336962_korichnevyj_parket_fonovaya_1920x1080_www.Gde-Fon.com.jpg');
+  background-image: url('https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/Background.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -549,7 +554,7 @@ export const LowerContainer = styled.div`
 `;
 
 export const BottomContainer = styled.div`
-background-color: grey;
+background: url('https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/BottomPicture.jpg');
   margin: 0;
   position: absolute;
   top: 95%;
@@ -716,6 +721,7 @@ export const TotalPotContainer = styled.div`
   text-align: center;
   font-size: 24pt;
   color: red;
+  overflow: hidden;
 `;
 
 export const MiddleCardsContainer = styled.div`
@@ -793,7 +799,42 @@ export const TopRightPlayerContainer = styled.div`
   padding-right: 15px;
 `;
 
-export const CardBox = styled.div`
+export const Combinations = styled.div`
+      background: url('https://www.pokerharder.com/img/p/3/pokerhands_big.jpg');
+      margin-left: -37%;
+      margin-top: -114%;
+      border-radius: 30px;
+      height: 213%;
+      width: 140%;
+      
+  
+      
+`;
+
+export const CombinationButton = styled.button`
+  &:hover {
+    transform: translateY(-2px);
+  }
+  padding: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 13px;
+  text-align: center;
+  color: red;
+  width: ${props => props.width || null};
+  height: 50px;
+  border-radius: 10px;
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
+  opacity: ${props => (props.disabled ? 0.4 : 1)};
+  background: black;
+  transition: all 0.3s ease;
+  border: solid;
+  border-color: red;
+  margin-top: 20%;
+  margin-left: 60%;
+`;
+
+export const BackOfCard = styled.div`
   border: solid;
   border-color: white;
   background: url('https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/cardBackground.png');
@@ -811,7 +852,28 @@ export const CardBox = styled.div`
   margin-right: auto;
   padding-right: auto;
   border-radius: 5px;
-  transform: ${props => props.transform || null}; 
+  transform: ${props => props.transform || null};
+  overflow: hidden; 
+`;
+
+export const PictureCardBox = styled.div`
+  background: transparent;
+  background-size: cover;
+  margin: 0;
+  position: absolute;
+  margin-right: 0%;
+  transform: translate(-50%, -50%);
+  width: ${props => props.width || null};
+  height: ${props => props.height || null};
+  top: ${props => props.top || null};
+  left: ${props => props.left || null};
+  margin-left: auto;
+  padding-left: auto;
+  margin-right: auto;
+  padding-right: auto;
+  border-radius: 5px;
+  transform: ${props => props.transform || null};
+  overflow: hidden; 
 `;
 
 export const PlayerInfoContainer = styled.div`
@@ -836,7 +898,7 @@ export const PlayerInfoContainer = styled.div`
   border: ${props => props.border || null};
 `;
 
-export const FrontCardBox = styled.div`
+export const PlaceHolderCard = styled.div`
   width: 100%;
   height: 100%;  
 `;

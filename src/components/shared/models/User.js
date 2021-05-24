@@ -11,6 +11,9 @@ class User {
     this.cards = null;
     this.money = null;
     this.username = null;
+    this.inGame = null;
+    this.folded= null;
+    this.gameId = null;
 
     Object.assign(this, data);
   }
@@ -21,6 +24,12 @@ class User {
     return <DisplayUserInfo>{this.username} <br></br> Money : {this.money} Betting
       : {game.pot.contribution[this.username]}
     </DisplayUserInfo>;}
+
+
+  renderUser(user){
+
+
+  }
 }
 
 

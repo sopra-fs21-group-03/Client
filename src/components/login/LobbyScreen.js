@@ -62,11 +62,13 @@ const LogoutButton = styled(LeaveTableButton)`
   position: absolute;
   top: 85%;
   left: 25%;
-  background: rgb(0,0,0,0.8);
+  background: red;
   height: 10%;
   width: 30%;
   font-size: 24pt;
   font-weight: 200;
+  border: none;
+  color: black;
 `;
 
 const PokerInstructionsButton = styled(LeaveTableButton)`
@@ -143,8 +145,7 @@ class LobbyScreen extends React.Component{
     }
 
     logout() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('userID');
+        localStorage.clear();
         this.props.history.push('/login');
     }
 
@@ -199,7 +200,7 @@ class LobbyScreen extends React.Component{
                         Logout
                     </LogoutButton>
                     <PokerInstructionsButton onClick={() => {
-                        this.logout()
+                        this.props.history.push(`/pokerInstructionsScreen`);
                     }}>
                         Poker Instructions
                     </PokerInstructionsButton>

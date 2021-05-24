@@ -59,7 +59,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ##External Links Images
 First Background Picture: https://wallpaperaccess.com/full/1219582.png
-Ingame Background Pictures: https://wallpaperaccess.com/full/2924715.jpg
+Ingame Background Pictures: http://st.gde-fon.com/wallpapers_original/336962_korichnevyj_parket_fonovaya_1920x1080_www.Gde-Fon.com.jpg
 Avatar-Pictures: https://i.pinimg.com/originals/77/ea/61/77ea618e1b9e4f43e95335af8dd0026b.jpg
 Winner Picture: https://img.stickers.cloud/packs/9f1040cc-6481-4ae8-85b4-8b661b693958/webp/e5cd9b91-dbca-4653-8d9d-e4e4874831c0.webp
 Looser Picture: https://i0.wp.com/firewireblog.com/wp-content/uploads/2013/10/tumblr_mqnn5ug9tv1snftoqo1_500.gif
@@ -67,5 +67,6 @@ Cards without hand: https://www.flaticon.com/svg/vstatic/svg/4330/4330439.svg?to
 Cards with hand: https://www.flaticon.com/svg/vstatic/svg/4363/4363224.svg?token=exp=1620903485~hmac=0f94682c2e77c174419b61b61b747f48
 Crown: https://www.flaticon.com/svg/vstatic/svg/1804/1804177.svg?token=exp=1620909398~hmac=f5cbed5bbf9be9043a1fb8ab4506078e
 CardBackground: https://images.cdn2.stockunlimited.net/preview1300/playing-cards-background_1608080.jpg
-Slider UI Component: https://github.com/react-component/slider
+Bottom Pixture: https://images4.alphacoders.com/184/thumb-1920-184506.jpg
 White Volume Control Icon: https://www.iconsdb.com/white-icons/volume-control-8-icon.html
+

@@ -45,23 +45,26 @@ import {
     RaiseContainer,
     TopLeftPlayerContainer,
     TopRightPlayerContainer,
-    CardBox,
+    BackOfCard,
     PlayerInfoContainer,
-    FrontCardBox,
+    PlaceHolderCard,
     LoadingGameContainer,
     LeaveTableButtonEndScreen,
     LooserPicture,
     LooserContainer,
     ChatSendButton,
     EmojiButton,
-    EmojiContainer, SingleEmojiButton
+    EmojiContainer, SingleEmojiButton, PictureCardBox, Combinations
 } from "../../views/design/GameScreenStyle";
 import Player from "../../views/Player";
 import ChatMessageField from "../../views/ChatMessageField";
 import {Spinner} from "../../views/design/Spinner";
 import styled from "styled-components";
+import {BlackButton} from "../../views/design/BlackButton";
 
 document.body.style.backgroundColor = "green";
+
+
 
 const ProfilePicture = styled.div`
   width: 100%;
@@ -77,6 +80,18 @@ const BottomTable = styled.div`
   left: -10%;
   height: 100%;
   background: url(''); 
+`;
+
+const CombinationButton = styled(BlackButton)`
+  position: absolute;
+  top: 33%;
+  left: 25%;
+  background: rgb(0,0,0,0.8);
+  height: 25%;
+  width: 60%;
+  font-size: 24pt;
+  font-weight: 200;
+  overflow: hidden;
 `;
 
 //Normal PokerScreen
@@ -210,14 +225,16 @@ class GameScreen extends React.Component {
         return requestBodyChatMessage
     }
 
-    leaveTable() {
-        this.props.history.push('/login');
+    async leaveTable() {
+        await api.put('/games/' + localStorage.getItem('gameId') + '/' + localStorage.getItem('userID') + '/leave', this.returnToken());
+        localStorage.removeItem("gameId");
+        this.props.history.push('/lobbyscreen');
     }
 
     async logoutEndGame() {
-        await api.put('/games/' + localStorage.getItem('gameId') + '/' + localStorage.getItem('userID') + 'leave', this.returnToken())
+        await api.put('/games/' + localStorage.getItem('gameId') + '/' + localStorage.getItem('userID') + '/leave', this.returnToken());
+        localStorage.removeItem("gameId");
         this.props.history.push('/lobbyscreen');
-        this.gameEnd = false;
     }
 
 
@@ -263,7 +280,6 @@ class GameScreen extends React.Component {
     }
 
     lostPlayersCounter = null;
-    gameEnd = false;
     game = new Game();
     showdownUser1 = new User();
     showdownUser2 = new User();
@@ -275,7 +291,7 @@ class GameScreen extends React.Component {
     user3 = new User();
     user4 = new User();
     userOnTurn = new User();
-
+    combinations=null;
 
     async updateGameScreen() {
 
@@ -296,6 +312,7 @@ class GameScreen extends React.Component {
 
         const gameResponse = await api.get('/games/' + localStorage.getItem("gameId"), {headers: {Authorization: localStorage.getItem('token')}});
         this.game = new Game(gameResponse.data);
+        console.log(gameResponse.data);
 
 
         const myselfUserResponse = await api.get('/games/' + localStorage.getItem("gameId") + '/' + localStorage.getItem('userID'), {headers: {Authorization: localStorage.getItem('token')}});
@@ -351,6 +368,15 @@ class GameScreen extends React.Component {
         var code = event.keyCode || event.which;
         if(code === 13){
             this.sendMessage();
+        }
+    }
+
+    showCombinations(){
+        if(this.combinations==null) {
+            this.combinations = <Combinations></Combinations>
+        }
+        else{
+            this.combinations=null;
         }
     }
 
@@ -416,37 +442,38 @@ class GameScreen extends React.Component {
         else if (this.game.gameName != null) {
             return (
                 <GameContainer>
+
                     <TableCircleLeft></TableCircleLeft>
                     <TableCircleRight></TableCircleRight>
                     <Tablesquare></Tablesquare>
                     <UpperContainer>
                         <TopLeftPlayerContainer>
-                            {this.user2.username == this.userOnTurn.username ? (
-                                <PlayerInfoContainer
-                                    top="27.5%" left="62.5%" width="50%" height="30%" color="red" background="grey"
-                                    padding="0 0 0 90px" borderradius="10px" border="solid white 1px">
-                                    {this.displayUser(this.user2)}
-                                </PlayerInfoContainer>
-                            ) : (
-                                <PlayerInfoContainer
-                                    top="27.5%" left="62.5%" width="50%" height="30%" color="white" background="grey"
-                                    padding="0 0 0 90px" borderradius="10px" border="solid white 1px">
-                                    {this.displayUser(this.user2)}
-                                </PlayerInfoContainer>
-                            )
-                            }
-                            {this.user2.username == this.userOnTurn.username ? (
-                                <ProfileCircle
-                                    top="12.5%" left="30%" bordercolor = "red">
-                                    {this.returnProfilePicture(this.game, this.user2)}
-                                </ProfileCircle>
-                            ) : (
-                                <ProfileCircle
-                                    top="12.5%" left="30%" bordercolor = "white">
-                                    {this.returnProfilePicture(this.game, this.user2)}
-                                </ProfileCircle>
-                            )
-                            }
+                            {this.user2.inGame ? (
+                                    this.user2.username == this.userOnTurn.username ? (
+                                            <PlayerInfoContainer
+                                                top="27.5%" left="62.5%" width="50%" height="30%" color="red" background="grey"
+                                                padding="0 0 0 90px" borderradius="10px" border="solid white 1px">
+                                                {this.displayUser(this.user2)}
+                                            </PlayerInfoContainer>
+                                        ) : (
+                                            <PlayerInfoContainer
+                                                top="27.5%" left="62.5%" width="50%" height="30%" color="white" background="grey"
+                                                padding="0 0 0 90px" borderradius="10px" border="solid white 1px">
+                                                {this.displayUser(this.user2)}
+                                            </PlayerInfoContainer>
+                                        )) : (<p1></p1>)}
+                            {this.user2.inGame ? (
+                                this.user2.username == this.userOnTurn.username ? (
+                                        <ProfileCircle
+                                            top="12.5%" left="30%" bordercolor = "red">
+                                            {this.returnProfilePicture(this.game, this.user2)}
+                                        </ProfileCircle>
+                                    ) : (
+                                        <ProfileCircle
+                                            top="12.5%" left="30%" bordercolor = "white">
+                                            {this.returnProfilePicture(this.game, this.user2)}
+                                        </ProfileCircle>
+                                    )) : (<p1></p1>)}
                             {this.user2.blind == "BIG" ?
                                 (<BigBlind
                                     top="70%" left="75%" transform="rotate(180deg)">B</BigBlind>) :
@@ -454,26 +481,50 @@ class GameScreen extends React.Component {
                             {this.user2.blind == "SMALL" ?
                                 (<SmallBlind top="70%" left="75%" transform="rotate(180deg)">S</SmallBlind>) :
                                 (<h1></h1>)}
-                            <PlayerCardsContainer
-                                top="72.5%" left="60%" width="30%" height="55%">
-                                <CardBox
-                                    width="30%" top="0" left="29%" height="100%" transform="rotate(180deg)">
-                                    <FrontCardBox>
-                                        {this.game.showdown == true ?
-                                            (this.getUserCard(this.showdownUser2, 0)) :
-                                            (<h1></h1>)}
-                                    </FrontCardBox>
-                                </CardBox>
-                                <CardBox
-                                    width="30%" top="0" left="61%" height="100%" transform="rotate(180deg)">
-                                    <FrontCardBox>
-                                        {this.game.showdown == true ?
-                                            (this.getUserCard(this.showdownUser2, 1)) :
-                                            (<h1></h1>)}
-                                    </FrontCardBox>
-                                </CardBox>
-                            </PlayerCardsContainer>
+
+                            {this.user2.inGame == false ? (<p1></p1>) : (
+                                this.user2.folded == true ? (<p1></p1>) : (
+                            this.game.showdown == true ?
+                                (this.getUserCard(this.showdownUser2, 0) ? (
+                                        <PlayerCardsContainer
+                                            top="72.5%" left="60%" width="30%" height="55%">
+                                            <PictureCardBox
+                                                width="30%" top="0" left="29%" height="100%" transform="rotate(180deg)">
+                                                <PlaceHolderCard>
+                                                    {this.getUserCard(this.showdownUser2, 0)}
+                                                </PlaceHolderCard>
+                                            </PictureCardBox>
+                                            <PictureCardBox
+                                                width="30%" top="0" left="61%" height="100%" transform="rotate(180deg)">
+                                                <PlaceHolderCard>
+                                                    {this.getUserCard(this.showdownUser2, 1)}
+                                                </PlaceHolderCard>
+                                            </PictureCardBox>
+                                        </PlayerCardsContainer>
+                                    ) : (
+                                        <PlayerCardsContainer
+                                        top="72.5%" left="60%" width="30%" height="55%">
+                                        <BackOfCard
+                                            width="30%" top="0" left="29%" height="100%" transform="rotate(180deg)">
+                                        </BackOfCard>
+                                        <BackOfCard
+                                            width="30%" top="0" left="61%" height="100%" transform="rotate(180deg)">
+                                        </BackOfCard>
+                                    </PlayerCardsContainer>
+                                    )) :
+                                (
+                                    <PlayerCardsContainer
+                                    top="72.5%" left="60%" width="30%" height="55%">
+                                    <BackOfCard
+                                        width="30%" top="0" left="29%" height="100%" transform="rotate(180deg)">
+                                    </BackOfCard>
+                                    <BackOfCard
+                                        width="30%" top="0" left="61%" height="100%" transform="rotate(180deg)">
+                                    </BackOfCard>
+                                </PlayerCardsContainer>
+                                )))}
                         </TopLeftPlayerContainer>
+
                         <TopRightPlayerContainer>
                             {this.user3.blind == "BIG" ?
                                 (<BigBlind
@@ -484,48 +535,76 @@ class GameScreen extends React.Component {
                                 (<h1></h1>)}
                             {this.user3.username == this.userOnTurn.username ? (
                                 <PlayerInfoContainer
-                                    top="27.5%" left="23.5%" width="50%" height="30%" color="red"
-                                    background="grey" padding="0 90px 0 10px" borderradius="10px" border="solid white 1px">
+                                    top="27.5%" left="37.5%" width="50%" height="30%" color="red" background="grey"
+                                    padding="0 90px 0 10px" borderradius="10px" border="solid white 1px">
                                     {this.displayUser(this.user3)}
                                 </PlayerInfoContainer>
                             ) : (
-                                <PlayerInfoContainer
-                                    top="27.5%" left="23.5%" width="50%" height="30%" color="white"
-                                    background="grey" padding="0 90px 0 10px" borderradius="10px" border="solid white 1px">
-                                    {this.displayUser(this.user3)}
-                                </PlayerInfoContainer>
+                                this.user3.inGame == false ? (
+                                    <p1></p1>
+                                ):(
+                                        <PlayerInfoContainer
+                                            top="27.5%" left="37.5%" width="50%" height="30%" color="white" background="grey"
+                                            padding="0 90px 0 10px" borderradius="10px" border="solid white 1px">
+                                            {this.displayUser(this.user3)}
+                                        </PlayerInfoContainer>
+                                    ))}
+                            {this.user3.inGame ? (
+                                this.user3.username == this.userOnTurn.username ? (
+                                <ProfileCircle
+                                    top="12.5%" left="54%" bordercolor = "red">
+                                    {this.returnProfilePicture(this.game, this.user3)}
+                                </ProfileCircle>
+                            ) : (
+                                <ProfileCircle
+                                    top="12.5%" left="54%" bordercolor = "white">
+                                    {this.returnProfilePicture(this.game, this.user3)}
+                                </ProfileCircle>
                             )
-                            }
-                            {this.user3.username == this.userOnTurn.username ? (
-                                <ProfileCircle
-                                    top="12.5%" left="40%" bordercolor = "red">
-                                    {this.returnProfilePicture(this.game, this.user3)}
-                                </ProfileCircle>
-                            ) : (
-                                <ProfileCircle
-                                    top="12.5%" left="40%" bordercolor = "white">
-                                    {this.returnProfilePicture(this.game, this.user3)}
-                                </ProfileCircle>
-                            )}
-                            <PlayerCardsContainer
-                                top="72.5%" left="20%" width="30%" height="55%">
-                                <CardBox
-                                    width="30%" top="0" left="29%" height="100%" transform="rotate(180deg)">
-                                    <FrontCardBox>
-                                        {this.game.showdown == true ?
-                                            (this.getUserCard(this.showdownUser3, 0)) :
-                                            (<h1></h1>)}
-                                    </FrontCardBox>
-                                </CardBox>
-                                <CardBox
-                                    width="30%" top="0" left="61%" height="100%" transform="rotate(180deg)">
-                                    <FrontCardBox>
-                                        {this.game.showdown == true ?
-                                            (this.getUserCard(this.showdownUser3, 1)) :
-                                            (<h1></h1>)}
-                                    </FrontCardBox>
-                                </CardBox>
-                            </PlayerCardsContainer>
+                            ) : (<p1></p1>)}
+
+
+                            {this.user3.inGame == false ? (<p1></p1>) : (
+                                this.user3.folded == true ? (<p1></p1>) : (
+                                    this.game.showdown == true ?
+                                        (this.getUserCard(this.showdownUser3, 0) ? (
+                                                <PlayerCardsContainer
+                                                    top="72.5%" left="20%" width="30%" height="55%">
+                                                    <PictureCardBox
+                                                        width="30%" top="0" left="29%" height="100%" transform="rotate(180deg)">
+                                                        <PlaceHolderCard>
+                                                            {this.getUserCard(this.showdownUser3, 0)}
+                                                        </PlaceHolderCard>
+                                                    </PictureCardBox>
+                                                    <PictureCardBox
+                                                        width="30%" top="0" left="61%" height="100%" transform="rotate(180deg)">
+                                                        <PlaceHolderCard>
+                                                            {this.getUserCard(this.showdownUser3, 1)}
+                                                        </PlaceHolderCard>
+                                                    </PictureCardBox>
+                                                </PlayerCardsContainer>
+                                        ) : (
+                                            <PlayerCardsContainer
+                                                top="72.5%" left="20%" width="30%" height="55%">
+                                                <BackOfCard
+                                                    width="30%" top="0" left="29%" height="100%" transform="rotate(180deg)">
+                                                </BackOfCard>
+                                                <BackOfCard
+                                                    width="30%" top="0" left="61%" height="100%" transform="rotate(180deg)">
+                                                </BackOfCard>
+                                            </PlayerCardsContainer>
+                                            )) :
+                                        (
+                                        <PlayerCardsContainer
+                                            top="72.5%" left="20%" width="30%" height="55%">
+                                            <BackOfCard
+                                                width="30%" top="0" left="29%" height="100%" transform="rotate(180deg)">
+                                            </BackOfCard>
+                                            <BackOfCard
+                                                width="30%" top="0" left="61%" height="100%" transform="rotate(180deg)">
+                                            </BackOfCard>
+                                        </PlayerCardsContainer>
+                                )))}
                         </TopRightPlayerContainer>
                     </UpperContainer>
                     <MiddleContainer>
@@ -536,85 +615,110 @@ class GameScreen extends React.Component {
                             {this.user1.blind == "SMALL" ?
                                 (<SmallBlind top="80%" left="75%" transform="rotate(90deg)">S</SmallBlind>) :
                                 (<h1></h1>)}
-                            {this.user1.username == this.userOnTurn.username ? (
-                                <PlayerInfoContainer
-                                    top="11.5%" left="75%" width="115%" height="19%" color="red"
-                                    background="grey" padding="0 0 0 90px"
-                                    borderradius="10px" border="solid white 1px">
-                                    {this.displayUser(this.user1)}
-                                </PlayerInfoContainer>
+                            {this.user1.inGame == true ? (
+                                this.user1.username == this.userOnTurn.username ? (
+                                    <PlayerInfoContainer
+                                        top="11.5%" left="75%" width="115%" height="19%" color="red"
+                                        background="grey" padding="0 0 0 90px"
+                                        borderradius="10px" border="solid white 1px">
+                                        {this.displayUser(this.user1)}
+                                    </PlayerInfoContainer>
+                                ) : (
+                                    <PlayerInfoContainer
+                                        top="11.5%" left="75%" width="115%" height="19%" color="white"
+                                        background="grey" padding="0 0 0 90px"
+                                        borderradius="10px" border="solid white 1px">
+                                        {this.displayUser(this.user1)}
+                                    </PlayerInfoContainer>
+                                )) : (<p1/>)}
+                            {this.user1.inGame == true ? (
+                                this.user1.username == this.userOnTurn.username ? (
+                                    <ProfileCircle
+                                        top="2%" left="0%" bordercolor="red">
+                                        {this.returnProfilePicture(this.game, this.user1)}
+                                    </ProfileCircle>
                             ) : (
-                                <PlayerInfoContainer
-                                    top="11.5%" left="75%" width="115%" height="19%" color="white"
-                                    background="grey" padding="0 0 0 90px"
-                                    borderradius="10px" border="solid white 1px">
-                                    {this.displayUser(this.user1)}
-                                </PlayerInfoContainer>
-                            )}
-                            {this.user1.username == this.userOnTurn.username ? (
                                 <ProfileCircle
-                                    top="2%" left="0%" bordercolor = "red">
-                                    {this.returnProfilePicture(this.game, this.user1)}
+                                top="2%" left="0%" bordercolor="white">
+                            {this.returnProfilePicture(this.game, this.user1)}
                                 </ProfileCircle>
-                            ) : (
-                                <ProfileCircle
-                                    top="2%" left="0%" bordercolor = "white">
-                                    {this.returnProfilePicture(this.game, this.user1)}
-                                </ProfileCircle>
-                            )
-                            }
-                            <PlayerCardsContainer
-                                top="50%" left="78%" width="40%" height="50%">
-                                <CardBox
-                                    width="60%" height="80%" top="-15%" left="20%" transform="rotate(90deg)">
-                                    <FrontCardBox>
-                                        {this.game.showdown == true ?
-                                            (this.getUserCard(this.showdownUser1, 0)) :
-                                            (<h1></h1>)}
-                                    </FrontCardBox>
-                                </CardBox>
-                                <CardBox
-                                    width="60%" height="80%" top="35%" left="20%" transform="rotate(90deg)">
-                                    <FrontCardBox>
-                                        {this.game.showdown == true ?
-                                            (this.getUserCard(this.showdownUser1, 1)) :
-                                            (<h1></h1>)}
-                                    </FrontCardBox>
-                                </CardBox>
-                            </PlayerCardsContainer>
+                                )) : (<p1/>)}
+
+                            {this.user1.inGame == false ? (<p1></p1>) : (
+                                this.user1.folded == true ? (<p1></p1>) : (
+                                    this.game.showdown == true ?
+                                        (this.getUserCard(this.showdownUser1, 0) ? (
+                                                <PlayerCardsContainer
+                                                    top="50%" left="78%" width="40%" height="50%">
+                                                    <PictureCardBox
+                                                        width="60%" height="80%" top="-15%" left="20%" transform="rotate(90deg)">
+                                                        <PlaceHolderCard>
+                                                            {this.getUserCard(this.showdownUser1, 0)}
+                                                        </PlaceHolderCard>
+                                                    </PictureCardBox>
+                                                    <PictureCardBox
+                                                        width="60%" height="80%" top="35%" left="20%" transform="rotate(90deg)">
+                                                        <PlaceHolderCard>
+                                                            {this.getUserCard(this.showdownUser1, 1)}
+                                                        </PlaceHolderCard>
+                                                    </PictureCardBox>
+                                                </PlayerCardsContainer>
+                                        ) : (
+                                            <PlayerCardsContainer
+                                                top="50%" left="78%" width="40%" height="50%">
+                                                <BackOfCard
+                                                    width="60%" height="80%" top="-15%" left="20%" transform="rotate(90deg)">
+                                                </BackOfCard>
+                                                <BackOfCard
+                                                    width="60%" height="80%" top="35%" left="20%" transform="rotate(90deg)">
+                                                </BackOfCard>
+                                            </PlayerCardsContainer>
+                                        )) :
+                                        (
+                                            <PlayerCardsContainer
+                                                top="50%" left="78%" width="40%" height="50%">
+                                                <BackOfCard
+                                                    width="60%" height="80%" top="-15%" left="20%" transform="rotate(90deg)">
+                                                </BackOfCard>
+                                                <BackOfCard
+                                                    width="60%" height="80%" top="35%" left="20%" transform="rotate(90deg)">
+                                                </BackOfCard>
+                                            </PlayerCardsContainer>
+                                        )))}
+
                         </PlayerLeftContainer>
                         <TableComponentsContainer>
                             <TotalPotContainer>Total Pot: {this.game.pot.total}</TotalPotContainer>
                             <MiddleCardsContainer>
                                 {this.game.river.cards.length >= 1 ? (
-                                    <CardBox
-                                        width="9%" height="80%" top="50%" left="68%">
-                                        <FrontCardBox>{this.game.river.getCard(0)}</FrontCardBox>
-                                    </CardBox>
+                                    <PictureCardBox
+                                        width="9%" height="84%" top="50%" left="68%">
+                                        <PlaceHolderCard>{this.game.river.getCard(0)}</PlaceHolderCard>
+                                    </PictureCardBox>
                                 ) : (<h1></h1>)}
                                 {this.game.river.cards.length >= 2 ? (
-                                    <CardBox
-                                        width="9%" height="80%" top="50%" left="58%">
-                                        <FrontCardBox>{this.game.river.getCard(1)}</FrontCardBox>
-                                    </CardBox>
+                                    <PictureCardBox
+                                        width="9%" height="84%" top="50%" left="58%">
+                                        <PlaceHolderCard>{this.game.river.getCard(1)}</PlaceHolderCard>
+                                    </PictureCardBox>
                                 ) : (<h1></h1>)}
                                 {this.game.river.cards.length >= 3 ? (
-                                    <CardBox
-                                        width="9%" height="80%" top="50%" left="48%">
-                                        <FrontCardBox>{this.game.river.getCard(2)}</FrontCardBox>
-                                    </CardBox>
+                                    <PictureCardBox
+                                        width="9%" height="84%" top="50%" left="48%">
+                                        <PlaceHolderCard>{this.game.river.getCard(2)}</PlaceHolderCard>
+                                    </PictureCardBox>
                                 ) : (<h1></h1>)}
                                 {this.game.river.cards.length >= 4 ? (
-                                    <CardBox
-                                        width="9%" height="80%" top="50%" left="38%">
-                                        <FrontCardBox>{this.game.river.getCard(3)}</FrontCardBox>
-                                    </CardBox>
+                                    <PictureCardBox
+                                        width="9%" height="84%" top="50%" left="38%">
+                                        <PlaceHolderCard>{this.game.river.getCard(3)}</PlaceHolderCard>
+                                    </PictureCardBox>
                                 ) : (<h1></h1>)}
                                 {this.game.river.cards.length >= 5 ? (
-                                    <CardBox
-                                        width="9%" height="80%" top="50%" left="28%">
-                                        <FrontCardBox>{this.game.river.getCard(4)}</FrontCardBox>
-                                    </CardBox>
+                                    <PictureCardBox
+                                        width="9%" height="84%" top="50%" left="28%">
+                                        <PlaceHolderCard>{this.game.river.getCard(4)}</PlaceHolderCard>
+                                    </PictureCardBox>
                                 ) : (<h1></h1>)}
                             </MiddleCardsContainer>
                             <CallContainer>
@@ -658,7 +762,8 @@ class GameScreen extends React.Component {
                             {this.user4.blind == "SMALL" ?
                                 (<SmallBlind top="80%" left="15%" transform="rotate(270deg)">S</SmallBlind>) :
                                 (<h1></h1>)}
-                            {this.user4.username == this.userOnTurn.username ? (
+                            {this.user4.inGame ? (
+                                this.user4.username == this.userOnTurn.username ? (
                                 <PlayerInfoContainer
                                     top="11.5%" left="25%" width="115%" height="19%" color="red"
                                     background="grey" padding="0 90px 0 10px" borderradius="10px"
@@ -671,8 +776,9 @@ class GameScreen extends React.Component {
                                     padding="0 90px 0 10px" borderradius="10px" border="solid white 1px">
                                     {this.displayUser(this.user4)}
                                 </PlayerInfoContainer>
-                            )}
-                            {this.user4.username == this.userOnTurn.username ? (
+                            )) : (<p1></p1>)}
+                            {this.user4.inGame ? (
+                                this.user4.username == this.userOnTurn.username ? (
                                 <ProfileCircle
                                     top="2%" left="60%" bordercolor="red">
                                     {this.returnProfilePicture(this.game, this.user4)}
@@ -682,24 +788,48 @@ class GameScreen extends React.Component {
                                     top="2%" left="60%" bordercolor="white">
                                     {this.returnProfilePicture(this.game, this.user4)}
                                 </ProfileCircle>
-                            )}
-                            <PlayerCardsContainer
-                                top="50%" left="22%" width="40%" height="50%">
-                                <CardBox
-                                    width="60%" height="80%" top="-15%" left="20%" transform="rotate(270deg)">
-                                    <FrontCardBox>{this.game.showdown == true ?
-                                        (this.getUserCard(this.showdownUser4, 0)) :
-                                        (<h1></h1>)}</FrontCardBox>
-                                </CardBox>
-                                <CardBox
-                                    width="60%" height="80%" top="35%" left="20%" transform="rotate(270deg)">
-                                    <FrontCardBox>
-                                        {this.game.showdown == true ?
-                                            (this.getUserCard(this.showdownUser4, 1)) :
-                                            (<h1></h1>)}
-                                    </FrontCardBox>
-                                </CardBox>
-                            </PlayerCardsContainer>
+                            )) : (<p1></p1>)}
+                            {this.user4.inGame == false ? (<p1></p1>) : (
+                                this.user4.folded == true ? (<p1></p1>) : (
+                                    this.game.showdown == true ?
+                                        (this.getUserCard(this.showdownUser4, 0) ? (
+                                                <PlayerCardsContainer
+                                                    top="50%" left="22%" width="40%" height="50%">
+                                                    <PictureCardBox
+                                                        width="60%" height="80%" top="-15%" left="20%" transform="rotate(270deg)">
+                                                        <PlaceHolderCard>{this.getUserCard(this.showdownUser4, 0)}
+                                                        </PlaceHolderCard>
+                                                    </PictureCardBox>
+                                                    <PictureCardBox
+                                                        width="60%" height="80%" top="35%" left="20%" transform="rotate(270deg)">
+                                                        <PlaceHolderCard>
+                                                            {this.getUserCard(this.showdownUser4, 1)}
+                                                        </PlaceHolderCard>
+                                                    </PictureCardBox>
+                                                </PlayerCardsContainer>
+                                        ) : (
+                                            <PlayerCardsContainer
+                                                top="50%" left="22%" width="40%" height="50%">
+                                                <BackOfCard
+                                                    width="60%" height="80%" top="-15%" left="20%" transform="rotate(270deg)">
+                                                </BackOfCard>
+                                                <BackOfCard
+                                                    width="60%" height="80%" top="35%" left="20%" transform="rotate(270deg)">
+                                                </BackOfCard>
+                                            </PlayerCardsContainer>
+                                        )) :
+                                        (
+                                            <PlayerCardsContainer
+                                                top="50%" left="22%" width="40%" height="50%">
+                                                <BackOfCard
+                                                    width="60%" height="80%" top="-15%" left="20%" transform="rotate(270deg)">
+                                                </BackOfCard>
+                                                <BackOfCard
+                                                    width="60%" height="80%" top="35%" left="20%" transform="rotate(270deg)">
+                                                </BackOfCard>
+                                            </PlayerCardsContainer>
+                                        )))}
+
                         </PlayerRightContainer>
                     </MiddleContainer>
                     <LowerContainer>
@@ -880,17 +1010,29 @@ class GameScreen extends React.Component {
                                 ) : (<h1></h1>))}
                         </CheckContainer>
                         {this.myselfUser.cards.length == 0 ? (<h1></h1>) : (
+                            this.myselfUser.folded ? (
+                                <OwnCardsContainer>
+                                    <PictureCardBox
+                                        width="35%" height="90%" top="50%" left="28%">
+                                        <PlaceHolderCard>{new Card(this.myselfUser.cards[0]).card}</PlaceHolderCard>
+                                    </PictureCardBox>
+                                    <PictureCardBox
+                                        width="35%" height="90%" top="50%" left="72%">
+                                        <PlaceHolderCard>{new Card(this.myselfUser.cards[1]).card}</PlaceHolderCard>
+                                    </PictureCardBox>
+                                </OwnCardsContainer>
+                            ) : (
                             <OwnCardsContainer>
-                                <CardBox
-                                    width="35%" height="80%" top="50%" left="28%">
-                                    <FrontCardBox>{new Card(this.myselfUser.cards[0]).card}</FrontCardBox>
-                                </CardBox>
-                                <CardBox
-                                    width="35%" height="80%" top="50%" left="72%">
-                                    <FrontCardBox>{new Card(this.myselfUser.cards[1]).card}</FrontCardBox>
-                                </CardBox>
+                                <PictureCardBox
+                                    width="35%" height="90%" top="50%" left="28%">
+                                    <PlaceHolderCard>{new Card(this.myselfUser.cards[0]).card}</PlaceHolderCard>
+                                </PictureCardBox>
+                                <PictureCardBox
+                                    width="35%" height="90%" top="50%" left="72%">
+                                    <PlaceHolderCard>{new Card(this.myselfUser.cards[1]).card}</PlaceHolderCard>
+                                </PictureCardBox>
                             </OwnCardsContainer>
-                        )}
+                            ))}
                         <FoldContainer>
                             {this.game.showdown == true ?
                                 (<h1></h1>) :
@@ -905,6 +1047,12 @@ class GameScreen extends React.Component {
                             }}>
                                 Leave Table
                             </LeaveTableButton>
+                            <CombinationButton onClick={() => {
+                                this.showCombinations()
+                            }}>Poker Hands hide/show</CombinationButton>
+                            {this.combinations}
+
+
                         </LeaveTableContainer>
                     </LowerContainer>
                     {this.myselfUser.username == this.userOnTurn.username ?
