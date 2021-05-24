@@ -11,11 +11,12 @@ import Spotify from "../components/music/Spotify"
 
 const Container = styled.div`
   height: 100px;
-  background: black;
+  background: url('https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/BottomPicture.jpg');
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative
+  position: relative;
+  border-bottom: solid white;
 `;
 //${props => props.height}px
 //default height
@@ -33,7 +34,6 @@ const SpotifyLogo = styled.div`
     position: absolute;
     margin-top: 3em;
     left: 75%;
-    background: yellow;
 `;
 
 const Title = styled.h1`

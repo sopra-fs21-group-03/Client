@@ -20,6 +20,14 @@ export const ProfileCircle = styled.div`
   overflow: hidden;
 `;
 
+export const SpotifyContainerInGame = styled.div`
+  position: absolute;
+  height: 50%;
+  width: 30%;   
+  left: 65%;
+  top: 25%;
+`;
+
 export const BigBlind = styled.div`
   position: absolute;
   width: 40px; 

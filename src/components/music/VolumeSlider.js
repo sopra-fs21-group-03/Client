@@ -17,14 +17,14 @@ export function Handle({
                 left: `${percent}%`,
                 position: "absolute",
                 marginLeft: -15,
-                marginTop: 5,
-                width: 30,
-                height: 30,
+                marginTop: 7,
+                width: 20,
+                height: 20,
                 border: 0,
                 textAlign: "center",
                 cursor: "pointer",
                 borderRadius: "50%",
-                backgroundColor: "#2C4870",
+                backgroundColor: "#1DB954",
                 color: "#fff"
             }}
             {...getHandleProps(id)}
@@ -38,18 +38,18 @@ const sliderStyle = {
     position: "relative",
     width: "100%",
     height: 30,
-    marginTop: 5,
+    marginTop: 2,
     marginRight: 50,
     marginBottom: 5,
-    marginLeft: 50
+    marginLeft: 30
 };
 
 const railStyle = {
     position: "absolute",
     width: "100%",
     height: 2,
-    marginTop: 18.5,
-    backgroundColor: "#8B9CB6"
+    marginTop: 15.5,
+    backgroundColor: "#ffffff"
 };
 
 const domain = [1, 100];

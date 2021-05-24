@@ -15,7 +15,6 @@ const BarComponentsContainer = styled.div`
     display: flex;
     position: absolute;
     left: 15%;
-    background: red;
 `;
 
 class Spotify extends Component {
@@ -66,6 +65,7 @@ class Spotify extends Component {
                         }, 1000);
                     }}>
                     <img
+
                         src={Spotify_Logo_RGB_Green}
                         alt={"Spotify"}
                         height={"15%"}
