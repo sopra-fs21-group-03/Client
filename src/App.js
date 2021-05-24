@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Header from "./views/Header";
 import AppRouter from "./components/shared/routers/AppRouter";
-import Spotify from "./components/music/Spotify";
 
 /**
  * Happy coding!
@@ -17,10 +16,8 @@ class App extends Component {
   }
 
   setSpotifyPlayer = spotifyPlayer => {
-    //let spotifyPlayer = spotifyPlayerObject;
     console.log("param of function", spotifyPlayer)
     this.setState({spotifyPlayer});
-    //console.log("new spotify Player", this.state.spotifyPlayer)
   }
 
   componentDidUpdate() {
@@ -28,13 +25,6 @@ class App extends Component {
   }
 
   render() {
-    /*
-    window.onbeforeunload = () => {
-        // Clear localStorage when window/browser is closed
-        localStorage.clear();
-    }
-
-     */
     return (
       <div>
         <Header height={"100"} setSpotifyPlayer={this.setSpotifyPlayer} />

@@ -1,11 +1,3 @@
-import styled from "styled-components";
-import User from "./User";
-import LobbyScreen from "../../login/InLobbyScreen";
-
-
-
-
-
 class Lobby{
 
     constructor(data = {}) {

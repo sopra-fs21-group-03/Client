@@ -215,12 +215,6 @@ class GameScreen extends React.Component {
         this.props.history.push('/lobbyscreen');
     }
 
-    async logoutEndGame() {
-        await api.put('/games/' + localStorage.getItem('gameId') + '/' + localStorage.getItem('userID') + '/leave', this.returnToken());
-        localStorage.removeItem("gameId");
-        this.props.history.push('/lobbyscreen');
-    }
-
 
     returnTokenAndIfReveal(boolean) {
         return JSON.stringify({
@@ -278,11 +272,11 @@ class GameScreen extends React.Component {
 
     async updateGameScreen() {
 
-        if (this.game.showdown == true) {
+        if (this.game.showdown) {
             this.showdown();
         }
 
-        if (this.game.showdown == false) {
+        if (!this.game.showdown) {
             this.showdownUser1 = new User();
             this.showdownUser2 = new User();
             this.showdownUser3 = new User();
@@ -388,7 +382,7 @@ class GameScreen extends React.Component {
                         </div>
                         <LeaveTableButtonEndScreen
                             onClick={() => {
-                                this.logoutEndGame()
+                                this.leaveTable()
 
                             }}
                             background='rgb(255,0,0,0.2)'
@@ -407,7 +401,7 @@ class GameScreen extends React.Component {
                         </WinnerSlogan>
                         <LeaveTableButtonEndScreen
                             onClick={() => {
-                                this.logoutEndGame()
+                                this.leaveTable()
 
                             }}
                             background='rgb(255,0,0,1)'
@@ -729,7 +723,7 @@ class GameScreen extends React.Component {
                                                  disabled={this.displayHowMuchCall(this.myselfUser) == 0}
                                     >Call {this.displayHowMuchCall(this.myselfUser)}</CallButton>) : (<h1></h1>))}
                             </CallContainer>
-                            {this.game.showdown == true ?
+                            {this.game.showdown ?
                                 (this.myselfUser.username == this.userOnTurn.username ? (<RaiseContainer>
                                         <CallButton onClick={() => {
                                             this.revealCards(false);

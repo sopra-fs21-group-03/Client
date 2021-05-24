@@ -179,10 +179,9 @@ class LobbyScreen extends React.Component{
     }
 
     returnToken() {
-        const requestBody = JSON.stringify({
+        return JSON.stringify({
             token: localStorage.getItem('token')
-        });
-        return requestBody
+        })
     }
 
     render() {
