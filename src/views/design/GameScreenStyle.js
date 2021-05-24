@@ -20,6 +20,14 @@ export const ProfileCircle = styled.div`
   overflow: hidden;
 `;
 
+export const SpotifyContainerInGame = styled.div`
+  position: absolute;
+  height: 50%;
+  width: 30%;   
+  left: 65%;
+  top: 25%;
+`;
+
 export const BigBlind = styled.div`
   position: absolute;
   width: 40px; 
@@ -411,6 +419,13 @@ export const WinnerContainer = styled.div`
   background-size: cover;
 `;
 
+export const SpotifyLogo = styled.div`
+    width: 40%;
+    position: absolute;
+    margin-top: 3em;
+    left: 75%;
+`;
+
 export const LooserContainer = styled.div`
   background-color: white;
   margin: 0;
@@ -467,7 +482,7 @@ export const WinnerSlogan = styled.div`
 `;
 
 export const LoadingGameContainer = styled.div`
-  background-color: rgb(169,170,172);
+  background-color: #2C4870;
   margin: 0;
   position: absolute;
   top: 50%;

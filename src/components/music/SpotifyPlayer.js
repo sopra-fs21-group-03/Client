@@ -11,6 +11,10 @@ const VolumeSettings = styled.div`
     align-items: center;
 `;
 
+export var spotifyPlayerObject = {
+    player: undefined
+}
+
 class SpotifyPlayer extends Component {
 
     constructor(props) {
@@ -22,7 +26,8 @@ class SpotifyPlayer extends Component {
             spotifyAccess: false,
             spotifyPlayerReady: false
         };
-        this.spotifyPlayer = undefined;
+        this.spotifyPlayer = this.props.spotifyPlayer ? this.props.spotifyPlayer : undefined ;
+        
 
         window.addEventListener("storage", this.authorizeSpotifyFromStorage);
 
@@ -58,6 +63,13 @@ class SpotifyPlayer extends Component {
 
     }
 
+    /*componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log("props",this.props)
+        console.log("spotifyPlayer in SpotifyPlayer.js", this.spotifyPlayer)
+        console.log("spotifyPlayer in SpotifyPlayer.js as Object ", spotifyPlayerObject)
+        this.props.setSpotifyPlayer(this.spotifyPlayer)
+    }*/
+
     connectToPlayer = () => {
         if (this.spotifyPlayer) {
             clearTimeout(this.connectToPlayerTimeout);
@@ -71,6 +83,7 @@ class SpotifyPlayer extends Component {
                     spotifyPlayerReady: true
                 });
                 this.startPlayback();
+                this.props.setSpotifyPlayer(this.spotifyPlayer)
             });
 
             // Not Ready
@@ -137,13 +150,13 @@ class SpotifyPlayer extends Component {
             return (
                 <VolumeSettings>
                     <img
-                         class="soundImg"
-                         src ={volumeControl}
-                         height={"100%"}
-                         width={"auto"}/>
-                <VolumeSlider
-                onChange = {this.setVolume}
-                />
+                        class="soundImg"
+                        src={volumeControl}
+                        height={"100%"}
+                        width={"auto"} />
+                    <VolumeSlider
+                        onChange={this.setVolume}
+                    />
                 </VolumeSettings>
             );
         }

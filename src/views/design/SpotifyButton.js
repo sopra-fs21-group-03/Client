@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const SpotifyButton = styled.button`
     width: auto;
-    height: 20%;
+    height: 15%;
     background: transparent;
     border: none;
     cursor: ${props => (props.disabled ? "default" : "pointer")};

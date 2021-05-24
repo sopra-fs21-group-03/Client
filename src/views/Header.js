@@ -11,11 +11,12 @@ import Spotify from "../components/music/Spotify"
 
 const Container = styled.div`
   height: 100px;
-  background: black;
+  background: url('https://raw.githubusercontent.com/sopra-fs21-group-03/Client/master/src/BottomPicture.jpg');
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative
+  position: relative;
+  border-bottom: solid white;
 `;
 //${props => props.height}px
 //default height
@@ -57,7 +58,7 @@ const Header = props => {
     return (
         <Container /**height={props.height}**/>
             <SpotifyLogo>
-                <Spotify/>
+                <Spotify setSpotifyPlayer={props.setSpotifyPlayer}/>
             </SpotifyLogo>
             <Container2>
                 <Title>Sopra Poker</Title>

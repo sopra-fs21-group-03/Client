@@ -56,7 +56,8 @@ class AppRouter extends React.Component {
                   exact
                   render={() => (
                       <GameGuard>
-                        <GameScreen />
+                        <GameScreen spotifyPlayer={this.props.spotifyPlayer}
+                        setSpotifyPlayer={this.props.setSpotifyPlayer}/>
                       </GameGuard>
                   )}
               />
