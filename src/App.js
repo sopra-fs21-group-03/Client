@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Header from "./views/Header";
 import AppRouter from "./components/shared/routers/AppRouter";
+import CircularTimer from "./components/game/timer/CircularTimer";
 
 /**
  * Happy coding!
@@ -31,6 +32,7 @@ class App extends Component {
         <AppRouter 
         spotifyPlayer={this.state.spotifyPlayer}
         setSpotifyPlayer={this.setSpotifyPlayer}/>
+        <CircularTimer />
       </div>
     );
   }
