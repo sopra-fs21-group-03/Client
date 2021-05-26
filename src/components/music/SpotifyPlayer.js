@@ -19,7 +19,7 @@ class SpotifyPlayer extends Component {
 
     constructor(props) {
         super(props);
-
+        
         this.state = {
             spotifyAccessToken: "",
             spotifyDeviceId: "",
@@ -142,7 +142,7 @@ class SpotifyPlayer extends Component {
     };
 
     setVolume = volume => {
-        this.spotifyPlayer.setVolume(volume).then(() => console.log(this.spotifyPlayer.getVolume));
+        this.spotifyPlayer.setVolume(volume).then(() => this.spotifyPlayer.getVolume().then(volume => console.log(volume)));
     }
 
     render() {
@@ -156,6 +156,7 @@ class SpotifyPlayer extends Component {
                         width={"auto"} />
                     <VolumeSlider
                         onChange={this.setVolume}
+                        spotifyPlayer={this.spotifyPlayer}
                     />
                 </VolumeSettings>
             );

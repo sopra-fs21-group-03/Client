@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import {Slider, Handles } from "react-compound-slider"
 import WhiteVolumeIcon from "./volume-control-white.png"
 import styled from 'styled-components';
+import SpotifyAuthWindow from "./SpotifyAuthWindow";
 
 const ReglerContainer = styled.div `
 `;
@@ -53,9 +54,14 @@ const railStyle = {
 };
 
 const domain = [1, 100];
-const defaultValues = [0];
+const defaultValues = [1];
 
 class VolumeSlider extends Component {
+
+    constructor(props) {
+        super(props);
+        console.log("start of constructor", this.state);
+    }
     state = {
         values: defaultValues.slice(),
         update: defaultValues.slice()
