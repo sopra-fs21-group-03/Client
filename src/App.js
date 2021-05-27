@@ -32,7 +32,6 @@ class App extends Component {
         <AppRouter 
         spotifyPlayer={this.state.spotifyPlayer}
         setSpotifyPlayer={this.setSpotifyPlayer}/>
-        <CircularTimer />
       </div>
     );
   }

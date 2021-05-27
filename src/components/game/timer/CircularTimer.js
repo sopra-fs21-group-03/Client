@@ -4,18 +4,16 @@ import "./TimerStyles.css";
 import {CountdownCircleTimer} from "react-countdown-circle-timer";
 
 const CircularTimer = props => {
+    const AFK_TIME = 30;
+    const AFK_TIMER_SIZE = 120;
     return (
-        <div className="App">
-            <h1>
-                CountdownCircleTimer
-                <br />
-                React Component
-            </h1>
+        <div>
             <div className="timer-wrapper">
                 <CountdownCircleTimer
                     isPlaying
-                    duration={30}
-                    colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
+                    duration={AFK_TIME}
+                    size={AFK_TIMER_SIZE}
+                    colors={[["#1dfc04", 0.33], ["#eeee06", 0.33], ["#b00202"]]}
                 >
                     {RenderTime}
                 </CountdownCircleTimer>
