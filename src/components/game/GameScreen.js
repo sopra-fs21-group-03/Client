@@ -60,6 +60,7 @@ import ChatMessageField from "../../views/ChatMessageField";
 import styled from "styled-components";
 import {BlackButton} from "../../views/design/BlackButton";
 import SpotifyPlayer from "../music/SpotifyPlayer";
+import CircularTimer from "./timer/CircularTimer";
 
 document.body.style.backgroundColor = "green";
 
@@ -1054,6 +1055,7 @@ class GameScreen extends React.Component {
                                 <SpotifyPlayer spotifyPlayer={this.props.spotifyPlayer}
                                 setSpotifyPlayer={this.props.setSpotifyPlayer}/>
                             </SpotifyContainerInGame>
+                            <CircularTimer/>
                         </BottomContainer>) :
                         (<BottomContainer bordercolor="solid 2px white">
                             <PlayerInfoContainer
