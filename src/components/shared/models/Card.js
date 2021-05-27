@@ -417,38 +417,6 @@ const ClubsAce = styled.div`
       object-fit: cover;
 `;
 
-const NULLBox = styled.div`
-      background-color: red;  
-      height: 100%;
-      width: 100%;
-      border: 2px solid black;
-`;
-
-const SymbolBox2 = styled.div`
-      height: 39px;
-      width: 32px;
-      overflow: hidden;
-      text-align: center;
-      margin: auto;
-      margin-top: 15px;
-`;
-
-const CardBox = styled.div`
-  background-color: white;  
-  height: 100%;
-  width: 100%;
-  border: 2px solid black;
-`;
-
-const CardNumberOnCard= styled.div`
-    height: 20px;
-    width: 100%;
-    margin-top: 16px;
-    flex-grow: 10;
-    position: absolute;
-    top: 50%;
-    text-align: center;
-`;
 
 
 

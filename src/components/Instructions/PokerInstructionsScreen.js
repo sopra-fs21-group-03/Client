@@ -75,21 +75,20 @@ const ButtonContainer = styled.div`
   left: 0%;
   transform: translate(-50%, -50%);
   background-color: rgb(0, 0, 0, 0.8); 
-  color: red;
+  color: rgb(135,206,250);
   max-width: 70%;
-  height: 600px;
+  height: 150%;
   width: 15%;
   top: 55%;
 `;
 
 const Combinations = styled.div`
       background: url('https://www.pokerharder.com/img/p/3/pokerhands_big.jpg');
-      background-size: cover;
-      margin-left: 10%;
+      margin-left: 18%;
       margin-top: 2.5%;
       border-radius: 30px;
       height: 90%;
-      width: 80%;
+      width: 63%;
   
       
 `;

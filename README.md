@@ -70,4 +70,5 @@ CardBackground: https://images.cdn2.stockunlimited.net/preview1300/playing-cards
 Bottom Pixture: https://images4.alphacoders.com/184/thumb-1920-184506.jpg
 White Volume Control Icon: https://www.iconsdb.com/white-icons/volume-control-8-icon.html
 Card-Pictures: http://acbl.mybigcommerce.com/52-playing-cards/
+Poker Hands: https://www.pokerharder.com/img/p/3/pokerhands_big.jpg
 

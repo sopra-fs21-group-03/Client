@@ -818,8 +818,9 @@ export const Combinations = styled.div`
       background: url('https://www.pokerharder.com/img/p/3/pokerhands_big.jpg');
       margin-left: -37%;
       margin-top: -114%;
+      background-position: center;
       border-radius: 30px;
-      height: 213%;
+      height: 204%;
       width: 140%;
       
   

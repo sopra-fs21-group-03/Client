@@ -1034,7 +1034,7 @@ class GameScreen extends React.Component {
                             </LeaveTableButton>
                             <CombinationButton onClick={() => {
                                 this.showCombinations()
-                            }}>Poker Hands hide/show</CombinationButton>
+                            }}>Poker Hands</CombinationButton>
                             {this.combinations}
 
 
