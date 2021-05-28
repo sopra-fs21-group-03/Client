@@ -415,7 +415,7 @@ class GameScreen extends React.Component {
             }
         }
 
-        //InGame
+        //InGame.
         else if (this.game.gameName != null) {
             return (
                 <GameContainer>
