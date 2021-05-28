@@ -78,7 +78,7 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## Learn More
+### Learn More
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
@@ -93,8 +93,11 @@ The User will start on the Login/Registration page. He can create a new account 
  
  ### Lobby:
  
- ![image](https://user-images.githubusercontent.com/71385679/120011053-2a677400-bfde-11eb-8541-abdc49ba4cd1.png)
+ ![image](https://user-images.githubusercontent.com/71385679/120011053-2a677400-bfde-11eb-8541-abdc49ba4cd1.png) ![image](https://user-images.githubusercontent.com/71385679/120011728-ea54c100-bfde-11eb-87dc-30668e34fdf5.png)
 
+### Game:
+
+![image](https://user-images.githubusercontent.com/71385679/120011910-1bcd8c80-bfdf-11eb-884a-6e9a1b25854a.png)
 
 
 
@@ -129,7 +132,7 @@ jonas.graze@uzh.ch
 ## License 
 MIT License
 
-Copyright (c) [2021]
+Copyright (c) [sopra-fs-21] [2021]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
