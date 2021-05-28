@@ -1,6 +1,34 @@
-# SoPra FS21 - Client Template
+# Poker Game from Group 03, SoPra FS 21 Client
 
-## Getting started with React
+
+## Introduction 
+The goal of this project was to create a Poker game with a lobby system, so that Users can register or login to our system, can chose a lobby where they want to play and, once 5 players are in a specific lobby and are ready, can play Poker. If the User does not have an account yet in our system, he must register to be considered as a valid User. Once he is registered, he can login again with his chosen username and password, if he was offline before. Our Poker game contains a Poker-Instructions page for User that do not know how to play Poker. When playing, a User can click on a button where the poker hands are shown. Therefore, a User can get guidance if he needs some. When playing and on turn, a User can raise, check, fold or call. A game session also contains a chat/log window, where Users can chat or see what events happened in the game. Once a game round is finished, the Server determines the winner(s) and organizes the next game round. A User can always, if he likes, leave a game session and chose in the lobby selection screen a different lobby where he wants to play. 
+
+
+## Technologies 
+Client (FrontEnd): 
+-	React 
+-	HTML 
+-	JavaScript 
+-	Spotify API 
+-	[Luca cha do no Spotify zügs adde wo er brucht hed] 
+
+
+## High-level Components 
+
+- LoginScreen/RegistrationScreen:
+This is where the user starts off when opening the application. The user can create a new profile, or log in in case he already has one. After that the user gets redirected to the lobbyScreen.
+
+- LobbyScreen:
+On the lobby screen the user can see 4 different games, with information like if the game is ongoing, or how many people are waiting in the lobby for the game to get started. He can join one, and then ready up. Once 5 people have joined a lobby and declared themselves ready, the game starts.
+
+- GameScreen : 
+This is where the users spend the majority of their time and where the game is played. Every user only has the information that they are allowed to have according to the rules of poker. Once a game is finished, the game screen transforms to either a “winner screen”, or a “looser screen”. Here the user can return to the LobbyScreen.
+
+- InstructionScreen:
+This is a simple feature we added. The instruction screen is accessible trough the LobbyScreen and contains simple instruction as to how the game Poker is played.
+ 
+## Launch & Deployment: 
 
 Read and go through those Tutorials, It will make your life easier!
 
@@ -55,9 +83,76 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 
->Thanks to Lucas Pelloni for the template
+## Illustrations 
+The User will start on the Login/Registration page. He can create a new account or login with an existing account. On the next screen he will see four lobbies and their details displayed. Now he has three options. He can logout and goes back to the login page, he can join a lobby by clicking on it or he can press the button “Poker Instructions”. On the Poker Instructions Page he is able to learn how a game of poker works. When a player joins a lobby he will be directed to the lobby screen. There his options are to press ready/unready or to leave the lobby and go back to the lobby selection screen. In the lobby a user can see the names of the other players and weather they are ready or not. If all players are ready they will all be directed to the game. If a user is not on turn he can use the chat and he also sees in the chat what the last actions of all the players were. If it is his turn he is able to check, fold, raise or call by pressing the respective buttons. During the showdown he is also able to decide if he wants to show his cards or not show his cards and fold. If a user folds he can’t raise, fold, check or call until the next round starts. He always has the option to leave the table and with this he will also leave the game. At the end of the whole poker game there will be a winner or looser screen where a player can only leave the game. When a player leaves a game he will get to the lobby selection screen and is able to select a new lobby or to logout. 
 
-##External Links Images
+### Login/Registration:
+
+![image](https://user-images.githubusercontent.com/71385679/120010905-fee48980-bfdd-11eb-92c4-6b791032128d.png)
+
+ 
+ ### Lobby:
+ 
+ ![image](https://user-images.githubusercontent.com/71385679/120011053-2a677400-bfde-11eb-8541-abdc49ba4cd1.png)
+
+
+
+
+## Roadmap 
+New developers could add: 
+-	Functionality, such that a User can chose a picture from his Computer or the Internet, upload this picture to our Server and this picture will be set as his profile picture. 
+-	A User overview and User search function: In a search dialog, a User can type in the username of another user to find him and communicate with him. Once the User found the User he was looking for, he can inspect the profile page of this User. A profile page might contain an overview of all the wins/losses a user has experienced. Also, the profile page could show the profile picture of a User. 
+-	Chatting which is independent of a game session: Right now, chatting is bound to a game session. With this functionality, a user can have a chat window all the time (also in the lobby) and chat with a specific User or, if he created a chat group, can chat with multiple Users. 
+ 
+## Authors and acknowledgment 
+- Samuele Giunta 
+samuele.giunta@uzh.ch 
+19-742-667 
+
+- Carlos Kirchdorfer 
+carlos.kirchdorfer@uzh.ch 
+19-720-002 
+
+- Loris Keist 
+loris.keist@uzh.ch 
+19-752-898 
+
+- Luca Huber 
+luca.huber2@uzh.ch 
+19-753-615 
+
+- Jonas Graze 
+jonas.graze@uzh.ch 
+18-726-539 
+(Leader)
+
+## License 
+MIT License
+
+Copyright (c) [2021]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE
+
+
+
+
+## External Links Images
 First Background Picture: https://wallpaperaccess.com/full/1219582.png
 Ingame Background Pictures: http://st.gde-fon.com/wallpapers_original/336962_korichnevyj_parket_fonovaya_1920x1080_www.Gde-Fon.com.jpg
 Avatar-Pictures: https://i.pinimg.com/originals/77/ea/61/77ea618e1b9e4f43e95335af8dd0026b.jpg
