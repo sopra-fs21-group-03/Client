@@ -82,6 +82,10 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
+### Releases 
+
+When you want to publish a release, create a tag on GitHub for the repository.
+
 
 ## Illustrations 
 The User will start on the Login/Registration page. He can create a new account or login with an existing account. On the next screen he will see four lobbies and their details displayed. Now he has three options. He can logout and goes back to the login page, he can join a lobby by clicking on it or he can press the button “Poker Instructions”. On the Poker Instructions Page he is able to learn how a game of poker works. When a player joins a lobby he will be directed to the lobby screen. There his options are to press ready/unready or to leave the lobby and go back to the lobby selection screen. In the lobby a user can see the names of the other players and weather they are ready or not. If all players are ready they will all be directed to the game. If a user is not on turn he can use the chat and he also sees in the chat what the last actions of all the players were. If it is his turn he is able to check, fold, raise or call by pressing the respective buttons. During the showdown he is also able to decide if he wants to show his cards or not show his cards and fold. If a user folds he can’t raise, fold, check or call until the next round starts. He always has the option to leave the table and with this he will also leave the game. At the end of the whole poker game there will be a winner or looser screen where a player can only leave the game. When a player leaves a game he will get to the lobby selection screen and is able to select a new lobby or to logout. 
