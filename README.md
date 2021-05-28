@@ -108,26 +108,32 @@ New developers could add:
 -	Chatting which is independent of a game session: Right now, chatting is bound to a game session. With this functionality, a user can have a chat window all the time (also in the lobby) and chat with a specific User or, if he created a chat group, can chat with multiple Users. 
  
 ## Authors and acknowledgment 
-- Samuele Giunta 
-samuele.giunta@uzh.ch 
-19-742-667 
 
-- Carlos Kirchdorfer 
-carlos.kirchdorfer@uzh.ch 
-19-720-002 
+- Samuele Giunta / 
+samuele.giunta@uzh.ch / 
+19-742-667 / 
+Github: Samy1101  
 
-- Loris Keist 
-loris.keist@uzh.ch 
-19-752-898 
+- Carlos Kirchdorfer / 
+carlos.kirchdorfer@uzh.ch / 
+19-720-002 /
+Github: mr-carlitos
 
-- Luca Huber 
-luca.huber2@uzh.ch 
-19-753-615 
+- Loris Keist / 
+loris.keist@uzh.ch / 
+19-752-898 / 
+Github: sironitro  
 
-- Jonas Graze 
-jonas.graze@uzh.ch 
-18-726-539 
-(Leader)
+- Luca Huber / 
+luca.huber2@uzh.ch / 
+19-753-615 / 
+Github: cobankar 
+
+- Jonas Graze / 
+jonas.graze@uzh.ch / 
+18-726-539 / 
+(Leader) / 
+Github: sanoj765 
 
 ## License 
 MIT License
