@@ -118,7 +118,8 @@ class PokerInstructionsScreen extends React.Component {
         "the middle contains 5 cards and the player with the best combination of his own cards, and the cards in the middle" +
         " wins."
     
-    spotify = "By clicking on the spotify icon you can log in to your spotify account and listen to music whilst playing. To make use of this feature, a premium subscription for spotify is needed."
+    spotify = "By clicking on the spotify icon you can log in to your spotify account and listen to music whilst playing. To make use of this feature, a premium subscription for spotify is needed." + "\r" +
+    "You might need to allow pop-ups and activate music in your browser."
     currentInfo = null;
 
     async componentDidMount() {
